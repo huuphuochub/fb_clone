@@ -1,0 +1,539 @@
+.header{
+    display: grid;
+    grid-template-columns: 5%  20% 50% 25%;
+    height: 70px;
+    background-color:#222222;
+    position: fixed;
+    width: 100%;
+    border-radius: 10px;
+    align-items: center; 
+
+    z-index: 1000; 
+
+}
+.header .logo{
+    font-size: 50px;
+    margin-left: 10px;
+    color: blue;
+}
+.header .logo:hover{
+   cursor: pointer;
+}
+.search{
+    position: relative;
+    display: inline-block;
+}
+.header .search{
+    font-size: 20px;
+    /* position: relative; */
+      /* display: inline-block; */
+
+}
+.search input{
+    padding-left: 30px; /* Đẩy nội dung của input để có chỗ cho icon */
+    height: 35px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    background-color: #AAAAAA;
+}
+.search i{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0b0b0b;
+}
+.link a{
+    color: #AAAAAA;
+    transition: all 0.3s ease; /* Thêm chuyển tiếp để làm cho hiệu ứng mượt mà hơn */
+    /* border: 1px solid #f0ebeb; */
+
+
+}
+
+.header .link{
+    font-size: 30px;
+
+    display: flex;
+}
+.link div{
+    padding: 0 8%;
+
+}
+.link .active {
+    border-bottom:3px solid #4374e5; ;
+}
+.link .active i{
+    color: #4374e5;
+}
+.link div:hover{
+    border-radius: 10px;
+    cursor: pointer; 
+
+    box-shadow: 10px #444444; /* Tạo hiệu ứng ánh sáng xung quanh */
+    background-color: #444444;
+}
+.header .menu{
+    font-size: 30px;
+    /* padding: 10px; */
+    display: flex;
+    margin-left: 50%;
+}
+.ochat{
+    position: relative; /* Để phần tử con có thể định vị theo phần tử này */
+    display: inline-block;
+
+}
+.ochat  p{
+    position: absolute;
+    color: white;
+    top: 4px;
+    left: 20px;
+    padding: 0 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: red;
+    border-radius: 50px;
+
+}
+.khungchat{
+    
+    background-color: black;
+    padding-left: 10px;
+    border-radius: 10px;
+    /* border: 2px solid white; */
+    border: 1px solid white;
+
+    position: absolute;
+    width: 400px;
+    height: 89vh;
+    margin-right: 10px;
+    top: 71px; 
+    right: 0;
+    z-index: 1000;
+    overflow-y: scroll;
+
+
+
+
+}
+
+.khungchat i{
+    color: white;
+    font-size: 20px;
+}
+.iconchat{
+    position: sticky;
+    top: 0;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+
+}
+.iconchat h3{
+    color: white;
+}
+.iconchat .icontuychon i{
+    padding: 10px;
+}
+.header .menu div:hover{
+    border-radius: 10px;
+    cursor: pointer; 
+
+    box-shadow: 10px #444444;
+    background-color: #444444;
+}
+
+.khungchat:hover{
+    cursor: pointer;
+    background-color: black;
+}
+.khungchat .timkiem{
+    position: sticky;
+    padding: 4px;
+    z-index: 1000;
+    top:40px;
+    background-color: black;
+}
+.khungchat .timkiem input{
+    margin: 0;
+    padding: 0;
+    height: 35px;
+    border-radius: 10px;
+}
+.khungchat .timkiem input::placeholder{
+    font-size: 20px;
+    text-align: center;
+}
+.khungchat .dangxemgi{
+    z-index: 1000;
+    background-color: black;
+    position: sticky;
+    top: 80px;
+    display: flex;
+}
+.khungchat .dangxemgi p{
+    font-size: 20px;
+    padding: 10px;
+    background-color: #ccc;
+    border-radius: 40px;
+}
+.tenvaonl{
+    position: relative;
+}
+.tinnhan {
+    font-size: 20px;
+    /* overflow-y: scroll; */
+}
+.tinnhan ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+.tinnhan li {
+    border: 2px solid black; 
+    padding: 0;
+    margin: 5px 0 0 0;
+    border-radius: 20px;
+
+}
+.tinnhan li:hover{
+    background-color: #222222;
+}
+
+.tinnhan li .hinhnguoinhan {
+
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+
+}
+.hinhnguoinhan img{
+    padding: 5px;
+    background-color: blue;
+    border-radius: 50px;
+}
+.hinhnguoinhan .tenvaonl .hienonl{
+    width: 10px;
+    height: 10px;
+    top: 40px;
+    left: 35px;
+    position: absolute;
+    border-radius: 10px;
+    background-color: rgb(84, 233, 84);
+}
+.hinhnguoinhan .thongtin{
+    margin: 0;
+    padding: 0;
+}
+.hinhnguoinhan .thongtin p{
+    font-size: 15px;
+    margin: 5px 0 0 0;
+    padding: 0;
+    color: white;
+}
+.hinhnguoinhan i{
+    margin: 0;
+    padding: 0;
+}
+
+.menu i{
+    color: #AAAAAA;
+}
+.menu div {
+    padding: 10px;
+
+}
+.menu .sothongbao p{
+    position: absolute;
+    color: white;
+    top: 9px;
+    right: 90px;
+    padding: 0 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: red;
+    border-radius: 50px;
+    
+}
+
+.chatvoiuser{
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    right: 400px;
+    top: 290px;
+    width: 400px;
+    height: 600px;
+    z-index: 10000;
+    background-color: white;
+}
+.khungchat .xemtatcachat{
+    font-size: 20px;
+    height: 40px;
+    background-color: black;
+    text-align: center;
+    color: blue;
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 2px solid #222222;
+
+
+}
+.khungthongbao{
+    background-color: black;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    /* display: block; */
+    position: absolute;
+    width: 400px;
+    height: 89vh;
+    margin-right: 10px;
+    top: 71px; 
+    right: 0;
+    z-index: 1000;
+    overflow-y: scroll;
+}
+
+.khungthongbao h3{
+    margin: 10px;
+}
+.khungthongbao .tuychonxem{
+    color: white;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+    margin-top: 20px;
+    border-bottom:1px solid white ;
+}
+.khungthongbao .tuychonxem h5{
+    background-color: #555555;
+    padding: 10px;
+    border-radius: 20px;
+}
+.khungthongbao .thongbao {
+    display: grid;
+    grid-template-columns: 10% 90%;
+   color: white;
+   font-size: 20px;
+   align-items: center;
+   margin: 10px;
+   background-color: #555555;
+   border-radius: 10px;
+   padding: 5px;
+   border: 1px solid #555555;
+}
+.khungthongbao .thongbaodadoc {
+    display: grid;
+    grid-template-columns: 10% 90%;
+   color: white;
+   font-size: 20px;
+   align-items: center;
+   margin: 10px;
+   border-radius: 10px;
+   padding: 5px;
+   border: 1px solid #555555;
+}
+.khungnhapchat{
+    background-color: black;
+    border: 1px solid white;
+    position: absolute;
+    width: 350px;
+    height: 500px;
+    right: 420px;
+    border-radius: 10px;
+    top: 390px;
+    overflow-y: scroll;
+
+}
+.khungnhapchat .nguoichat{
+    padding: 10px;
+    display: grid;
+    color: white;
+    grid-template-columns: 20% 40% 20% 10% 10%;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #555555 ;
+    position: sticky;
+    top: 0;
+    background-color: #222222;
+}
+.khungnhapchat .nguoichat img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+
+}
+.khungnhapchat .nguoichat p{
+  margin: 0;
+  padding: 0;
+  
+
+}
+.khungnhapchat .nguoichat p:first-child{
+    font-size: 20px;
+}
+.khungnhapchat .nguoichat p:last-child{
+    font-size: 13px;
+}
+.khungnhapchat .chutk{
+   padding: 10px;
+   text-align: right;
+}
+.khungnhapchat .chutk p{
+    padding: 10px;
+    border-radius: 15px 15px 0;
+    background-color: #4374e5;
+    margin: 0 10px 2px 10px;
+ }
+ .chutk .anhtinnhanchu {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+ }
+
+.khungnhapchat .nguoinhan .anhnguoigui{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+.nguoinhan .anhtinnhanbenkia{
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+.khungnhapchat .nguoinhan{
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+.khungnhapchat .nguoinhan p{
+    background-color: #555555;
+    color: white;
+    padding: 10px;
+    margin: 0 10px 2px 0;
+    border-radius: 15px 15px 15px 0;
+  }
+  
+  .inputchat {
+    padding: 15px;
+    position: sticky;
+    bottom: 0;
+    background-color: #222222;
+  }
+.inputchat form{
+    display: flex;
+    text-align: center;
+}
+/* css input */
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 10px;
+    transition: 0.4s;
+    cursor: pointer;
+  }
+  
+  /* The circle inside the slider */
+  .slider::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 1px;
+    bottom: 0px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+  }
+  
+  /* When the checkbox is checked, move the slider to the right */
+  input:checked + .slider {
+    background-color: #4caf50;
+  }
+  
+  input:checked + .slider::before {
+    transform: translateX(8px);
+  }
+  
+  /* Optional: make the slider appear rounded */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round::before {
+    border-radius: 50%;
+  }
+
+/* end css input */
+
+
+
+
+
+
+
+  
+
+.khungcaidat{
+    background-color: black;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 1px solid #222222;
+    color: white;
+    position: absolute;
+    width: 400px;
+    height: 50vh;
+    margin-right: 10px;
+    top: 71px; 
+    right: 0;
+    z-index: 1000;
+    border: 2px solid #fff;
+    font-size: 20px;
+}
+.khungcaidat .quyenriengtu{
+    border: 1px solid #555555 ;
+    padding: 10px;
+    display: flex;
+}
+.khungcaidat .quyenriengtu i{
+    margin: 10px;
+}
+.khungcaidat .trangthaihoatdong{
+    border: 1px solid #555555 ;
+    padding: 10px;
+    display: flex;
+    
+}
+.khungcaidat .trangthaihoatdong i {
+    margin: 10px;
+}
+.khungcaidat .trangthaihoatdong p {
+    margin: 0 10px 0 0;
+}
+.khungcaidat .dangxuat{
+    border: 1px solid #555555 ;
+    padding: 10px;
+    display: flex;
+    
+}
+.khungcaidat .dangxuat i{
+   margin: 10px;
+}

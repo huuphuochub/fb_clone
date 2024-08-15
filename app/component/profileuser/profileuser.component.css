@@ -1,0 +1,477 @@
+body{
+    color: #ec2626;
+}
+main{
+  
+    background-color: black;
+}
+.phandau{
+    width: 100%;
+    height: 830px;
+    background: linear-gradient(to bottom, #7a7979, #131313);
+}
+.phandau .divanhbia{
+    width: 75%;
+    height: 600px;
+    background-color: #131313;
+    margin: 0 12.5% 0 12.5%;
+    border-radius: 10px;
+
+}
+.phandau .divanhbia img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.thongtincanhandautrang {
+    margin: 0 12% 0 12%;
+    padding: 0 2% 20px 2%;
+    width: 76%;
+    
+    display: grid;
+    grid-template-columns: 18% 62% 20%;
+    border-bottom: 2px solid #555555;
+
+}
+
+.thongtincanhandautrang .anhdaidien img{
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    position: absolute;
+    top: 550px;
+}
+.thongtincanhandautrang .tennguoidung .ten h1 {
+    color: white;
+}
+.thongtincanhandautrang .tennguoidung .banbe {
+    display: flex;    
+}
+
+.thongtincanhandautrang .tennguoidung .banbe p{
+    color: white;
+
+}
+.thongtincanhandautrang .tennguoidung .hinhbanbe img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    left: -10px;
+}
+
+
+.thongtincanhandautrang .cactuychon button{
+    background-color: blue;
+    margin-top: 110px;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    align-self: center;
+}
+.thongtincanhandautrang .cactuychon i{
+    padding: 2px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+   background-color: #555555;
+}
+
+
+.phandau .chedoxem{
+    background-color: #222222;
+    /* border: 2px solid red; */
+    /* padding: 30px;    */
+    margin: 0 12% 0 12%;
+    display: grid;
+    padding: 7px;
+    grid-template-columns: 65% 30% 5%;
+
+}
+.phandau .chedoxem .cacluachonxem ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+.phandau .chedoxem .cacluachonxem ul{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Chia đều 7 cột */
+    gap: 1px; /* Khoảng cách giữa các cột và hàng */
+
+
+}
+.phandau .chedoxem .cacluachonxem li{
+    /* background-color: #ec2626; */
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0;
+    color: white;
+    text-align: center;
+
+}
+.phandau .chedoxem .cacluachonxem li:hover{
+    background-color: #555555;
+    cursor: pointer;
+    
+}
+.chedoxem .baocao{
+    color: white;
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
+    align-self: center; /* Căn chỉnh thẻ con theo chiều dọc giữa hàng */
+
+}
+.chedoxem .baocao:hover{
+    background-color: #555555;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
+    align-self: center; /* Căn chỉnh thẻ con theo chiều dọc giữa hàng */
+
+}
+.phanhai{
+    width: 76%;
+    height: 600px;
+    background-color: black;
+    margin: 0 12% 0 12%;
+    display: grid;
+    grid-template-columns: 40% 60%;
+
+}
+
+.divgioithieu {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #222222;
+    border-radius: 10px;
+    color: white;
+    
+}
+.divgioithieu h3{
+    margin-bottom: 20px;
+}
+.divgioithieu div{
+    display: flex;
+    margin-top: 10px;
+}
+.divgioithieu div i{
+    font-size: 25px;
+    margin-right: 10px;
+}
+.divgioithieu .storynguoidung {
+   margin: 0;
+   padding: 0;
+
+}
+.divgioithieu .storynguoidung {
+    display: grid;
+    padding: 0;
+    list-style-type: none;
+
+    grid-template-columns: 33% 33% 34%;
+
+
+}
+
+
+
+
+.storynguoidung .hinstory img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.storynguoidung .hinstory {
+    display: grid;
+    margin: 5px;
+    text-align: center;
+}
+.storynguoidung .hinstory p{
+    display: inline-block; /* Hoặc inline nếu phù hợp */
+
+   margin: 0;
+   padding: 0;
+}
+
+.phanhai .cacanhnguoidung{
+    background-color: #222222;
+   
+    margin-top: 15px;
+    border-radius: 10px;
+    color: white;
+}
+.tieudeanh .chitiettieudeanh {
+    display: grid;
+    margin: 5px;
+    padding: 10px;
+    grid-template-columns: 33% 33% 34%;
+    align-items: center; 
+
+}
+.tieudeanh .chitiettieudeanh a{
+    justify-self: end; 
+
+}
+.tatcaanhnguoidung {
+    display: grid;
+    grid-template-columns: 33% 33% 34%;
+    margin: 10px;
+    /* margin-bottom: 20px; */
+
+}
+
+.image-container {
+    width: 100%;
+    height: 175px;
+    border-radius: 10px;
+    overflow: hidden; /* Ẩn phần thừa của ảnh */
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    margin: 2px;
+    object-fit: cover; /* Giữ tỷ lệ ảnh và cắt ảnh để vừa container */
+    object-position: center; /* Đặt trọng tâm của ảnh ở giữa */
+}
+
+.hienbanbenguoidung {
+    background-color: #222222;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+.hienbanbenguoidung .phandaubanbe .tieudebanbe{
+   display: grid;
+   grid-template-columns: 25% 40% 35%;
+
+}
+.hienbanbenguoidung .phandaubanbe .tieudebanbe a{
+    justify-self: end; 
+    margin: 10px;
+    color: blue;
+ 
+ }
+ .hienbanbenguoidung .phandaubanbe .tieudebanbe h3{
+   margin: 0;
+   padding: 0;
+ 
+ }
+.tatcabanbeoday{
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    gap: 5px;
+
+}
+.hienbanbenguoidung .chitietbanbecuaban {
+    width: 100%;
+    /* margin: 5px; */
+
+
+ }
+ .hienbanbenguoidung .chitietbanbecuaban img{
+    width: 100%;
+    height: 180px;
+    /* margin: 20px; */
+    border-radius: 20px;
+
+ }
+
+.cacbaivietnguoidungdang{
+    
+    overflow-y: scroll;
+    background-color: black;
+    margin-left: 10px;
+    
+}
+.tuongtacvoinguoidung {
+    background-color: #222222;
+    margin-top: 15px;
+    border-radius: 10px;
+    color: white;
+}
+.tuongtacvoinguoidung .noidenhap{
+    display: grid;
+    grid-template-columns: 10% 90%;
+    align-items: center;
+    border-bottom:2px solid #555555 ;
+    padding:10px 0 ;
+
+
+}
+.tuongtacvoinguoidung .noidenhap img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 5px;
+}
+.tuongtacvoinguoidung .noidenhap input{
+   background-color: #555555;
+   width: 95%;
+   height: 50px;
+   border-radius: 30px;
+}
+
+.tuongtacvoinguoidung .cactuychontuongtacnguoidung ul{
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+
+}
+.cacbaivietnguoidungdang .bolocbaiviet{
+    background-color: #222222;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+
+}
+.cacbaivietnguoidungdang .cacbaiviet{
+    background-color: #222222;
+    border-radius: 10px;
+    color: white;
+
+}
+.thongtinbaivietotrangcanhan{
+    margin-top: 10px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 8% 20% 60% 12%;
+    align-items: center;
+}
+
+.cacbaivietnguoidungdang .bolocbaiviet button{
+    background-color: #555555;
+    border-radius: 10px;
+}
+.thongtinbaivietotrangcanhan .hinhdaidien img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 10px;
+}
+.thongtinbaivietotrangcanhan .thongtinnguoidang h5{
+    margin:8px 0 0 0;
+    padding: 0;
+}
+.thongtinbaivietotrangcanhan .luachon i{
+    justify-self: end; 
+    font-size: 30px;
+
+}
+.cacbaiviet .tieudebaiviet p{
+    padding: 0 0 10px 10px;
+}
+.cacbaiviet .hinhanhbaiviet{
+    display: grid;
+    grid-template-columns: 49% 49%;
+    gap: 10px;
+    padding: 0 0 0 5px;
+}
+.cacbaiviet .hinhanhbaiviet img{
+   width: 100%;
+   border-radius: 10px;
+}
+.cacbaiviet .luottuongtacbaiviet {
+   margin: 20px 0 0 20px;
+   border-bottom:2px solid #555555 ;
+   
+}
+.cacbaiviet .luottuongtacbaiviet .luotlike{
+    display: grid;
+    grid-template-columns: 60% 20% 20%;
+    font-size: 15px;
+}
+.cacbaiviet .luottuongtacbaiviet .luotlike .cacicon{
+    display: grid;
+    grid-template-columns: 5% 5% 90%;
+}
+.cacbaiviet .tuongtacvoibaiviet{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    text-align: center;
+    padding: 15px;
+}
+
+
+
+
+
+
+@media (max-width: 1600px) {
+    .thongtincanhandautrang {
+        grid-template-columns: 22% 50% 28%;
+    }
+    .image-container {
+        width: 100%;
+        height: 160px;
+        border-radius: 10px;
+        overflow: hidden; /* Ẩn phần thừa của ảnh */
+        position: relative;
+    }
+}
+@media (max-width: 1430px) {
+    .thongtincanhandautrang {
+        grid-template-columns: 22% 50% 28%;
+    }
+    .image-container {
+        width: 100%;
+        height: 140px;
+        border-radius: 10px;
+        overflow: hidden; /* Ẩn phần thừa của ảnh */
+        position: relative;
+    }
+    
+}
+@media (max-width: 1430px) {
+    .phandau .divanhbia {
+        width: 90%;
+        height: 600px;
+        background-color: #131313;
+        margin: 0 5% 0 5%;
+        border-radius: 10px;
+    }
+    
+}
+@media (max-width: 1200px) {
+    .phandau .divanhbia {
+        width: 100%;
+        height: 400px;
+        margin: 0;
+        background-color: #131313;
+        border-radius: 10px;
+    }
+    .thongtincanhandautrang .anhdaidien img{
+        width: 200px;
+        height: 200px;
+        border-radius: 200px;
+        position: absolute;
+        top: 370px;
+    }
+    .thongtincanhandautrang {
+        margin: 0;
+        width: 100%;
+        
+        display: grid;
+        grid-template-columns: 22% 52% 26%;
+        border: 2px solid red;
+    
+    }
+    
+}
+@media (max-width: 980px) {
+    .thongtincanhandautrang {
+        grid-template-columns: 25% 41% 33%;
+    }
+}

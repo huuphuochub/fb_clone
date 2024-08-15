@@ -1,0 +1,309 @@
+<div class="header">
+    <div class="logo">
+        <i class="bi bi-facebook" routerLink="/"></i>
+    </div>
+  
+    <div class="search"><i class="bi bi-search"></i>
+        <form [formGroup]="formsearchuser" (ngSubmit)="timkiemuser()">
+    <input type="text" placeholder="search" formControlName="username">
+        </form>
+</div>
+    <div class="link">
+            <div [ngClass]="{'active': currentPage === 'home'}"><a href=""><i class="bi bi-house"></i></a></div>
+            <div><a href=""><i class="bi bi-film"></i></a></div>
+            <div><a href=""><i class="bi bi-bag"></i></a></div>
+            <div><a href=""><i class="bi bi-bag-check"></i></a></div>
+            <div><a href=""><i class="bi bi-controller"></i></a></div>
+     </div>
+    <div class="menu">
+        <div><i class="bi bi-grid-3x3-gap"></i></div>
+        <div class="ochat">
+            
+            <i class="bi bi-chat thongbaochat" (click)="close()"></i><p>1</p>
+           
+        </div>
+        <div class="sothongbao">
+            <i class="bi bi-bell" (click)="closetb()"></i>
+            <p>1</p>
+        </div>
+        <div><i class="bi bi-person-circle" (click)="closecaidat()"></i></div>
+    </div>
+    <div class="chatvoiuser">
+        chat
+    </div>
+
+    <!-- khung chat -->
+    <div class="khungchat" *ngIf="showchat">
+        <div class="iconchat">
+            <h3>đoạn chat</h3>
+            <div class="icontuychon"> 
+                <i class="bi bi-list"></i>
+                <i class="bi bi-columns-gap"></i>
+                <i class="bi bi-arrows-angle-expand"></i>
+            </div>
+        </div>
+        <div class="timkiem">
+            <input type="text" placeholder="tìm kiếm trên mes">
+        </div>
+        <div class="dangxemgi">
+            <p>hộp thư</p>
+
+            <p>cộng đồng</p>
+        </div>
+        <div class="tinnhan">
+            <ul>
+                <li>
+                    <div class="hinhnguoinhan">
+                        <div class="tenvaonl">
+                        <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                        <div class="hienonl"></div>
+                    </div>
+
+                        <div class="thongtin">
+                            <p>name</p>
+                            <p>tin nhắn mới nhất</p>
+                        </div>
+                        <i class="bi bi-list"></i>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="hinhnguoinhan">
+                        <div class="tenvaonl">
+                        <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                        <div class="hienonl"></div>
+                    </div>
+
+                        <div class="thongtin">
+                            <p>name</p>
+                            <p>tin nhắn mới nhất</p>
+                        </div>
+                        <i class="bi bi-list"></i>
+                    </div>
+                </li>
+                <li>  <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            <li>
+                <div class="hinhnguoinhan">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
+                    <div class="thongtin">
+                        <p>name</p>
+                        <p>tin nhắn mới nhất</p>
+                    </div>
+                    <i class="bi bi-list"></i>
+                </div>
+            </li>
+            </ul>
+        </div>
+      
+       
+        <div class="xemtatcachat">
+            xem tất cả đoạn chat
+        </div>
+    </div>
+    <!-- end khung chat -->
+
+
+    <!-- khung thongbao -->
+    <div class="khungthongbao" *ngIf="showthongbao" >
+        <div>
+            <h3 style="color: white;">thông báo</h3>
+        </div>
+        <div class="tuychonxem">
+            <h5>tất cả</h5>
+            <h5>chưa đọc</h5>
+        </div>
+        <div class="thongbao">
+            <i class="fa-regular fa-comment"></i>  <p>name đã bình luận về bài viết của bạn <i>19:30</i></p>
+        </div>
+        <div class="thongbaodadoc">
+            <i class="fa-regular fa-comment"></i>  <p>name đã bình luận về bài viết của bạn </p>
+        </div>
+    </div>
+    <!-- end khung thong bao -->
+
+    <!-- khung cai dat -->
+     <div class="khungcaidat" *ngIf="showcaidat">
+        <div >
+            <h3 style="color: white;">cài đặt</h3>
+        </div>
+        <div class="quyenriengtu">
+            <i class="fa-solid fa-lock"></i>
+            <p>cài đặt quyền riêng tư</p>
+        </div>
+        <div class="trangthaihoatdong">
+            <i class="fa-solid fa-globe"></i>
+            <p>trạng thái hoạt động</p>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+        </div>
+        <div class="dangxuat">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <p>đăng xuất</p>
+        </div>
+     </div>
+     <!-- end khung cai dat -->
+
+     <!-- khung nhap chat -->
+     <div class="khungnhapchat" *ngIf="showformchat">
+        <div class="nguoichat">
+            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            <div>
+                <p>name</p>
+                <p>đang hoạt động</p>
+            </div>
+            <i></i>
+            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-xmark" (click)="closekhungchat()"></i>
+
+        </div>
+        <div class="chutk">
+            <p>hello bạn</p>
+            
+        </div>
+        <div class="nguoinhan">
+            <i></i>
+           <div>
+            <p>uh helo bạn nha</p>
+            <p>uh helo bạn nha</p>
+            <p>uh helo bạn nha</p>
+            <p>uh helo bạn nha</p>
+            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhtinnhanbenkia">
+            <p>ảnh đẹp k ku</p>
+
+           </div>
+            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhnguoigui">
+            <i></i>        
+        </div>
+        <div class="chutk">
+            <div><p>hello bạn</p>
+                <p>hello bạn</p>
+                <p>hello bạnakjdhjkashdkasdnasjkhdkjashdj
+                    ạdhjkashdasljdhlasj
+                </p>
+                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhtinnhanchu">
+                <p>đẹp á</p>
+            </div>
+            
+        </div>
+        <div class="inputchat" >
+            
+            <form action="">
+                <input type="file" placeholder="ảnh">
+                <input type="text" placeholder="nhập tin nhắn">
+            </form>
+        </div>
+     </div>
+     <!-- end khung nhap chat -->
+
+</div>
