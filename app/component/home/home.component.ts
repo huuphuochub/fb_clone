@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data=>{
       this.profilefriend = data
       this.UserBehaviorSubject.compressionuser(data);
-      console.log(data)
+      // console.log(data)
       this.friendonline()
 
     })

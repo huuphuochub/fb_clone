@@ -14,6 +14,19 @@ export class SocketIoService {
   public sendOnlineStatus( id_user:any): void {
     this.socket.emit('online', id_user);
   }
+  public sendmess( id_user:any,id_room:any): void {
+    this.socket.emit('sendmess', id_user,id_room);
+  }
+
+  public receicemess(): Observable<string> {
+    return new Observable<string>(observer => {
+      this.socket.on('receicemess', (message: string) => {
+        console.log(message)
+        observer.next(message);
+      });
+    });
+  }
+
 
   public sendNotification(id_user: string, thongtin:string): void {
     this.socket.emit('notifyUser', id_user,thongtin);
@@ -26,6 +39,8 @@ export class SocketIoService {
       });
     });
   }
+
+
 
   public getfriendonline():Observable<string>{
     return new Observable<string>(observer =>{

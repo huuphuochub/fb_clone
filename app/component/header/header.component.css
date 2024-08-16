@@ -384,8 +384,11 @@
     font-size: 13px;
 }
 .khungnhapchat .chutk{
-   padding: 10px;
+    padding: 3px;
    text-align: right;
+}
+.trollthoi{
+    display: flex;
 }
 .khungnhapchat .chutk p{
     padding: 10px;
@@ -399,7 +402,8 @@
     border-radius: 10px;
  }
 
-.khungnhapchat .nguoinhan .anhnguoigui{
+ .anhnguoigui{
+    margin-left: 10px;
     width: 40px;
     height: 40px;
     border-radius: 50px;
@@ -423,13 +427,14 @@
   
   .inputchat {
     padding: 15px;
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
     background-color: #222222;
+    width: 350px;
   }
-.inputchat form{
-    display: flex;
-    text-align: center;
+.inputchat form input[type=file]{
+    margin: 0;
+    padding: 0;
 }
 /* css input */
 
@@ -437,6 +442,12 @@
     opacity: 0;
     width: 0;
     height: 0;
+  }
+  .doanchat{
+    bottom: 100px;
+  }
+  .khoangtrong{
+    height: 100px;
   }
   
   /* The slider */

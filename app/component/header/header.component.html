@@ -50,157 +50,29 @@
 
             <p>cộng đồng</p>
         </div>
-        <div class="tinnhan">
-            <ul>
-                <li>
+        <div class="tinnhan" *ngIf="mess">
+            <ul *ngFor="let chat of mess">
+                <li (click)="openchat(chat.id_room)">
                     <div class="hinhnguoinhan">
                         <div class="tenvaonl">
-                        <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                        <div class="hienonl"></div>
+                        <img src="{{chat.avatar}}" alt="" width="50px" height="50px">
+                        <div class="hienonl" *ngIf="chat.online === 1"></div>
                     </div>
 
                         <div class="thongtin">
-                            <p>name</p>
-                            <p>tin nhắn mới nhất</p>
+                            <p>{{chat.name}}</p>
+                           <div class="trollthoi">
+                            <p *ngIf="chat.lastuser === id_user">bạn: </p>
+                            <p>{{ chat.lastmess}}</p>
+                           </div>
+
                         </div>
                         <i class="bi bi-list"></i>
                     </div>
                 </li>
 
 
-                <li>
-                    <div class="hinhnguoinhan">
-                        <div class="tenvaonl">
-                        <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                        <div class="hienonl"></div>
-                    </div>
-
-                        <div class="thongtin">
-                            <p>name</p>
-                            <p>tin nhắn mới nhất</p>
-                        </div>
-                        <i class="bi bi-list"></i>
-                    </div>
-                </li>
-                <li>  <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
-            <li>
-                <div class="hinhnguoinhan">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" width="50px" height="50px">
-                    <div class="thongtin">
-                        <p>name</p>
-                        <p>tin nhắn mới nhất</p>
-                    </div>
-                    <i class="bi bi-list"></i>
-                </div>
-            </li>
+              
             </ul>
         </div>
       
@@ -255,55 +127,57 @@
      <!-- end khung cai dat -->
 
      <!-- khung nhap chat -->
-     <div class="khungnhapchat" *ngIf="showformchat">
+     <div class="khungnhapchat" *ngIf="showformchat && contentmess">
+        <div  *ngFor="let mes of contentmess">
         <div class="nguoichat">
-            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            <img [src]="mes.avatar" alt="">
             <div>
-                <p>name</p>
-                <p>đang hoạt động</p>
+                <p>{{mes.name}}</p>
+                <p *ngIf="mes.online ===1">đang hoạt động</p>
             </div>
             <i></i>
             <i class="fa-solid fa-gear"></i>
             <i class="fa-solid fa-xmark" (click)="closekhungchat()"></i>
 
         </div>
-        <div class="chutk">
-            <p>hello bạn</p>
+        <div *ngFor="let ok of mes.content" class="doanchat">      
+              <div class="chutk" *ngIf="ok.id_user === id_user">
+            <p>{{ok.content}}</p>
+            <img *ngIf="ok.image !== '' " src="{{ok.image}}" alt="" class="anhtinnhanchu">
             
         </div>
-        <div class="nguoinhan">
+        <div class="nguoinhan" *ngIf="ok.id_user !== id_user">
             <i></i>
            <div>
-            <p>uh helo bạn nha</p>
-            <p>uh helo bạn nha</p>
-            <p>uh helo bạn nha</p>
-            <p>uh helo bạn nha</p>
-            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhtinnhanbenkia">
-            <p>ảnh đẹp k ku</p>
-
+            <p>{{ok.content}}</p>
+            <img *ngIf="ok.image !== ''" src="{{ok.image}}" alt="" class="anhtinnhanbenkia">
            </div>
-            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhnguoigui">
             <i></i>        
         </div>
-        <div class="chutk">
-            <div><p>hello bạn</p>
-                <p>hello bạn</p>
-                <p>hello bạnakjdhjkashdkasdnasjkhdkjashdj
-                    ạdhjkashdasljdhlasj
-                </p>
-                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhtinnhanchu">
-                <p>đẹp á</p>
-            </div>
-            
+
+
+
         </div>
+
+    <img src="{{mes.avatar}}" class="anhnguoigui" alt="">
+    <div #scrollBottom></div>
+
+
+        <div class="khoangtrong" id="sclowroll"></div>
+
         <div class="inputchat" >
             
-            <form action="">
-                <input type="file" placeholder="ảnh">
-                <input type="text" placeholder="nhập tin nhắn">
+            <form [formGroup]="forminputchat" (ngSubmit)="sendchat(mes.id_user)">
+                <img *ngIf="image !== '' " [src]="image" alt="" width="100px" height="100px">
+
+                <input type="file" placeholder="ảnh" (change)="onFileChange($event)">
+                <input type="text" placeholder="nhập tin nhắn" formControlName="content">
+                <input type="submit">
             </form>
         </div>
-     </div>
+
+    </div>
+    </div>
      <!-- end khung nhap chat -->
 
 </div>

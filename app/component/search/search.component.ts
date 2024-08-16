@@ -135,7 +135,8 @@ handleacp(id:any,id_users:any){
         id_users
       ],
       name:this.user.username,
-      type:1
+      type:1,
+      lastmess:'xin chào, hãy nhắn tin với mình'
     
   }
     this.messengerservice.addromchat(dataroom).subscribe(data =>{
