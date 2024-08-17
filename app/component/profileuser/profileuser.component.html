@@ -1,20 +1,21 @@
 <main>
-    <div class="phandau">
+    <div class="phandau" id="loadlai">
     <div class="divanhbia">
         <img src="https://i.imgur.com/qV5uuOz.jpg" alt="">
 
     </div>
     <div class="thongtincanhandautrang">
         <div class="anhdaidien">
-            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            <img src="{{user.avatar}}" alt="">
+            <div class="hienonl" *ngIf="user.online === 1"></div>
         </div>
         <div class="tennguoidung">
             <div class="ten">
-                <h1>name</h1>
+                <h1>{{user.username}}</h1>
             </div>
             <div class="banbe">
-                <p>588 người bạn -  </p>
-                <p> 20 bạn chung</p>
+                <p>{{allfriend.length}} người bạn -  </p>
+                <p> {{user.banchung}} bạn chung</p>
             </div>
             <div class="hinhbanbe">
                 <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
@@ -147,30 +148,16 @@
                     <a>xem tất cả bạn bè</a>
                 </div>
                 <div class="sobanchung">
-                    <p>100 bạn chung</p>
+                    <p>{{allfriend.length}} bạn bè ({{user.banchung}} bạn chung)</p>
                 </div>
             </div>
-            <div class="tatcabanbeoday">
-                <div class="chitietbanbecuaban">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-                    <h6>name</h6>
-                    <p>10 bạn chung</p>
+            <div class="tatcabanbeoday" *ngIf="allfriend">
+                <div class="chitietbanbecuaban" *ngFor="let friend of allfriend">
+                    <img src="{{friend.avatar}}" alt=""  routerLink="/profileuser/{{friend._id}}">
+                    <h6>{{friend.username}}</h6>
+                    <p *ngIf="friend.banchung > 0">{{friend.banchung}} bạn chung</p>
                 </div>
-                <div class="chitietbanbecuaban">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-                    <h6>name</h6>
-                    <p>10 bạn chung</p>
-                </div>
-                <div class="chitietbanbecuaban">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-                    <h6>name</h6>
-                    <p>10 bạn chung</p>
-                </div>
-                <div class="chitietbanbecuaban">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-                    <h6>name</h6>
-                    <p>10 bạn chung</p>
-                </div>
+                
             </div>
         </div>
         <p style="color: white;"><i class="fa-brands fa-github"></i>huuphuochub</p>

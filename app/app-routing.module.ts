@@ -11,7 +11,7 @@ import { SearchComponent } from './component/search/search.component';
 const routes: Routes = [
 
   {path: '', component:HomeComponent},
-  {path:'profileuser', component:ProfileuserComponent},
+  {path:'profileuser/:id', component:ProfileuserComponent},
   {path:'login', component:LoginComponent},
   {path:'regsiter', component:DangkiComponent},
   {path:'authenticate', component:AuthenticateComponent},

@@ -137,7 +137,7 @@
         </div>
 
         <div class="baidang">
-            <pre class="noidungbaidang">
+            <p class="noidungbaidang">
                  bài đăng này cực hay nhé mọi người:
                 Giải Thích
 .image-container:
@@ -150,7 +150,7 @@ transition: transform 0.3s ease; tạo hiệu ứng mượt mà khi hình ảnh 
 .image-container:hover .zoom-image:
 
 transform: scale(1.1); áp dụng hiệu ứng phóng to hình ảnh khi người dùng di chuột qua phần tử .image-container. Giá trị 1.1 có nghĩa là hình ảnh sẽ được phóng to lên 10% so với kích thước gốc.
-            </pre>
+            </p>
             <div class="hinhanhbaidang">
                 <img src="https://i.imgur.com/qV5uuOz.jpg" alt="">
             </div>
@@ -456,8 +456,8 @@ transform: scale(1.1); áp dụng hiệu ứng phóng to hình ảnh khi ngườ
                 </div>
 
             </div>
-            <div class="thongtinbanbe" *ngFor="let friend of isfriendonline">
-                <img src="{{friend.avatar}}" alt="">
+            <div class="thongtinbanbe" *ngFor="let friend of isfriendonline" >
+                <img src="{{friend.avatar}}" alt="" routerLink="/profileuser/{{friend._id}}">
                 <div class="hienonl" *ngIf="friend.online === 1"></div>
                 <p>{{friend.username}}</p>
             </div>

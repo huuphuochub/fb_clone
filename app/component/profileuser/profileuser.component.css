@@ -41,6 +41,19 @@ main{
     position: absolute;
     top: 550px;
 }
+.thongtincanhandautrang .anhdaidien {
+  display: grid;
+}
+.thongtincanhandautrang .anhdaidien .hienonl{
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #0eeb3a;
+    z-index: 1000;
+    align-self: end; 
+    justify-self: end; 
+    margin: 0 50px 10px 0;
+}
 .thongtincanhandautrang .tennguoidung .ten h1 {
     color: white;
 }
@@ -406,7 +419,14 @@ main{
 
 
 
-
+::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #262628;
+    border-radius: 10px;
+}
 
 
 @media (max-width: 1600px) {

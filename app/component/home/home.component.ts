@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
   }
   friendonline(){
 this.UserBehaviorSubject.alluser$.subscribe(data =>{
+  // console.log(data);
         this.isfriendonline = data
 
 })

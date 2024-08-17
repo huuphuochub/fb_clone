@@ -47,7 +47,7 @@ idroom!:any;
     private friendservice:Friendservice,
     private UserBehaviorSubject:UserBehaviorSubject,
     private EncryptionService:EncryptionService,
-    // private FriendBehaviorSubject:FriendBehaviorSubject,
+    private FriendBehaviorSubject:FriendBehaviorSubject,
     private socketioservice:SocketIoService,
     private userservice:Userservice,
     
@@ -78,15 +78,22 @@ idroom!:any;
         this.test()
       }
     })
-    this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
-      // console.log(data);
-      this.allmessenger = data;
-      // this.compressionuserroom()
-    })
+   this.loadroom()
   
     this.socketioservice.sendOnlineStatus(id_user);
 
   }
+
+  loadroom(){
+    this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
+      console.log(data);
+      this.allmessenger = data;
+      this.compressionuserroom();
+
+      // this.compressionuserroom()
+    })
+  }
+
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -122,6 +129,7 @@ sendchat(id_user:any){
       this.forminputchat.reset();
       this.selectedFile = null
       this.image = '';
+      this.loadroom();
       if(id_user){
         this.socketioservice.sendmess(id_user,id_room);
         
@@ -141,23 +149,29 @@ sendchat(id_user:any){
     this.socketioservice.getallfriendonline().subscribe(data =>{
       this.idfriendonline= data;
       this.UserBehaviorSubject.setidlistfriend(this.idfriendonline)
+      this.FriendBehaviorSubject.setidlistfriend(this.idfriendonline)
+
       this.friendonline();
     })
     this.socketioservice.getfriendonline().subscribe((data) =>{
       if (!this.idfriendonline.includes(data)) {
         this.idfriendonline.push(data);
         this.UserBehaviorSubject.setidlistfriend(this.idfriendonline)
+        this.FriendBehaviorSubject.setidlistfriend(this.idfriendonline)
+
     }
     this.friendonline(); 
     })
     this.socketioservice.getfriendoffline().subscribe((data=>{
       this.idfriendonline = this.idfriendonline.filter((item:any)=>item !== data);
       this.UserBehaviorSubject.setidlistfriend(this.idfriendonline);
+      this.FriendBehaviorSubject.setidlistfriend(this.idfriendonline)
+
       this.friendonline()
     }))
     this.socketioservice.receicemess().subscribe(data =>{
       console.log(data);
-      this.friendonline()
+      this.loadroom()
         this.openchat(data);
       
     })

@@ -67,52 +67,44 @@ export class UserBehaviorSubject {
 
 
   xulydulieu(){
-    let allusers : any[] =[]
-    // console.log(this.alluser);
-    this.datauser.forEach((user:any) => {
-        let status = 0
-        let id_friend =''
-  
-        if(user._id === this.id_user){
-          status = 4;
-  
-        }else{
-          this.allloimoi.forEach((add:any ) =>{
-            if(user._id === add.id_user1 && add.id_user2 === this.id_user && add.status ===1){
-              status = 1;
-              id_friend = add._id
-            }else if(user._id === add.id_user2 && add.id_user1 === this.id_user && add.status === 1){
-              status = 2;
-              id_friend = add._id
-  
-            }else if((user._id === add.id_user2 && add.id_user1 === this.id_user && add.status === 2) ||
-            (user._id === add.id_user1 && add.id_user2 === this.id_user && add.status === 2)){
-              status = 3
-              id_friend = add._id
-  
-            }
-          })
-        }
-  
-        allusers.push({
-          _id: user._id,
-          username: user.username,
-          avatar: user.avatar,
-          status: status,
-          id_friend:id_friend,
-          email:user.email,
+    const allusers = this.datauser.map((user: any) => {
+        let status = 0;
+        let id_friend = '';
 
-        });
-  
-  
-  
+        if (user._id === this.id_user) {
+            status = 4;
+        } else {
+            const add = this.allloimoi.find((add: any) => 
+                (user._id === add.id_user1 && add.id_user2 === this.id_user && add.status === 1) ||
+                (user._id === add.id_user2 && add.id_user1 === this.id_user && add.status === 1) ||
+                ((user._id === add.id_user2 && add.id_user1 === this.id_user && add.status === 2) ||
+                 (user._id === add.id_user1 && add.id_user2 === this.id_user && add.status === 2))
+            );
+
+            if (add) {
+                if (add.status === 1) {
+                    status = (user._id === add.id_user1) ? 1 : 2;
+                } else if (add.status === 2) {
+                    status = 3;
+                }
+                id_friend = add._id;
+            }
+        }
+
+        return {
+            _id: user._id,
+            username: user.username,
+            avatar: user.avatar,
+            status: status,
+            id_friend: id_friend,
+            email: user.email,
+        };
     });
-  
-    // console.log(allusers)
-    this.listuser = allusers
-    this.timbanchung()
-    // console.log(this.allloimoi)
-  }
+
+    this.listuser = allusers;
+    this.timbanchung();
+}
+
 
   
 
