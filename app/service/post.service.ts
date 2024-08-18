@@ -28,4 +28,7 @@ export class Postservice {
     getpostbyfolowinf(id_folowing:any[]):Observable<any>{
       return this.http.post<any>(`${this.url}post/getpostbyfolowing`, id_folowing)
     }
+    getpostbyme(id:any):Observable<any>{
+      return this.http.get<any>(`${this.url}post/getpostbyme/${id}`)
+    }
 }

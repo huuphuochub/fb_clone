@@ -7,6 +7,8 @@ import { FriendBehaviorSubject } from '../../BehaviorSubject/friend.BehaviorSubj
 import { Userservice } from '../../service/userservice';
 import { Subscription } from 'rxjs';
 import { Folowerservice } from '../../service/folower.service';
+import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject';
+import { Router } from '@angular/router';
 
 
 
@@ -22,18 +24,25 @@ export class ProfileuserComponent implements OnInit{
   id_user!:any;
   user!:any;
   friendofuser!:any
+  postbyuser!:any;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private Folowerservice:Folowerservice, private Userservice:Userservice, private FriendBehaviorSubject:FriendBehaviorSubject, private activeStateService: ActiveStateService, private friendservice:Friendservice,private UserBehaviorSubject:UserBehaviorSubject,private route: ActivatedRoute) {}
+  constructor(
+    private router:Router,
+    private PostBehaviorSubject:PostBehaviorSubject,
+    private Folowerservice:Folowerservice, private Userservice:Userservice, private FriendBehaviorSubject:FriendBehaviorSubject, private activeStateService: ActiveStateService, private friendservice:Friendservice,private UserBehaviorSubject:UserBehaviorSubject,private route: ActivatedRoute) {}
 
 
   ngOnInit(): void {
     this.activeStateService.setCurrentPage('');
-
+    const id = localStorage.getItem('id_user')
     // Lắng nghe sự thay đổi của tham số route
     this.subscriptions.add(
       this.route.paramMap.subscribe(params => {
         this.id_user = params.get('id');
+        if(this.id_user === id){
+          this.router.navigate([`/profileme`])
+        }
         this.loadUserData();
         this.loadFriendData();
       })
@@ -43,18 +52,50 @@ export class ProfileuserComponent implements OnInit{
     this.subscriptions.add(
       this.UserBehaviorSubject.alluser$.subscribe(data => {
         this.allfriend = data;
-        console.log(data);
+        // console.log(data);
       })
     );
 
     this.subscriptions.add(
       this.FriendBehaviorSubject.alluser$.subscribe(data => {
         this.user = data[0];
-        console.log(this.user);
+        // console.log(this.user)
+        if(this.user.status === 0 || this.user.status === 1 || this.user.status === 2){
+          this.getpostbyuser()
+        }else if(this.user.status === 3){
+          this.getpostbyfriend()
+        }
+        // console.log(this.user);
       })
     );
   }
+  getpostbyuser(){
+    // console.log(this.id_user);
+    const id:any[] =[]
+    id.push(this.id_user);
+    console.log(id);
+    this.PostBehaviorSubject.setarridfriend([])
 
+    this.PostBehaviorSubject.setarridfolowing(id)
+    this.loadpost()
+  }
+  getpostbyfriend(){
+    const id:any[] =[]
+    id.push(this.id_user);
+    console.log(id);
+    this.PostBehaviorSubject.setarridfolowing([])
+
+    this.PostBehaviorSubject.setarridfriend(id);
+    this.loadpost()
+
+  }
+
+  loadpost(){
+    this.PostBehaviorSubject.listallpost$.subscribe(data =>{
+      // console.log(data);
+      this.postbyuser = data.reverse()
+    })
+  }
   loadUserData(): void {
     if (this.id_user) {
       this.Userservice.getuser(this.id_user).subscribe(data => {
@@ -66,7 +107,7 @@ export class ProfileuserComponent implements OnInit{
   }
 
   handlefolow(id_user:any){
-      console.log(id_user);
+      // console.log(id_user);
       const id_user1 = localStorage.getItem('id_user');
       const id_user2 = id_user;
       const status = 1
@@ -76,7 +117,7 @@ export class ProfileuserComponent implements OnInit{
       formdata.append('id_user2',id_user2);
       formdata.append('status', status.toString())
       this.Folowerservice.addfolower(formdata).subscribe( data =>{ 
-        console.log(data)
+        // console.log(data)
       })
     }
 
@@ -86,7 +127,7 @@ export class ProfileuserComponent implements OnInit{
   loadFriendData(): void {
     if (this.id_user) {
       this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.UserBehaviorSubject.compressionuser(data.slice(0,9));
       });
     }

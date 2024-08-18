@@ -12,6 +12,7 @@ import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject'
 import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
 import { Folowerservice } from '../../service/folower.service';
 import { Postservice } from '../../service/post.service';
+import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject';
 
 
 @Component({
@@ -21,7 +22,9 @@ import { Postservice } from '../../service/post.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice) {}
+  constructor(
+    private PostBehaviorSubject:PostBehaviorSubject,
+    private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice) {}
 
   position = 0;
   trove:boolean = false;
@@ -41,6 +44,7 @@ export class HomeComponent implements OnInit {
   arruserpost!:any;
   postbyfriend!:any;
   postbyfolowing!:any;
+  allpostnewfeed!:any
 
 
   ngOnInit(): void {
@@ -55,7 +59,7 @@ export class HomeComponent implements OnInit {
       
     })
     this.Folowerservice.getfolowerbyuser(this.id_user).subscribe(data =>{
-      console.log(data);
+      // console.log(data);
       this.listfolower = data
       this.arridfolowing = data.map((item:any) =>{
         if(item.status === 1 && item.id_user1 === this.id_user){
@@ -68,18 +72,22 @@ export class HomeComponent implements OnInit {
       }
           
       )
-      console.log(this.arridfolowing);
+
+      this.PostBehaviorSubject.setarridfolowing(this.arridfolowing);
     })
     this.friendservice.timbancuaminh(this.id_user).subscribe(data =>{
-      console.log(data);
+      // console.log(data);
     this.arriddfriend =  data.map((item:any) =>{
           if(item.id_user1 === this.id_user){
             return item.id_user2
-          }else{
+          }else if(item.id_user2 === this.id_user){
             return item.id_user1
+          }else{
+            return null
           }
      } )
-      console.log(this.arriddfriend);
+      // console.log(this.arriddfriend);
+      this.PostBehaviorSubject.setarridfriend(this.arriddfriend);
       this.getnewfeed()
 
     })
@@ -87,27 +95,15 @@ export class HomeComponent implements OnInit {
   }
 
   getnewfeed(){
-    const arriduser = [...new Set([...this.arriddfriend, ...this.arridfolowing])]
-    console.log(arriduser);
-    this.userservice.getuserbyarrid(arriduser).subscribe(data =>{
-      console.log(data);
-      this.arruserpost=data;
-    })
-    this.Postservice.getpostbyfriend(this.arriddfriend).subscribe(data =>{
-      console.log(data);
-      this.postbyfriend = data
-      
-    })
-    this.Postservice.getpostbyfolowinf(this.arridfolowing).subscribe(data =>{
-      console.log(data)
-      this.postbyfolowing = data;
-    })
 
+    this.PostBehaviorSubject.listallpost$.subscribe(data =>{
+      this.allpostnewfeed = data.reverse()
+    })
   }
 
 
 
-  
+
   loadban(){
 
     

@@ -20,7 +20,8 @@ export class ProfilemeComponent implements OnInit{
   isformaddpost:boolean = false;
   formaddpost!:FormGroup;
   id_user!:any;
-  selectedoption!:any
+  selectedoption!:any;
+  postofme!:any;
 
 
 constructor(
@@ -44,7 +45,15 @@ constructor(
         this.MeBehaviorSubject.compressionuser(data);
         this.fetchfriend()
       })
+      this.getpost()
+    
 
+  }
+  getpost(){
+    this.Postservice.getpostbyme(this.id_user).subscribe(data =>{
+      console.log(data);
+      this.postofme = data.reverse()
+    })
   }
   onFileChange(event:any){
     const file = event.target.files[0]
@@ -68,9 +77,11 @@ constructor(
     image = this.selectdFile
 
     }
-    if(!this.selectedoption){
+    if(this.selectedoption === undefined){
       this.selectedoption = 1
     }
+    console.log(this.selectedoption);
+
     const formdata = new FormData()
     formdata.append('content', this.formaddpost.get('content')?.value);
     formdata.append('id_user' ,this.id_user);
@@ -80,7 +91,10 @@ constructor(
     this.Postservice.addpost(formdata).subscribe(data =>{
       if(data === true){
         this.formaddpost.reset();
-        this.selectedoption =''
+        this.selectedoption ='';
+        this.isformaddpost = false;
+        this.lammo = false;
+        this.getpost();
       }
     })
 
@@ -89,6 +103,7 @@ constructor(
   selectedOption(event:any){
     const option = event.target as HTMLSelectElement;
     console.log(option.value);
+    this.selectedoption = option.value;
   }
   openformpost(){
     this.isformaddpost = true;

@@ -104,7 +104,10 @@
 
             </div>
             <div class="tatcaanhnguoidung">
-                <div class="image-container">
+                <div class="image-container" *ngFor="let post of postofme">
+                    <img *ngIf="post.image !== '' " src="{{post.image}}" alt="">
+                </div>
+                <!-- <div class="image-container">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
                 </div>
                 <div class="image-container">
@@ -127,10 +130,7 @@
                 </div>
                 <div class="image-container">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                </div>
-                <div class="image-container">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="hienbanbenguoidung">
@@ -174,7 +174,52 @@
             <i></i>
             <button><i class="fa-solid fa-sliders"></i>  bộ lọc</button>
         </div>
-        <div class="cacbaiviet">
+        <div class="cacbaiviet" *ngFor="let post of postofme">
+            <div class="thongtinbaivietotrangcanhan">
+                <div class="hinhdaidien">
+                    <img src="{{user.avatar}}" alt="">
+                </div>
+                <div class="thongtinnguoidang">
+                    <h5>{{user.username}}</h5>
+                    <p>{{post.date.split('T')[0]}}</p>
+                </div>
+                <div> </div>
+                <div class="luachon">
+                    <p *ngIf="post.status === 1">công khai</p>
+                    <p *ngIf="post.status === 2">bạn bè</p>
+                    <p *ngIf="post.status === 3">chỉ mình tôi</p>
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+            <div class="tieudebaiviet">
+                <p>{{post.content}}</p>
+            </div>
+            <div class="hinhanhbaiviet">
+                <img src="{{post.image}}" alt="" class="image-baiviet">
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet"> -->
+            </div>
+            <div class="luottuongtacbaiviet">
+                <div class="luotlike">
+                    <div class="cacicon">            
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                        <i class="fa-solid fa-heart" style="color: red;"></i>
+                        <p class="xemlike">{{post.totallike}} lượt thích</p>
+                    </div>
+                    <div  class="xembl" >
+                        {{post.totalcomment}} bình luận
+                    </div>
+                    <div class="xemshare">
+                        {{post.totalshare}} luọt chia sẻ
+                    </div>
+                </div>
+            </div>
+            <div class="tuongtacvoibaiviet">
+                <div><i class="fa-regular fa-thumbs-up"></i>thích</div>
+                <div><i class="fa-regular fa-comment"></i> bình luận</div>
+                <div><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+            </div>
+        </div>
+        <!-- <div class="cacbaiviet">
             <div class="thongtinbaivietotrangcanhan">
                 <div class="hinhdaidien">
                     <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
@@ -257,49 +302,7 @@
                 <div><i class="fa-regular fa-comment"></i> bình luận</div>
                 <div><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
             </div>
-        </div>
-        <div class="cacbaiviet">
-            <div class="thongtinbaivietotrangcanhan">
-                <div class="hinhdaidien">
-                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-                </div>
-                <div class="thongtinnguoidang">
-                    <h5>name</h5>
-                    <p>5 tháng 1</p>
-                </div>
-                <div> </div>
-                <div class="luachon">
-                    <i class="bi bi-list"></i>
-                </div>
-            </div>
-            <div class="tieudebaiviet">
-                <p>bài viết này nocap</p>
-            </div>
-            <div class="hinhanhbaiviet">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet">
-            </div>
-            <div class="luottuongtacbaiviet">
-                <div class="luotlike">
-                    <div class="cacicon">            
-                        <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
-                        <i class="fa-solid fa-heart" style="color: red;"></i>
-                        <p class="xemlike">bạn và 40 người khác</p>
-                    </div>
-                    <div  class="xembl" >
-                        10 bình luận
-                    </div>
-                    <div class="xemshare">
-                        9 luọt chia sẻ
-                    </div>
-                </div>
-            </div>
-            <div class="tuongtacvoibaiviet">
-                <div><i class="fa-regular fa-thumbs-up"></i>thích</div>
-                <div><i class="fa-regular fa-comment"></i> bình luận</div>
-                <div><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
-            </div>
-        </div>
+        </div> -->
     </div>
     
 </div>
@@ -309,12 +312,12 @@
             <i class="fa-solid fa-circle-xmark" (click)="closeformpost()"></i>
            </div>
             <div class="thongtinnguoiviet">
-                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                <img src="{{user.avatar}}" alt="">
                 <div class="username">
                     <h5>{{user.username}}</h5>
                     <select (change)="selectedOption($event)" name="" id="">
-                        <option [value]="1">bạn bè</option>
-                        <option [value]="2">mọi người</option>
+                        <option [value]="1">mọi người</option>
+                        <option [value]="2">bạn bè</option>
                         <option [value]="3">chỉ mình tôi</option>
                     </select>
                 </div>
