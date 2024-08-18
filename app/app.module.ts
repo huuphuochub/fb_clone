@@ -13,7 +13,8 @@ import { AuthenticateComponent } from './component/authenticate/authenticate.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SettingprofileComponent } from './component/settingprofile/settingprofile.component';
-import { SearchComponent } from './component/search/search.component'; // Import HttpClientModule
+import { SearchComponent } from './component/search/search.component';
+import { ProfilemeComponent } from './component/profileme/profileme.component'; // Import HttpClientModule
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SearchComponent } from './component/search/search.component'; // Import
     ProfileuserComponent,
     AuthenticateComponent,
     SettingprofileComponent,
-    SearchComponent
+    SearchComponent,
+    ProfilemeComponent
   ],
   imports: [
     BrowserModule,

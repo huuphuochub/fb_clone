@@ -201,6 +201,7 @@ ngOnInit(): void {
     var password = this.formpassword.get('password')?.value;
     var cfpassword = this.formpassword.get('cfpassword')?.value;
     var email = this.email;
+    const status = 1
     if(password.length<8){
       this.loipassword=true
     }else if(password !== cfpassword){
@@ -212,6 +213,7 @@ ngOnInit(): void {
       const formdata = new FormData()
       formdata.append('email',email);
       formdata.append('password',password);
+      formdata.append('status', status.toString());
 
       this.userservice.dangky(formdata).subscribe(data=>{
         console.log(data);

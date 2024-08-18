@@ -22,13 +22,13 @@
         <div class="content">
             <h4>mọi ngươi</h4>
         </div>
-        <div class="searchuser" *ngFor="let user of listuserhoanchinh">
-            <div class="okla">
+        <div class="searchuser" *ngFor="let user of listuserhoanchinh" >
+            <div class="okla" routerLink="/profileuser/{{user._id}}">
                 <img src="{{user?.avatar}}" alt="">
                 <div class="hienonl" *ngIf="user.online === 1"></div>
 
             </div>
-            <div class="thongtinuser">
+            <div class="thongtinuser" routerLink="/profileuser/{{user._id}}">
                 <h5>{{user.username}}</h5>
                 <p *ngIf="user._id !== id_user && user.banchung>0">có {{user.banchung}} bạn chung</p>
             </div>

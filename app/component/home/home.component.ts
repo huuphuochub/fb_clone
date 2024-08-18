@@ -9,6 +9,9 @@ import { SocketIoService } from '../../service/socketio.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Sharedataservice } from '../../service/sharedata.service';
 import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject';
+import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
+import { Folowerservice } from '../../service/folower.service';
+import { Postservice } from '../../service/post.service';
 
 
 @Component({
@@ -18,7 +21,7 @@ import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice) {}
+  constructor(private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice) {}
 
   position = 0;
   trove:boolean = false;
@@ -31,6 +34,13 @@ export class HomeComponent implements OnInit {
   profilefriend!:any
   idfriendonline!:any;
   isfriendonline:any[] =[];
+  listfolower!:any
+  arriddfriend!:any[];
+  arriduserpost!:any[];
+  arridfolowing!:any;
+  arruserpost!:any;
+  postbyfriend!:any;
+  postbyfolowing!:any;
 
 
   ngOnInit(): void {
@@ -44,19 +54,66 @@ export class HomeComponent implements OnInit {
 
       
     })
-  
-     
+    this.Folowerservice.getfolowerbyuser(this.id_user).subscribe(data =>{
+      console.log(data);
+      this.listfolower = data
+      this.arridfolowing = data.map((item:any) =>{
+        if(item.status === 1 && item.id_user1 === this.id_user){
+          return item.id_user2
+        }else if(item.status === 2 && item.id_user2 === this.id_user){
+          return item.id_user1
+        }else{
+          return null;
+        }
+      }
+          
+      )
+      console.log(this.arridfolowing);
+    })
+    this.friendservice.timbancuaminh(this.id_user).subscribe(data =>{
+      console.log(data);
+    this.arriddfriend =  data.map((item:any) =>{
+          if(item.id_user1 === this.id_user){
+            return item.id_user2
+          }else{
+            return item.id_user1
+          }
+     } )
+      console.log(this.arriddfriend);
+      this.getnewfeed()
 
-    
-    // localStorage.clear()
-    
+    })
+    // localStorage.clear()  
   }
+
+  getnewfeed(){
+    const arriduser = [...new Set([...this.arriddfriend, ...this.arridfolowing])]
+    console.log(arriduser);
+    this.userservice.getuserbyarrid(arriduser).subscribe(data =>{
+      console.log(data);
+      this.arruserpost=data;
+    })
+    this.Postservice.getpostbyfriend(this.arriddfriend).subscribe(data =>{
+      console.log(data);
+      this.postbyfriend = data
+      
+    })
+    this.Postservice.getpostbyfolowinf(this.arridfolowing).subscribe(data =>{
+      console.log(data)
+      this.postbyfolowing = data;
+    })
+
+  }
+
+
+
+  
   loadban(){
 
     
     this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data=>{
       this.profilefriend = data
-      this.UserBehaviorSubject.compressionuser(data);
+      this.MeBehaviorSubject.compressionuser(data);
       // console.log(data)
       this.friendonline()
 
@@ -69,7 +126,7 @@ export class HomeComponent implements OnInit {
 
   }
   friendonline(){
-this.UserBehaviorSubject.alluser$.subscribe(data =>{
+this.MeBehaviorSubject.alluser$.subscribe(data =>{
   // console.log(data);
         this.isfriendonline = data
 

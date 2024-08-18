@@ -7,11 +7,14 @@ import { DangkiComponent } from './component/dangki/dangki.component';
 import { AuthenticateComponent } from './component/authenticate/authenticate.component';
 import { SettingprofileComponent } from './component/settingprofile/settingprofile.component';
 import { SearchComponent } from './component/search/search.component';
+import { ProfilemeComponent } from './component/profileme/profileme.component';
 
 const routes: Routes = [
 
   {path: '', component:HomeComponent},
   {path:'profileuser/:id', component:ProfileuserComponent},
+  {path:'profileme', component:ProfilemeComponent},
+
   {path:'login', component:LoginComponent},
   {path:'regsiter', component:DangkiComponent},
   {path:'authenticate', component:AuthenticateComponent},

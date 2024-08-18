@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FriendBehaviorSubject } from '../../BehaviorSubject/friend.BehaviorSubject';
 import { Userservice } from '../../service/userservice';
 import { Subscription } from 'rxjs';
-
+import { Folowerservice } from '../../service/folower.service';
 
 
 
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-profileuser',
   templateUrl: './profileuser.component.html',
-  styleUrl: './profileuser.component.css'
+  styleUrls: ['./profileuser.component.css']
 })
 export class ProfileuserComponent implements OnInit{
   allfriend!:any;
@@ -24,7 +24,7 @@ export class ProfileuserComponent implements OnInit{
   friendofuser!:any
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private Userservice:Userservice, private FriendBehaviorSubject:FriendBehaviorSubject, private activeStateService: ActiveStateService, private friendservice:Friendservice,private UserBehaviorSubject:UserBehaviorSubject,private route: ActivatedRoute) {}
+  constructor(private Folowerservice:Folowerservice, private Userservice:Userservice, private FriendBehaviorSubject:FriendBehaviorSubject, private activeStateService: ActiveStateService, private friendservice:Friendservice,private UserBehaviorSubject:UserBehaviorSubject,private route: ActivatedRoute) {}
 
 
   ngOnInit(): void {
@@ -65,11 +65,29 @@ export class ProfileuserComponent implements OnInit{
     }
   }
 
+  handlefolow(id_user:any){
+      console.log(id_user);
+      const id_user1 = localStorage.getItem('id_user');
+      const id_user2 = id_user;
+      const status = 1
+      if(id_user1){
+      const formdata = new FormData()
+      formdata.append('id_user1', id_user1);
+      formdata.append('id_user2',id_user2);
+      formdata.append('status', status.toString())
+      this.Folowerservice.addfolower(formdata).subscribe( data =>{ 
+        console.log(data)
+      })
+    }
+
+  }
+
+
   loadFriendData(): void {
     if (this.id_user) {
       this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data => {
         console.log(data);
-        this.UserBehaviorSubject.compressionuser(data);
+        this.UserBehaviorSubject.compressionuser(data.slice(0,9));
       });
     }
   }

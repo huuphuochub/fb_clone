@@ -15,19 +15,19 @@ export class Friendservice {
   }
   getallfriend(id:any):Observable<any>{
     // console.log(id);
-    return this.http.get<any>(`${this.url}friend/allfriend/${id}`)
+    return this.http.get<any>(`${this.url}friend/allfriend/${id}`) // lấy tất cả bạn của user theo id (đã kết bạn hoặc chưa kết bạn) trả về bảng friend
   }
   timbancuaban(id:any[]):Observable<any>{
-    return this.http.post<any>(`${this.url}friend/laytatcabancuauser`,id)
+    return this.http.post<any>(`${this.url}friend/laytatcabancuauser`,id)  // lấy tất cả bạn của mảng id  trả về bảng friend
   }
   timbancuaminh(id:any):Observable<any>{
     // console.log(typeof id);
-    return this.http.get<any>(`${this.url}friend/getallfriend/${id}`)
+    return this.http.get<any>(`${this.url}friend/getallfriend/${id}`) // lấy tất cả bảng friend có id   trả về bảng friend
   }
   
   laythongtinfriendbyuser(id:any):Observable<any>{
     // console.log(typeof id);
-    return this.http.get<any>(`${this.url}friend/getallfriendbyuerr/${id}`)
+    return this.http.get<any>(`${this.url}friend/getallfriendbyuerr/${id}`) // lấy thông tin đầy đủ của tất cả bạn từ id trả về mảng user
   }
   acpfriend(id:any):Observable<any>{
     // console.log(typeof id);

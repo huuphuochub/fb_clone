@@ -11,6 +11,7 @@ import { Friendservice } from '../../service/friend.service';
 import { FriendBehaviorSubject } from '../../BehaviorSubject/friend.BehaviorSubject';
 import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject';
 import { Messengerservice } from '../../service/messenger.service';
+import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
 
 
 @Component({
@@ -54,6 +55,7 @@ idroom!:any;
     private sharedataservice:Sharedataservice,
     private formbuilder:FormBuilder,
     private router:Router,
+    private MeBehaviorSubject:MeBehaviorSubject
     
   ) {
     this.formsearchuser = this.formbuilder.group({
@@ -111,7 +113,7 @@ sendchat(id_user:any){
   const formdata = new FormData();
   
   formdata.append('content', this.forminputchat.get('content')?.value)
-  // console.log(this.userchat);
+  console.log(this.userchat);
   let id_room = ''
   this.userchat.forEach((item:any)=>{
     id_room = item.id_room
@@ -149,6 +151,8 @@ sendchat(id_user:any){
     this.socketioservice.getallfriendonline().subscribe(data =>{
       this.idfriendonline= data;
       this.UserBehaviorSubject.setidlistfriend(this.idfriendonline)
+      this.MeBehaviorSubject.setidlistfriend(this.idfriendonline)
+
       this.FriendBehaviorSubject.setidlistfriend(this.idfriendonline)
 
       this.friendonline();
@@ -158,6 +162,8 @@ sendchat(id_user:any){
         this.idfriendonline.push(data);
         this.UserBehaviorSubject.setidlistfriend(this.idfriendonline)
         this.FriendBehaviorSubject.setidlistfriend(this.idfriendonline)
+        this.MeBehaviorSubject.setidlistfriend(this.idfriendonline)
+
 
     }
     this.friendonline(); 
@@ -166,6 +172,8 @@ sendchat(id_user:any){
       this.idfriendonline = this.idfriendonline.filter((item:any)=>item !== data);
       this.UserBehaviorSubject.setidlistfriend(this.idfriendonline);
       this.FriendBehaviorSubject.setidlistfriend(this.idfriendonline)
+      this.MeBehaviorSubject.setidlistfriend(this.idfriendonline)
+
 
       this.friendonline()
     }))
@@ -179,7 +187,7 @@ sendchat(id_user:any){
   }
 
   friendonline(){
-this.UserBehaviorSubject.alluser$.subscribe(data =>{
+this.MeBehaviorSubject.alluser$.subscribe(data =>{
   this.alluser = data
   // console.log(data);
   this.compressionuserroom();

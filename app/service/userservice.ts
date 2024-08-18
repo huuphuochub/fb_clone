@@ -37,5 +37,8 @@ export class Userservice {
     
     return this.http.post<any>(`${this.url}user/login`, formdata);
   }
+  getuserbyarrid(formdata:any[]):Observable<any>{
+    return this.http.post<any>(`${this.url}user/getalluserbyarrid`, formdata);
+  }
 
 }

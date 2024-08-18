@@ -7,27 +7,24 @@
     <div class="thongtincanhandautrang">
         <div class="anhdaidien">
             <img src="{{user.avatar}}" alt="">
-            <div class="hienonl" *ngIf="user.online === 1"></div>
+            <div class="hienonl" ><i class="fa-solid fa-camera"></i></div>
         </div>
         <div class="tennguoidung">
             <div class="ten">
                 <h1>{{user.username}}</h1>
             </div>
             <div class="banbe">
-                <p>{{allfriend.length}} người bạn -  </p>
-                <p> {{user.banchung}} bạn chung</p>
+                <p>{{listfriend.length}} người bạn -  </p>
+                <p> </p>
             </div>
             <div class="hinhbanbe" >
-                <img *ngFor="let friend of allfriend" src="{{friend.avatar}}" alt="">
+                <img *ngFor="let listfriend of listfriend" src="{{listfriend.avatar}}" alt="">
             </div>
         </div>
         <div class="cactuychon">
-            <button *ngIf="user.status === 0">thêm bạn bè</button>
-            <button *ngIf="user.status === 1"> chấp nhận</button>
-            <button *ngIf="user.status === 2">hủy lời mời</button>
-            <button *ngIf="user.status === 3" style="background-color: rgb(82, 85, 88);">bạn bè</button>
+           <button>chỉnh sửa</button>
 
-            <button (click)="handlefolow(user._id)">theo giõi</button>
+            <button>thêm vào tin</button>
             <i class="bi bi-chevron-compact-down"></i>
         </div>
     </div>
@@ -144,16 +141,15 @@
                     <a>xem tất cả bạn bè</a>
                 </div>
                 <div class="sobanchung">
-                    <p>{{allfriend.length}} bạn bè ({{user.banchung}} bạn chung)</p>
+                    <p>{{listfriend.length}} bạn bè </p>
                 </div>
             </div>
-            <div class="tatcabanbeoday" *ngIf="allfriend">
-                <div class="chitietbanbecuaban" *ngFor="let friend of allfriend">
-                    <img src="{{friend.avatar}}" alt=""  routerLink="/profileuser/{{friend._id}}">
-                    <h6>{{friend.username}}</h6>
-                    <p *ngIf="friend.banchung > 0">{{friend.banchung}} bạn chung</p>
-                </div>
-                
+            <div class="tatcabanbeoday" >
+                <div class="chitietbanbecuaban" *ngFor="let listfriend of listfriend">
+                    <img src="{{listfriend.avatar}}" alt=""  routerLink="/profileuser/{{listfriend._id}}">
+                    <h6>{{listfriend.username}}</h6>
+                    <p *ngIf="listfriend.banchung > 0">{{listfriend.banchung}} bạn chung</p>
+                </div> 
             </div>
         </div>
         <p style="color: white;"><i class="fa-brands fa-github"></i>huuphuochub</p>
@@ -163,7 +159,7 @@
         <div class="tuongtacvoinguoidung">
             <div class="noidenhap">
                 <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-                <input type="text" placeholder="write something to nguoi dung">
+                <input type="text" placeholder="bạn đang nghĩ gì...." (click)="openformpost()">
             </div>
             <div class="cactuychontuongtacnguoidung">
                 <ul>
@@ -307,5 +303,39 @@
     </div>
     
 </div>
+    <div class="addpost" *ngIf="isformaddpost">
+           <div class="taobaiviet">
+            <h3>tạo bài viết</h3>
+            <i class="fa-solid fa-circle-xmark" (click)="closeformpost()"></i>
+           </div>
+            <div class="thongtinnguoiviet">
+                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                <div class="username">
+                    <h5>{{user.username}}</h5>
+                    <select (change)="selectedOption($event)" name="" id="">
+                        <option [value]="1">bạn bè</option>
+                        <option [value]="2">mọi người</option>
+                        <option [value]="3">chỉ mình tôi</option>
+                    </select>
+                </div>
+            </div>
+            <form class="ok" [formGroup]="formaddpost" (ngSubmit)="handleaddpost()">
+
+            <div class="inputpost">
+                <textarea name="" id="" placeholder="bạn đang nghĩ gì" style="color: white;" formControlName="content"></textarea>
+                <img *ngIf="image !== '' " [src]="image" alt="">
+                
+            </div>
+
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fa-solid fa-image"></i> ảnh
+                </label>
+            <input id="file-upload" type="file" (change)="onFileChange($event)"/> <br>
+            <button>đăng</button>
+        </form>
+
+          
+    </div>
+    <div class="overlay" id="overlay" *ngIf="lammo"></div>
 
 </main>
