@@ -1,6 +1,6 @@
 .header{
     display: grid;
-    grid-template-columns: 5%  20% 50% 25%;
+    grid-template-columns: 5%  22% 46% 27%;
     height: 70px;
     background-color:#222222;
     position: fixed;
@@ -78,7 +78,7 @@
     font-size: 30px;
     /* padding: 10px; */
     display: flex;
-    margin-left: 50%;
+    margin-left: 40%;
 }
 .ochat{
     position: relative; /* Để phần tử con có thể định vị theo phần tử này */
@@ -249,13 +249,16 @@
     padding: 10px;
 
 }
+.sothongbao{
+    position: relative;
+}
 .menu .sothongbao p{
     position: absolute;
     color: white;
-    top: 9px;
-    right: 90px;
-    padding: 0 5px;
+    top: 2px;
+    right: 0;
     font-size: 15px;
+    padding:0 5px;
     font-weight: bold;
     background-color: red;
     border-radius: 50px;
@@ -349,7 +352,7 @@
     height: 500px;
     right: 420px;
     border-radius: 10px;
-    top: 390px;
+    top: 220px;
     overflow-y: scroll;
 
 }
@@ -384,8 +387,8 @@
     font-size: 13px;
 }
 .khungnhapchat .chutk{
-    padding: 3px;
-   text-align: right;
+    display: flex;
+    justify-content: flex-end;    
 }
 .trollthoi{
     display: flex;
@@ -414,8 +417,8 @@
     border-radius: 10px;
 }
 .khungnhapchat .nguoinhan{
-    display: grid;
-    grid-template-columns: 15% 85%;
+    display: flex;
+    margin-left: 20px;
 }
 .khungnhapchat .nguoinhan p{
     background-color: #555555;
@@ -427,7 +430,7 @@
   
   .inputchat {
     padding: 15px;
-    position: fixed;
+    position: sticky;
     bottom: 0px;
     background-color: #222222;
     width: 350px;
@@ -447,7 +450,7 @@
     bottom: 100px;
   }
   .khoangtrong{
-    height: 100px;
+    height: 10px;
   }
   
   /* The slider */

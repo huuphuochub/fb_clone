@@ -8,6 +8,7 @@ import { AuthenticateComponent } from './component/authenticate/authenticate.com
 import { SettingprofileComponent } from './component/settingprofile/settingprofile.component';
 import { SearchComponent } from './component/search/search.component';
 import { ProfilemeComponent } from './component/profileme/profileme.component';
+import { PostComponent } from './component/post/post.component';
 
 const routes: Routes = [
 
@@ -16,6 +17,8 @@ const routes: Routes = [
   {path:'profileme', component:ProfilemeComponent},
 
   {path:'login', component:LoginComponent},
+  {path:'post/:id', component:PostComponent},
+
   {path:'regsiter', component:DangkiComponent},
   {path:'authenticate', component:AuthenticateComponent},
   {path:'setprofile', component:SettingprofileComponent},

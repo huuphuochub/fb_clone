@@ -5,9 +5,9 @@
   
     <div class="search"><i class="bi bi-search"></i>
         <form [formGroup]="formsearchuser" (ngSubmit)="timkiemuser()">
-    <input type="text" placeholder="search" formControlName="username">
+         <input type="text" placeholder="search" formControlName="username">
         </form>
-</div>
+    </div>
     <div class="link">
             <div [ngClass]="{'active': currentPage === 'home'}"><a routerLink="/"><i class="bi bi-house"></i></a></div>
             <div><a href=""><i class="bi bi-film"></i></a></div>
@@ -23,8 +23,7 @@
            
         </div>
         <div class="sothongbao">
-            <i class="bi bi-bell" (click)="closetb()"></i>
-            <p>1</p>
+            <i class="bi bi-bell" (click)="closetb()"></i><p>{{newnoti.length}}</p>
         </div>
         <div><i class="bi bi-person-circle" (click)="closecaidat()"></i></div>
     </div>
@@ -93,12 +92,15 @@
             <h5>tất cả</h5>
             <h5>chưa đọc</h5>
         </div>
-        <div class="thongbao">
-            <i class="fa-regular fa-comment"></i>  <p>name đã bình luận về bài viết của bạn <i>19:30</i></p>
+        <div *ngFor="let noti of notification">
+        <div class="thongbao" *ngIf="noti.status === 0"  (click)="updatenoti(noti._id,noti.id_post)">
+            <i class="fa-regular fa-comment"></i>  <p>{{noti.content}}<i>{{noti.date.split("T")[1]}}</i></p>
+         </div>
+        <div class="thongbaodadoc"  *ngIf="noti.status === 1" (click)="updatenoti(noti._id,noti.id_post)">
+            <i class="fa-regular fa-comment"></i>  <p>{{noti.content}}<i>{{noti.date.split("T")[1]}}</i></p>
         </div>
-        <div class="thongbaodadoc">
-            <i class="fa-regular fa-comment"></i>  <p>name đã bình luận về bài viết của bạn </p>
-        </div>
+    </div>
+
     </div>
     <!-- end khung thong bao -->
 

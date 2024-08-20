@@ -13,6 +13,8 @@ import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
 import { Folowerservice } from '../../service/folower.service';
 import { Postservice } from '../../service/post.service';
 import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject';
+import { Likeservice } from '../../service/like.service';
+import { Notificationservice } from '../../service/notification.service';
 
 
 @Component({
@@ -23,6 +25,8 @@ import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject'
 export class HomeComponent implements OnInit {
 
   constructor(
+    private Likeservice:Likeservice,
+    private Notificationservice:Notificationservice,
     private PostBehaviorSubject:PostBehaviorSubject,
     private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice) {}
 
@@ -148,20 +152,56 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
   }
   
 
-  onMouseEnter() {
+  onMouseEnter(index:any) {
     // Thiết lập thời gian hiển thị popup sau 3 giây
     this.hoverTimer = setTimeout(() => {
-      this.showPopup = true;
+      this.allpostnewfeed[index].ishover = true;
     }, 1000);
-  }
+  } 
 
-  onMouseLeave() {
+  onMouseLeave(index:any) {
     // Hủy bỏ thời gian nếu chuột rời khỏi trước khi hết thời gian
     clearTimeout(this.hoverTimer);
-    this.showPopup = false;
+    this.allpostnewfeed[index].ishover = false;
     
 
     
+  }
+  handlelike(type:any,id_post:string,id_user:any){
+    console.log(type);
+    const fomdata = new FormData()
+    fomdata.append('id_post',id_post),
+    fomdata.append('id_user',this.id_user);
+    fomdata.append('type',type)
+    this.Likeservice.addlike(fomdata).subscribe(data =>{
+      console.log(data)
+      this.PostBehaviorSubject.getpostbyfriend()
+      this.PostBehaviorSubject.getpostbyuser
+      this.PostBehaviorSubject.getlike()
+      const thongbao = `${this.profileuser.username} vừa thả cảm xúc về bài viết của bạn`;
+
+      this.socketservice.sendNotification(id_user,thongbao)
+      const formthongbao = new FormData()
+      formthongbao.append('id_user',id_user),
+      formthongbao.append('content',thongbao);
+      formthongbao.append('id_post', id_post)
+      this.Notificationservice.addnotification(formthongbao).subscribe(data =>{
+        console.log(data);
+      })
+
+    })
+  }
+  deletelike(id_post:any){
+    console.log(id_post)
+    const fomdata = new FormData()
+    fomdata.append('id_post',id_post),
+    fomdata.append('id_user',this.id_user);
+    this.Likeservice.deletelike(fomdata).subscribe(data=>{
+      console.log(data);
+      this.PostBehaviorSubject.getpostbyfriend()
+      this.PostBehaviorSubject.getpostbyuser
+      this.PostBehaviorSubject.getlike()
+    })
   }
   mobinhluan(){
     this.openbinhluan = true

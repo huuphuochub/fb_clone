@@ -14,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SettingprofileComponent } from './component/settingprofile/settingprofile.component';
 import { SearchComponent } from './component/search/search.component';
-import { ProfilemeComponent } from './component/profileme/profileme.component'; // Import HttpClientModule
+import { ProfilemeComponent } from './component/profileme/profileme.component';
+import { PostComponent } from './component/post/post.component'; // Import HttpClientModule
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProfilemeComponent } from './component/profileme/profileme.component'; 
     AuthenticateComponent,
     SettingprofileComponent,
     SearchComponent,
-    ProfilemeComponent
+    ProfilemeComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

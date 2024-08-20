@@ -1,0 +1,64 @@
+<main>
+    <div class="divpost">
+        <div class="baiviet">
+            <h3>bài viết</h3>
+        </div>
+        <div class="thongtin">
+            <div class="user">
+                <img src="{{user.avatar}}" alt="">
+                <div class="divp">
+                    <p>{{user.username}}</p>
+                    <p>{{post.date.split('T')[1]}}</p>
+                </div>
+            </div>
+            <div class="iclose">
+                <i class="bi bi-list"></i>
+            </div>
+        </div>
+        <div class="content">
+            <p>{{post.content}}</p>
+        </div>
+        <div class="hinhpost" *ngIf="post.image !== '' ">
+            <img src="{{post.image}}" alt="">
+        </div>
+        <div class="like">
+                
+            <div class="handdlike">
+           <div> {{post.totallike}} <i class="fa-regular fa-thumbs-up"  ></i>thích </div>
+          </div>
+            <div class="handdcmt" >{{post.totalcomment}}<i class="fa-regular fa-comment"></i> bình luận</div>
+            <div class="handdshare"> {{post.totalshare}} <i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+
+        </div>
+        <div class="comment">
+            <div class="usercomment">
+                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            </div>
+            <div class="usercmt">
+                <p>name</p>
+                <p>hahahahhahahah káhdasdajksh jaksdh</p>
+            </div>
+        </div>
+        <div class="comment">
+            <div class="usercomment">
+                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            </div>
+            <div class="usercmt">
+                <p>name</p>
+                <p>hahahahhahahah káhdasdajksh jaksdh</p>
+            </div>
+        </div>
+        <div class="formbinhluan"> 
+            <form action="">
+                <textarea placeholder="Bình luận"></textarea>
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fa-solid fa-image"></i> Ảnh
+                </label>
+                <input id="file-upload" type="file" />
+                <button type="submit">Đăng</button>
+            </form>
+        </div>
+        
+
+    </div>
+</main>

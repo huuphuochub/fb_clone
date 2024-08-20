@@ -5,6 +5,7 @@ import { Friendservice } from '../service/friend.service';
 import { SocketIoService } from '../service/socketio.service';
 import { Postservice } from '../service/post.service';
 import { Userservice } from '../service/userservice';
+import { Likeservice } from '../service/like.service';
 
 
 @Injectable({
@@ -22,12 +23,16 @@ export class PostBehaviorSubject {
     arruser!:any[]
     arruser2!:any
     arruser3!:any
+    // arrlikepost!:any;
+    post!:any;
+    arrlike!:any
 
 
 
   // listuserhoanchinh!:any
   constructor(
     private Userservice:Userservice,
+    private Likeservice:Likeservice,
     private Postservice:Postservice,
     private http:HttpClient,private friendservice:Friendservice, private socketservice:SocketIoService){
       this.arridfriend$.subscribe(data =>{
@@ -49,6 +54,8 @@ export class PostBehaviorSubject {
 
   private arriduser = new BehaviorSubject<any>('');
   arriduser$ = this.arriduser.asObservable();
+  private arrlikepost = new BehaviorSubject<any>('');
+  arrlikepost$ = this.arrlikepost.asObservable();
 
 
   setarridfriend(id_user:any){
@@ -129,6 +136,12 @@ export class PostBehaviorSubject {
   })
 }
 
+getlike(){
+  this.Likeservice.getalllikeme(this.id_me,this.arrlike).subscribe(data =>{
+    this.arrlikepost.next(data)
+  })
+}
+
   ispost(){
     console.log(this.arrpost);
     console.log(this.arruser);
@@ -143,6 +156,13 @@ export class PostBehaviorSubject {
     const postArray = this.arrpost3.filter((item:any, index:any, self:any) =>
         index === self.findIndex((t:any) => t._id === item._id)
       );
+      const arrlike = postArray.map((item:any) => item._id);
+      console.log(arrlike);
+      this.arrlike = arrlike;
+      this.id_me = localStorage.getItem('id_user');
+      console.log(this.id_me)
+
+      this.getlike()
       const userArray = this.arruser3.filter((item:any, index:any, self:any) =>
         index === self.findIndex((t:any) => t._id === item._id)
       );
@@ -164,6 +184,7 @@ export class PostBehaviorSubject {
                 totallike:post.totallike,
                 totalcomment:post.totalcomment,
                 totalshare:post.totalshare,
+                ishover:false,
 
               })
           }
@@ -171,9 +192,38 @@ export class PostBehaviorSubject {
     });
     // console.log(arrpost);
     // console.log(this.arruser3);
-    this.allpost.next(arrpost)
+    // this.allpost.next(arrpost)
+    this.post = arrpost
+    this.graftlikepost()
   }
 
+  graftlikepost() {
+    this.arrlikepost$.subscribe(likes => {
+      console.log(likes)
+
+      const okla = this.post.map((post: any) => {
+        const like = likes.find((like: any) => post.id_post === like.id_post);
+        return {
+          id_post: post.id_post,
+          id_user: post.id_user,
+          avatar: post.avatar,
+          username: post.username,
+          date: post.date.split('T')[0],
+          content: post.content,
+          image: post.image,
+          totallike: post.totallike,
+          totalcomment: post.totalcomment,
+          totalshare: post.totalshare,
+          ishover: false,
+          typelike: like ? like.type : 0, // Set `typelike` if `like` exists, otherwise null
+        };
+      });
+      
+      console.log(okla);
+      this.allpost.next(okla); // Emit the result to `allpost` BehaviorSubject
+    });
+  }
+  
   // list id user
   
 

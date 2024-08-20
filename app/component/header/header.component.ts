@@ -11,6 +11,7 @@ import { Friendservice } from '../../service/friend.service';
 import { FriendBehaviorSubject } from '../../BehaviorSubject/friend.BehaviorSubject';
 import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject';
 import { Messengerservice } from '../../service/messenger.service';
+import { Notificationservice } from '../../service/notification.service';
 import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
 
 
@@ -40,11 +41,14 @@ image:any ='';
 userchat!:any;
 elementScrolled:boolean=false
 idroom!:any;
+notification!:any
+newnoti!:any;
 @ViewChild('scrollBottom') private scrollBottom!: ElementRef;
 
 
   constructor(private activeStateService: ActiveStateService, 
     private Messengerservice:Messengerservice,
+    private Notificationservice:Notificationservice,
     private friendservice:Friendservice,
     private UserBehaviorSubject:UserBehaviorSubject,
     private EncryptionService:EncryptionService,
@@ -81,11 +85,31 @@ idroom!:any;
       }
     })
    this.loadroom()
+   this.loadnoti()
   
     this.socketioservice.sendOnlineStatus(id_user);
+    this.socketioservice.getNotifications().subscribe(data =>{
+      console.log(data);
+      this.loadnoti()
+    })
 
   }
 
+  loadnoti(){
+    this.Notificationservice.getnotibyuser(this.id_user).subscribe(data =>{
+      this.notification = data
+     this.newnoti = data.filter((data:any) => data.status ===0);
+    })
+  }
+  updatenoti(id:any,id_post:any){
+    console.log(id,id_post);
+    this.Notificationservice.updatenoti(id).subscribe(data =>{
+      this.router.navigate([`post/${id_post}`])
+      this.loadnoti()
+
+    })
+
+  }
   loadroom(){
     this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
       console.log(data);

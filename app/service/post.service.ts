@@ -31,4 +31,5 @@ export class Postservice {
     getpostbyme(id:any):Observable<any>{
       return this.http.get<any>(`${this.url}post/getpostbyme/${id}`)
     }
+    
 }

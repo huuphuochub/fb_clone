@@ -107,7 +107,13 @@
 
             </div>
             <div class="tatcaanhnguoidung">
-                <div class="image-container">
+                <div *ngFor="let post of postbyuser">
+                    <div class="image-container" *ngIf="post.image !== '' ">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                    </div>
+                </div>
+               
+                <!-- <div class="image-container">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
                 </div>
                 <div class="image-container">
@@ -130,10 +136,7 @@
                 </div>
                 <div class="image-container">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                </div>
-                <div class="image-container">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="hienbanbenguoidung">

@@ -117,7 +117,7 @@
         <!-- bài đăng -->
        </div>
 
-       <div class="newfeed" *ngFor="let post of allpostnewfeed">
+       <div class="newfeed" *ngFor="let post of allpostnewfeed, let i = index">
         <div class="thongtin">
             <div class="hinhanh">           
                 <img src="{{post.avatar}}" alt="">
@@ -140,14 +140,12 @@
             <p class="noidungbaidang">
                 {{post.content}}
             </p>
-            <div class="hinhanhbaidang">
+            <div class="hinhanhbaidang" *ngIf="post.image !== '' ">
                 <img src="{{post.image}}" alt="">
             </div>
             <div class="luotlike">
                 <div class="cacicon">            
-                    <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
-                    <i class="fa-solid fa-heart" style="color: red;"></i>
-                    <p class="xemlike">{{post.totallike}} lượt thích</p>
+                    <p class="xemlike">{{post.totallike}} tương tác</p>
                 </div>
                 <div  class="xembl" (click)="mobinhluan()">
                     {{post.totalcomment}} bình luận
@@ -159,15 +157,22 @@
             <div class="like">
                 
                 <div class="handdlike" 
-                (mouseenter)="onMouseEnter()" 
-                (mouseleave)="onMouseLeave()"><i class="fa-regular fa-thumbs-up"></i> thích
-                    <div class="allicon" *ngIf="showPopup">
-                        <i class="fa-regular fa-thumbs-up" style="color: blue;"></i>
-                        <i class="fa-regular fa-heart" style="color: red;"></i>
-                        <i class="fa-regular fa-face-smile" style="color: yellow;"></i>
-                        <i class="fa-regular fa-face-frown" style="color:orange;"></i>
-                        <i class="fa-regular fa-face-angry" style="color: blueviolet;"></i>
-                        <i class="fa-regular fa-face-surprise"  style="color: pink;"></i>
+                (mouseenter)="onMouseEnter(i)" 
+                (mouseleave)="onMouseLeave(i)">
+               <div *ngIf="post.typelike === 0" (click)="handlelike(1,post.id_post,post.id_user)"> <i class="fa-regular fa-thumbs-up"  ></i>thích </div>
+               <div *ngIf="post.typelike === 1" (click)="deletelike(post.id_post)"><i class="fa-solid fa-thumbs-up"  style="color: blue;" ></i>thích</div>
+                <div *ngIf="post.typelike === 2" (click)="deletelike(post.id_post)"><i class="fa-solid fa-heart" style="color: red;" ></i>yêu thích</div>
+                <div *ngIf="post.typelike === 3" (click)="deletelike(post.id_post)"><i class="fa-solid fa-face-laugh-beam" style="color: yellow;" ></i>haha</div>
+               <div *ngIf="post.typelike === 4" (click)="deletelike(post.id_post)"> <i class="fa-solid fa-face-frown-open" style="color: orange;" ></i>buồn</div>
+                <div *ngIf="post.typelike === 5" (click)="deletelike(post.id_post)"><i class="fa-solid fa-face-angry" style="color: #f25c2e;" ></i>phẫn nộ</div>
+                <div *ngIf="post.typelike === 6" (click)="deletelike(post.id_post)"><i class="fa-solid fa-face-surprise" style="color: yellow;" ></i>wow</div>
+                    <div class="allicon" *ngIf="post.ishover">
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;" (click)="handlelike(1,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-heart" style="color: red;"  (click)="handlelike(2,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-smile" style="color: yellow;"  (click)="handlelike(3,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-frown" style="color:orange;"  (click)="handlelike(4,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-angry" style="color: #f25c2e;"  (click)="handlelike(5,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-surprise"  style="color: pink;"  (click)="handlelike(6,post.id_post,post.id_user)"></i>
                     </div></div>
                 <div class="handdcmt" (click)="mobinhluan()"><i class="fa-regular fa-comment"></i> bình luận</div>
                 <div class="handdshare"><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
@@ -311,7 +316,7 @@
        <div class="formbinhluan" *ngIf="openbinhluan">
         <div class="baivietcuaai">
             <i></i>
-            <h2>baif vieets cuar ai do</h2>
+            <h4>baif vieets cuar ai do</h4>
             <i class="fa-solid fa-xmark" (click)="dongbinhluan()"></i>
 
         </div>
@@ -347,7 +352,7 @@
             </div>
          </div>
 
-         <div class="tuongtacnguoidung">
+         <!-- <div class="tuongtacnguoidung">
             <div class="camxuc">
                 <div class="handdlike" 
                 (mouseenter)="onMouseEnter()" 
@@ -368,7 +373,7 @@
             <div class="chiase">
                 <i class="fa-regular fa-share-from-square"></i>chia sẻ
             </div>
-         </div>
+         </div> -->
          <div class="docbinhluan">
             <div class="hinhnguoibinhluan">
                 <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
@@ -406,6 +411,10 @@
             <form>
 
             <textarea placeholder="viết bình luận"></textarea>
+            <label for="file-upload" class="custom-file-upload">
+                <i class="fa-solid fa-image"></i> 
+            </label>
+            <input id="file-upload" type="file" />
              </form>
 
             <i class="fa-solid fa-paper-plane"></i>
@@ -426,7 +435,7 @@
             </ul>
         </div>
         <div class="thongbao">
-            <h4>sinh nhật</h4>
+            <h5>sinh nhật</h5>
             <div class="thongtinsinhnhat">
                 <i class="fa-solid fa-cake-candles"></i>
                 <p>hôm nay là sinh nhật của hahaha</p>
@@ -435,7 +444,7 @@
         <div class="banbedangonline" *ngIf="isfriendonline">
             <div class="tuychon">
                 <div class="nguoilienhe">
-                    <h4>người liên hệ</h4>
+                    <h6>người liên hệ</h6>
 
                 </div>
                 <div class="theli">
