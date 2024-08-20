@@ -2,13 +2,14 @@
     background-color: black;
 } */
 main{
+    top: 100px;
     display: grid;
     grid-template-columns: 27% 46% 27%;
 
     padding-top: 70px;
     height: 100vh;
     width: 99vw;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
@@ -764,11 +765,13 @@ cursor: pointer;
     background-color: #222222;
     padding: 5px;
     display: flex;
-    position: sticky;
+    bottom: 0px;
     align-items: center;
     display: grid;
-    grid-template-columns:8% 84% 8%;
+    grid-template-columns:8% 84%  ;
     position: relative;
+    position: sticky;
+
 
     bottom: 0px;
 }
@@ -777,8 +780,12 @@ cursor: pointer;
     height: 40%;
     border-radius: 50px;
 }
+.formdienbinhluan button{
+    background-color: #222222;
+    border: none;
+}
 .formbinhluan .formdienbinhluan form textarea{
-    width: 100%;
+    width: 90%;
     color: white;
     height: 80px;
     background-color: #555555;

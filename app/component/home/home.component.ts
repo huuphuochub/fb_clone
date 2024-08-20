@@ -15,6 +15,9 @@ import { Postservice } from '../../service/post.service';
 import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject';
 import { Likeservice } from '../../service/like.service';
 import { Notificationservice } from '../../service/notification.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Commentservice } from '../../service/comment.service';
+
 
 
 @Component({
@@ -23,12 +26,22 @@ import { Notificationservice } from '../../service/notification.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+  formcomment!:FormGroup;
 
   constructor(
     private Likeservice:Likeservice,
+    private Commentservice:Commentservice,
+    private formbuilder:FormBuilder,
     private Notificationservice:Notificationservice,
     private PostBehaviorSubject:PostBehaviorSubject,
-    private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice) {}
+    private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice)
+    
+    {
+      this.formcomment = this.formbuilder.group({
+        content:['',Validators.required]
+      })
+
+    }
 
   position = 0;
   trove:boolean = false;
@@ -48,7 +61,11 @@ export class HomeComponent implements OnInit {
   arruserpost!:any;
   postbyfriend!:any;
   postbyfolowing!:any;
-  allpostnewfeed!:any
+  allpostnewfeed!:any;
+  post!:any;
+  comments!:any;
+  arriduser!:any
+  allcmt!:any
 
 
   ngOnInit(): void {
@@ -96,6 +113,10 @@ export class HomeComponent implements OnInit {
 
     })
     // localStorage.clear()  
+  }
+
+  handlecomment(){
+    console.log(this.formcomment.get('content')?.value)
   }
 
   getnewfeed(){
@@ -203,8 +224,40 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
       this.PostBehaviorSubject.getlike()
     })
   }
-  mobinhluan(){
+  mobinhluan(id:any){
+    const ok =this.allpostnewfeed.filter((item:any) =>item.id_post === id)
+    // console.log(ok[0])
+    this.post = ok[0]
     this.openbinhluan = true
+    this.Commentservice.getcommentbypost(id).subscribe(data =>{
+      this.comments = data
+      console.log(data)
+      const hahha = data.map((item:any) => item.id_user)
+      console.log(hahha)
+      this.arriduser = hahha
+      this.loaduserandcmt()
+    })
+
+  }
+  loaduserandcmt(){
+    this.userservice.getuserbyarrid(this.arriduser).subscribe(data =>{
+      console.log(data)
+      const okakjs = this.comments.map((cmt:any)=>{
+       const hahahah= data.find((user:any) => cmt.id_user === user._id)
+          return{
+            id_user:cmt.id_user,
+            avatar:hahahah.avatar,
+            username:hahahah.username,
+            date:cmt.date.split("T")[1],
+            content:cmt.content,
+            image:cmt.image
+
+
+          }
+      })
+this.allcmt = okakjs;
+console.log(okakjs)
+    })
   }
   dongbinhluan(){
     this.openbinhluan = false

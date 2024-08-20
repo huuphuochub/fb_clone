@@ -147,7 +147,7 @@
                 <div class="cacicon">            
                     <p class="xemlike">{{post.totallike}} tương tác</p>
                 </div>
-                <div  class="xembl" (click)="mobinhluan()">
+                <div  class="xembl" (click)="mobinhluan(post.id_post)">
                     {{post.totalcomment}} bình luận
                 </div>
                 <div class="xemshare">
@@ -174,7 +174,7 @@
                         <i class="fa-solid fa-face-angry" style="color: #f25c2e;"  (click)="handlelike(5,post.id_post,post.id_user)"></i>
                         <i class="fa-solid fa-face-surprise"  style="color: pink;"  (click)="handlelike(6,post.id_post,post.id_user)"></i>
                     </div></div>
-                <div class="handdcmt" (click)="mobinhluan()"><i class="fa-regular fa-comment"></i> bình luận</div>
+                <div class="handdcmt" (click)="mobinhluan(post.id_post)"><i class="fa-regular fa-comment"></i> bình luận</div>
                 <div class="handdshare"><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
 
             </div>
@@ -183,6 +183,7 @@
         </div>
         
     </div>
+    <div style="height: 100px;"></div>
 
 
        <!-- <div class="newfeed">
@@ -316,7 +317,7 @@
        <div class="formbinhluan" *ngIf="openbinhluan">
         <div class="baivietcuaai">
             <i></i>
-            <h4>baif vieets cuar ai do</h4>
+            <h4>bài viết của {{post.username}}</h4>
             <i class="fa-solid fa-xmark" (click)="dongbinhluan()"></i>
 
         </div>
@@ -326,29 +327,33 @@
 
                 </div>
                 <div class="tennguoiviet">
-                    <p>name</p>
-                    <p>1 tiengs truoc</p>
+                    <p>{{post.username}}</p>
+                    <p>{{post.date}}</p>
                 </div>
                
                 <div class="tuychon">
                     <i class="bi bi-list"></i>
                 </div>
+              
          </div>
+         <div style="color: white;" class="tieude">
+            <p>{{post.content}} </p>
+        </div>
          <div class="anhbiaviet">
-            <img src="https://i.imgur.com/qV5uuOz.jpg" alt="">
+            <img src="{{post.image}}" alt="">
          </div>
          <div class="tuongtacbaiviet">
             <div class="camxucbaiviet">
                 <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
                 <i class="fa-solid fa-heart" style="color: red;"></i>
-                <p class="xemlike">bạn và 40 người khác</p>
+                <p class="xemlike">{{post.totallike}} tương tác</p>
             </div>
           
-            <div class="sobinhluan" (click)="mobinhluan()">
-                <p>700 bình luận</p>
+            <div class="sobinhluan">
+                <p>{{post.totalcomment}} bình luận</p>
             </div>
             <div class="sochiase">
-                <p>90 luọt chia sẻ</p>
+                <p>{{post.totalshare}} luọt chia sẻ</p>
             </div>
          </div>
 
@@ -374,7 +379,22 @@
                 <i class="fa-regular fa-share-from-square"></i>chia sẻ
             </div>
          </div> -->
-         <div class="docbinhluan">
+         <div class="docbinhluan" *ngFor="let cmt of allcmt">
+            <div class="hinhnguoibinhluan">
+                <img src="{{cmt.avatar}}" alt="">
+            </div>
+            <div class="chitietbinhluan">
+                <div class="ok">
+                    <p>{{cmt.username}}</p>
+                    <p>{{cmt.content}}</p>
+                </div>
+                
+            </div>
+            <div>
+
+            </div>
+         </div>
+         <!-- <div class="docbinhluan">
             <div class="hinhnguoibinhluan">
                 <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
             </div>
@@ -388,36 +408,22 @@
             <div>
 
             </div>
-         </div>
-         <div class="docbinhluan">
-            <div class="hinhnguoibinhluan">
-                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-            </div>
-            <div class="chitietbinhluan">
-                <div class="ok">
-                    <p>name</p>
-                    <p>bình luận aksjggggggg ádddddddddddd </p>
-                </div>
-                
-            </div>
-            <div>
-
-            </div>
-         </div>
+         </div> -->
 
     
          <div class="formdienbinhluan">
             <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-            <form>
+            <form [formGroup]="formcomment" (ngSubmit)="handlecomment()">
 
-            <textarea placeholder="viết bình luận"></textarea>
+            <textarea placeholder="viết bình luận" formControlName="content"></textarea>
             <label for="file-upload" class="custom-file-upload">
-                <i class="fa-solid fa-image"></i> 
+                <i class="fa-solid fa-image" type="submit"></i> 
             </label>
             <input id="file-upload" type="file" />
+            <button><i class="fa-solid fa-paper-plane"></i></button>
+
              </form>
 
-            <i class="fa-solid fa-paper-plane"></i>
          </div>
         </div>
     </div>
