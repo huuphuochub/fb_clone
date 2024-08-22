@@ -359,8 +359,12 @@ main{
 .thongtinbaivietotrangcanhan{
     margin-top: 10px;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 8% 20% 55% 17%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.thongtinbaivietotrangcanhan .hinhvaten{
+    display: flex;
     align-items: center;
 }
 
@@ -369,15 +373,22 @@ main{
     border-radius: 10px;
 }
 .thongtinbaivietotrangcanhan .hinhdaidien img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50px;
     margin: 10px;
 }
-.thongtinbaivietotrangcanhan .thongtinnguoidang h5{
-    margin:8px 0 0 0;
+.thongtinbaivietotrangcanhan .thongtinnguoidang p{
+    margin: 0;
     padding: 0;
+    font-size: 12px;
 }
+
+.thongtinbaivietotrangcanhan .thongtinnguoidang p:first-child{
+    font-weight: bold;
+    font-size: 15px;
+}
+
 .thongtinbaivietotrangcanhan .luachon {
     display: flex;
     align-items: center;
@@ -396,14 +407,21 @@ main{
     padding: 0 0 10px 10px;
 }
 .cacbaiviet .hinhanhbaiviet{
-    display: grid;
-    grid-template-columns: 49% 49%;
-    gap: 10px;
-    padding: 0 0 0 5px;
+    width: auto;            /* Tự động chiều rộng để phù hợp với kích thước của hình ảnh */
+    height: 500px;      
+    display: flex;    /* Chiều cao cố định */
+    overflow: hidden;       /* Ẩn các phần hình ảnh bị tràn ra ngoài khung chứa */
+    background-color: #222222;
+    align-items: center;
+    justify-content: center;
+
 }
 .cacbaiviet .hinhanhbaiviet img{
-   width: 100%;
-   border-radius: 10px;
+    height: 100%;           /* Đảm bảo hình ảnh chiếm toàn bộ chiều cao của khung chứa */
+    width: auto;            /* Chiều rộng của hình ảnh tự động để giữ tỷ lệ gốc */
+    object-fit: cover; 
+    text-align: center;
+    border-radius: 10px;
 }
 .cacbaiviet .luottuongtacbaiviet {
    margin: 20px 0 0 20px;
@@ -430,7 +448,7 @@ main{
     top: 50%;
     left: 50%;
     width: 40%;
-    height: 50%;
+    height: 65%;
     background-color: #7a7979;
     position: fixed;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 

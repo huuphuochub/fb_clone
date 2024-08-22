@@ -15,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SettingprofileComponent } from './component/settingprofile/settingprofile.component';
 import { SearchComponent } from './component/search/search.component';
 import { ProfilemeComponent } from './component/profileme/profileme.component';
-import { PostComponent } from './component/post/post.component'; // Import HttpClientModule
+import { PostComponent } from './component/post/post.component';
+import { StoriesComponent } from './component/stories/stories.component'; // Import HttpClientModule
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PostComponent } from './component/post/post.component'; // Import HttpC
     SettingprofileComponent,
     SearchComponent,
     ProfilemeComponent,
-    PostComponent
+    PostComponent,
+    StoriesComponent
   ],
   imports: [
     BrowserModule,

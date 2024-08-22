@@ -109,7 +109,7 @@
             <div class="tatcaanhnguoidung">
                 <div *ngFor="let post of postbyuser">
                     <div class="image-container" *ngIf="post.image !== '' ">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                        <img src="{{post.image}}" alt="">
                     </div>
                 </div>
                
@@ -183,14 +183,15 @@
         </div>
         <div class="cacbaiviet" *ngFor="let post of postbyuser">
             <div class="thongtinbaivietotrangcanhan">
+               <div class="hinhvaten">
                 <div class="hinhdaidien">
                     <img src="{{post.avatar}}" alt="">
                 </div>
                 <div class="thongtinnguoidang">
-                    <h5>{{post.username}}</h5>
+                    <p>{{post.username}}</p>
                     <p>{{post.date}}</p>
                 </div>
-                <div> </div>
+               </div>
                 <div class="luachon">
                     <i class="bi bi-list"></i>
                 </div>

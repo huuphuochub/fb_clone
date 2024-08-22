@@ -34,7 +34,7 @@
     <!-- khung chat -->
     <div class="khungchat" *ngIf="showchat">
         <div class="iconchat">
-            <h3>đoạn chat</h3>
+            <h4>đoạn chat</h4>
             <div class="icontuychon"> 
                 <i class="bi bi-list"></i>
                 <i class="bi bi-columns-gap"></i>
@@ -45,29 +45,39 @@
             <input type="text" placeholder="tìm kiếm trên mes">
         </div>
         <div class="dangxemgi">
-            <p>hộp thư</p>
+            <p (click)="loadroom()">hộp thư</p>
 
             <p>cộng đồng</p>
+            <p (click)="xemnhomchat()">nhóm</p>
+            <p (click)="addgroup()">tạo nhóm</p>
+
+
+
+          
         </div>
-        <div class="tinnhan" *ngIf="mess">
+        <div class="tinnhan"  >
             <ul *ngFor="let chat of mess">
                 <li (click)="openchat(chat.id_room)">
                     <div class="hinhnguoinhan">
+                       <div class="hinhvaten">
                         <div class="tenvaonl">
-                        <img src="{{chat.avatar}}" alt="" width="50px" height="50px">
-                        <div class="hienonl" *ngIf="chat.online === 1"></div>
+                            <img src="{{chat.avatar}}" alt="" width="50px" height="50px">
+                            <div class="hienonl" *ngIf="chat.online === 1"></div>
+                       </div>
+                       <div class="thongtin">
+                        <p>{{chat.name}}</p>
+                       <div class="trollthoi">
+                        <p *ngIf="chat.lastuser === id_user">bạn: </p>
+                        <p>{{ chat.lastmess}}</p>
+                       </div>
+
+                    </div>
                     </div>
 
-                        <div class="thongtin">
-                            <p>{{chat.name}}</p>
-                           <div class="trollthoi">
-                            <p *ngIf="chat.lastuser === id_user">bạn: </p>
-                            <p>{{ chat.lastmess}}</p>
-                           </div>
-
-                        </div>
-                        <i class="bi bi-list"></i>
-                    </div>
+                       
+                       
+                    <i class="bi bi-list"></i>    
+                </div>
                 </li>
 
 
@@ -130,38 +140,111 @@
 
      <!-- khung nhap chat -->
      <div class="khungnhapchat" *ngIf="showformchat && contentmess">
-        <div  *ngFor="let mes of contentmess">
+        <div *ngFor="let mes of contentmess">
+            <div  *ngIf="mes.type === 1">
+                <div class="nguoichat"  *ngIf="mes.type === 1">
+                  <div class="hinhvatennguoichat">
+                    <div>
+                        <img [src]="mes.avatar" alt="">
+                    </div>
+                    <div>
+                        <p>{{mes.name}}</p>
+                        <p *ngIf="mes.online ===1">đang hoạt động</p>
+                    </div>
+                   
+                  </div>
+                   <div class="caidat">
+                    <i class="fa-solid fa-gear"></i>
+                    <i class="fa-solid fa-user-plus" *ngIf="mes.type === 2"></i>
+                    <i class="fa-solid fa-xmark" (click)="closekhungchat()"></i>
+        
+                   </div>
+        
+                </div>
+                <div *ngFor="let ok of mes.content" class="doanchat">      
+                      <div class="chutk" *ngIf="ok.id_user === id_user">
+                    <p>{{ok.content}}</p> 
+                    <img *ngIf="ok.image !== '' " src="{{ok.image}}" alt="" class="anhtinnhanchu">
+                    
+                </div>
+                <div class="nguoinhan" *ngIf="ok.id_user !== id_user">
+                    <i></i>
+                   <div>
+                    <img src="{{ok.avatar}}" alt="" style="width: 20px; height: 20px; border-radius: 20px;" *ngIf="ok.avatar !== '' "><p>{{ok.content}}</p>
+                    <img *ngIf="ok.image !== ''" src="{{ok.image}}" alt="" class="anhtinnhanbenkia">
+                   </div>
+                    <i></i>        
+                </div>
+        
+        
+        
+                </div>
+        
+            <img src="{{mes.avatar}}" class="anhnguoigui" alt="" *ngIf="mes.type === 1">
+            <div #scrollBottom></div>
+        
+        
+                <div class="khoangtrong" id="sclowroll"></div>
+        
+                <div class="inputchat" >
+                    
+                    <form [formGroup]="forminputchat" (ngSubmit)="sendchat(mes.id_user)">
+                        <img *ngIf="image !== '' " [src]="image" alt="" width="100px" height="100px">
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fa-solid fa-image"></i> Ảnh
+                        </label>
+                        <input id="file-upload" type="file" (change)="onFileChange($event)"/>
+                        <input type="text" placeholder="nhập tin nhắn" formControlName="content">
+                        <input type="submit">
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+     
+
+
+<!-- óadjklajsssssssssssssssssssss ssssssssssssssssssssssss sssssssssssssss -->
+
+<div *ngFor="let mes of contentmess">
+    <div  *ngIf="mes.type === 2">
         <div class="nguoichat">
-            <img [src]="mes.avatar" alt="">
+          <div class="hinhvatennguoichat">
+            <div>
+                <img [src]="mes.avatar" alt="">
+            </div>
             <div>
                 <p>{{mes.name}}</p>
                 <p *ngIf="mes.online ===1">đang hoạt động</p>
             </div>
-            <i></i>
+           
+          </div>
+           <div class="caidat">
             <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-user-plus" *ngIf="mes.type === 2"></i>
             <i class="fa-solid fa-xmark" (click)="closekhungchat()"></i>
+
+           </div>
 
         </div>
         <div *ngFor="let ok of mes.content" class="doanchat">      
               <div class="chutk" *ngIf="ok.id_user === id_user">
-            <p>{{ok.content}}</p>
+            <p>{{ok.content}}</p> 
             <img *ngIf="ok.image !== '' " src="{{ok.image}}" alt="" class="anhtinnhanchu">
             
         </div>
         <div class="nguoinhan" *ngIf="ok.id_user !== id_user">
-            <i></i>
-           <div>
-            <p>{{ok.content}}</p>
+           <div class="hahahaho">
+            <img src="{{ok.avatar}}" alt="" style="width: 20px; height: 20px; border-radius: 20px;" *ngIf="ok.avatar !== '' "><p>{{ok.content}}</p>
             <img *ngIf="ok.image !== ''" src="{{ok.image}}" alt="" class="anhtinnhanbenkia">
            </div>
-            <i></i>        
         </div>
 
 
 
         </div>
 
-    <img src="{{mes.avatar}}" class="anhnguoigui" alt="">
+    <img src="{{mes.avatar}}" class="anhnguoigui" alt="" *ngIf="mes.type === 1">
     <div #scrollBottom></div>
 
 
@@ -171,15 +254,63 @@
             
             <form [formGroup]="forminputchat" (ngSubmit)="sendchat(mes.id_user)">
                 <img *ngIf="image !== '' " [src]="image" alt="" width="100px" height="100px">
-
-                <input type="file" placeholder="ảnh" (change)="onFileChange($event)">
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fa-solid fa-image"></i> Ảnh
+                </label>
+                <input id="file-upload" type="file" (change)="onFileChange($event)"/>
                 <input type="text" placeholder="nhập tin nhắn" formControlName="content">
                 <input type="submit">
             </form>
         </div>
 
     </div>
+</div>
+
+<!-- jjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjj  -->
+
+
+    
     </div>
      <!-- end khung nhap chat -->
+
+  <!-- add nhóm chat -->
+          
+  
+  <div class="addgroup" *ngIf="showaddgroup" >
+    <div class="inputsearchuser">
+        <input type="text" placeholder="tìm kiếm">
+        <p style="color: white;" (click)="closeaddgroup()">hủy</p>
+
+    </div>
+    <div class="inputnamegroup" >
+        <form [formGroup]="formnamegroup">
+        <input type="text" placeholder="tên nhóm" formControlName="name">
+    </form>
+    </div>
+    <p>bạn bè</p>                  <img *ngIf="image !== '' " [src]="image" alt="" width="70px" height="70px">
+
+    <label for="file-upload" class="custom-file-upload">
+        <i class="fa-solid fa-image"></i> Ảnh
+    </label>
+    <input id="file-upload" type="file" (change)="onFileChange($event)"/>
+    <div class="detailuser" *ngFor="let chat of mess">
+        <div class="nameandimg">
+            <img src="{{chat.avatar}}" alt="">
+            <p>{{chat.name}}</p>
+        </div>
+        <div class="plus">
+            <input type="checkbox" (change)="oncheckeduser($event,chat.id_user)">
+        </div>
+    </div>
+
+
+    <div class="buttonadd">
+        <button (click)="handleaddgroup()">tạo nhóm</button>
+    </div>
+
+    </div>
+
+<!-- end addgroup chat -->
+
 
 </div>

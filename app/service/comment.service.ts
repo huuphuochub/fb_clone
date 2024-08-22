@@ -14,5 +14,7 @@ export class Commentservice {
     getcommentbypost(id_post:any):Observable<any>{
         return this.http.get<any>(`${this.url}comment/getcommentbypost/${id_post}`)
     }
-
+    addcomment(formdata:any):Observable<any>{
+      return this.http.post<any>(`${this.url}comment/addcmt`,formdata)
+    }
 }

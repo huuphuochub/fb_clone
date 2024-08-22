@@ -1,8 +1,10 @@
 <main>
     <div class="divpost">
         <div class="baiviet">
-            <h3>bài viết</h3>
+            <h4>bài viết của {{user.username}}</h4>
+               <p routerLink="/"> X</p>
         </div>
+       
         <div class="thongtin">
             <div class="user">
                 <img src="{{user.avatar}}" alt="">
@@ -24,13 +26,22 @@
         <div class="like">
                 
             <div class="handdlike">
-           <div> {{post.totallike}} <i class="fa-regular fa-thumbs-up"  ></i>thích </div>
+           <div> {{post.totallike}} <i class="fa-regular fa-thumbs-up"  ></i> </div>
           </div>
-            <div class="handdcmt" >{{post.totalcomment}}<i class="fa-regular fa-comment"></i> bình luận</div>
-            <div class="handdshare"> {{post.totalshare}} <i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+            <div class="handdcmt" >{{post.totalcomment}}<i class="fa-regular fa-comment"></i> </div>
+            <div class="handdshare"> {{post.totalshare}} <i class="fa-regular fa-share-from-square"></i> </div>
 
         </div>
-        <div class="comment">
+        <div class="comment" *ngFor="let cmt of allcmts">
+            <div class="usercomment">
+                <img src="{{cmt.avatar}}" alt="">
+            </div>
+            <div class="usercmt">
+                <p>{{cmt.username}}</p>
+                <p>{{cmt.content}}</p>
+            </div>
+        </div>
+        <!-- <div class="comment">
             <div class="usercomment">
                 <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
             </div>
@@ -38,16 +49,7 @@
                 <p>name</p>
                 <p>hahahahhahahah káhdasdajksh jaksdh</p>
             </div>
-        </div>
-        <div class="comment">
-            <div class="usercomment">
-                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-            </div>
-            <div class="usercmt">
-                <p>name</p>
-                <p>hahahahhahahah káhdasdajksh jaksdh</p>
-            </div>
-        </div>
+        </div> -->
         <div class="formbinhluan"> 
             <form action="">
                 <textarea placeholder="Bình luận"></textarea>

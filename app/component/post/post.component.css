@@ -2,20 +2,25 @@
     position: absolute;
     margin: 100px 25% 0 25%;
     width: 50%;
-    height: 800px;
+    height: 600px;
     background-color: #222222;
     border-radius: 10px;
     overflow-y: scroll;
     color: white;
 }
 .baiviet{
-    text-align: center;
     border-bottom:1px solid #555555 ;
     padding: 10px;
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+
+    top: 0;
+    background-color: #222222;
 }
 .thongtin .user img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50px;
     margin: 10px 5px 10px 10px;
 }
@@ -32,20 +37,21 @@
 }
 .thongtin .iclose{
     margin-right: 20px;
-    font-size: 30px;
+    font-size: 20px;
 }
 .user .divp p{
     margin: 0;
     padding: 0;
+    font-size: 14px;
     
 }
 .user .divp p:first-child{
-        font-size: 22px;
+        font-size: 15px;
         font-weight: bold;
     
 }
 .content{
-    font-size: 20px;
+    font-size: 15px;
     margin-left: 10px;
 }
 .hinhpost{
@@ -70,12 +76,12 @@
     grid-template-columns: 33% 33% 33%;
     text-align: center;
     padding: 20px 10px;
-    font-size: 20px;
+    font-size: 15px;
     border-bottom:1px solid #555555 ;
 }
 .comment .usercomment img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50px;
     margin: 10px 5px 5px 10px;
 }
@@ -87,10 +93,17 @@
 .comment .usercmt p{
     margin: 0;
     padding: 0;
+    font-size: 13px;
     
 }
+
+.comment .usercmt p:first-child{
+   font-weight: bold;
+    
+}
+
 .comment .usercmt{
-    padding: 10px;
+    padding: 5px;
     background-color: #555555;
     border-radius: 10px;
 }
@@ -128,7 +141,7 @@ input[type="file"] {
   .formbinhluan form textarea{
     margin-left: 20px;
     width: 80%;
-    height: 90px;
+    height: 70px;
     border-radius: 10px;
     background-color: #555555;
   }

@@ -129,7 +129,7 @@ main .nav{
     z-index: 999;
 
 }
-.content .story li  .anhstory{
+.content .story li  video{
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -142,7 +142,22 @@ main .nav{
    
 }
 
-.content .story li  .anhstory:hover{
+#videotest::-webkit-media-controls {
+    display: none !important;
+  }
+  #videotest::-moz-media-controls {
+    display: none !important;
+  }
+  #videotest::-ms-media-controls {
+    display: none !important;
+  }
+  #videotest::-o-media-controls {
+    display: none !important;
+  }
+
+
+
+.content .story li  video:hover{
     transform: scale(1.03); /* Phóng to hình ảnh 10% khi hover */
 
     
@@ -151,16 +166,31 @@ main .nav{
 
 
 .content .story li  p{
-  color: black;
+  color: white;
   position: absolute;
   text-align: center;
-  top: 200px;
+  top: 210px;
+  display: flex;
+  font-size: 13px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-    
-   
 }
+
+.content .story li  p:last-child{
+    color: white;
+    position: absolute;
+    text-align: center;
+    top: 230px;
+    background-color: #555555;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    font-size: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
 .content .story li:hover{
    cursor: pointer;
 
@@ -653,27 +683,45 @@ cursor: pointer;
 }
 .formbinhluan .thongtinnguoivietbai {
     padding:10px;
-    display: grid;
-    grid-template-columns:8% 82% 10%;
-    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    /* position: sticky; */
     border-top:2px solid #444444 ;
-    top: 65px;
+    /* top: 65px; */
     background-color: #222222;
 
 }
+
+.thongtinnguoivietbai .hinhvatennguoiviet{
+    display: flex;
+    align-items: center;
+}
+
 .formbinhluan .thongtinnguoivietbai .hinhanhnguoiviet img{
     width: 40px;
     height: 40px;
+    margin-right: 10px;
     border-radius: 50px;
     padding: 5px;
     background-color: blue;
     
 }
-.formbinhluan .thongtinnguoivietbai .tennguoiviet p{
+.formbinhluan .thongtinnguoivietbai .tennguoiviet p:first-child{
     color: white;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.formbinhluan .thongtinnguoivietbai .tennguoiviet p:last-child{
+    color: white;
+    font-size: 12px;
     margin: 0;
     padding: 0;
 }
+
+
 .formbinhluan .thongtinnguoivietbai .tennguoiviet p:hover{
     cursor: pointer;
   text-decoration: underline; 

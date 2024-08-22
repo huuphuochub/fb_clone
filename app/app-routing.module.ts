@@ -9,12 +9,15 @@ import { SettingprofileComponent } from './component/settingprofile/settingprofi
 import { SearchComponent } from './component/search/search.component';
 import { ProfilemeComponent } from './component/profileme/profileme.component';
 import { PostComponent } from './component/post/post.component';
+import { StoriesComponent } from './component/stories/stories.component';
 
 const routes: Routes = [
 
   {path: '', component:HomeComponent},
   {path:'profileuser/:id', component:ProfileuserComponent},
   {path:'profileme', component:ProfilemeComponent},
+
+  {path:'stories/:id', component:StoriesComponent},
 
   {path:'login', component:LoginComponent},
   {path:'post/:id', component:PostComponent},

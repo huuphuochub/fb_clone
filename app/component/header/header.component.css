@@ -127,15 +127,15 @@
     position: sticky;
     top: 0;
     background-color: black;
-    display: grid;
-    grid-template-columns: 50% 50%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     margin: 0;
     padding: 0;
     z-index: 1000;
 
 }
-.iconchat h3{
+.iconchat h4{
     color: white;
 }
 .iconchat .icontuychon i{
@@ -156,6 +156,7 @@
 .khungchat .timkiem{
     position: sticky;
     padding: 4px;
+    margin-bottom: 10px;
     z-index: 1000;
     top:40px;
     background-color: black;
@@ -177,9 +178,10 @@
     top: 80px;
     display: flex;
 }
+
 .khungchat .dangxemgi p{
-    font-size: 20px;
-    padding: 10px;
+    font-size: 15px;
+    padding: 5px;
     background-color: #ccc;
     border-radius: 40px;
 }
@@ -208,10 +210,12 @@
 }
 
 .tinnhan li .hinhnguoinhan {
-
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-
+    display: flex;
+    justify-content: space-between
+}
+.nguoinhan .hahahaho{
+    display: flex;
+    flex-direction: column;
 }
 .hinhnguoinhan img{
     padding: 5px;
@@ -231,9 +235,12 @@
     margin: 0;
     padding: 0;
 }
+.hinhnguoinhan .hinhvaten{
+    display: flex;
+}
 .hinhnguoinhan .thongtin p{
     font-size: 15px;
-    margin: 5px 0 0 0;
+    margin: 0 0 0 5px;
     padding: 0;
     color: white;
 }
@@ -283,12 +290,13 @@
     text-align: center;
     color: blue;
     position: sticky;
-    bottom: 0;
-    z-index: 1000;
+    bottom: 0px;
+    z-index: 999;
     border-top: 2px solid #222222;
-
-
 }
+
+
+
 .khungthongbao{
     background-color: black;
     padding-left: 10px;
@@ -357,29 +365,41 @@
 
 }
 .khungnhapchat .nguoichat{
-    padding: 10px;
-    display: grid;
+    display: flex;
     color: white;
-    grid-template-columns: 20% 40% 20% 10% 10%;
+    justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #555555 ;
     position: sticky;
     top: 0;
     background-color: #222222;
 }
 .khungnhapchat .nguoichat img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50px;
+    margin: 10px;
 
+}
+.nguoichat .hinhvatennguoichat{
+    display: flex;
+    align-items: center;
 }
 .khungnhapchat .nguoichat p{
   margin: 0;
   padding: 0;
-  
-
 }
+.nguoichat .caidat i{
+    margin: 10px;
+}
+
+.khungnhapchat .nguoichat p:first-child{
+   
+    font-weight: bold;
+    
+  
+  }
+
+
 .khungnhapchat .nguoichat p:first-child{
     font-size: 20px;
 }
@@ -389,22 +409,37 @@
 .khungnhapchat .chutk{
     display: flex;
     justify-content: flex-end;    
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0;
+    padding: 0;
 }
 .trollthoi{
     display: flex;
 }
 .khungnhapchat .chutk p{
-    padding: 10px;
+    margin: 2px 0;
+    padding: 5px;
     border-radius: 15px 15px 0;
     background-color: #4374e5;
-    margin: 0 10px 2px 10px;
+    font-size: 15px;
  }
  .chutk .anhtinnhanchu {
     width: 250px;
     height: auto;
     border-radius: 10px;
  }
+ input[type="file"] {
+    display: none;
 
+  }
+  
+  .custom-file-upload {
+    color: white;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
  .anhnguoigui{
     margin-left: 10px;
     width: 40px;
@@ -423,7 +458,8 @@
 .khungnhapchat .nguoinhan p{
     background-color: #555555;
     color: white;
-    padding: 10px;
+    padding: 5px;
+    font-size: 15px;
     margin: 0 10px 2px 0;
     border-radius: 15px 15px 15px 0;
   }
@@ -503,7 +539,6 @@
 
 
 
-
   
 
 .khungcaidat{
@@ -551,6 +586,64 @@
 .khungcaidat .dangxuat i{
    margin: 10px;
 }
+.addgroup{
+    background-color: black;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    /* display: block; */
+    position: absolute;
+    width: 400px;
+    height: 70vh;
+    margin-right: 10px;
+    top: 210px; 
+    right: 0;
+    z-index: 1000;
+    overflow-y: scroll;
+    color: white;
+}
+.addgroup input{
+    border-radius: 10px;
+    margin: 5px;
+}
+.addgroup .inputsearchuser{
+    display: flex;
+    justify-content: space-between;
+}
+
+.addgroup .detailuser{
+    display: flex;
+    justify-content: space-between;
+    margin: 7px;
+    padding: 7px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.addgroup .detailuser .nameandimg{
+    display: flex;
+    align-items: center;
+}
+.addgroup .nameandimg img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.addgroup .buttonadd{
+    position: fixed;
+    bottom: 20px;
+    width: 350px;
+    border-top: 1px solid #555555;
+}
+.addgroup .buttonadd button{
+    background-color: #4374e5;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+
 ::-webkit-scrollbar{
     width: 5px;
     height: 5px;

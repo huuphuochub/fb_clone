@@ -25,5 +25,12 @@ export class Messengerservice {
        
     return this.http.post<any>(`${this.url}messenger/sendchat`, formdata);
   }
+  getgroupchatbyuser(id:any):Observable<any>{
+    return this.http.get<any>(`${this.url}messenger/getallgroupchatbyuser/${id}`)
+
+  }
+  addgroupchat(formdata:any):Observable<any>{
+    return this.http.post<any>(`${this.url}messenger/addgroupchat`,formdata)
+  }
 
 }

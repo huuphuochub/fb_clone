@@ -43,6 +43,12 @@ elementScrolled:boolean=false
 idroom!:any;
 notification!:any
 newnoti!:any;
+arridingroup:any[] =[];
+showaddgroup:boolean = false;
+formnamegroup!:FormGroup;
+profileme!:any;
+
+
 @ViewChild('scrollBottom') private scrollBottom!: ElementRef;
 
 
@@ -68,6 +74,9 @@ newnoti!:any;
     this.forminputchat = this.formbuilder.group({
       content:['',Validators.required]
     })
+    this.formnamegroup = this.formbuilder.group({
+      name:['',Validators.required]
+    })
 
   }
   ngOnInit(): void {
@@ -78,7 +87,9 @@ newnoti!:any;
     this.id_user = id_user
     const email = this.EncryptionService.getemail()
     this.userservice.getuser(id_user).subscribe(data=>{
-      if(data === false){
+      console.log(data);
+      this.profileme = data
+      if(data === null){
         this.router.navigate(['/login']);
       }else{
         this.test()
@@ -103,6 +114,7 @@ newnoti!:any;
   }
   updatenoti(id:any,id_post:any){
     console.log(id,id_post);
+    this.showthongbao = false;
     this.Notificationservice.updatenoti(id).subscribe(data =>{
       this.router.navigate([`post/${id_post}`])
       this.loadnoti()
@@ -114,6 +126,7 @@ newnoti!:any;
     this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
       console.log(data);
       this.allmessenger = data;
+      this.showaddgroup = false;
       this.compressionuserroom();
 
       // this.compressionuserroom()
@@ -137,6 +150,8 @@ sendchat(id_user:any){
   const formdata = new FormData();
   
   formdata.append('content', this.forminputchat.get('content')?.value)
+  formdata.append('username', this.profileme.username)
+  formdata.append('avatar', this.profileme.avatar)
   console.log(this.userchat);
   let id_room = ''
   this.userchat.forEach((item:any)=>{
@@ -163,8 +178,53 @@ sendchat(id_user:any){
     }
   })
   console.log(id_user);
-
 }
+
+addgroup(){
+  this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
+    console.log(data);
+    this.allmessenger = data;
+    this.compressionuserroom();
+    this.showaddgroup = true
+
+
+    // this.compressionuserroom()
+  })
+  // this.loadroom()
+}
+closeaddgroup(){
+  this.showaddgroup = false
+  this.selectedFile = ''
+  this.image =''
+  // this.loadroom()
+}
+
+
+handleaddgroup(){
+  console.log(this.formnamegroup.get('name')?.value);
+  this.arridingroup.push(this.id_user)
+  console.log(JSON.stringify(this.arridingroup));
+  console.log(this.selectedFile)
+
+  const formdata = new FormData()
+  this.arridingroup.forEach((id) => {
+    formdata.append('id_user[]', id);
+});
+  formdata.append('type', '2');
+  formdata.append('name', this.formnamegroup.get('name')?.value);
+  formdata.append('lastmess', 'bạn có nhóm mới');
+  formdata.append('file', this.selectedFile ? this.selectedFile : '');
+  this.Messengerservice.addgroupchat(formdata).subscribe(data =>{
+    console.log(data);
+    
+  })
+
+
+
+  // formdata.append('id_user', this.arridingroup)
+}
+
+
   test(){
     this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data=>{
       this.profilefriend = data
@@ -217,33 +277,57 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
   this.compressionuserroom();
 })
   }
-
+xemnhomchat(){
+  this.Messengerservice.getgroupchatbyuser(this.id_user).subscribe(data =>{
+    this.allmessenger = data;
+    this.showaddgroup = false
+    this.compressionuserroom()
+  })
+}
 
 
   compressionuserroom(){
     let arr :any[] =[]
-    // console.log(this.alluser);
-    // console.log(this.allmessenger)
+    console.log(this.alluser);
+    console.log(this.allmessenger)
     this.allmessenger.forEach((mess:any) =>{
         this.alluser.forEach((friend:any) =>{
           if(mess.id_user.includes(friend._id)){
             arr.push({
               id_room:mess._id,
               id_user:friend._id,
-              name:friend.username,
-              avatar:friend.avatar,
+              name:mess.name ? mess.name : friend.username,
+              avatar:mess.image ? mess.image : friend.avatar,
               online:friend.online,
               lastmess:mess.lastmess,
-              lastuser:mess.lastuser
+              lastuser:mess.lastuser,
+              type:mess.type,
 
             })
           }
         })
     })
-    // console.log(arr);
-    this.mess = arr
+    console.log(arr);
+    const uniqueRooms = arr.filter((room, index, self) =>
+      index === self.findIndex((r) => (
+          r.id_room === room.id_room
+      ))
+  );
+    this.mess = uniqueRooms
   }
 
+
+  oncheckeduser(event:any,ids:any){
+    if (event.target.checked) {
+      // Nếu checkbox được chọn, thêm id_user vào mảng
+      this.arridingroup.push(ids);
+    } else {
+      // Nếu checkbox bị bỏ chọn, loại bỏ id_user khỏi mảng
+      this.arridingroup = this.arridingroup.filter((id:any) => id !== ids);
+    }
+    console.log(this.arridingroup);
+  }
+  
 
   timkiemuser(){
 
@@ -272,7 +356,9 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
               content: dataItem.content,
               image: dataItem.image ? dataItem.image : '',
               status: dataItem.status,
-              sendstatus: dataItem.sendstatus
+              sendstatus: dataItem.sendstatus,
+              avatar:dataItem.avatar ? dataItem.avatar : '',
+              username:dataItem.username ? dataItem.username : '',
             }));
       
           // Trả về đối tượng với nội dung mới được gộp
@@ -282,7 +368,8 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
             name: item.name,
             avatar: item.avatar,
             online: item.online,
-            content: content
+            content: content,
+            type:item.type,
           };
         });
       

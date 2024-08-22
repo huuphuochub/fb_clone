@@ -359,28 +359,38 @@ main{
 .thongtinbaivietotrangcanhan{
     margin-top: 10px;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 8% 20% 60% 12%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
-
+.thongtinbaivietotrangcanhan .hinhvaten{
+    display: flex;
+    align-items: center;
+}
 .cacbaivietnguoidungdang .bolocbaiviet button{
     background-color: #555555;
     border-radius: 10px;
 }
 .thongtinbaivietotrangcanhan .hinhdaidien img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50px;
     margin: 10px;
 }
-.thongtinbaivietotrangcanhan .thongtinnguoidang h5{
-    margin:8px 0 0 0;
+.thongtinbaivietotrangcanhan .thongtinnguoidang p{
+    margin: 0;
     padding: 0;
+    font-size: 12px;
 }
+.thongtinbaivietotrangcanhan .thongtinnguoidang p:first-child{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
 .thongtinbaivietotrangcanhan .luachon i{
-    justify-self: end; 
-    font-size: 30px;
+    font-size: 20px;
+    margin-right: 10px;
 
 }
 .cacbaiviet .tieudebaiviet p{

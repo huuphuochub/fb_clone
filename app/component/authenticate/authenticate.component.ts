@@ -4,6 +4,7 @@ import { Userservice } from '../../service/userservice';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sharedataservice } from '../../service/sharedata.service';
+import { EncryptionService } from '../../service/EncryptionService';
 
 @Component({
   selector: 'app-authenticate',
@@ -29,10 +30,11 @@ export class AuthenticateComponent implements OnInit{
   thoigianconlai!:any;
   times!:any
   email!:any;
+  
   hienformpassword:boolean = false
   loipassword:boolean= false;
   loicfpassword:boolean=false;
-      constructor(private formBuilder: FormBuilder, private userservice:Userservice, private router:Router, private sharedataservice:Sharedataservice){
+      constructor(private EncryptionService:EncryptionService,private formBuilder: FormBuilder, private userservice:Userservice, private router:Router, private sharedataservice:Sharedataservice){
   this.formlogin = this.formBuilder.group({
     name:['', Validators.required],
   password:['', Validators.required]
@@ -218,7 +220,7 @@ ngOnInit(): void {
       this.userservice.dangky(formdata).subscribe(data=>{
         console.log(data);
         if(data == true){
-          localStorage.setItem('email',email);
+          this.EncryptionService.saveemail(email);
           this.router.navigate(['/setprofile'])
 
         }

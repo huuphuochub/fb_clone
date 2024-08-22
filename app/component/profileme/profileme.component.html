@@ -179,14 +179,16 @@
         </div>
         <div class="cacbaiviet" *ngFor="let post of postofme">
             <div class="thongtinbaivietotrangcanhan">
-                <div class="hinhdaidien">
-                    <img src="{{user.avatar}}" alt="">
+                <div class="hinhvaten">
+                    <div class="hinhdaidien">
+                        <img src="{{user.avatar}}" alt="">
+                    </div>
+                    <div class="thongtinnguoidang">
+                        <p>{{user.username}}</p>
+                        <p>{{post.date.split('T')[0]}}</p>
+                    </div>
                 </div>
-                <div class="thongtinnguoidang">
-                    <h5>{{user.username}}</h5>
-                    <p>{{post.date.split('T')[0]}}</p>
-                </div>
-                <div> </div>
+               <div>
                 <div class="luachon">
                     <p *ngIf="post.status === 1">công khai</p>
                     <p *ngIf="post.status === 2">bạn bè</p>
@@ -194,7 +196,9 @@
                     <i class="bi bi-list"></i>
                 </div>
             </div>
-            <div class="tieudebaiviet">
+          
+               </div>
+               <div class="tieudebaiviet">
                 <p>{{post.content}}</p>
             </div>
             <div class="hinhanhbaiviet">

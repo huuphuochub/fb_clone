@@ -71,6 +71,7 @@ ngOnInit(): void {
       .subscribe(data =>{
         if(data){
           localStorage.setItem('id_user', data._id);
+          console.log(data);
           // localStorage.setItem('')
           this.router.navigate(['/'])
 

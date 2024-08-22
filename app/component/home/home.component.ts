@@ -66,6 +66,8 @@ export class HomeComponent implements OnInit {
   comments!:any;
   arriduser!:any
   allcmt!:any
+  id_post!:any;
+  id_user_post!:any;
 
 
   ngOnInit(): void {
@@ -117,6 +119,29 @@ export class HomeComponent implements OnInit {
 
   handlecomment(){
     console.log(this.formcomment.get('content')?.value)
+
+    const fromdata = new FormData()
+    fromdata.append('content',this.formcomment.get('content')?.value);
+    fromdata.append('id_user',this.id_user);
+    fromdata.append('id_post',this.id_post);
+
+    this.Commentservice.addcomment(fromdata).subscribe(data =>{
+      if(data === true){
+        this.mobinhluan(this.id_post,this.id_user_post)
+        const thongbao = `${this.profileuser.username} đã bình luận về bài viết của bạn`
+        this.socketservice.sendNotification(this.id_user_post,thongbao)
+        const formthongbao = new FormData()
+        formthongbao.append('id_user',this.id_user_post),
+        formthongbao.append('content',thongbao);
+        formthongbao.append('id_post', this.id_post)
+        this.Notificationservice.addnotification(formthongbao).subscribe(data =>{
+          console.log(data);
+        })
+  
+      }
+    })
+
+
   }
 
   getnewfeed(){
@@ -224,9 +249,11 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
       this.PostBehaviorSubject.getlike()
     })
   }
-  mobinhluan(id:any){
+  mobinhluan(id:any,id_user:any){
     const ok =this.allpostnewfeed.filter((item:any) =>item.id_post === id)
+    this.id_user_post = id_user
     // console.log(ok[0])
+    this.id_post = id
     this.post = ok[0]
     this.openbinhluan = true
     this.Commentservice.getcommentbypost(id).subscribe(data =>{
@@ -240,6 +267,11 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
 
   }
   loaduserandcmt(){
+    console.log(this.arriduser.length !== 0 )
+    console.log(this.comments);
+
+    console.log(this.arriduser[0] !== null )
+    if(this.arriduser.length >0 && this.comments.length>0){
     this.userservice.getuserbyarrid(this.arriduser).subscribe(data =>{
       console.log(data)
       const okakjs = this.comments.map((cmt:any)=>{
@@ -258,6 +290,9 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
 this.allcmt = okakjs;
 console.log(okakjs)
     })
+  }else{
+    this.allcmt =[]
+  }
   }
   dongbinhluan(){
     this.openbinhluan = false
