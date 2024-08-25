@@ -26,7 +26,7 @@ export class MeBehaviorSubject {
       })
   }
 
-  private url = 'http://localhost:3001/';
+  private url = 'http://192.168.2.39:3001/'
 
 
   // list id user
@@ -53,6 +53,7 @@ export class MeBehaviorSubject {
 
   compressionuser(data:any){
     this.datauser = data
+    console.log(data)
     this.id_user = localStorage.getItem('id_user');
     this.fetchtatcaloimoi()
   }
@@ -114,9 +115,10 @@ export class MeBehaviorSubject {
     this.listuser.forEach((item:any)=>{
       arrid.push(item._id)
     })
-    // console.log(arrid);
+    console.log(arrid);
     this.friendservice.timbancuaban(arrid).subscribe(data=>{
       this.bancuaban = data
+      console.log(data)
       this.timbancuaminh();
     })
   }
@@ -143,7 +145,7 @@ export class MeBehaviorSubject {
      const uniqueArray = [...new Set(mangarr)];
      // console.log(uniqueArray);
      const ok =uniqueArray.filter(item => item !== this.id_user)
-     // console.log(ok); //bancuaminh
+     console.log(ok); //bancuaminh
    
      this.listuser.forEach((mag:any) =>{
        let banchung =0
@@ -200,10 +202,10 @@ export class MeBehaviorSubject {
    friendonline() {
     this.idlistfriend$.subscribe(data => {
         this.idfriendonline = data;
-        // console.log('idfriendonline:', data);
+        console.log('idfriendonline:', data);
 
         let arr: any[] = [];
-        // console.log('profilefriend:', this.profilefriend);
+        console.log('profilefriend:', this.profilefriend);
 
         if (this.idfriendonline && this.profilefriend) {
             this.profilefriend.forEach((friend: any) => {
@@ -227,7 +229,7 @@ export class MeBehaviorSubject {
         }
 
         this.isfriendonline = arr;
-        // console.log('Danh sách bạn bè với trạng thái online:', arr);
+        console.log('Danh sách bạn bè với trạng thái online:', arr);
 
         // Thực hiện các hành động khác sau khi đã cập nhật isfriendonline
         this.alluser.next(arr);

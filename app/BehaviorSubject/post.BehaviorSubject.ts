@@ -44,7 +44,7 @@ export class PostBehaviorSubject {
   }
 
   
-  private url = 'http://localhost:3001/';
+  private url = 'http://192.168.2.39:3001/'
 
   private allpost = new BehaviorSubject<any>('');
   listallpost$ = this.allpost.asObservable();
@@ -73,7 +73,7 @@ export class PostBehaviorSubject {
   getpostbyfriend(){
     this.arridfriend$.subscribe(data =>{
       this.arrid_friend = data
-    console.log(this.arrid_friend)
+    // console.log(this.arrid_friend)
     if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
       this.Postservice.getpostbyfriend(this.arrid_friend).subscribe(data =>{
         // console.log(data);
@@ -106,10 +106,10 @@ export class PostBehaviorSubject {
   getpostbyuser(){
     this.arriduser$.subscribe(data =>{
       this.arid_folowing = data
-    console.log(this.arid_folowing)
+    // console.log(this.arid_folowing)
     if(this.arid_folowing[0] !== null  && this.arid_folowing.length>0){
       this.Postservice.getpostbyfolowinf(this.arid_folowing).subscribe(data =>{
-        console.log(data);
+        // console.log(data);
             // this.arrpost.push(data)
             this.arrpost2 = data
             this.ispost()
@@ -120,7 +120,7 @@ export class PostBehaviorSubject {
     }
       if(this.arid_folowing[0] !==null && this.arid_folowing.length>0){
       this.Userservice.getuserbyarrid(this.arid_folowing).subscribe(datas =>{
-        console.log(datas)
+        // console.log(datas)
         if(datas){
             // this.arruser.push(datas)
             this.arruser2 = datas
@@ -143,10 +143,10 @@ getlike(){
 }
 
   ispost(){
-    console.log(this.arrpost);
-    console.log(this.arruser);
-    console.log(this.arrpost2);
-    console.log(this.arruser2);
+    // console.log(this.arrpost);
+    // console.log(this.arruser);
+    // console.log(this.arrpost2);
+    // console.log(this.arruser2);
     // console.log(this.arid_folowing.length)
     // console.log(this.arrid_friend.length);
     this.arrpost3 = [...this.arrpost, ...this.arrpost2];
@@ -157,10 +157,10 @@ getlike(){
         index === self.findIndex((t:any) => t._id === item._id)
       );
       const arrlike = postArray.map((item:any) => item._id);
-      console.log(arrlike);
+      // console.log(arrlike);
       this.arrlike = arrlike;
       this.id_me = localStorage.getItem('id_user');
-      console.log(this.id_me)
+      // console.log(this.id_me)
 
       this.getlike()
       const userArray = this.arruser3.filter((item:any, index:any, self:any) =>
@@ -199,7 +199,7 @@ getlike(){
 
   graftlikepost() {
     this.arrlikepost$.subscribe(likes => {
-      console.log(likes)
+      // console.log(likes)
 
       const okla = this.post.map((post: any) => {
         const like = likes.find((like: any) => post.id_post === like.id_post);
@@ -219,7 +219,7 @@ getlike(){
         };
       });
       
-      console.log(okla);
+      // console.log(okla);
       this.allpost.next(okla); // Emit the result to `allpost` BehaviorSubject
     });
   }

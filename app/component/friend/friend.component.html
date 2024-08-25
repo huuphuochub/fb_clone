@@ -1,0 +1,36 @@
+<main>
+   <div class="divmain">
+    <div class="optionfriend">
+        <p [ngClass]="{'active': current === 'banbe'}" (click)="laythongtin()">tất cả bạn</p>
+        <p [ngClass]="{'active': current === 'loimoikb'}" (click)="loimoiketban()">lời mời kết bạn</p>
+        <p [ngClass]="{'active': current === 'daguiloimoi'}" (click)="daguiloimoi()">đã gửi lời mời</p>
+        <p [ngClass]="{'active': current === 'dangtheogioi'}">đang theo giõi</p>
+        <p [ngClass]="{'active': current === 'datheogioi'}">đã theo giõi</p>
+    </div>
+    <div class="listitem">
+        <p style="color: white; margin-left: 20px;">        {{alluser.length}}
+        </p>
+        <div class="item" *ngFor="let user of alluser">
+            <div class="itemnameandimg">
+                <div class="itemimg">
+                    <img src="{{user.avatar}}" alt="">
+                    <div class="hienonl" *ngIf="user.online === 1"></div>
+
+                </div>
+                <div class="itemname">
+                    <p>{{user.username}}</p>
+                    <p *ngIf="user.banchung>0">{{user.banchung}} bạn chung</p>
+                </div>
+            </div>
+            <div class="itembutton">
+                <div class="listitembutton">
+                    <button *ngIf="user.status === 0">thêm bạn bè</button>
+                    <button *ngIf="user.status === 2">hủy</button>
+                    <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
+                    <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+</main>

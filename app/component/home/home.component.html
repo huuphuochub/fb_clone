@@ -35,12 +35,13 @@
     <div class="content">
                 <!-- story -->
 
-       <div class="story" [ngStyle]="{'left.px': position}">
-            <ul>
+      <div style="overflow-x:scroll ;">
+        <div class="story"  [ngStyle]="{'left.px': position}">
+            <ul >
                 <li routerLink="/stories/ăsasssdsads">
-                        <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
-                        <video id="videotest"  controls>
-                            <source src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" type="video/mp4">
+                        <img src="{{profileuser.avatar}}" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
+                        <video id="videotest"  controls  *ngIf="storyme">
+                            <source  src="{{storyme!.linkvideo || ''}}" type="video/mp4">
 
                         </video>
                         <p> elon musk</p> <br>
@@ -52,7 +53,7 @@
                     <li>
                         <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhdaidien">
                         <video id="videotest"  controls>
-                            <source src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" type="video/mp4">
+                            <source type="video/mp4" src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" >
                         
                         </video>
                     </li>
@@ -119,6 +120,7 @@
 
 
        </div>
+      </div>
        <div  *ngIf="trove" class="xemthems" (click)="quaylai()" ><i class="bi bi-arrow-left"></i></div>
        <div class="xemthem" (click)="togglePosition()"><i class="bi bi-arrow-right-short"></i></div>
 
@@ -127,7 +129,7 @@
        <div class="addblog">
         <div class="blog">
             <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
-            <input type="text" placeholder="bạn nghĩ gì">
+            <input type="text" placeholder="bạn nghĩ gì" (click)="openformstory()">
         </div>
         <div class="optionblog">
             <ul>
@@ -493,5 +495,24 @@
            
         </div> 
     </div>
+
+
+    <div class="formaddstory" *ngIf="formstory">
+        <div *ngIf="isloading">đang tạo tin, vui lòng đợi</div>
+       <div *ngIf="!isloading">
+        <h4>tạo tin</h4>
+        <div>
+           
+            <label for="file-upload" class="custom-file-upload">
+                <i class="fa-solid fa-image" type="submit"></i>video 
+            </label>
+            <input id="file-upload" type="file" (change)="onFileChange($event)" />
+        </div>
+        <div class="buttonstoty">
+            <button (click)="handlepoststory()">đăng</button>
+            <button (click)="closeformstory()">hủy</button>
+        </div>
+       </div>
+        </div>
 
 </main>

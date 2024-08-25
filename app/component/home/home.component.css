@@ -92,9 +92,13 @@ main .nav{
     margin-top: 20px;
     position: relative;
     overflow-y:scroll ;
-    overflow-x: hidden; 
+    /* overflow-x: hidden;  */
 
 
+}
+.content .story{
+    overflow-x: scroll;
+    width: 100%;
 }
 .content .story ul{
     display: flex;
@@ -102,6 +106,7 @@ main .nav{
     width: 100%;
     margin: 0;
     padding: 0;
+    /* overflow-x: scroll; */
 
 }
 .content .story li{
@@ -887,4 +892,18 @@ input[type="file"] {
     padding: 10px;
     background-color: #555555;
     border-radius:10px ;
+}
+main .formaddstory{
+    position: absolute;
+    background-color: aliceblue;
+    width: 300px;
+    height: 300px;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+}
+.formaddstory .buttonstoty{
+    margin-top: 190px;
 }

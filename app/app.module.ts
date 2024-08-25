@@ -16,7 +16,9 @@ import { SettingprofileComponent } from './component/settingprofile/settingprofi
 import { SearchComponent } from './component/search/search.component';
 import { ProfilemeComponent } from './component/profileme/profileme.component';
 import { PostComponent } from './component/post/post.component';
-import { StoriesComponent } from './component/stories/stories.component'; // Import HttpClientModule
+import { StoriesComponent } from './component/stories/stories.component';
+import { TestvideoComponent } from './component/testvideo/testvideo.component';
+import { FriendComponent } from './component/friend/friend.component'; // Import HttpClientModule
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { StoriesComponent } from './component/stories/stories.component'; // Imp
     SearchComponent,
     ProfilemeComponent,
     PostComponent,
-    StoriesComponent
+    StoriesComponent,
+    TestvideoComponent,
+    FriendComponent
   ],
   imports: [
     BrowserModule,

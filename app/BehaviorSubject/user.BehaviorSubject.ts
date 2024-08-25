@@ -26,7 +26,7 @@ export class UserBehaviorSubject {
       })
   }
 
-  private url = 'http://localhost:3001/';
+  private url = 'http://192.168.2.39:3001/'
 
 
   // list id user

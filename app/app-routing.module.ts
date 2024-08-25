@@ -10,6 +10,8 @@ import { SearchComponent } from './component/search/search.component';
 import { ProfilemeComponent } from './component/profileme/profileme.component';
 import { PostComponent } from './component/post/post.component';
 import { StoriesComponent } from './component/stories/stories.component';
+import { TestvideoComponent } from './component/testvideo/testvideo.component';
+import { FriendComponent } from './component/friend/friend.component';
 
 const routes: Routes = [
 
@@ -18,6 +20,10 @@ const routes: Routes = [
   {path:'profileme', component:ProfilemeComponent},
 
   {path:'stories/:id', component:StoriesComponent},
+  {path:'testvideo', component:TestvideoComponent},
+  {path:'friend', component:FriendComponent},
+
+
 
   {path:'login', component:LoginComponent},
   {path:'post/:id', component:PostComponent},

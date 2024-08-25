@@ -34,8 +34,18 @@ export class PostComponent implements OnInit{
   ngOnInit(): void {
     this.activeStateService.setCurrentPage('');
 
-    this.id_post = this.route.snapshot.paramMap.get('id');
+    // this.id_post = this.route.snapshot.paramMap.get('id');
     console.log(this.id_post); 
+    this.route.paramMap.subscribe(params => {
+      this.id_post  = params.get('id');
+     this.loadpost()
+    })
+
+
+    
+  }
+
+  loadpost(){
     this.Postservice.getpostformidpost(this.id_post).subscribe(data =>{
       console.log(data);
       this.post = data
@@ -49,15 +59,19 @@ export class PostComponent implements OnInit{
       console.log(data);
       this.arrcmt = data
       const arrid =data.map((item:any) =>item.id_user)
+      console.log(arrid.length);
+      if(arrid.length>0){
       this.Userservice.getuserbyarrid(arrid).subscribe(datas =>{
         console.log(datas);
         this.usercmt = datas
         this.loadusercmt()
 
       })
+    }
     })
 
   }
+
   loadusercmt(){
     const cmt =this.arrcmt.map((cmt:any)=>{
       const user = this.usercmt.find((user:any) => cmt.id_user === user._id)

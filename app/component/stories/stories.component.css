@@ -1,0 +1,32 @@
+main{
+    top: 100px;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    background-color: aquamarine;
+}
+.divstory{
+    top: 70px;
+    position: absolute;
+    width: 25%;
+    height:auto;
+    margin: 0 37.5% 0 37.5% ;
+}
+.divstory #videotest{
+    width: 100%;
+    height: 100%;
+}
+/* 
+#videotest::-webkit-media-controls {
+    display: none !important;
+  }
+  #videotest::-moz-media-controls {
+    display: none !important;
+  }
+  #videotest::-ms-media-controls {
+    display: none !important;
+  }
+  #videotest::-o-media-controls {
+    display: none !important;
+  } */
+

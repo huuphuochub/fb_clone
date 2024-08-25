@@ -38,6 +38,7 @@ handlelogin(){
   formdata.append('password',this.formlogin.get('password')?.value);
   console.log('ok')
   this.userservice.login(formdata).subscribe(data =>{
+    alert(data.thongbao)
     if(data.thongbao == false){
       this.loi = data.loi
     }else if(data.thongbao == true){

@@ -84,9 +84,12 @@ profileme!:any;
       this.currentPage = page;
     });
     const id_user = localStorage.getItem('id_user');
+    // alert(id_user)
+  
     this.id_user = id_user
     const email = this.EncryptionService.getemail()
     this.userservice.getuser(id_user).subscribe(data=>{
+      // alert(data)
       console.log(data);
       this.profileme = data
       if(data === null){
@@ -103,21 +106,37 @@ profileme!:any;
       console.log(data);
       this.loadnoti()
     })
+    this.socketioservice.getNotificationsfriend().subscribe(data =>{
+      this.loadnoti()
+    })
 
   }
 
   loadnoti(){
     this.Notificationservice.getnotibyuser(this.id_user).subscribe(data =>{
       this.notification = data
+      console.log(data)
      this.newnoti = data.filter((data:any) => data.status ===0);
     })
   }
-  updatenoti(id:any,id_post:any){
-    console.log(id,id_post);
+  updatenoti(id:any){
+    console.log(id);
+    const ok = this.notification.filter((item:any) =>item._id === id)
+    console.log(ok)
+    const id_post = ok[0].id_post
     this.showthongbao = false;
     this.Notificationservice.updatenoti(id).subscribe(data =>{
+      console.log(id_post)
+     if(id_post){
       this.router.navigate([`post/${id_post}`])
       this.loadnoti()
+ 
+     }else{
+      // console.log(`${ok[0].type}/${id_post}`)
+      this.router.navigate([`${ok[0].type}/`])
+      this.loadnoti()
+
+     }
 
     })
 

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class Postservice {
- private url = 'http://localhost:3001/'
+ private url = 'http://192.168.2.39:3001/'
 
  constructor(private http: HttpClient) {}
 

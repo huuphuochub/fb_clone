@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class Sharedataservice {
   constructor(private http:HttpClient){}
 
-  private url = 'http://localhost:3001/';
+  private url = 'http://192.168.2.39:3001/';
   private emailsubject = new BehaviorSubject<string>('');
   email$ = this.emailsubject.asObservable();
 

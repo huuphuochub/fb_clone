@@ -7,6 +7,7 @@ import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject'
 import { SocketIoService } from '../../service/socketio.service';
 import { FriendBehaviorSubject } from '../../BehaviorSubject/friend.BehaviorSubject';
 import { Userservice } from '../../service/userservice';
+import { Notificationservice } from '../../service/notification.service';
 
 
 
@@ -24,10 +25,12 @@ export class SearchComponent implements OnInit{
   listuserhoanchinh!:any;
   loading:boolean = false;
   user!:any;
+  users!:any;
   
 
 
   constructor(
+    private Notificationservice:Notificationservice,
     private socketservice:SocketIoService,
     private Userservice:Userservice,
     private FriendBehaviorSubject:FriendBehaviorSubject,
@@ -39,6 +42,9 @@ ngOnInit(): void {
   this.id_user = localStorage.getItem('id_user')
   this.activeStateService.setCurrentPage('');
   this.fetchalldataa();
+  this.Userservice.getuser(this.id_user).subscribe(data =>{
+    this.user = data
+  })
   
 }
 
@@ -58,7 +64,7 @@ fetachdata(){
       // this.fetchtatcaloimoi()
     }else{
       this.listuserhoanchinh = data;
-      // console.log(data);
+      console.log(data);
       this.loading = false
     }
    
@@ -91,7 +97,17 @@ addfriend(id:any){
 
  this.friendservice.addfriend(formdata).subscribe(data=>{
   if(data === true){
+
     this.fetchalldataa()
+    const content =  `${this.user.username} đã gửi cho bạn lời mời kết bạn`
+    const formnoti = new FormData()
+    formnoti.append('id_user',id);
+    formnoti.append('content', content);
+    formnoti.append('type', 'friend')
+    this.Notificationservice.addnotification(formnoti).subscribe(data=>{
+      this.socketservice.sendNotificationfriend(id,content)
+    })
+    
   }
  })
  
@@ -110,7 +126,7 @@ huyloimoi(id:any){
 acpfriend(id:any,id_users:any){
   // console.log(id)
   this.Userservice.getuser(id_users).subscribe(data =>{
-    this.user = data
+    this.users = data
     console.log(data);
     this.handleacp(id,id_users)
   })
@@ -127,8 +143,15 @@ handleacp(id:any,id_users:any){
       this.fetchalldataa();
     }
   })
-  if(this.user){
-
+  if(this.users){
+    const formdata = new FormData()
+    const content = `${this.user.username} đã chấp nhân lời mời kết bạn`
+    formdata.append('id_user',id_users);
+    formdata.append('content', content);
+    formdata.append('type', 'friend');
+    this.Notificationservice.addnotification(formdata).subscribe(data=>{
+      this.socketservice.sendNotificationfriend(id_users,content)
+    })
   const dataroom = {
       id_user:[
         this.id_user,

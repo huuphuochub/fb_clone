@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { Folowerservice } from '../../service/folower.service';
 import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject';
 import { Router } from '@angular/router';
+import { Notificationservice } from '../../service/notification.service';
+import { SocketIoService } from '../../service/socketio.service';
 
 
 
@@ -25,9 +27,12 @@ export class ProfileuserComponent implements OnInit{
   user!:any;
   friendofuser!:any
   postbyuser!:any;
+  me!:any
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private Notificationservice:Notificationservice,
+    private SocketIoService:SocketIoService,
     private router:Router,
     private PostBehaviorSubject:PostBehaviorSubject,
     private Folowerservice:Folowerservice, private Userservice:Userservice, private FriendBehaviorSubject:FriendBehaviorSubject, private activeStateService: ActiveStateService, private friendservice:Friendservice,private UserBehaviorSubject:UserBehaviorSubject,private route: ActivatedRoute) {}
@@ -43,6 +48,9 @@ export class ProfileuserComponent implements OnInit{
         if(this.id_user === id){
           this.router.navigate([`/profileme`])
         }
+        this.Userservice.getuser(id).subscribe(data =>{
+          this.me = data
+        })
         this.loadUserData();
         this.loadFriendData();
       })
@@ -118,6 +126,16 @@ export class ProfileuserComponent implements OnInit{
       formdata.append('status', status.toString())
       this.Folowerservice.addfolower(formdata).subscribe( data =>{ 
         // console.log(data)
+        const content = `${this.me.username} đã theo giõi bạn`
+        const formnoti = new FormData();
+        formnoti.append('id_user',id_user);
+        formnoti.append('content',content);
+        formnoti.append('type', 'friend');
+
+        this.Notificationservice.addnotification(formdata).subscribe(data =>{
+          this.SocketIoService.sendNotificationfriend(id_user,content)
+        })
+        
       })
     }
 

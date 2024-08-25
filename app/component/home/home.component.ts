@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 
-import { switchMap } from 'rxjs/operators';
+import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { ActiveStateService } from '../../service/active-state.service';
 import { Userservice } from '../../service/userservice';
 import { Friendservice } from '../../service/friend.service';
@@ -17,7 +17,7 @@ import { Likeservice } from '../../service/like.service';
 import { Notificationservice } from '../../service/notification.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Commentservice } from '../../service/comment.service';
-
+import { Storyservice } from '../../service/story.service';
 
 
 @Component({
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private Likeservice:Likeservice,
+    private Storyservice:Storyservice,
     private Commentservice:Commentservice,
     private formbuilder:FormBuilder,
     private Notificationservice:Notificationservice,
@@ -68,6 +69,12 @@ export class HomeComponent implements OnInit {
   allcmt!:any
   id_post!:any;
   id_user_post!:any;
+  formstory:boolean=false;
+  selectedFile!:any;
+  video!:any;
+  isloading:boolean = false;
+  storymes!:any
+  storyme!:any;
 
 
   ngOnInit(): void {
@@ -77,9 +84,17 @@ export class HomeComponent implements OnInit {
     // console.log(typeof this.id_user);
     this.userservice.getuser(this.id_user).subscribe(data =>{
       this.profileuser = data;
+      
+      console.log(data);
                 this.loadban()
 
       
+    })
+    this.Storyservice.getstorybyme(this.id_user).subscribe(data =>{
+  this.storymes = data
+  console.log(data)
+  this.storyme = data[0]
+  console.log(this.storyme)
     })
     this.Folowerservice.getfolowerbyuser(this.id_user).subscribe(data =>{
       // console.log(data);
@@ -109,7 +124,7 @@ export class HomeComponent implements OnInit {
             return null
           }
      } )
-      // console.log(this.arriddfriend);
+      console.log(this.arriddfriend);
       this.PostBehaviorSubject.setarridfriend(this.arriddfriend);
       this.getnewfeed()
 
@@ -134,6 +149,7 @@ export class HomeComponent implements OnInit {
         formthongbao.append('id_user',this.id_user_post),
         formthongbao.append('content',thongbao);
         formthongbao.append('id_post', this.id_post)
+        formthongbao.append('type','post')
         this.Notificationservice.addnotification(formthongbao).subscribe(data =>{
           console.log(data);
         })
@@ -160,17 +176,71 @@ export class HomeComponent implements OnInit {
     this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data=>{
       this.profilefriend = data
       this.MeBehaviorSubject.compressionuser(data);
-      // console.log(data)
+      console.log(data)
       this.friendonline()
 
     })
- 
-    
-  
-  
-
 
   }
+  openformstory(){
+   
+      if(this.storymes.length > 0){
+        alert('bạn đã đăng 1 story gần đây, mỗi ngày chỉ đc đăng 1');
+        return
+      }else{
+        this.formstory = true
+
+      }
+  }
+closeformstory(){
+  this.formstory = false
+}
+
+handlepoststory(){
+  
+  if(!this.selectedFile){
+    alert('vui lòng thêm video vào story')
+    return;
+  }else{
+    this.isloading = true;
+    const formdata = new FormData()
+    formdata.append('id_user', this.id_user);
+    formdata.append('video', this.selectedFile);
+    formdata.append('totalview', '0');
+    formdata.append('status' ,'1');
+    this.Storyservice.addstory(formdata)
+    .pipe(
+      catchError((error:any) =>{
+        console.error('eroor');
+        return '';
+      }),
+      finalize(() =>{
+        this.isloading = false
+      })
+    )
+    .subscribe(data =>{
+      console.log(data)
+      this.closeformstory();
+    })
+  }
+ 
+  
+}
+onFileChange(event: any) {
+  const file = event.target.files[0];
+  console.log(file)
+  if (file) {
+    this.selectedFile = file;
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.video = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+  }
+}
+
+
   friendonline(){
 this.MeBehaviorSubject.alluser$.subscribe(data =>{
   // console.log(data);
@@ -269,7 +339,8 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
   loaduserandcmt(){
     console.log(this.arriduser.length !== 0 )
     console.log(this.comments);
-
+    console.log(this.arriduser);
+    
     console.log(this.arriduser[0] !== null )
     if(this.arriduser.length >0 && this.comments.length>0){
     this.userservice.getuserbyarrid(this.arriduser).subscribe(data =>{
