@@ -20,5 +20,8 @@ export class Likeservice {
     deletelike(formdata:any):Observable<any>{
       return this.http.post<any>(`${this.url}like/deletelike`,formdata)
     }
+    getlikebypost(id:any):Observable<any>{
+      return this.http.get<any>(`${this.url}like/getlikebypost/${id}`)
+    }
 
 }

@@ -83,8 +83,13 @@ profileme!:any;
     this.activeStateService.currentPage$.subscribe(page => {
       this.currentPage = page;
     });
+
     const id_user = localStorage.getItem('id_user');
     // alert(id_user)
+    if(!id_user){
+      this.router.navigate(['/login']);
+
+    }
   
     this.id_user = id_user
     const email = this.EncryptionService.getemail()
@@ -103,7 +108,7 @@ profileme!:any;
   
     this.socketioservice.sendOnlineStatus(id_user);
     this.socketioservice.getNotifications().subscribe(data =>{
-      console.log(data);
+      // console.log(data);
       this.loadnoti()
     })
     this.socketioservice.getNotificationsfriend().subscribe(data =>{
@@ -111,22 +116,27 @@ profileme!:any;
     })
 
   }
+  dangxuat(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
+
+  }
 
   loadnoti(){
     this.Notificationservice.getnotibyuser(this.id_user).subscribe(data =>{
       this.notification = data
-      console.log(data)
+      // console.log(data)
      this.newnoti = data.filter((data:any) => data.status ===0);
     })
   }
   updatenoti(id:any){
-    console.log(id);
+    // console.log(id);
     const ok = this.notification.filter((item:any) =>item._id === id)
-    console.log(ok)
+    // console.log(ok)
     const id_post = ok[0].id_post
     this.showthongbao = false;
     this.Notificationservice.updatenoti(id).subscribe(data =>{
-      console.log(id_post)
+      // console.log(id_post)
      if(id_post){
       this.router.navigate([`post/${id_post}`])
       this.loadnoti()
@@ -143,7 +153,7 @@ profileme!:any;
   }
   loadroom(){
     this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
-      console.log(data);
+      // console.log(data);
       this.allmessenger = data;
       this.showaddgroup = false;
       this.compressionuserroom();
@@ -171,7 +181,7 @@ sendchat(id_user:any){
   formdata.append('content', this.forminputchat.get('content')?.value)
   formdata.append('username', this.profileme.username)
   formdata.append('avatar', this.profileme.avatar)
-  console.log(this.userchat);
+  // console.log(this.userchat);
   let id_room = ''
   this.userchat.forEach((item:any)=>{
     id_room = item.id_room
@@ -196,12 +206,12 @@ sendchat(id_user:any){
         }
     }
   })
-  console.log(id_user);
+  // console.log(id_user);
 }
 
 addgroup(){
   this.Messengerservice.getallroombyuser(this.id_user).subscribe(data =>{
-    console.log(data);
+    // console.log(data);
     this.allmessenger = data;
     this.compressionuserroom();
     this.showaddgroup = true
@@ -220,10 +230,10 @@ closeaddgroup(){
 
 
 handleaddgroup(){
-  console.log(this.formnamegroup.get('name')?.value);
+  // console.log(this.formnamegroup.get('name')?.value);
   this.arridingroup.push(this.id_user)
-  console.log(JSON.stringify(this.arridingroup));
-  console.log(this.selectedFile)
+  // console.log(JSON.stringify(this.arridingroup));
+  // console.log(this.selectedFile)
 
   const formdata = new FormData()
   this.arridingroup.forEach((id) => {
@@ -234,7 +244,7 @@ handleaddgroup(){
   formdata.append('lastmess', 'bạn có nhóm mới');
   formdata.append('file', this.selectedFile ? this.selectedFile : '');
   this.Messengerservice.addgroupchat(formdata).subscribe(data =>{
-    console.log(data);
+    // console.log(data);
     
   })
 
@@ -281,7 +291,7 @@ handleaddgroup(){
       this.friendonline()
     }))
     this.socketioservice.receicemess().subscribe(data =>{
-      console.log(data);
+      // console.log(data);
       this.loadroom()
         this.openchat(data);
       
@@ -307,8 +317,8 @@ xemnhomchat(){
 
   compressionuserroom(){
     let arr :any[] =[]
-    console.log(this.alluser);
-    console.log(this.allmessenger)
+    // console.log(this.alluser);
+    // console.log(this.allmessenger)
     this.allmessenger.forEach((mess:any) =>{
         this.alluser.forEach((friend:any) =>{
           if(mess.id_user.includes(friend._id)){
@@ -326,7 +336,7 @@ xemnhomchat(){
           }
         })
     })
-    console.log(arr);
+    // console.log(arr);
     const uniqueRooms = arr.filter((room, index, self) =>
       index === self.findIndex((r) => (
           r.id_room === room.id_room
@@ -344,7 +354,7 @@ xemnhomchat(){
       // Nếu checkbox bị bỏ chọn, loại bỏ id_user khỏi mảng
       this.arridingroup = this.arridingroup.filter((id:any) => id !== ids);
     }
-    console.log(this.arridingroup);
+    // console.log(this.arridingroup);
   }
   
 
@@ -363,7 +373,7 @@ xemnhomchat(){
       this.idroom = id;
       const haha = this.mess.filter((item:any) => item.id_room == id)
       this.userchat = haha;
-      console.log(haha);
+      // console.log(haha);
       this.Messengerservice.fetchchatbyroom(id).subscribe(abc => {
         const data = abc.reverse()
         const ok = haha.map((item: any) => {
@@ -393,9 +403,9 @@ xemnhomchat(){
         });
       
 
-        console.log(ok);
+        // console.log(ok);
         this.contentmess = ok
-        console.log(this.contentmess);
+        // console.log(this.contentmess);
 
 
 

@@ -1,8 +1,141 @@
 <main>
+  <div class="divfirst">
+    <div class="avataruser">
+        <img src="{{userstory.avatar}}" alt="">
+       <div class="divp">
+        <p>{{userstory.username}}</p>
+        <p>{{userstory.date}} </p>
+       </div>
+
+
+    </div>
+   <div class="viewer" *ngIf="isviewer">
+    <p>người xem</p>
+
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+         <i class="fa-solid fa-thumbs-up" style="color: blue;" ></i>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+    <div class="avatarviewer">
+        <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1724216580/test/cp6n3oatkihxlc2dflsv.jpg" alt="">
+        <div class="divp">
+         <p>name</p>
+        </div>
+    </div>
+   </div>
+  </div>
     <div class="divstory">
         <video id="videotest"  controls>
-            <source src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" type="video/mp4">
+            <source src="{{userstory.linkvideo}}" type="video/mp4">
         
         </video>
+        <div>
+            <div class="allicon" >
+                <i class="fa-solid fa-thumbs-up" style="color: blue;" ></i>
+                <i class="fa-solid fa-heart" style="color: red;"  ></i>
+                <i class="fa-solid fa-face-smile" style="color: yellow;"  ></i>
+                <i class="fa-solid fa-face-frown" style="color:orange;"  ></i>
+                <i class="fa-solid fa-face-angry" style="color: #f25c2e;"  ></i>
+                <i class="fa-solid fa-face-surprise"  style="color: pink;"  ></i>
+            </div>
+        </div>
+    </div>
+    <div class="nextstory">
+        <div class="closestory">
+            <i style="color: white;">X</i>
+        </div>
+
+        <div class="nextavataruser" *ngFor="let story of storys">
+            <img src="{{story.avatar}}" alt="" routerLink="/stories/{{story._id}}">
+           <div class="divp" routerLink="/stories/{{story._id}}">
+            <p>{{story.username}}</p>
+            <p>{{story.date}}</p>
+           </div>
+    
+    
+        </div>
+       
+
     </div>
 </main>

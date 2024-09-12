@@ -10,9 +10,11 @@ import { HttpClient } from '@angular/common/http';
 export class Sharedataservice {
   constructor(private http:HttpClient){}
 
-  private url = 'http://192.168.2.39:3001/';
+  private url = 'http://192.168.2.39:3001/'
   private emailsubject = new BehaviorSubject<string>('');
   email$ = this.emailsubject.asObservable();
+  private storysubject = new BehaviorSubject<any>([]);
+  story$ = this.storysubject.asObservable();
 
   private searchuser = new BehaviorSubject<any[]>([]);
   usersearch$ = this.searchuser.asObservable()
@@ -42,7 +44,9 @@ export class Sharedataservice {
     })
   }
 
-
+  setstory(arrstory:any){
+    this.storysubject.next(arrstory);
+  }
 
   timkiembaiviet(key:string){
     this.searchpost.next(key)

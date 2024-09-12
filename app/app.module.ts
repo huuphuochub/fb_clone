@@ -19,6 +19,8 @@ import { PostComponent } from './component/post/post.component';
 import { StoriesComponent } from './component/stories/stories.component';
 import { TestvideoComponent } from './component/testvideo/testvideo.component';
 import { FriendComponent } from './component/friend/friend.component'; // Import HttpClientModule
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import { FriendComponent } from './component/friend/friend.component'; // Import
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
     HttpClientModule
   ],
   providers: [],

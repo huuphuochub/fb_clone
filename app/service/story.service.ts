@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class Storyservice {
- private url = 'http://192.168.2.39:3001/'
+  private url = 'http://192.168.2.39:3001/'
 
  constructor(private http: HttpClient) {}
 
@@ -23,5 +23,7 @@ export class Storyservice {
   getstorybyuser(id_user:any):Observable<any>{
     return this.http.get<any>(`${this.url}story/getstoryathome${id_user}`)
   }
-
+  getstorybyariduser(id:any):Observable<any>{
+    return this.http.post<any>(`${this.url}story/getstorybyariduser`, id)
+  }
 }

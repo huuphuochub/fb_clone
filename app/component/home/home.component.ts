@@ -18,7 +18,8 @@ import { Notificationservice } from '../../service/notification.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Commentservice } from '../../service/comment.service';
 import { Storyservice } from '../../service/story.service';
-
+import { CmtBehaviorSubject } from '../../BehaviorSubject/cmt.BehaviorSubject';
+import { LikeBehaviorSubject } from '../../BehaviorSubject/like.BehaviorSubject';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
   formcomment!:FormGroup;
 
   constructor(
+    private LikeBehaviorSubject:LikeBehaviorSubject,
+    private CmtBehaviorSubject:CmtBehaviorSubject,
     private Likeservice:Likeservice,
     private Storyservice:Storyservice,
     private Commentservice:Commentservice,
@@ -75,6 +78,17 @@ export class HomeComponent implements OnInit {
   isloading:boolean = false;
   storymes!:any
   storyme!:any;
+  iduserstory:any[] =[];
+  story!:any;
+  opencamxuc:boolean = false
+  userlike!:any;
+  openforminteract:boolean=false;
+  userlikes!:any;
+  userpost!:any;
+  currentseen:any ='tatca';
+ 
+
+
 
 
   ngOnInit(): void {
@@ -84,17 +98,18 @@ export class HomeComponent implements OnInit {
     // console.log(typeof this.id_user);
     this.userservice.getuser(this.id_user).subscribe(data =>{
       this.profileuser = data;
+      console.log(data)
       
-      console.log(data);
+      // console.log(data);
                 this.loadban()
 
       
     })
     this.Storyservice.getstorybyme(this.id_user).subscribe(data =>{
   this.storymes = data
-  console.log(data)
+  // console.log(data)
   this.storyme = data[0]
-  console.log(this.storyme)
+  // console.log(this.storyme)
     })
     this.Folowerservice.getfolowerbyuser(this.id_user).subscribe(data =>{
       // console.log(data);
@@ -110,7 +125,10 @@ export class HomeComponent implements OnInit {
       }
           
       )
-
+      // const iduserstory = new Set(this.arridfolowing)
+      // console.log(this.arridfolowing);
+      
+      this.iduserstory = [...this.arridfolowing];
       this.PostBehaviorSubject.setarridfolowing(this.arridfolowing);
     })
     this.friendservice.timbancuaminh(this.id_user).subscribe(data =>{
@@ -124,16 +142,34 @@ export class HomeComponent implements OnInit {
             return null
           }
      } )
-      console.log(this.arriddfriend);
+      // console.log(this.arriddfriend);
+      // this.iduserstory.push(this.arriddfriend)
+      // const iduserstory = new Set(this.arriddfriend)
+      this.iduserstory = [...this.iduserstory, ...this.arriddfriend]
       this.PostBehaviorSubject.setarridfriend(this.arriddfriend);
       this.getnewfeed()
+      const arr = [...new Set(this.iduserstory.filter(item => item !== null))];
+    // console.log(arr);
+    
+      if(arr.length>0){
+        this.Storyservice.getstorybyariduser(arr).subscribe(data=>{
+          // console.log(data)
+          this.story = data
+          this.Sharedataservice.setstory(data);
+        })
+      }
+
 
     })
-    // localStorage.clear()  
+    // localStorage.clear() 
+     
+  }
+  onScroll(){
+    console.log('ê tao load lại nha')
   }
 
   handlecomment(){
-    console.log(this.formcomment.get('content')?.value)
+    // console.log(this.formcomment.get('content')?.value)
 
     const fromdata = new FormData()
     fromdata.append('content',this.formcomment.get('content')?.value);
@@ -151,7 +187,7 @@ export class HomeComponent implements OnInit {
         formthongbao.append('id_post', this.id_post)
         formthongbao.append('type','post')
         this.Notificationservice.addnotification(formthongbao).subscribe(data =>{
-          console.log(data);
+          // console.log(data);
         })
   
       }
@@ -170,13 +206,14 @@ export class HomeComponent implements OnInit {
 
 
 
+
   loadban(){
 
     
     this.friendservice.laythongtinfriendbyuser(this.id_user).subscribe(data=>{
       this.profilefriend = data
       this.MeBehaviorSubject.compressionuser(data);
-      console.log(data)
+      // console.log(data)
       this.friendonline()
 
     })
@@ -200,11 +237,17 @@ handlepoststory(){
   
   if(!this.selectedFile){
     alert('vui lòng thêm video vào story')
+    // console.log(this.profileuser.username);
+    // console.log(this.profileuser.avatar);
+    
+    
     return;
   }else{
     this.isloading = true;
     const formdata = new FormData()
     formdata.append('id_user', this.id_user);
+    formdata.append('username', this.profileuser.username);
+    formdata.append('avatar', this.profileuser.avatar);
     formdata.append('video', this.selectedFile);
     formdata.append('totalview', '0');
     formdata.append('status' ,'1');
@@ -219,7 +262,7 @@ handlepoststory(){
       })
     )
     .subscribe(data =>{
-      console.log(data)
+      // console.log(data)
       this.closeformstory();
     })
   }
@@ -228,7 +271,7 @@ handlepoststory(){
 }
 onFileChange(event: any) {
   const file = event.target.files[0];
-  console.log(file)
+  // console.log(file)
   if (file) {
     this.selectedFile = file;
     const reader = new FileReader();
@@ -284,13 +327,13 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
     
   }
   handlelike(type:any,id_post:string,id_user:any){
-    console.log(type);
+    // console.log(type);
     const fomdata = new FormData()
     fomdata.append('id_post',id_post),
     fomdata.append('id_user',this.id_user);
     fomdata.append('type',type)
     this.Likeservice.addlike(fomdata).subscribe(data =>{
-      console.log(data)
+      // console.log(data)
       this.PostBehaviorSubject.getpostbyfriend()
       this.PostBehaviorSubject.getpostbyuser
       this.PostBehaviorSubject.getlike()
@@ -301,72 +344,95 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
       formthongbao.append('id_user',id_user),
       formthongbao.append('content',thongbao);
       formthongbao.append('id_post', id_post)
+      formthongbao.append('type', 'post')
       this.Notificationservice.addnotification(formthongbao).subscribe(data =>{
-        console.log(data);
+        // console.log(data);
       })
 
     })
   }
   deletelike(id_post:any){
-    console.log(id_post)
+    // console.log(id_post)
     const fomdata = new FormData()
     fomdata.append('id_post',id_post),
     fomdata.append('id_user',this.id_user);
     this.Likeservice.deletelike(fomdata).subscribe(data=>{
-      console.log(data);
+      // console.log(data);
       this.PostBehaviorSubject.getpostbyfriend()
       this.PostBehaviorSubject.getpostbyuser
       this.PostBehaviorSubject.getlike()
     })
   }
   mobinhluan(id:any,id_user:any){
-    const ok =this.allpostnewfeed.filter((item:any) =>item.id_post === id)
+    // console.log(this.allpostnewfeed)
+    this.CmtBehaviorSubject.getcmtbypost(id)
+    this.CmtBehaviorSubject.post$.subscribe(data =>{
+      this.post = data
+        })
     this.id_user_post = id_user
-    // console.log(ok[0])
     this.id_post = id
-    this.post = ok[0]
     this.openbinhluan = true
-    this.Commentservice.getcommentbypost(id).subscribe(data =>{
-      this.comments = data
-      console.log(data)
-      const hahha = data.map((item:any) => item.id_user)
-      console.log(hahha)
-      this.arriduser = hahha
-      this.loaduserandcmt()
+    this.CmtBehaviorSubject.allcmt$.subscribe(data =>{
+      this.allcmt = data
     })
 
-  }
-  loaduserandcmt(){
-    console.log(this.arriduser.length !== 0 )
-    console.log(this.comments);
-    console.log(this.arriduser);
-    
-    console.log(this.arriduser[0] !== null )
-    if(this.arriduser.length >0 && this.comments.length>0){
-    this.userservice.getuserbyarrid(this.arriduser).subscribe(data =>{
-      console.log(data)
-      const okakjs = this.comments.map((cmt:any)=>{
-       const hahahah= data.find((user:any) => cmt.id_user === user._id)
-          return{
-            id_user:cmt.id_user,
-            avatar:hahahah.avatar,
-            username:hahahah.username,
-            date:cmt.date.split("T")[1],
-            content:cmt.content,
-            image:cmt.image
 
+  }
 
-          }
-      })
-this.allcmt = okakjs;
-console.log(okakjs)
-    })
-  }else{
-    this.allcmt =[]
-  }
-  }
   dongbinhluan(){
     this.openbinhluan = false
+  }
+  openinteract(id:any,id_user:any){
+    // console.log(id)
+    this.Postservice.getpostbyid(id).subscribe(data =>{
+      this.post=data
+    })
+    this.userservice.getuser(id_user).subscribe(data =>{
+      this.userpost = data
+    })
+    this.LikeBehaviorSubject.setidpost(id)
+    this.loadlike()
+  }
+  loadlike(){
+    this.LikeBehaviorSubject.like$.subscribe(data =>{
+      // console.log(data)
+      this.userlikes = data
+      this.userlike = this.userlikes
+     
+
+      this.openforminteract=true
+    })
+  }
+  dong(){
+    this.openforminteract = false
+  }
+  tatca(){
+    this.userlike = this.userlikes
+    this.currentseen = 'tatca'
+  }
+  seenlike(){
+    this.userlike = this.userlikes.filter((item:any) => item.type === 1)
+    this.currentseen = 'like'
+  }
+  seenfavorite(){
+    this.userlike = this.userlikes.filter((item:any) => item.type === 2)
+    this.currentseen = 'favorite'
+  }
+  seenhaha(){
+    this.userlike = this.userlikes.filter((item:any) => item.type === 3)
+    this.currentseen = 'haha'
+  }
+  seensaid(){
+    this.userlike = this.userlikes.filter((item:any) => item.type === 4)
+    this.currentseen = 'said'
+  }
+  seenangry(){
+    this.userlike = this.userlikes.filter((item:any) => item.type === 5)
+    this.currentseen = 'angry'
+  }
+  seenwow(){
+    this.userlike = this.userlikes.filter((item:any) => item.type === 6)
+    this.currentseen = 'wow'
   }
 
 

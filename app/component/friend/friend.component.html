@@ -1,17 +1,17 @@
 <main>
    <div class="divmain">
     <div class="optionfriend">
-        <p [ngClass]="{'active': current === 'banbe'}" (click)="laythongtin()">tất cả bạn</p>
+        <p [ngClass]="{'active': current === 'banbe'}" (click)="loadfriend()">tất cả bạn</p>
         <p [ngClass]="{'active': current === 'loimoikb'}" (click)="loimoiketban()">lời mời kết bạn</p>
         <p [ngClass]="{'active': current === 'daguiloimoi'}" (click)="daguiloimoi()">đã gửi lời mời</p>
-        <p [ngClass]="{'active': current === 'dangtheogioi'}">đang theo giõi</p>
-        <p [ngClass]="{'active': current === 'datheogioi'}">đã theo giõi</p>
+        <p [ngClass]="{'active': current === 'dangtheogioi'}" (click)="dangtheogioi()">người theo giõi</p>
+        <p [ngClass]="{'active': current === 'datheogioi'}" (click)="datheogioi()">đã theo giõi</p>
     </div>
     <div class="listitem">
         <p style="color: white; margin-left: 20px;">        {{alluser.length}}
         </p>
         <div class="item" *ngFor="let user of alluser">
-            <div class="itemnameandimg">
+            <div class="itemnameandimg" routerLink="/profileuser/{{user._id}}">
                 <div class="itemimg">
                     <img src="{{user.avatar}}" alt="">
                     <div class="hienonl" *ngIf="user.online === 1"></div>
@@ -28,6 +28,8 @@
                     <button *ngIf="user.status === 2">hủy</button>
                     <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
                     <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                    <button *ngIf="user.folower === 1" (click)="handlefolow(user._id)">theo giõi lại</button>
+                    <button *ngIf="user.folower === 2" style="background-color: rgb(58, 59, 61);">hủy theo giõi</button>
                 </div>
             </div>
         </div>

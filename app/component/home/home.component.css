@@ -91,6 +91,7 @@ main .nav{
 .content{
     margin-top: 20px;
     position: relative;
+    height: 100vh;
     overflow-y:scroll ;
     /* overflow-x: hidden;  */
 
@@ -179,7 +180,7 @@ main .nav{
   font-size: 13px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 999;
 }
 
 .content .story li  p:last-child{
@@ -194,7 +195,7 @@ main .nav{
     font-size: 13px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
+    z-index: 999;
   }
 .content .story li:hover{
    cursor: pointer;
@@ -750,7 +751,104 @@ cursor: pointer;
 
 }
 
+.formcamxuc{
+    /* display: ; */
+    color: white;
+    width: 45%;
+    position: absolute;
+    height: 90%;
+    background-color: #222222;
+    z-index: 1000;
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    right: 25%;
+    border-radius: 10px;
+    overflow-y: scroll;
+    transform: translateX(-50%);
+}
+.formcamxuc .baivietcuaai {
+    border-bottom: 1px solid #444444;
+    padding: 15px;
+    display: grid;
+    grid-template-columns:10% 80% 10%;
+    text-align: center;
+    position: sticky;
+    top: 0px;
+    background-color: #222222;
 
+
+}
+
+.formcamxuc .baivietcuaai h4{
+    color: white;
+
+}
+.formcamxuc .baivietcuaai i{
+    color: white;
+    font-size: 30px;
+}
+.formcamxuc .baivietcuaai i:last-child:hover{
+    background-color: #555555;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.formcamxuc .loaicamxuc{
+    display: flex;
+    justify-content: space-evenly;
+}
+.formcamxuc .loaicamxuc .active{
+    background-color: #555555;
+}
+.formcamxuc .loaicamxuc p{
+    background-color: #262628;
+    margin: 0;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+.formcamxuc .loaicamxuc p:hover{
+    background-color: #333333;
+    cursor: pointer;
+   
+}
+.formcamxuc .nguoithacamxuc{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333333;
+    margin: 5px;
+    border-radius: 10px;
+}
+.nguoithacamxuc .hinh{
+    position: relative;
+}
+.nguoithacamxuc .hinh i{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 15px;
+}
+.formcamxuc .nguoithacamxuc .hinh img{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin: 5px;
+}
+.nguoithacamxuc .thongtin{
+    display: flex;
+    align-items: center;
+}
+.nguoithacamxuc .ten p{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+.nguoithacamxuc .banbe button{
+    border-radius: 10px;
+    background-color: blue;
+    padding: 5px;
+    margin-right: 10px;
+}
 
 .tuongtacnguoidung {
     display: grid;

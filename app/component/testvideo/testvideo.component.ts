@@ -9,7 +9,7 @@ import { io } from 'socket.io-client';
 })
 export class TestvideoComponent implements OnInit{
 
-  private socket = io('http://192.168.2.39:3001/');
+  private socket = io('http://192.168.1.9:3001/');
   private localStream!: MediaStream;
   private peerConnection!: RTCPeerConnection; // Sử dụng toán tử `!`
   public localVideo!: HTMLVideoElement; // Sử dụng toán tử `!`

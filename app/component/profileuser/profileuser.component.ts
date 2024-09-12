@@ -132,7 +132,7 @@ export class ProfileuserComponent implements OnInit{
         formnoti.append('content',content);
         formnoti.append('type', 'friend');
 
-        this.Notificationservice.addnotification(formdata).subscribe(data =>{
+        this.Notificationservice.addnotification(formnoti).subscribe(data =>{
           this.SocketIoService.sendNotificationfriend(id_user,content)
         })
         

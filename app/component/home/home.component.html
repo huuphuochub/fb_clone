@@ -32,13 +32,30 @@
 
 
 
-    <div class="content">
+    <div class="content"
+    infiniteScroll
+       [infiniteScrollDistance]="3"
+       [infiniteScrollThrottle]="50"
+       [scrollWindow]="false"
+       (scrolled)="onScroll()"
+    >
                 <!-- story -->
 
       <div style="overflow-x:scroll ;">
         <div class="story"  [ngStyle]="{'left.px': position}">
             <ul >
-                <li routerLink="/stories/ăsasssdsads">
+                <li *ngIf="storyme" routerLink="/stories/{{storyme._id}}">
+                        <img src="{{profileuser.avatar}}" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
+                        <video id="videotest"  controls  *ngIf="storyme">
+                            <source  src="{{storyme!.linkvideo || ''}}" type="video/mp4">
+
+                        </video>
+                        <p> elon musk</p> <br>
+                        <p>tạo tin</p>
+
+                   
+                    </li>
+                    <li *ngIf="!storyme" >
                         <img src="{{profileuser.avatar}}" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
                         <video id="videotest"  controls  *ngIf="storyme">
                             <source  src="{{storyme!.linkvideo || ''}}" type="video/mp4">
@@ -50,14 +67,14 @@
                    
                     </li>
     
-                    <li>
-                        <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhdaidien">
-                        <video id="videotest"  controls>
-                            <source type="video/mp4" src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" >
+                    <li *ngFor="let story of story">
+                        <img src="{{story.avatar}}" alt="" class="anhdaidien">
+                        <video id="videotest"  controls routerLink="/stories/{{story._id}}">
+                            <source type="video/mp4" src="{{story.linkvideo}}" >
                         
                         </video>
                     </li>
-                    <li>
+                    <!-- <li>
                         <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
                         <video id="videotest"  controls>
                             <source src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" type="video/mp4">
@@ -111,7 +128,7 @@
                             <source src="https://res.cloudinary.com/dnjakwi6l/video/upload/v1724242933/5719324292638_ggy11x.mp4" type="video/mp4">
                         
                         </video>
-                    </li>
+                    </li> -->
                 
     
             </ul>
@@ -140,7 +157,7 @@
         </div>
         <!-- bài đăng -->
        </div>
-
+      
        <div class="newfeed" *ngFor="let post of allpostnewfeed, let i = index">
         <div class="thongtin">
             <div class="hinhanh">           
@@ -169,7 +186,7 @@
             </div>
             <div class="luotlike">
                 <div class="cacicon">            
-                    <p class="xemlike">{{post.totallike}} tương tác</p>
+                    <p class="xemlike" (click)="openinteract(post.id_post, post.id_user)" >{{post.totallike}} tương tác</p>
                 </div>
                 <div  class="xembl" (click)="mobinhluan(post.id_post,post.id_user)">
                     {{post.totalcomment}} bình luận
@@ -206,8 +223,11 @@
 
         </div>
         
-    </div>
+      
+
+</div>
     <div style="height: 100px;"></div>
+   
 
 
        <!-- <div class="newfeed">
@@ -451,6 +471,54 @@
              </form>
 
          </div>
+        </div>
+
+
+
+        <div class="formcamxuc" *ngIf="openforminteract">
+            
+            <div class="baivietcuaai">
+                <i></i>
+                <h4>bài viết của {{userpost.username}}</h4>
+                <i class="fa-solid fa-xmark" (click)="dong()"></i>
+    
+            </div>
+            <div class="loaicamxuc">
+                <p (click)="tatca()" [ngClass]="{'active': currentseen === 'tatca'}">tất cả ({{post.totallike}})</p>
+                <p (click)="seenlike()"  [ngClass]="{'active': currentseen === 'like'}"><i class="fa-solid fa-thumbs-up"  style="color: blue;" ></i></p>
+                <p (click)="seenfavorite()" [ngClass]="{'active': currentseen === 'favorite'}"><i class="fa-solid fa-heart" style="color: red;" ></i></p>
+                <p (click)="seenhaha()" [ngClass]="{'active': currentseen === 'haha'}"><i class="fa-solid fa-face-laugh-beam" style="color: yellow;" ></i></p>
+                <p (click)="seensaid()" [ngClass]="{'active': currentseen === 'said'}"><i class="fa-solid fa-face-frown-open" style="color: orange;" ></i></p>
+                <p (click)="seenangry()" [ngClass]="{'active': currentseen === 'angry'}"><i class="fa-solid fa-face-angry" style="color: #f25c2e;" ></i></p>
+                <p (click)="seenwow()" [ngClass]="{'active': currentseen === 'wow'}"><i class="fa-solid fa-face-surprise" style="color: yellow;" ></i></p>
+            </div>
+            <div class="nguoithacamxuc" *ngFor="let user of userlike">
+               <div class="thongtin">
+                <div class="hinh">
+                    <img src="{{user.avatar}}" alt="">
+                    <i class="fa-solid fa-thumbs-up"  style="color: blue;" *ngIf="user.type ===1" ></i>
+                    <i class="fa-solid fa-heart" style="color: red;" *ngIf="user.type ===2"></i>
+                    <i class="fa-solid fa-face-laugh-beam" style="color: yellow;" *ngIf="user.type ===3"></i>
+                    <i class="fa-solid fa-face-frown-open" style="color: orange;" *ngIf="user.type ===4"></i>
+                    <i class="fa-solid fa-face-angry" style="color: #f25c2e;" *ngIf="user.type ===5"></i>
+                    <i class="fa-solid fa-face-surprise" style="color: yellow;" *ngIf="user.type ===6"></i>
+                </div>
+                <div class="ten">
+                    <p>{{user.username}}</p>
+                    <p *ngIf="user.banchung > 0">{{user.banchung}} bạn chung</p>
+                </div>
+               </div>
+                <div class="banbe">
+                    <button *ngIf="user.status === 0" style="background-color: blue;">thêm bạn bè</button>
+                    <button  *ngIf="user.status === 1" style="background-color: blue;">chấp nhận</button>
+                    <button  *ngIf="user.status === 2" style="background-color: rgb(101, 99, 97);">hủy lời mời</button>
+                    <button  *ngIf="user.status === 3" style="background-color: rgb(101, 99, 97);">bạn bè</button>
+                    <button  *ngIf="user.status === 4" style="background-color: rgb(101, 99, 97)">trang cá nhân</button>
+
+                </div>
+            </div>
+         
+            
         </div>
     </div>
 

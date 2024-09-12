@@ -73,7 +73,7 @@ export class PostBehaviorSubject {
   getpostbyfriend(){
     this.arridfriend$.subscribe(data =>{
       this.arrid_friend = data
-    // console.log(this.arrid_friend)
+    console.log(this.arrid_friend)
     if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
       this.Postservice.getpostbyfriend(this.arrid_friend).subscribe(data =>{
         // console.log(data);
@@ -87,7 +87,8 @@ export class PostBehaviorSubject {
     }else{
         this.arrpost =[]
     }
-      if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
+    // console.log(this.arrid_friend)
+    if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
       this.Userservice.getuserbyarrid(this.arrid_friend).subscribe(datas =>{
         // console.log(datas)
         if(datas){
@@ -167,10 +168,16 @@ getlike(){
         index === self.findIndex((t:any) => t._id === item._id)
       );
     
-    // console.log(postArray);
+    console.log(postArray);
     // console.log(userArray);
     let arrpost:any[] =[]
-    postArray.forEach((post:any) => {
+    let ok =postArray.sort((a:any,b:any) =>{
+      const datea = new Date(a.date);
+      const dateb = new Date(b.date);
+
+      return datea.getTime() - dateb.getTime();
+    })
+    ok.forEach((post:any) => {
         userArray.forEach((user:any) =>{
           if(post.id_user === user._id){
               arrpost.push({
@@ -178,7 +185,7 @@ getlike(){
                 id_user:user._id,
                 avatar:user.avatar,
                 username:user.username,
-                date:post.date.split('T')[0],
+                date:this.calculateMinutesDifference(post.date),
                 content:post.content,
                 image:post.image,
                 totallike:post.totallike,
@@ -196,10 +203,31 @@ getlike(){
     this.post = arrpost
     this.graftlikepost()
   }
+  calculateMinutesDifference(date: string): string { 
+    const now = new Date(); 
+    const pastDate = new Date(date); 
+  
+    const diffInMs = now.getTime() - pastDate.getTime();
+    
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  
+    if (diffInMinutes > 10080) {
+      return date.split("T")[0]; 
+    } else if (diffInMinutes > 1440) { 
+      return `${Math.floor(diffInMinutes / 1440)} ngày trước`; 
+    } else if (diffInMinutes >= 60) {
+      return `${Math.floor(diffInMinutes / 60)} giờ trước`; 
+    } else if (diffInMinutes < 60) { 
+      return `${diffInMinutes} phút trước`;
+    }
+  
+    return `${diffInMinutes} phút trước`;
+  }
 
   graftlikepost() {
     this.arrlikepost$.subscribe(likes => {
       // console.log(likes)
+      console.log(this.post)
 
       const okla = this.post.map((post: any) => {
         const like = likes.find((like: any) => post.id_post === like.id_post);
@@ -208,7 +236,7 @@ getlike(){
           id_user: post.id_user,
           avatar: post.avatar,
           username: post.username,
-          date: post.date.split('T')[0],
+          date: post.date,
           content: post.content,
           image: post.image,
           totallike: post.totallike,

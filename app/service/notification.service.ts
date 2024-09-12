@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class Notificationservice {
   constructor(private http:HttpClient){}
 
-  private url = 'http://192.168.2.39:3001/';
+  private url = 'http://192.168.2.39:3001/'
 
   addnotification(formdata:any):Observable<any>{
     return this.http.post<any>(`${this.url}notification/add`,formdata)

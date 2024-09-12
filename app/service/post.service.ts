@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class Postservice {
- private url = 'http://192.168.2.39:3001/'
+  private url = 'http://192.168.2.39:3001/'
 
  constructor(private http: HttpClient) {}
 
@@ -30,6 +30,9 @@ export class Postservice {
     }
     getpostbyme(id:any):Observable<any>{
       return this.http.get<any>(`${this.url}post/getpostbyme/${id}`)
+    }
+    getpostbyid(id:any):Observable<any>{
+      return this.http.get<any>(`${this.url}post/getpostbyid/${id}`)
     }
     
 }
