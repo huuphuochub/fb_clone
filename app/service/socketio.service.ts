@@ -9,6 +9,7 @@ export class SocketIoService {
   private socket:Socket;
 
   constructor() {
+
     this.socket = io('http://192.168.2.39:3001/');
   }
   public sendOnlineStatus( id_user:any): void {

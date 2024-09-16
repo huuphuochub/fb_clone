@@ -19,10 +19,14 @@ export class Sharedataservice {
   private searchuser = new BehaviorSubject<any[]>([]);
   usersearch$ = this.searchuser.asObservable()
 ;
-
+// private url = 'http://172.16.103.22:3001/'
 
   private searchpost = new BehaviorSubject<string>('');
   postsearc$ = this.searchpost.asObservable();
+
+  urls(){
+    return this.url
+  }
 
 
   timkiemuser(key:any):Observable<any>{

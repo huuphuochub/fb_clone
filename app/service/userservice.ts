@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, share } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Sharedataservice } from './sharedata.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class Userservice {
  private url = 'http://192.168.2.39:3001/'
 
  constructor(private http: HttpClient) {}
-
+    
   checkemail(emails:any):Observable<any>{
     const emailss= {email:emails}
     return this.http.post<any>(`${this.url}user/checkemail`, emailss);
