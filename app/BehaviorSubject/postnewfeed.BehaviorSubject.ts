@@ -6,6 +6,10 @@ import { SocketIoService } from '../service/socketio.service';
 import { Postservice } from '../service/post.service';
 import { Userservice } from '../service/userservice';
 import { Likeservice } from '../service/like.service';
+import { forkJoin } from 'rxjs';
+// import { distinctUntilChanged } from 'rxjs/operators';
+
+
 
 
 @Injectable({
@@ -18,7 +22,8 @@ export class PostnewfeedBehaviorSubject {
     arrpost!:any[]
     arrpost2!:any
     arrpost3!:any
-
+    newfeed:any[] =[]
+    isgetlike:boolean = false
 
     arruser!:any[]
     arruser2!:any
@@ -26,7 +31,8 @@ export class PostnewfeedBehaviorSubject {
     // arrlikepost!:any;
     post!:any;
     arrlike!:any
-
+    goigetpost:boolean = false;
+    pagepost:any = 1
 
 
   // listuserhoanchinh!:any
@@ -35,16 +41,12 @@ export class PostnewfeedBehaviorSubject {
     private Likeservice:Likeservice,
     private Postservice:Postservice,
     private http:HttpClient,private friendservice:Friendservice, private socketservice:SocketIoService){
-      this.arridfriend$.subscribe(data =>{
-        this.arrid_friend = data
-      })
-      this.arriduser$.subscribe(data =>{
-        this.arid_folowing = data
-      })
+   
   }
 
-  
   private url = 'http://192.168.2.39:3001/'
+
+  // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
 
   private allpost = new BehaviorSubject<any>('');
   listallpost$ = this.allpost.asObservable();
@@ -58,51 +60,64 @@ export class PostnewfeedBehaviorSubject {
   arrlikepost$ = this.arrlikepost.asObservable();
 
 
-  setarridfriend(id_user:any){
+  setarridfriend(id_user:any,pagepost:any){
     this.arridfriend.next(id_user)
-    // this.arrid_friend = id_user
-    this.getpostbyfriend()
+    this.pagepost = pagepost;
+    // console.log('setidfriend')
+    // const ok =this.arridfriend$.subscribe(data => {
+    //   return data
+    // })
+    // console.log(ok);
+    
+    
+
+      // this.arrid_friend = id_user
+    // console.log('gọi getpostbyfriend');
+    
+      if(this.goigetpost === false){
+        this.getpostbyfriend()
+        this.goigetpost = true
+      }
+  }
+  goigetpostbyfriend(){
+    this.goigetpostbyfriend()
   }
   setarridfolowing(id_folowing:any){
     // this.arid_folowing = id_folowing
+    // console.log('setidfolower')
+
     this.arriduser.next(id_folowing)
 
     this.getpostbyuser()
   }
 
-  getpostbyfriend(){
-    this.arridfriend$.subscribe(data =>{
-      this.arrid_friend = data
-    console.log(this.arrid_friend)
-    if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
-      this.Postservice.getpostbyfriend(this.arrid_friend).subscribe(data =>{
+  getpostbyfriend() {
+    // console.log('chạy getpostbyfriend');
+    
+    this.arridfriend$.subscribe(data => {
+        this.arrid_friend = data;
         // console.log(data);
-           this.arrpost  = data
-           this.ispost()
+        
+        // console.log(this.arrid_friend);
 
-      
-       
+        if (this.arrid_friend[0] !== null && this.arrid_friend.length > 0) {
+            const posts$ = this.Postservice.getpagepostbyfriend(this.arrid_friend,this.pagepost);
+            const users$ = this.Userservice.getuserbyarrid(this.arrid_friend);
 
-      })
-    }else{
-        this.arrpost =[]
-    }
-    // console.log(this.arrid_friend)
-    if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
-      this.Userservice.getuserbyarrid(this.arrid_friend).subscribe(datas =>{
-        // console.log(datas)
-        if(datas){
-            // this.arruser.push(datas)
-            this.arruser = datas
-            this.ispost()
+            forkJoin([posts$, users$]).subscribe(([postsData, usersData]) => {
+                // Cả hai yêu cầu đã hoàn thành
+                this.arrpost = postsData; // Gán dữ liệu bài viết
+                this.arruser = usersData; // Gán dữ liệu người dùng
 
+                // Gọi ispost() sau khi cả hai yêu cầu đã hoàn thành
+                this.ispost();
+                // console.log('gọi ispost');
+            });
+        } else {
+            this.arrpost = [];
+            this.arruser = [];
         }
-      })
-    }else{
-        this.arruser=[]
-    }
-     
-  })
+    });
 }
   getpostbyuser(){
     this.arriduser$.subscribe(data =>{
@@ -113,7 +128,7 @@ export class PostnewfeedBehaviorSubject {
         // console.log(data);
             // this.arrpost.push(data)
             this.arrpost2 = data
-            this.ispost()
+            // this.ispost()
 
       })
     }else{
@@ -125,7 +140,9 @@ export class PostnewfeedBehaviorSubject {
         if(datas){
             // this.arruser.push(datas)
             this.arruser2 = datas
-            this.ispost()
+            // this.ispost()
+            
+            
 
         }
 
@@ -138,12 +155,22 @@ export class PostnewfeedBehaviorSubject {
 }
 
 getlike(){
-  this.Likeservice.getalllikeme(this.id_me,this.arrlike).subscribe(data =>{
+  // console.log('họi nhiêu fk');
+  // const like$ = this.Likeservice.getalllikeme(this.id_me,this.arrlike)
+
+  if(this.isgetlike === false){
+    this.Likeservice.getalllikeme(this.id_me,this.arrlike).subscribe(data =>{
+    // console.log(data);
+    
     this.arrlikepost.next(data)
+    this.isgetlike = true;
   })
+}
 }
 
   ispost(){
+    // console.log('gọi nhiều k');
+    
     // console.log(this.arrpost);
     // console.log(this.arruser);
     // console.log(this.arrpost2);
@@ -162,13 +189,14 @@ getlike(){
       this.arrlike = arrlike;
       this.id_me = localStorage.getItem('id_user');
       // console.log(this.id_me)
+      // console.log('gọi getlike');
 
       this.getlike()
       const userArray = this.arruser3.filter((item:any, index:any, self:any) =>
         index === self.findIndex((t:any) => t._id === item._id)
       );
     
-    console.log(postArray);
+    // console.log(postArray);
     // console.log(userArray);
     let arrpost:any[] =[]
     let ok =postArray.sort((a:any,b:any) =>{
@@ -201,6 +229,8 @@ getlike(){
     // console.log(this.arruser3);
     // this.allpost.next(arrpost)
     this.post = arrpost
+    // console.log('gọi graftlikepost');
+    
     this.graftlikepost()
   }
   calculateMinutesDifference(date: string): string { 
@@ -225,9 +255,13 @@ getlike(){
   }
 
   graftlikepost() {
-    this.arrlikepost$.subscribe(likes => {
+    this.arrlikepost$
+    .pipe(distinctUntilChanged())
+    .subscribe(likes => {
       // console.log(likes)
-      console.log(this.post)
+      // console.log(this.post)
+      // console.log('lấy likepost');
+      
 
       const okla = this.post.map((post: any) => {
         const like = likes.find((like: any) => post.id_post === like.id_post);
@@ -246,12 +280,17 @@ getlike(){
           typelike: like ? like.type : 0, // Set `typelike` if `like` exists, otherwise null
         };
       });
+     this.setposst(okla);
       
-      // console.log(okla);
-      this.allpost.next(okla); // Emit the result to `allpost` BehaviorSubject
+
+       // Emit the result to `allpost` BehaviorSubject
     });
+   
   }
-  
+  setposst(post:any){
+    this.allpost.next(post);
+
+  }
   // list id user
   
 

@@ -118,6 +118,7 @@ private MeBehaviorSubject:MeBehaviorSubject,
     }
   }
   dangtheogioi(){
+    this.alluser =[]
     this.current ='dangtheogioi'
     let arrfl:any[] =[]
     this.Folowerservice.getfolowerbyuser(this.id_user).subscribe(data=>{
@@ -183,7 +184,11 @@ private MeBehaviorSubject:MeBehaviorSubject,
     });
     
     // Assign the processed data to `this.alluser`
-    this.alluser = akjshdkas;
+    
+      this.alluser = akjshdkas;
+
+    
+    
     // this.alluser = ok
     })
   }

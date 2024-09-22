@@ -19,7 +19,7 @@ export class PostBehaviorSubject {
     arrpost2!:any
     arrpost3!:any
 
-
+    pagepost:any = 1
     arruser!:any[]
     arruser2!:any
     arruser3!:any
@@ -42,9 +42,10 @@ export class PostBehaviorSubject {
         this.arid_folowing = data
       })
   }
+  private url = 'http://192.168.2.39:3001/'
 
   
-  private url = 'http://192.168.2.39:3001/'
+  // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
 
   private allpost = new BehaviorSubject<any>('');
   listallpost$ = this.allpost.asObservable();
@@ -227,7 +228,7 @@ getlike(){
   graftlikepost() {
     this.arrlikepost$.subscribe(likes => {
       // console.log(likes)
-      console.log(this.post)
+      // console.log(this.post)
 
       const okla = this.post.map((post: any) => {
         const like = likes.find((like: any) => post.id_post === like.id_post);

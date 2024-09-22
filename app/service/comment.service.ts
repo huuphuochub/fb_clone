@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 export class Commentservice {
   private url = 'http://192.168.2.39:3001/'
 
+  // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
+
  constructor(private http: HttpClient) {}
 
    
@@ -15,6 +17,6 @@ export class Commentservice {
         return this.http.get<any>(`${this.url}comment/getcommentbypost/${id_post}`)
     }
     addcomment(formdata:any):Observable<any>{
-      return this.http.post<any>(`${this.url}comment/addcmt`,formdata)
+      return this.http.post<any>(`${this.url}comment/addcmt/`,formdata)
     }
 }

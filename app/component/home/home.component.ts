@@ -1,5 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { timer } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { ActiveStateService } from '../../service/active-state.service';
@@ -12,7 +14,7 @@ import { UserBehaviorSubject } from '../../BehaviorSubject/user.BehaviorSubject'
 import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
 import { Folowerservice } from '../../service/folower.service';
 import { Postservice } from '../../service/post.service';
-import { PostBehaviorSubject } from '../../BehaviorSubject/post.BehaviorSubject';
+import { PostnewfeedBehaviorSubject } from '../../BehaviorSubject/postnewfeed.BehaviorSubject';
 import { Likeservice } from '../../service/like.service';
 import { Notificationservice } from '../../service/notification.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -30,6 +32,7 @@ export class HomeComponent implements OnInit {
   formcomment!:FormGroup;
 
   constructor(
+    private cdr:ChangeDetectorRef,
     private LikeBehaviorSubject:LikeBehaviorSubject,
     private CmtBehaviorSubject:CmtBehaviorSubject,
     private Likeservice:Likeservice,
@@ -37,7 +40,7 @@ export class HomeComponent implements OnInit {
     private Commentservice:Commentservice,
     private formbuilder:FormBuilder,
     private Notificationservice:Notificationservice,
-    private PostBehaviorSubject:PostBehaviorSubject,
+    private PostBehaviorSubject:PostnewfeedBehaviorSubject,
     private Postservice:Postservice, private Folowerservice:Folowerservice, private MeBehaviorSubject:MeBehaviorSubject, private UserBehaviorSubject:UserBehaviorSubject,private router:Router,private activeStateService: ActiveStateService, private userservice:Userservice, private friendservice:Friendservice, private socketservice:SocketIoService, private Sharedataservice:Sharedataservice)
     
     {
@@ -86,6 +89,9 @@ export class HomeComponent implements OnInit {
   userlikes!:any;
   userpost!:any;
   currentseen:any ='tatca';
+  pagefriend:any = 1;
+  pagepost:any = 1;
+  posts:any[] =[]
  
 
 
@@ -94,24 +100,36 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.activeStateService.setCurrentPage('home');
     this.id_user = localStorage.getItem('id_user');
-   
+    // this.PostBehaviorSubject.arridfriend$.subscribe(data =>{
+    //   // console.log(data)
+    // })
+
     // console.log(typeof this.id_user);
     this.userservice.getuser(this.id_user).subscribe(data =>{
       this.profileuser = data;
-      console.log(data)
+      // console.log(data)
       
       // console.log(data);
                 this.loadban()
 
       
     })
+    this.getnewfeed()
     this.Storyservice.getstorybyme(this.id_user).subscribe(data =>{
   this.storymes = data
   // console.log(data)
   this.storyme = data[0]
   // console.log(this.storyme)
     })
+    this.getfriendandfolower(this.pagefriend);
+    // localStorage.clear() 
+     
+  }
+  getfriendandfolower(page:any){
+    const formpage = new FormData();
+    formpage.append('page',page);
     this.Folowerservice.getfolowerbyuser(this.id_user).subscribe(data =>{
+      // lấy bảng folower của mình(gồm những mục có id của người dùng)
       // console.log(data);
       this.listfolower = data
       this.arridfolowing = data.map((item:any) =>{
@@ -131,8 +149,51 @@ export class HomeComponent implements OnInit {
       this.iduserstory = [...this.arridfolowing];
       this.PostBehaviorSubject.setarridfolowing(this.arridfolowing);
     })
-    this.friendservice.timbancuaminh(this.id_user).subscribe(data =>{
-      // console.log(data);
+    
+    
+    this.friendservice.getusernewfeed(this.id_user, formpage).subscribe(data =>{
+      // lấy id của bạn mình (ở bảng friend )
+      
+      // console.log('những bạn ở page ' + page);
+      // console.log(data.length);
+      if(data.length === 0){
+        this.pagefriend = 1;
+        this.pagepost += 1;
+
+        const frompagefriend = new FormData();
+        frompagefriend.append('page', this.pagefriend)
+        this.friendservice.getusernewfeed(this.id_user, frompagefriend).subscribe(datass =>{
+          // console.log(this.pagepost);
+          this.arriddfriend =  datass.map((item:any) =>{
+            if(item.id_user1 === this.id_user){
+              return item.id_user2
+            }else if(item.id_user2 === this.id_user){
+              return item.id_user1
+            }else{
+              return null
+            }
+       } )
+        // console.log(this.arriddfriend);
+        // this.iduserstory.push(this.arriddfriend)
+        // const iduserstory = new Set(this.arriddfriend)
+        this.iduserstory = [...this.iduserstory, ...this.arriddfriend]
+        this.PostBehaviorSubject.setarridfriend(this.arriddfriend,this.pagepost);
+        // this.getnewfeed()
+        const arr = [...new Set(this.iduserstory.filter(item => item !== null))];
+      // console.log(arr);
+      
+        if(arr.length>0){
+          this.Storyservice.getstorybyariduser(arr).subscribe(data=>{
+            // console.log(data)
+            this.story = data
+            this.Sharedataservice.setstory(data);
+          })
+        }
+        })
+
+      }
+
+
     this.arriddfriend =  data.map((item:any) =>{
           if(item.id_user1 === this.id_user){
             return item.id_user2
@@ -146,8 +207,8 @@ export class HomeComponent implements OnInit {
       // this.iduserstory.push(this.arriddfriend)
       // const iduserstory = new Set(this.arriddfriend)
       this.iduserstory = [...this.iduserstory, ...this.arriddfriend]
-      this.PostBehaviorSubject.setarridfriend(this.arriddfriend);
-      this.getnewfeed()
+      this.PostBehaviorSubject.setarridfriend(this.arriddfriend,this.pagepost);
+      // this.getnewfeed()
       const arr = [...new Set(this.iduserstory.filter(item => item !== null))];
     // console.log(arr);
     
@@ -161,11 +222,11 @@ export class HomeComponent implements OnInit {
 
 
     })
-    // localStorage.clear() 
-     
   }
   onScroll(){
-    console.log('ê tao load lại nha')
+    // console.log('ê tao load lại nha')
+    this.pagefriend = this.pagefriend +=1;
+    this.getfriendandfolower(this.pagefriend);
   }
 
   handlecomment(){
@@ -197,9 +258,15 @@ export class HomeComponent implements OnInit {
   }
 
   getnewfeed(){
+    // console.log('gọi nhiêuf')
 
-    this.PostBehaviorSubject.listallpost$.subscribe(data =>{
-      this.allpostnewfeed = data.reverse()
+    this.PostBehaviorSubject.listallpost$
+    
+    .subscribe(data =>{
+      this.posts = [...this.posts,...data.reverse()]
+      this.allpostnewfeed = this.posts
+      // console.log(data.reverse());
+      // console.log(this.allpostnewfeed)
     })
   }
 
@@ -328,13 +395,29 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
   }
   handlelike(type:any,id_post:string,id_user:any){
     // console.log(type);
+
+    this.allpostnewfeed = this.allpostnewfeed.map((item:any) =>{
+      if(item.id_post === id_post){
+        return {
+          ...item, // Giữ nguyên các thuộc tính khác
+          typelike: type,
+          totallike : item.totallike +=1 // Cập nhật thuộc tính type
+      };
+      }
+      return item
+    })
+    // console.log(this.allpostnewfeed);
+    this.cdr.detectChanges()
+    // this.PostBehaviorSubject.setposst(this.allpostnewfeed);
+
+    
     const fomdata = new FormData()
     fomdata.append('id_post',id_post),
     fomdata.append('id_user',this.id_user);
     fomdata.append('type',type)
     this.Likeservice.addlike(fomdata).subscribe(data =>{
       // console.log(data)
-      this.PostBehaviorSubject.getpostbyfriend()
+      // this.PostBehaviorSubject.getpostbyfriend()
       this.PostBehaviorSubject.getpostbyuser
       this.PostBehaviorSubject.getlike()
       const thongbao = `${this.profileuser.username} vừa thả cảm xúc về bài viết của bạn`;
@@ -352,13 +435,27 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
     })
   }
   deletelike(id_post:any){
+    this.allpostnewfeed = this.allpostnewfeed.map((item:any) =>{
+      if(item.id_post === id_post){
+        return {
+          ...item, // Giữ nguyên các thuộc tính khác
+          typelike: 0,
+          totallike : item.totallike -=1 // Cập nhật thuộc tính type
+      };
+      }
+      return item
+    })
+    // console.log(this.allpostnewfeed);
+    this.cdr.detectChanges()
+
+
     // console.log(id_post)
     const fomdata = new FormData()
     fomdata.append('id_post',id_post),
     fomdata.append('id_user',this.id_user);
     this.Likeservice.deletelike(fomdata).subscribe(data=>{
       // console.log(data);
-      this.PostBehaviorSubject.getpostbyfriend()
+      // this.PostBehaviorSubject.getpostbyfriend()
       this.PostBehaviorSubject.getpostbyuser
       this.PostBehaviorSubject.getlike()
     })

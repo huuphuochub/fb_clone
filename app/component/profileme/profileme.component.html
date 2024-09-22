@@ -18,7 +18,7 @@
                 <p> </p>
             </div>
             <div class="hinhbanbe" >
-                <img *ngFor="let listfriend of listfriend" src="{{listfriend.avatar}}" alt="">
+                <img *ngFor="let listfriend of friends" src="{{listfriend.avatar}}" alt="">
             </div>
         </div>
         <div class="cactuychon">
@@ -114,7 +114,7 @@
 
             </div>
             <div class="tatcaanhnguoidung">
-                <div *ngFor="let post of postofme">
+                <div *ngFor="let post of summanyimg">
                     <div class="image-container" *ngIf="post.image !== '' ">
                         <img  src="{{post.image}}" alt="">
                     </div>
@@ -158,7 +158,7 @@
                 </div>
             </div>
             <div class="tatcabanbeoday" >
-                <div class="chitietbanbecuaban" *ngFor="let listfriend of listfriend">
+                <div class="chitietbanbecuaban" *ngFor="let listfriend of friend">
                     <img src="{{listfriend.avatar}}" alt=""  routerLink="/profileuser/{{listfriend._id}}">
                     <h6>{{listfriend.username}}</h6>
                     <p *ngIf="listfriend.banchung > 0">{{listfriend.banchung}} bạn chung</p>

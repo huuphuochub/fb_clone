@@ -9,14 +9,24 @@ export class SocketIoService {
   private socket:Socket;
 
   constructor() {
+    this.socket = io('http://192.168.2.39:3001/')
+    // this.socket = io('https://huuphuoc.test.huuphuoc.id.vn/');
+    
 
-    this.socket = io('http://192.168.2.39:3001/');
+
+    // this.socket = io('http://192.168.2.39:3001/');
   }
   public sendOnlineStatus( id_user:any): void {
-    this.socket.emit('online', id_user);
+    const operatingstatus = localStorage.getItem('operatingstatus')
+    if(operatingstatus=='1'){
+      this.socket.emit('online', id_user);
+    }
   }
   public sendmess( id_user:any,id_room:any): void {
     this.socket.emit('sendmess', id_user,id_room);
+  }
+  public deleteonline( id_user:any): void {
+    this.socket.emit('deleteonline', id_user);
   }
 
   public receicemess(): Observable<string> {
@@ -63,7 +73,7 @@ export class SocketIoService {
   public getfriendonline():Observable<string>{
     return new Observable<string>(observer =>{
       this.socket.on('frienonline', (message:string) =>{
-        // console.log(message)
+        console.log(message)
         observer.next(message)
       })
     })

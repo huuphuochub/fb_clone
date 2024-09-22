@@ -8,17 +8,19 @@ import { HttpClient } from '@angular/common/http';
 export class Likeservice {
   private url = 'http://192.168.2.39:3001/'
 
+  // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
+
  constructor(private http: HttpClient) {}
 
     addlike(formdata:any):Observable<any>{
-        return this.http.post<any>(`${this.url}like/addlike`, formdata)
+        return this.http.post<any>(`${this.url}like/addlike/`, formdata)
     }
     getalllikeme(id_me:any,arridpost:any):Observable<any>{
       const ok = {id_user:id_me,id_post:arridpost}
-      return this.http.post<any>(`${this.url}like/getalllikeme`,ok)
+      return this.http.post<any>(`${this.url}like/getalllikeme/`,ok)
     }
     deletelike(formdata:any):Observable<any>{
-      return this.http.post<any>(`${this.url}like/deletelike`,formdata)
+      return this.http.post<any>(`${this.url}like/deletelike/`,formdata)
     }
     getlikebypost(id:any):Observable<any>{
       return this.http.get<any>(`${this.url}like/getlikebypost/${id}`)

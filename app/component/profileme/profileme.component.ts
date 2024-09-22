@@ -22,6 +22,10 @@ export class ProfilemeComponent implements OnInit{
   id_user!:any;
   selectedoption!:any;
   postofme!:any;
+  friend:any[] =[]
+  friends:any[]=[]
+  summanyimg:any[] =[];
+
 
 
 constructor(
@@ -53,6 +57,7 @@ constructor(
     this.Postservice.getpostbyme(this.id_user).subscribe(data =>{
       console.log(data);
       this.postofme = data.reverse()
+      this.summanyimg = this.postofme.slice(0,9)
     })
   }
   onFileChange(event:any){
@@ -97,6 +102,10 @@ constructor(
         this.getpost();
       }
     })
+    const ids = {id:this.id_user}
+    this.Friendservice.updatelastPostTimeUser(ids).subscribe(data =>{
+      console.log(data);
+    })
 
   }
 
@@ -119,6 +128,8 @@ constructor(
   fetchfriend(){
     this.MeBehaviorSubject.alluser$.subscribe(data =>{
       this.listfriend = data;
+      this.friend = data.slice(0,9)
+      this.friends = data.slice(0,5)
       console.log(data)
     })
   }

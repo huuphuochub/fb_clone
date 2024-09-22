@@ -53,7 +53,7 @@ ngOnInit(): void {
       this.selectedFile = 'https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp';
     }else if(!username){
       this.loiname = true
-    }else {
+    }
       const formdata = new FormData()
       formdata.append('email',this.email);
       formdata.append('username',this.formname.get('username')?.value);
@@ -77,7 +77,7 @@ ngOnInit(): void {
 
         }
       })
-    }
+    
   }
 
 }

@@ -330,6 +330,20 @@ background-color: #555555;
     border-radius: 15px;
 
 }
+.endnewfeed{
+    padding-bottom: 10px;
+    background-color: #222222;
+
+    margin-top: 10px;
+    border: 2px solid black; 
+    border-radius: 15px;
+    height: 700px;
+}
+.endnewfeed h3{
+    margin-top: 200px;
+    color: white;
+    text-align: center;
+}
 .newfeed .thongtin {
     display: grid;
     grid-template-columns: 10% 75% 15%;

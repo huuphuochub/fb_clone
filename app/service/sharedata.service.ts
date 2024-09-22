@@ -9,8 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Sharedataservice {
   constructor(private http:HttpClient){}
-
   private url = 'http://192.168.2.39:3001/'
+
+  // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
   private emailsubject = new BehaviorSubject<string>('');
   email$ = this.emailsubject.asObservable();
   private storysubject = new BehaviorSubject<any>([]);
@@ -32,7 +33,7 @@ export class Sharedataservice {
   timkiemuser(key:any):Observable<any>{
     const ok = {username:key}
     // console.log(ok)
-    return this.http.post<any>(`${this.url}user/search`, ok);
+    return this.http.post<any>(`${this.url}user/search/`, ok);
   }
 
 

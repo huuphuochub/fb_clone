@@ -8,12 +8,14 @@ import { io } from 'socket.io-client';
   styleUrl: './testvideo.component.css'
 })
 export class TestvideoComponent implements OnInit{
+  private socket = io('http://192.168.2.39:3001/')
 
-  private socket = io('http://192.168.1.9:3001/');
+  // private socket = io('https://huuphuoc.test.huuphuoc.id.vn/');
   private localStream!: MediaStream;
-  private peerConnection!: RTCPeerConnection; // Sử dụng toán tử `!`
-  public localVideo!: HTMLVideoElement; // Sử dụng toán tử `!`
-  public remoteVideo!: HTMLVideoElement; // Sử dụng toán tử `!`
+  private peerConnection!: RTCPeerConnection; 
+  public localVideo!: HTMLVideoElement; 
+  public remoteVideo!: HTMLVideoElement; 
+  private isCaller = false; // Biến để theo dõi ai là người gọi
 
   ngOnInit() {
     this.localVideo = document.getElementById('localVideo') as HTMLVideoElement;
@@ -29,54 +31,97 @@ export class TestvideoComponent implements OnInit{
         this.localStream = stream;
         this.localVideo.srcObject = stream;
 
-        this.createPeerConnection(); // tạo 1 peer
-
+        this.createPeerConnection(); // Tạo PeerConnection
         this.localStream.getTracks().forEach(track => 
           this.peerConnection.addTrack(track, this.localStream)
         );
+      })
+      .catch(error => {
+        console.error('Error accessing media devices.', error);
       });
 
-    this.socket.on('offer', (offer) => { // lắng nghe offer từ người khác
-      console.log(offer)
-      this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-      this.createAnswer(); // trả lời cho offer vừa nghe đc
+    this.socket.on('offer', (offer) => { // Lắng nghe offer từ người khác
+      console.log('Đã nhận offer:', offer);
+      if (this.isCaller) {
+        this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer))
+          .then(() => {
+            this.isCaller = true; // Đánh dấu là người gọi
+            this.createAnswer(); // Trả lời cho offer
+          })
+          .catch(error => {
+            console.error('Error setting remote description:', error);
+          });
+      }
     });
 
-    this.socket.on('answer', (answer) => {   
-      this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));  // lắng nghe câu trả lời
+    this.socket.on('answer', (answer) => { // Lắng nghe answer từ người khác
+      console.log('Đã nhận answer của người khác:', answer);
+      this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer))
+        .catch(error => {
+          console.error('Error setting remote description:', error);
+        });
     });
 
-    this.socket.on('ice-candidate', (candidate) => {
-      this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate));  
+    this.socket.on('icecandidate', (candidate) => { // Lắng nghe ice candidate
+      this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
+        .catch(error => {
+          console.error('Error adding received ice candidate:', error);
+        });
     });
   }
 
   createPeerConnection() {
-    this.peerConnection = new RTCPeerConnection(); // tạo 1 peer 
+    var configuration = { 
+      "iceServers": [{ "url": "stun:stun.1.google.com:19302" }] 
+   }; 
+    this.peerConnection = new RTCPeerConnection();
+    console.log(this.peerConnection);
+    
+    // console.log('load oo');
+    
 
-    this.peerConnection.onicecandidate = (event) => {
-      if (event.candidate) {
-        this.socket.emit('ice-candidate', event.candidate);  // thiết lập kết nối
-      }
-    };
+    
+    // this.peerConnection.onicecandidate = (event) => {
+    //   console.log(event.cancelable)
+    //   // console.log('đã vô onice');
+      
+    //   if (event.candidate) {
+    //     console.log('Đã gửi ice candidate:', event.candidate);
+    //     this.socket.emit('icecandidate', event.candidate); // Gửi candidate tới server
+    //   }
+    // };
 
     this.peerConnection.ontrack = (event) => {
+      console.log('Đang tạo video từ remote track');
       this.remoteVideo.srcObject = event.streams[0];
     };
 
+    // Tạo offer ngay khi PeerConnection được tạo
     this.peerConnection.createOffer()
       .then(offer => {
-        this.peerConnection.setLocalDescription(offer);
-        this.socket.emit('offer', offer);  // tạo offer và gửi về server
+        return this.peerConnection.setLocalDescription(offer);
+      })
+      .then(() => {
+        this.isCaller = true; // Đánh dấu là người gọi
+        console.log('offer của mình' + this.peerConnection.localDescription);
+        
+        this.socket.emit('offer', this.peerConnection.localDescription); // Gửi offer tới server
+      })
+      .catch(error => {
+        console.error('Error creating offer:', error);
       });
   }
 
-  createAnswer() {
-    this.peerConnection.createAnswer()
-      .then(answer => {
-        this.peerConnection.setLocalDescription(answer); // trả lời
-        this.socket.emit('answer', answer);
-      });
+  async createAnswer() {
+    try {
+      const answer = await this.peerConnection.createAnswer();
+      await this.peerConnection.setLocalDescription(answer);
+      this.socket.emit('answer', this.peerConnection.localDescription);
+       // Gửi answer tới server
+       console.log("answer của mình" + this.peerConnection.localDescription);
+       
+    } catch (error) {
+      console.error('Error creating answer:', error);
+    }
   }
-
 }

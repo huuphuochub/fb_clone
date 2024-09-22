@@ -25,15 +25,16 @@ export class FriendBehaviorSubject {
         // console.log(data)
       })
   }
-
   private url = 'http://192.168.2.39:3001/'
+
+  // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
 
 
   // list id user
   private arridlistfriend = new BehaviorSubject<string>('');
   idlistfriend$ = this.arridlistfriend.asObservable();
 
-  setidlistfriend(arr: string) {
+  setidlistfriend(arr: any) {
     // console.log(arr)
     this.arridlistfriend.next(arr);
   }
@@ -259,7 +260,7 @@ export class FriendBehaviorSubject {
   timkiemuser(key:any):Observable<any>{
     const ok = {username:key}
     // console.log(ok)
-    return this.http.post<any>(`${this.url}user/search`, ok);
+    return this.http.post<any>(`${this.url}user/search/`, ok);
   }
 
 
