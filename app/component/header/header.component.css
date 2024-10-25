@@ -1,654 +1,360 @@
+:root{
+    --color-backgorund:black;
+    --color-background2: #222222;
+    --color-backgrounds:#444444;
+    --color-border:#444444;
+    --color-text:#918f8f;
+    --color-test:white;
+}
+
 .header{
-    display: grid;
-    grid-template-columns: 5%  22% 46% 27%;
-    height: 70px;
-    background-color:#222222;
-    position: fixed;
     width: 100%;
-    border-radius: 10px;
-    align-items: center; 
-
-    z-index: 1000; 
-
+    height: 50px;
+    background-color: #222222;
+    border-bottom:1px solid #444444  ;
 }
-.header .logo{
-    font-size: 50px;
-    margin-left: 10px;
+.p-huy{
+    background-color: #444444;
+    border-radius: 50px;
+    color: #918f8f;
+}
+.bi-facebook{
     color: blue;
+    font-size: 40px;
 }
-.header .logo:hover{
-   cursor: pointer;
-}
-.search{
-    position: relative;
-    display: inline-block;
-}
-.header .search{
+.bi-search{
     font-size: 20px;
-    /* position: relative; */
-      /* display: inline-block; */
-
+    color: #918f8f;
 }
-.search input{
-    padding-left: 30px; /* Đẩy nội dung của input để có chỗ cho icon */
-    height: 35px;
+.inputsearch{
     width: 200px;
-    border: 1px solid #ccc;
+    height: 30px;
+    border: 1px solid black;
     border-radius: 50px;
-    background-color: #AAAAAA;
-}
-.search i{
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #0b0b0b;
-}
-.link a{
-    color: #AAAAAA;
-    transition: all 0.3s ease; /* Thêm chuyển tiếp để làm cho hiệu ứng mượt mà hơn */
-    /* border: 1px solid #f0ebeb; */
-
-
-}
-
-.header .link{
-    font-size: 30px;
-
-    display: flex;
-}
-.link div{
-    padding: 0 8%;
-
-}
-.link .active {
-    border-bottom:3px solid #4374e5; ;
-}
-.link .active i{
-    color: #4374e5;
-}
-.link div:hover{
-    border-radius: 10px;
-    cursor: pointer; 
-
-    box-shadow: 10px #444444; /* Tạo hiệu ứng ánh sáng xung quanh */
     background-color: #444444;
 }
-.header .menu{
+.list-item-header div{
+    padding: 4px 40px;
+    border-radius: 10px;
+}
+.list-item-header div:hover{
+    background-color: #444444 ;
+}
+.list-item-header i{
+    color: #918f8f;
     font-size: 30px;
-    /* padding: 10px; */
-    display: flex;
-    margin-left: 40%;
 }
-.ochat{
-    position: relative; /* Để phần tử con có thể định vị theo phần tử này */
-    display: inline-block;
-
+.list-item-two-header i{
+    font-size: 30px;
+    color: #918f8f;
 }
-.ochat  p{
-    position: absolute;
-    color: white;
-    top: 4px;
-    left: 20px;
-    padding: 0 5px;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: red;
-    border-radius: 50px;
-
-}
-.khungchat{
-    
-    background-color: black;
-    padding-left: 10px;
-    border-radius: 10px;
-    /* border: 2px solid white; */
-    border: 1px solid white;
-
-    position: absolute;
-    width: 400px;
-    height: 89vh;
-    margin-right: 10px;
-    top: 71px; 
-    right: 0;
-    z-index: 1000;
-    overflow-y: scroll;
-
-
-
-
-}
-
-.khungchat i{
-    color: white;
-    font-size: 20px;
-}
-.iconchat{
-    position: sticky;
-    top: 0;
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    z-index: 1000;
-
-}
-.iconchat h4{
-    color: white;
-}
-.iconchat .icontuychon i{
-    padding: 10px;
-}
-.header .menu div:hover{
-    border-radius: 10px;
-    cursor: pointer; 
-
-    box-shadow: 10px #444444;
-    background-color: #444444;
-}
-
-.khungchat:hover{
+.list-item-two-header div{
     cursor: pointer;
-    background-color: black;
-}
-.khungchat .timkiem{
-    position: sticky;
-    padding: 4px;
-    margin-bottom: 10px;
-    z-index: 1000;
-    top:40px;
-    background-color: black;
-}
-.khungchat .timkiem input{
-    margin: 0;
-    padding: 0;
-    height: 35px;
+    padding: 4px 10px;
     border-radius: 10px;
-}
-.khungchat .timkiem input::placeholder{
-    font-size: 20px;
-    text-align: center;
-}
-.khungchat .dangxemgi{
-    z-index: 1000;
-    background-color: black;
-    position: sticky;
-    top: 80px;
-    display: flex;
-}
-
-.khungchat .dangxemgi p{
-    font-size: 15px;
-    padding: 5px;
-    background-color: #ccc;
-    border-radius: 40px;
-}
-.tenvaonl{
-    position: relative;
-}
-.tinnhan {
-    font-size: 20px;
-    /* overflow-y: scroll; */
-}
-.tinnhan ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 
 }
-.tinnhan li {
-    border: 2px solid black; 
-    padding: 0;
-    margin: 5px 0 0 0;
-    border-radius: 20px;
-
+.list-item-two-header div:hover{
+    background-color: #444444;    
 }
-.tinnhan li:hover{
-    background-color: #222222;
-}
-
-.tinnhan li .hinhnguoinhan {
-    display: flex;
-    justify-content: space-between
-}
-.nguoinhan .hahahaho{
-    display: flex;
-    flex-direction: column;
-}
-.hinhnguoinhan img{
-    padding: 5px;
-    background-color: blue;
-    border-radius: 50px;
-}
-.hinhnguoinhan .tenvaonl .hienonl{
-    width: 10px;
-    height: 10px;
-    top: 40px;
-    left: 35px;
-    position: absolute;
-    border-radius: 10px;
-    background-color: rgb(84, 233, 84);
-}
-.hinhnguoinhan .thongtin{
-    margin: 0;
-    padding: 0;
-}
-.hinhnguoinhan .hinhvaten{
-    display: flex;
-}
-.hinhnguoinhan .thongtin p{
-    font-size: 15px;
-    margin: 0 0 0 5px;
-    padding: 0;
-    color: white;
-}
-.hinhnguoinhan i{
-    margin: 0;
-    padding: 0;
-}
-
-.menu i{
-    color: #AAAAAA;
-}
-.menu div {
-    padding: 10px;
-
-}
-.sothongbao{
-    position: relative;
-}
-.menu .sothongbao p{
-    position: absolute;
-    color: white;
-    top: 2px;
-    right: 0;
-    font-size: 15px;
-    padding:0 5px;
-    font-weight: bold;
-    background-color: red;
-    border-radius: 50px;
-    
-}
-
-.chatvoiuser{
+/* .bisearchs{
     display: none;
-    position: absolute;
-    border-radius: 10px;
-    right: 400px;
-    top: 290px;
-    width: 400px;
-    height: 600px;
-    z-index: 10000;
-    background-color: white;
 }
-.khungchat .xemtatcachat{
-    font-size: 20px;
-    height: 40px;
-    background-color: black;
-    text-align: center;
-    color: blue;
-    position: sticky;
-    bottom: 0px;
-    z-index: 999;
-    border-top: 2px solid #222222;
-}
+.bisearchs:hover{
+    cursor: pointer;
+} */
+@media only screen and (min-width: 1199px) {
+    .form-search-two{
+        display: none;
+    }
+    .p-huy{
+        display: none;
+    }
 
-
-
-.khungthongbao{
-    background-color: black;
-    padding-left: 10px;
-    border-radius: 10px;
-    border: 1px solid white;
-    /* display: block; */
-    position: absolute;
-    width: 400px;
-    height: 89vh;
-    margin-right: 10px;
-    top: 71px; 
-    right: 0;
-    z-index: 1000;
-    overflow-y: scroll;
-}
-
-.khungthongbao h3{
-    margin: 10px;
-}
-.khungthongbao .tuychonxem{
-    color: white;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    text-align: center;
-    margin-top: 20px;
-    border-bottom:1px solid white ;
-}
-.khungthongbao .tuychonxem h5{
-    background-color: #555555;
-    padding: 10px;
-    border-radius: 20px;
-}
-.khungthongbao .thongbao {
-    display: grid;
-    grid-template-columns: 10% 90%;
-   color: white;
-   font-size: 20px;
-   align-items: center;
-   margin: 10px;
-   background-color: #555555;
-   border-radius: 10px;
-   padding: 5px;
-   border: 1px solid #555555;
-}
-.khungthongbao .thongbaodadoc {
-    display: grid;
-    grid-template-columns: 10% 90%;
-   color: white;
-   font-size: 20px;
-   align-items: center;
-   margin: 10px;
-   border-radius: 10px;
-   padding: 5px;
-   border: 1px solid #555555;
-}
-.khungnhapchat{
-    background-color: black;
-    border: 1px solid white;
-    position: absolute;
-    width: 350px;
-    height: 500px;
-    right: 420px;
-    border-radius: 10px;
-    top: 220px;
-    overflow-y: scroll;
-
-}
-.khungnhapchat .nguoichat{
-    display: flex;
-    color: white;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: #222222;
-}
-.khungnhapchat .nguoichat img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    margin: 10px;
-
-}
-.nguoichat .hinhvatennguoichat{
-    display: flex;
-    align-items: center;
-}
-.khungnhapchat .nguoichat p{
-  margin: 0;
-  padding: 0;
-}
-.nguoichat .caidat i{
-    margin: 10px;
-}
-
-.khungnhapchat .nguoichat p:first-child{
-   
-    font-weight: bold;
+  }
+  .form-search-two{
     
-  
+    position: absolute;
+    top: -13px;
+    
+}
+@media only screen and (max-width: 1199px) {
+    .list-item-header div{
+        padding: 4px 20px;
+    }
+    .list-item-two-header div{
+        padding: 4px 10px;
+    }
   }
 
-
-.khungnhapchat .nguoichat p:first-child{
+  @media only screen and (max-width: 1100px) {
+   .form-search{
+    display: none;
+   }
+   .bisearchs{
+    display: block;
     font-size: 20px;
+    position: absolute; /* Đảm bảo vị trí là absolute */
+    top: 50%; /* Đặt nó ở giữa chiều cao của phần tử cha */
+    left: 10px; /* Điều chỉnh khoảng cách từ bên trái nếu cần */
+    transform: translateY(-50%);
+    padding: 0 5px;
+    background-color: #444444;
+    border-radius: 50px;
+   }
+
+  }
+  @media only screen and (max-width: 750px) {
+    .list-item-header{
+        display: none;
+    }
+ 
+   }
+   .messenger{
+    height:  90vh;
+    width: 300px;
+    background-color: #222222;
+    top: 50px;
+    z-index: 500;
+   }
+   .notification{
+    height:  90vh;
+    width: 300px;
+    background-color: #222222;
+    top: 50px;
+    z-index: 500;
+   }
+   .title-chat{
+    font-size: 20px;
+    padding: 10px;
+   }
+.input-search-chat{
+    width: 100%;
+    height: 30px;
+    border-radius: 50px;
+    padding-left: 10px;
 }
-.khungnhapchat .nguoichat p:last-child{
+.button-option-chat button{
+    background-color: #444444;
+    color: #918f8f;
+    padding: 5px;
+    border-radius: 10px;
+}
+.div-p-nemuser p{
+    margin: 0;
+    padding: 0;
+    color: white;
     font-size: 13px;
 }
-.khungnhapchat .chutk{
-    display: flex;
-    justify-content: flex-end;    
-    flex-direction: column;
-    align-items: flex-end;
-    margin: 0;
-    padding: 0;
+.div-p-nemuser p:first-child{
+    font-weight: bold;
 }
-.trollthoi{
-    display: flex;
-}
-.khungnhapchat .chutk p{
-    margin: 2px 0;
-    padding: 5px;
-    border-radius: 15px 15px 0;
-    background-color: #4374e5;
-    font-size: 15px;
- }
- .chutk .anhtinnhanchu {
-    width: 250px;
-    height: auto;
-    border-radius: 10px;
- }
- input[type="file"] {
-    display: none;
-
-  }
-  
-  .custom-file-upload {
-    color: white;
-    display: inline-block;
-    padding: 6px 12px;
+.item-chat-user:hover{
+    background-color: #444444;
     cursor: pointer;
-  }
- .anhnguoigui{
-    margin-left: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
 }
-.nguoinhan .anhtinnhanbenkia{
-    width: 250px;
-    height: auto;
-    border-radius: 10px;
+.overflow-y-scroll{
+    height: 100%;
 }
-.khungnhapchat .nguoinhan{
-    display: flex;
-    margin-left: 20px;
+.scrolls-chat{
+    flex-grow: 1;
 }
-.khungnhapchat .nguoinhan p{
-    background-color: #555555;
-    color: white;
-    padding: 5px;
-    font-size: 15px;
-    margin: 0 10px 2px 0;
-    border-radius: 15px 15px 15px 0;
-  }
-  
-  .inputchat {
-    padding: 15px;
-    position: sticky;
-    bottom: 0px;
-    background-color: #222222;
-    width: 350px;
-  }
-.inputchat form input[type=file]{
-    margin: 0;
-    padding: 0;
-}
-/* css input */
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  .doanchat{
-    bottom: 100px;
-  }
-  .khoangtrong{
-    height: 10px;
-  }
-  
-  /* The slider */
-  .slider {
-    position: relative;
-    display: inline-block;
-    width: 20px;
-    height: 10px;
-    background-color: #ccc;
-    border-radius: 10px;
-    transition: 0.4s;
-    cursor: pointer;
-  }
-  
-  /* The circle inside the slider */
-  .slider::before {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    left: 1px;
-    bottom: 0px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.4s;
-  }
-  
-  /* When the checkbox is checked, move the slider to the right */
-  input:checked + .slider {
-    background-color: #4caf50;
-  }
-  
-  input:checked + .slider::before {
-    transform: translateX(8px);
-  }
-  
-  /* Optional: make the slider appear rounded */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round::before {
-    border-radius: 50%;
-  }
-
-/* end css input */
-
-
-
-
-
-
-  
-
-.khungcaidat{
-    background-color: black;
-    padding-left: 10px;
-    border-radius: 10px;
-    border: 1px solid #222222;
-    color: white;
-    position: absolute;
-    width: 400px;
-    height: 50vh;
-    margin-right: 10px;
-    top: 71px; 
-    right: 0;
-    z-index: 1000;
-    border: 2px solid #fff;
-    font-size: 20px;
-}
-.khungcaidat .quyenriengtu{
-    border: 1px solid #555555 ;
-    padding: 10px;
-    display: flex;
-}
-.khungcaidat .quyenriengtu i{
-    margin: 10px;
-}
-.khungcaidat .trangthaihoatdong{
-    border: 1px solid #555555 ;
-    padding: 10px;
-    display: flex;
-    
-}
-.khungcaidat .trangthaihoatdong i {
-    margin: 10px;
-}
-.khungcaidat .trangthaihoatdong p {
-    margin: 0 10px 0 0;
-}
-.khungcaidat .dangxuat{
-    border: 1px solid #555555 ;
-    padding: 10px;
-    display: flex;
-    
-}
-.khungcaidat .dangxuat i{
-   margin: 10px;
-}
-.addgroup{
-    background-color: black;
-    padding-left: 10px;
-    border-radius: 10px;
-    border: 1px solid white;
-    /* display: block; */
-    position: absolute;
-    width: 400px;
-    height: 70vh;
-    margin-right: 10px;
-    top: 210px; 
-    right: 0;
-    z-index: 1000;
-    overflow-y: scroll;
-    color: white;
-}
-.addgroup input{
-    border-radius: 10px;
-    margin: 5px;
-}
-.addgroup .inputsearchuser{
-    display: flex;
-    justify-content: space-between;
-}
-
-.addgroup .detailuser{
-    display: flex;
-    justify-content: space-between;
-    margin: 7px;
-    padding: 7px;
-    border: 1px solid white;
-    border-radius: 10px;
-}
-
-.addgroup .detailuser .nameandimg{
-    display: flex;
-    align-items: center;
-}
-.addgroup .nameandimg img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    margin-right: 10px;
-}
-
-.addgroup .buttonadd{
-    position: fixed;
-    bottom: 20px;
-    width: 350px;
-    border-top: 1px solid #555555;
-}
-.addgroup .buttonadd button{
-    background-color: #4374e5;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-
 ::-webkit-scrollbar{
     width: 5px;
     height: 5px;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: #f2f2f8;
+    background-color: #262628;
     border-radius: 10px;
+}
+.div-title-notìication {
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+}
+.container-noti{
+    height: 100%;
+    width: 100%;
+}
+.chuadoc{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: blue;
+}
+.dadoc{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+.content-noti {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.content-noti:hover{
+    background-color: #444444;
+    cursor: pointer;
+    
+}
+.setting{
+    height:  auto;
+    width: 300px;
+    background-color: #222222;
+    top: 50px;
+    z-index: 500;
+}
+.setting-name{
+    color: white;
+}
+.bi-gear{
+    font-size: 20px;
+}
+.logout-setting{
+    color: white;
+    font-size: 20px;
+}
+.logout-setting:hover{
+    background-color: #444444;
+    cursor: pointer;
+}
+.chat{
+    right: 320px;
+    bottom: 0;
+    border-radius: 10px;
+    z-index: 600;
+    width: 280px;
+    height: 550px;
+    max-height: 450px;
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+}
+@media only screen and (max-width: 620px) {
+    .chat{
+        right: 20px;
+        bottom: 10px;
+        border-radius: 10px;
+        z-index: 600;
+        width: 280px;
+        height: 550px;
+        max-height: 450px;
+        background-color: #222222;
+        display: flex;
+        flex-direction: column;
+    }
+  }
+.div-infor-chat p{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    color: white;
+}
+input[type="file"] {
+    display: none;
+    color: white;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    z-index: 700;
+    border-right: 1px solid #444444;
+    color: green;
+  }
+.form-input-chat button{
+    background-color: blue;
+}
+.content-chat{
+    flex-grow: 1; /* Chiếm phần còn lại của div cha */
+}
+.img-input-chat{
+    height: 100px;
+    max-height: 200px;    
+    position: absolute;
+    bottom: 50px;
+    overflow: hidden; /* Ẩn bất kỳ phần nào của hình ảnh vượt quá */
+    left: 10px;
+    border: 1px solid #918f8f;
+    padding: 5px;
+
+}
+.img-input-chat img {
+    height: 100%; /* Đặt chiều cao của hình ảnh bằng với chiều cao của div cha */
+    width: auto; /* Giữ tỷ lệ khung hình */
+    object-fit: cover; /* Cắt hình ảnh nếu cần thiết */
+}
+.item-content-chat{
+    display: flex;
+
+    justify-content: start;
+
+}
+.item-content-chat p{
+    font-size: 13px;
+    color: white;
+    padding: 5px;
+    background-color: #918f8f;
+    border-radius: 20px 20px 20px 0px;
+    margin: 5px 15px 5px 5px;
+}
+.item-content-chat-me{
+    display: flex;
+
+    justify-content: end;
+
+}
+.item-content-chat-me p{
+    font-size: 13px;
+    color: white;
+    padding: 5px;
+    background-color: blue;
+    border-radius: 20px 20px 0 20px;
+    margin: 5px 5px 5px 15px;
+}
+.content-me img{
+    max-height: 150px;
+    float: right;
+    margin-right: 5px;
+}
+.content img{
+    max-height: 150px;
+    float: left;
+    margin-left: 5px;
+}
+.p-group-chat img{
+    float: right;
+    border-radius: 10px;
+}
+.hienonl{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: green;
+    bottom: 0;
+    right: 0;
+}
+.item-user-add-group{
+    padding: 5px;
+    border-radius: 10px;
+    /* background-color: #444444; */
+
+}
+.item-user-add-group:hover{
+    background-color: #444444;
+    cursor: pointer;
+}
+.button-huy-or-ok button{
+    padding: 5px 10px;
+    background-color: red;
+    border-radius: 10px;
+
+}
+.button-huy-or-ok button:first-child{
+    background-color: blue;
+}
+.so-thong-bao{
+    font-size: 10px;
+    color: white;
 }

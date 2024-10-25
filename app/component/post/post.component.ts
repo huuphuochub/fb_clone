@@ -35,7 +35,7 @@ export class PostComponent implements OnInit{
     this.activeStateService.setCurrentPage('');
 
     // this.id_post = this.route.snapshot.paramMap.get('id');
-    console.log(this.id_post); 
+    // console.log(this.id_post); 
     this.route.paramMap.subscribe(params => {
       this.id_post  = params.get('id');
      this.loadpost()
@@ -47,22 +47,22 @@ export class PostComponent implements OnInit{
 
   loadpost(){
     this.Postservice.getpostformidpost(this.id_post).subscribe(data =>{
-      console.log(data);
+      // console.log(data);
       this.post = data
       this.id_user = data.id_user
       this.Userservice.getuser(this.id_user).subscribe(data=>{
-        console.log(data)
+        // console.log(data)
         this.user=data
       })
     })
     this.Commentservice.getcommentbypost(this.id_post).subscribe(data =>{
-      console.log(data);
+      // console.log(data);
       this.arrcmt = data
       const arrid =data.map((item:any) =>item.id_user)
-      console.log(arrid.length);
+      // console.log(arrid.length);
       if(arrid.length>0){
       this.Userservice.getuserbyarrid(arrid).subscribe(datas =>{
-        console.log(datas);
+        // console.log(datas);
         this.usercmt = datas
         this.loadusercmt()
 
@@ -85,6 +85,6 @@ export class PostComponent implements OnInit{
       }
     })
     this.allcmts = cmt 
-    console.log(cmt)
+    // console.log(cmt)
   }
 }

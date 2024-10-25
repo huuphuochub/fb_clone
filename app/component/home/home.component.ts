@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { SkeletonModule } from 'primeng/skeleton';
 import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { ActiveStateService } from '../../service/active-state.service';
 import { Userservice } from '../../service/userservice';
@@ -22,6 +22,8 @@ import { Commentservice } from '../../service/comment.service';
 import { Storyservice } from '../../service/story.service';
 import { CmtBehaviorSubject } from '../../BehaviorSubject/cmt.BehaviorSubject';
 import { LikeBehaviorSubject } from '../../BehaviorSubject/like.BehaviorSubject';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
   formcomment!:FormGroup;
 
   constructor(
+    private toastr:ToastrService,
     private cdr:ChangeDetectorRef,
     private LikeBehaviorSubject:LikeBehaviorSubject,
     private CmtBehaviorSubject:CmtBehaviorSubject,
@@ -92,6 +95,15 @@ export class HomeComponent implements OnInit {
   pagefriend:any = 1;
   pagepost:any = 1;
   posts:any[] =[]
+  isloadhandlecmt:boolean =false
+  imageselected:any =''
+  confirmationdeletecmt:boolean=false
+  commentIdToDelete:any
+  loadcomment:boolean = false;
+  divloadpost:boolean =false;
+  divendpost:boolean = false;
+  searchText: string = '';
+  showSearchIcon: boolean = true;
  
 
 
@@ -100,8 +112,20 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.activeStateService.setCurrentPage('home');
     this.id_user = localStorage.getItem('id_user');
+    this.PostBehaviorSubject.endpost$.subscribe(data =>{
+      // console.log(data);
+      
+      if(data === true){
+        this.divendpost = true;
+        this.divloadpost = false;
+
+      }else if(data === false)
+        this.divloadpost = true;
+        this.divendpost = false;
+
+    }) 
     // this.PostBehaviorSubject.arridfriend$.subscribe(data =>{
-    //   // console.log(data)
+      // console.log(data)
     // })
 
     // console.log(typeof this.id_user);
@@ -125,6 +149,45 @@ export class HomeComponent implements OnInit {
     // localStorage.clear() 
      
   }
+  hideIcon() {
+    this.showSearchIcon = false;
+  }
+
+  showIcon() {
+    this.showSearchIcon = this.searchText === '';
+  }
+
+  showNotification(message: string): void {
+    const notificationElement = document.querySelector('.notification') as HTMLElement;
+    if (notificationElement) {
+      notificationElement.textContent = message;
+      notificationElement.style.display = 'block'; // Hiển thị phần tử
+      setTimeout(() => {
+        notificationElement.style.transform = 'translateY(-100%)'; // Di chuyển phần tử lên trên
+      }, 100); // Thời gian chờ trước khi di chuyển
+      setTimeout(() => {
+        notificationElement.style.display = 'none'; // Ẩn phần tử sau khi hoàn thành
+        notificationElement.style.transform = 'translateY(0)'; // Đặt lại vị trí ban đầu
+      }, 5000); // Thời gian tồn tại của thông báo
+    }
+  }
+
+  showerrNotification(message: string): void {
+    const notificationElement = document.querySelector('.errnotification') as HTMLElement;
+    if (notificationElement) {
+      notificationElement.textContent = message;
+      notificationElement.style.display = 'block'; // Hiển thị phần tử
+      setTimeout(() => {
+        notificationElement.style.transform = 'translateY(-100%)'; // Di chuyển phần tử lên trên
+      }, 100); // Thời gian chờ trước khi di chuyển
+      setTimeout(() => {
+        notificationElement.style.display = 'none'; // Ẩn phần tử sau khi hoàn thành
+        notificationElement.style.transform = 'translateY(0)'; // Đặt lại vị trí ban đầu
+      }, 5000); // Thời gian tồn tại của thông báo
+    }
+  }
+
+
   getfriendandfolower(page:any){
     const formpage = new FormData();
     formpage.append('page',page);
@@ -231,13 +294,27 @@ export class HomeComponent implements OnInit {
 
   handlecomment(){
     // console.log(this.formcomment.get('content')?.value)
-
+    this.isloadhandlecmt = true
+ 
     const fromdata = new FormData()
     fromdata.append('content',this.formcomment.get('content')?.value);
     fromdata.append('id_user',this.id_user);
     fromdata.append('id_post',this.id_post);
+    if(this.selectedFile){
+      fromdata.append('file',this.selectedFile); 
+    }else{
+      const file = ''
+      fromdata.append('file',file);
+    }
 
-    this.Commentservice.addcomment(fromdata).subscribe(data =>{
+    this.Commentservice.addcomment(fromdata)
+    .pipe(
+      finalize(() =>{
+        this.isloadhandlecmt = false
+        
+      })
+    )
+    .subscribe(data =>{
       if(data === true){
         this.mobinhluan(this.id_post,this.id_user_post)
         const thongbao = `${this.profileuser.username} đã bình luận về bài viết của bạn`
@@ -250,23 +327,55 @@ export class HomeComponent implements OnInit {
         this.Notificationservice.addnotification(formthongbao).subscribe(data =>{
           // console.log(data);
         })
+        this.allpostnewfeed = this.allpostnewfeed.map((item:any) =>{
+          if(item.id_post === this.id_post){
+            return {
+              ...item, // Giữ nguyên các thuộc tính khác
+              totalcomment: item.totalcomment +=1
+              // Cập nhật thuộc tính type
+          };
+          }
+          return item
+        })
+        const comntentthongbao = `bạn đã bình luận về bài viết của ${this.post.username}`
+        this.showNotification(comntentthongbao)
+        this.post.totalcomment = (this.post.totalcomment || 0) +1
+        // console.log(this.allpostnewfeed);
+        this.cdr.detectChanges()
+        this.selectedFile = '';
+        this.imageselected ='';
+        const formdata = new FormData()
   
       }
-    })
+    },
+    error =>{
+      // console.log(error);
+      
+    }
+    
+  )
 
 
   }
 
   getnewfeed(){
-    // console.log('gọi nhiêuf')
 
     this.PostBehaviorSubject.listallpost$
     
     .subscribe(data =>{
-      this.posts = [...this.posts,...data.reverse()]
-      this.allpostnewfeed = this.posts
-      // console.log(data.reverse());
-      // console.log(this.allpostnewfeed)
+      if(data){
+      // console.log(data);
+      if (Array.isArray(data)) {
+        this.posts = [...this.posts,...data.reverse()]
+        this.allpostnewfeed = this.posts
+        // console.log(data.reverse());
+        // console.log(this.allpostnewfeed)
+    } else {
+        console.error("Dữ liệu không phải là mảng:", data);
+    }
+  }
+      
+     
     })
   }
 
@@ -321,17 +430,24 @@ handlepoststory(){
     this.Storyservice.addstory(formdata)
     .pipe(
       catchError((error:any) =>{
-        console.error('eroor');
+        // console.error('eroor');
+        const message = 'lỗi k thể tạo tin';
+        this.showerrNotification(message);
         return '';
       }),
       finalize(() =>{
         this.isloading = false
+        const message = 'đã tạo tin thành công' 
+        this.showNotification(message);
       })
     )
     .subscribe(data =>{
       // console.log(data)
       this.closeformstory();
     })
+
+
+    
   }
  
   
@@ -344,6 +460,7 @@ onFileChange(event: any) {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.video = e.target.result;
+      this.imageselected = e.target.result
     };
     reader.readAsDataURL(file);
 
@@ -354,7 +471,9 @@ onFileChange(event: any) {
   friendonline(){
 this.MeBehaviorSubject.alluser$.subscribe(data =>{
   // console.log(data);
-        this.isfriendonline = data
+        this.isfriendonline = data.sort((a:any,b:any) => b.online  - a.online)
+        // this.isfriendonline = data
+        this.isfriendonline.slice(0,9);
 
 })
   }
@@ -386,26 +505,41 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
   } 
 
   onMouseLeave(index:any) {
-    // Hủy bỏ thời gian nếu chuột rời khỏi trước khi hết thời gian
-    clearTimeout(this.hoverTimer);
-    this.allpostnewfeed[index].ishover = false;
+    // Hủy bỏ thời gian nếu chuột rời khỏi trước khi hết thời gian\
+    this.hoverTimer = setTimeout(() => {
+      clearTimeout(this.hoverTimer);
+      this.allpostnewfeed[index].ishover = false;
+        }, 500);
+    
     
 
     
   }
   handlelike(type:any,id_post:string,id_user:any){
     // console.log(type);
+    this.allpostnewfeed = this.allpostnewfeed.map((item:any) =>{
+      if(item.id_post === id_post && item.typelike === 0){
+        return {
+          ...item, // Giữ nguyên các thuộc tính khác
+
+          totallike : item.totallike +=1 // Cập nhật thuộc tính type
+      };
+      }
+      return item
+    })
 
     this.allpostnewfeed = this.allpostnewfeed.map((item:any) =>{
       if(item.id_post === id_post){
         return {
           ...item, // Giữ nguyên các thuộc tính khác
           typelike: type,
-          totallike : item.totallike +=1 // Cập nhật thuộc tính type
+// Cập nhật thuộc tính type
       };
       }
       return item
     })
+
+
     // console.log(this.allpostnewfeed);
     this.cdr.detectChanges()
     // this.PostBehaviorSubject.setposst(this.allpostnewfeed);
@@ -419,7 +553,7 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
       // console.log(data)
       // this.PostBehaviorSubject.getpostbyfriend()
       this.PostBehaviorSubject.getpostbyuser
-      this.PostBehaviorSubject.getlike()
+      // this.PostBehaviorSubject.getlike()
       const thongbao = `${this.profileuser.username} vừa thả cảm xúc về bài viết của bạn`;
 
       this.socketservice.sendNotification(id_user,thongbao)
@@ -457,28 +591,102 @@ this.MeBehaviorSubject.alluser$.subscribe(data =>{
       // console.log(data);
       // this.PostBehaviorSubject.getpostbyfriend()
       this.PostBehaviorSubject.getpostbyuser
-      this.PostBehaviorSubject.getlike()
+      // this.PostBehaviorSubject.getlike()
     })
   }
-  mobinhluan(id:any,id_user:any){
-    // console.log(this.allpostnewfeed)
-    this.CmtBehaviorSubject.getcmtbypost(id)
-    this.CmtBehaviorSubject.post$.subscribe(data =>{
-      this.post = data
-        })
-    this.id_user_post = id_user
-    this.id_post = id
-    this.openbinhluan = true
-    this.CmtBehaviorSubject.allcmt$.subscribe(data =>{
-      this.allcmt = data
-    })
+  mobinhluan(id: any, id_user: any) {
+    this.loadcomment = true;
+    
+    // Gọi hàm lấy comment theo bài viết
+    this.CmtBehaviorSubject.getcmtbypost(id);
+    
+    this.CmtBehaviorSubject.post$
+    .subscribe(data => {
+        this.post = data;
+        // Đặt lại loadcomment là false sau 1 giây
+        setTimeout(() => {
+            this.loadcomment = false;
+        }, 500);
+    });
 
+    this.id_user_post = id_user;
+    this.id_post = id;
+    this.openbinhluan = true;
 
-  }
+    this.CmtBehaviorSubject.allcmt$
+    .subscribe(data => {
+        this.allcmt = data;
+        // Đặt lại loadcomment là false sau 1 giây
+        setTimeout(() => {
+            this.loadcomment = false;
+        }, 500);
+    });
+
+    // console.log(this.loadcomment);
+}
+
 
   dongbinhluan(){
     this.openbinhluan = false
+    // console.log(this.allpostnewfeed);
+    this.selectedFile = ''
+    this.imageselected = ''
+    this.cdr.detectChanges()
   }
+  deletecomment(id:any){
+    this.confirmationdeletecmt = true
+    this.commentIdToDelete = id
+  }
+  destroydelete(){
+    this.confirmationdeletecmt = false
+    this.commentIdToDelete = undefined
+  }
+  confirmdeletecmt(){
+    // console.log(this.commentIdToDelete);
+    
+    this.isloadhandlecmt = true
+    const formdataas = new FormData();
+    formdataas.append('id_cmt',this.commentIdToDelete);
+    formdataas.append('id_post',this.post.id_post)
+    this.Commentservice.deletecomment(formdataas)
+    .pipe(
+      finalize(() =>{
+          this.confirmationdeletecmt = false
+          this.isloadhandlecmt=false
+          // console.log(this.isloadhandlecmt);
+          
+          const mesage = 'bạn đã xóa bình luận thành công';
+          this.showNotification(mesage);
+      })
+    )
+    .subscribe(data =>{
+      // console.log(data);
+      
+      if(data === true){
+        
+        this.allpostnewfeed = this.allpostnewfeed.map((item:any) =>{
+          if(item.id_post === this.post.id_post){
+            return {
+              ...item, // Giữ nguyên các thuộc tính khác
+              totalcomment : item.totalcomment -=1 // Cập nhật thuộc tính type
+          };
+          }
+          return item
+        })
+        this.post.totalcomment = (this.post.totalcomment) -1 
+        // console.log(this.allcmt);
+
+        this.allcmt = this.allcmt.filter((item: any) => item._id !== this.commentIdToDelete);
+
+        // console.log(this.allcmt);
+
+        // console.log(this.allpostnewfeed);
+        this.cdr.detectChanges()
+    
+      }
+    })
+  }
+
   openinteract(id:any,id_user:any){
     // console.log(id)
     this.Postservice.getpostbyid(id).subscribe(data =>{

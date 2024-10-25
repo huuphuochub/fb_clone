@@ -33,13 +33,17 @@ export class LoginComponent {
 
  
 handlelogin(){
+  console.log(this.formlogin.get('email')?.value);
+  
   const formdata = new FormData()
   formdata.append('email',this.formlogin.get('email')?.value);
   formdata.append('password',this.formlogin.get('password')?.value);
+  // console.log(formdata);
+  
   // console.log('ok')
   this.userservice.login(formdata).subscribe(data =>{
-    alert(data.thongbao)
-    console.log(data);
+    // alert(data.thongbao)
+    // console.log(data);
     if(data.thongbao == false){
       this.loi = data.loi
     }else if(data.thongbao == true){
@@ -52,7 +56,7 @@ handlelogin(){
   onInputs(): void {
     // const value = this.inputField.nativeElement.value;
     const values = this.inputField2.nativeElement.value;
-    console.log(values.trim().length)
+    // console.log(values.trim().length)
      if
     (values.trim().length<8 && values.trim() !== ''){
       this.errmatkhau = true;

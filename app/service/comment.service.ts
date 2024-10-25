@@ -19,4 +19,7 @@ export class Commentservice {
     addcomment(formdata:any):Observable<any>{
       return this.http.post<any>(`${this.url}comment/addcmt/`,formdata)
     }
+    deletecomment(fromdata:any):Observable<any>{
+      return this.http.post<any>(`${this.url}comment/delete/`,fromdata)
+    }
 }

@@ -64,7 +64,7 @@ fetachdata(){
       // this.fetchtatcaloimoi()
     }else{
       this.listuserhoanchinh = data;
-      console.log(data);
+      // console.log(data);
       this.loading = false
     }
    
@@ -127,7 +127,7 @@ acpfriend(id:any,id_users:any){
   // console.log(id)
   this.Userservice.getuser(id_users).subscribe(data =>{
     this.users = data
-    console.log(data);
+    // console.log(data);
     this.handleacp(id,id_users)
   })
   
@@ -163,7 +163,7 @@ handleacp(id:any,id_users:any){
     
   }
     this.messengerservice.addromchat(dataroom).subscribe(data =>{
-      console.log(data)
+      // console.log(data)
     })
   }
 }

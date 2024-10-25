@@ -27,6 +27,9 @@ export class Postservice {
     getpostbyfriend(id_friend:any[]):Observable<any>{
       return this.http.post<any>(`${this.url}post/getpostbyfriend/`, id_friend)
     }
+    getallpostbyuser(id:any):Observable<any>{
+      return this.http.get<any>(`${this.url}post/getallpostbyuser/${id}`)
+    }
     getpagepostbyfriend(id_friend:any[],pagepost:any):Observable<any>{
       const data = {
         id: id_friend, // Giả sử id_friend là mảng id
@@ -37,8 +40,8 @@ export class Postservice {
     getpostbyfolowinf(id_folowing:any[]):Observable<any>{
       return this.http.post<any>(`${this.url}post/getpostbyfolowing/`, id_folowing)
     }
-    getpostbyme(id:any):Observable<any>{
-      return this.http.get<any>(`${this.url}post/getpostbyme/${id}`)
+    getpostbyme(id:any):Observable<any[]>{
+      return this.http.get<any[]>(`${this.url}post/getpostbyme/${id}`)
     }
     getpostbyid(id:any):Observable<any>{
       return this.http.get<any>(`${this.url}post/getpostbyid/${id}`)

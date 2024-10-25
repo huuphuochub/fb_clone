@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ConnectivityService } from './service/checkconnect.service';
 import { catchError, finalize } from 'rxjs';
+import { Userservice } from './service/userservice';
 
 
 @Component({
@@ -14,17 +15,43 @@ export class AppComponent implements OnInit{
   isConnected:boolean = false
   isloading:boolean=false
   isconnected:boolean = false;
-  constructor(private router: Router,private connectivityService:ConnectivityService) {}
+  loiserver:boolean = false;
+  id_user:any;
+  constructor(private router: Router,private connectivityService:ConnectivityService, private userservice :Userservice) {}
 
   ngOnInit(): void {
-      this.checkconnect()
+    this.checkconnect()
+
+    this.id_user = localStorage.getItem('id_user');
+    if(!this.id_user){
+      this.router.navigate(['/login']);
+    }else{
+      this.checkusser(this.id_user);
+    }
+  }
+  private checkusser(id:any):void{
+    this.isloading = true;
+    this.userservice.getuser(id).pipe(
+      catchError(error => {
+        console.log(error);
+        
+        this.loiserver = true
+        return (error); 
+      }),
+      finalize(() =>{
+        this.isloading = false;
+      })
+    ).subscribe(data => {
+     
+    });
   }
   private checkconnect(): void {
   this.isloading = true
     this.connectivityService.checkConnection()
     .pipe(
       catchError((error:any) =>{
-        console.error('error');
+
+
         return '';
       }),
       finalize(() =>{
@@ -34,11 +61,14 @@ export class AppComponent implements OnInit{
     
     .subscribe(isConnected => {
       isConnected;
-      console.log(isConnected)
       if (isConnected) {
         this.isconnected = true
+        // console.log('đã kết nối');
+        
       } else {
-        this.isconnected = false
+        this.isconnected = false;
+        // console.log('chưa kết nối');
+        
 
       }
     });

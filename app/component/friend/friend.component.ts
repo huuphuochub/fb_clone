@@ -16,8 +16,9 @@ export class FriendComponent implements OnInit{
   id_user!:any
   alluser!:any;
   current:String =''
-  tatcaban!:any
+  tatcaban:any;
   users!:any;
+  friend!:any;
   user!:any;
 constructor(private Friendservice:Friendservice,
   private Folowerservice:Folowerservice,
@@ -41,10 +42,12 @@ private MeBehaviorSubject:MeBehaviorSubject,
   loadfriend(){
     this.Friendservice.getallfriend(this.id_user).subscribe(data =>{
       const arrid = data.map((item:any) =>  item.id_user1 === this.id_user ? item.id_user2 : item.id_user1)
-      console.log(data)
-      console.log(arrid);
+      // console.log(data)
+      // console.log(arrid);
       this.Userservice.getuserbyarrid(arrid).subscribe(datas=>{
         this.MeBehaviorSubject.compressionuser(datas)
+        console.log(datas);
+        
 
       })
       
@@ -56,8 +59,12 @@ private MeBehaviorSubject:MeBehaviorSubject,
     this.current ='banbe'
 
     this.MeBehaviorSubject.alluser$.subscribe(data =>{
-      console.log(data)
+      // console.log(data)
+      console.log(this.tatcaban);
+      
+      if(!this.tatcaban){
       this.tatcaban = data
+      }
       this.alluser = this.tatcaban.filter((item:any) => item.status === 3)
 
     })
@@ -68,6 +75,9 @@ private MeBehaviorSubject:MeBehaviorSubject,
 
   }
   daguiloimoi(){
+    console.log(this.tatcaban);
+    // this.loadfriend()
+    
     this.alluser = this.tatcaban.filter((item:any) => item.status === 2)
     this.current ='daguiloimoi'
   }
@@ -77,7 +87,7 @@ private MeBehaviorSubject:MeBehaviorSubject,
     // console.log(id)
     this.Userservice.getuser(id_users).subscribe(data =>{
       this.users = data
-      console.log(data);
+      // console.log(data);
       this.handleacp(id,id_users)
     })
     
@@ -113,7 +123,7 @@ private MeBehaviorSubject:MeBehaviorSubject,
       
     }
       this.Messengerservice.addromchat(dataroom).subscribe(data =>{
-        console.log(data)
+        // console.log(data)
       })
     }
   }
@@ -135,7 +145,7 @@ private MeBehaviorSubject:MeBehaviorSubject,
       if(arrid.length>0){
         this.Userservice.getuserbyarrid(arrid).subscribe(data =>{
           this.MeBehaviorSubject.compressionuser(data)
-          console.log(data)
+          // console.log(data)
         })
       }else if(arrid.length === 0){
         this.alluser =[]
@@ -157,7 +167,7 @@ private MeBehaviorSubject:MeBehaviorSubject,
 
 
     })
-    console.log(ok)
+    // console.log(ok)
     const akjshdkas: any[] = [];
 
     // Create a Set of IDs with status 3 for quick lookup
@@ -208,7 +218,7 @@ private MeBehaviorSubject:MeBehaviorSubject,
       if(arrid.length>0){
         this.Userservice.getuserbyarrid(arrid).subscribe(data =>{
           this.MeBehaviorSubject.compressionuser(data)
-          console.log(data)
+          // console.log(data)
         })
       }else if(arrid.length === 0){
         this.alluser =[]

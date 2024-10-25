@@ -45,7 +45,7 @@ export class CmtBehaviorSubject {
         let  ok =this.posts.id_user
        
         this.Userservice.getuser(ok).subscribe(data =>{
-            console.log(data)
+            // console.log(data)
             let okla = {
                 id_post :this.posts._id,
                 id_user:data._id,
@@ -72,10 +72,11 @@ export class CmtBehaviorSubject {
               const okakjs = this.comments.map((cmt:any)=>{
                const hahahah= data.find((user:any) => cmt.id_user === user._id)
                   return{
+                    _id:cmt._id,
                     id_user:cmt.id_user,
                     avatar:hahahah.avatar,
                     username:hahahah.username,
-                    date:cmt.date.split("T")[1],
+                    date: this.calculateMinutesDifference(cmt.date),
                     content:cmt.content,
                     image:cmt.image
         
@@ -90,6 +91,30 @@ export class CmtBehaviorSubject {
             this.allcmt.next([]);
 
           }
+          
+
+
+    }
+
+    calculateMinutesDifference(date: string): string { 
+      const now = new Date(); 
+      const pastDate = new Date(date); 
+    
+      const diffInMs = now.getTime() - pastDate.getTime();
+      
+      const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    
+      if (diffInMinutes > 10080) {
+        return date.split("T")[0]; 
+      } else if (diffInMinutes > 1440) { 
+        return `${Math.floor(diffInMinutes / 1440)} ngày trước`; 
+      } else if (diffInMinutes >= 60) {
+        return `${Math.floor(diffInMinutes / 60)} giờ trước`; 
+      } else if (diffInMinutes < 60) { 
+        return `${diffInMinutes} phút trước`;
+      }
+    
+      return `${diffInMinutes} phút trước`;
     }
 
 

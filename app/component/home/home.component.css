@@ -1,659 +1,70 @@
-/* body {
-    background-color: black;
-} */
 main{
-    top: 100px;
-    display: grid;
-    grid-template-columns: 27% 46% 27%;
-
-    padding-top: 70px;
-    height: 100vh;
+    display: flex;
+    margin-top: 50px;
     width: 99vw;
-    overflow: hidden;
-}
-
-
-
-
-
-
-
-/* nav */
-main .nav{
-    /* padding: 10px; */
-    margin-top: 5px;
+    height: 92.5vh;
     background-color: black;
-    display: grid;
-    flex-direction: column; 
-    height: 100vh;
-    overflow-y: scroll;
-    /* background-color:white; */
-    /* flex-direction: column; */
-
-    
 }
-
-.nav p{
-    color: white;
-}
-.nav li {
-    margin: 10px 0 ;
-    color: white;
-
-}
-.nav li:hover{
-    border-radius: 10px;
-    cursor: pointer; 
-
-    box-shadow: 10px #444444; /* Tạo hiệu ứng ánh sáng xung quanh */
-    background-color: #444444;
-
-}
-
-.nav li i{
-    font-size: 20px;
-    margin: 10px 10px 10px 0;
-    color: #AAAAAA;
-}
-.nav ul li img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    margin-right: 10px;
-}
-.nav li{
-    font-size: 13px;
-}
-.nav ul{
-    list-style-type: none;
- /* Loại bỏ dấu chấm đầu dòng */
-
-}
-.nav ul{
-    border-bottom:1px solid #2b2b2b; ;
-}
-
-
-
-
-
-
-
-
-
-
-.main .noti{
-    background-color: rgb(184, 237, 220);
-}
-
-/* content */
-
-.content{
-    margin-top: 20px;
-    position: relative;
-    height: 100vh;
-    overflow-y:scroll ;
-    /* overflow-x: hidden;  */
-
-
-}
-.content .story{
-    overflow-x: scroll;
-    width: 100%;
-}
-.content .story ul{
-    display: flex;
-    list-style-type: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    /* overflow-x: scroll; */
-
-}
-.content .story li{
-    border-radius: 10px ;
-    position: relative;
-    width: 150px;
-    height: 260px;
-    background-color: #222222;
-    border: 2px solid black; 
-    margin: 0 5px;
-    padding: 0;
-    box-sizing: border-box;
-    flex: 0 0 150px; /* Kích thước cố định */
-
-}
-.content .story li  .anhdaidien{
-    width: 40px;
-    height: 40px;
-    position: absolute;
-
-    border-radius: 50px;
-    margin: 5px;
-    padding: 5px;
-    background-color: blue;
-    z-index: 999;
-
-}
-.content .story li  video{
-    width: 100%;
+.div1-home{
+    width: 25%;
     height: 100%;
-    border-radius: 10px;
-    position: absolute;
-    left: 0;
-    z-index: 998;
-    transition: transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi hover */
+    background-color: black;
+}
+.div2-home{
+    flex-grow: 1;
+    height: 100%;
+    background-color: black;
+    color: #918f8f;
+}
+.div3-home{
+    width: 25%;
+    height: 100%;
+    background-color: black;
+    color: #918f8f;
+}
+@media only screen and (max-width: 1000px) {
+    .div1-home{
+        display: none;
+    }
+    .div2-home{
+        width: 70%;
+        
+    }
+    .div3-home{
+        flex-grow: 1;
+        
+    }
+  }
+  @media only screen and (max-width: 750px) {
 
+    .div2-home{
+        width: 100%;
+        
+    }
+    .div3-home{
+        display: none;
+    }
+  }
+
+  .list-item-divhome1 div{
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 10px;
     
-   
-}
-
-#videotest::-webkit-media-controls {
-    display: none !important;
   }
-  #videotest::-moz-media-controls {
-    display: none !important;
-  }
-  #videotest::-ms-media-controls {
-    display: none !important;
-  }
-  #videotest::-o-media-controls {
-    display: none !important;
-  }
-
-
-
-.content .story li  video:hover{
-    transform: scale(1.03); /* Phóng to hình ảnh 10% khi hover */
-
-    
-   
-}
-
-
-.content .story li  p{
-  color: white;
-  position: absolute;
-  text-align: center;
-  top: 210px;
-  display: flex;
-  font-size: 13px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-}
-
-.content .story li  p:last-child{
-    color: white;
-    position: absolute;
-    text-align: center;
-    top: 230px;
-    background-color: #555555;
-    padding: 5px;
-    border-radius: 10px;
-    display: flex;
-    font-size: 13px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-  }
-.content .story li:hover{
-   cursor: pointer;
-
-}
-.story{
-    /* display: flex; */
-    /* position: relative; */
-    position: absolute;
-    /* left: -720px; */
-}
-
-.content  .xemthem i{
-    background-color: #444444;
-    border-radius: 50px;
-    z-index: 999;
-    position: absolute;
-
-    top: 14%;
-    right: 1%;
-    transform: translateY(-50%);
-
-
-
-    color: white;
-    font-size: 40px;
-}
- .xemthem i:hover{
-background-color: #555555;
-    cursor: pointer;
-}
-
-
-
-
-
-.content  .xemthems i{
-    background-color: #444444;
-    border-radius: 50px;
-    z-index: 999;
-    position: absolute;
-
-    top: 14%;
-    left: 1%;
-    transform: translateY(-50%);
-
-
-
-    color: white;
-    font-size: 40px;
-}
- .xemthems i:hover{
-background-color: #555555;
-    cursor: pointer;
-}
-
-
-/* addblog */
-
-
-.addblog{
-    border: 2px solid black; 
-    margin-top: 280px;
-    border-radius: 15px;
-    background-color:#222222 ;
-}
-
-.addblog .blog{
-
-    margin-top: 5px;
-}
-.addblog .blog img{
-    border-radius: 50px;
-    margin: 10px;
-    width: 40px;
-    height: 40px;
-}
-
-.addblog .blog img:hover{
-    cursor: pointer;
- }
-.addblog .blog input{
-    width: 85%;
-    height: 40px;
-    background-color: #444444;
-    border-radius: 50px;
-}
-
-.addblog .blog input:hover{
-   background-color: #555555;
-}
-
-
-.addblog .optionblog ul{
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: 33% 34% 33%;
-    text-align: center;
-}
-.addblog .optionblog ul li{
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-right: 15px;
-}
-.addblog .optionblog ul li:hover{
-    background-color: #444444;
-    cursor: pointer;
-}
-.addblog .optionblog ul li i{
-    margin: 0 10px 0 0;
-}
-.fa-video{
-    color: red;
-}
-.fa-image{
-    color: green;
-}
-.fa-face-smile{
-    color: yellow;
-}
-
-
-/* newfeed */
-
-.newfeed{
-    padding-bottom: 10px;
+  .list-item-divhome1 div:hover{
     background-color: #222222;
 
-    margin-top: 10px;
-    border: 2px solid black; 
-    border-radius: 15px;
+    
+  }
 
-}
-.endnewfeed{
-    padding-bottom: 10px;
-    background-color: #222222;
-
-    margin-top: 10px;
-    border: 2px solid black; 
-    border-radius: 15px;
-    height: 700px;
-}
-.endnewfeed h3{
-    margin-top: 200px;
-    color: white;
-    text-align: center;
-}
-.newfeed .thongtin {
-    display: grid;
-    grid-template-columns: 10% 75% 15%;
-}
-
-.newfeed .thongtin .hinhanh img{
-    padding: 4px;
-    background-color: blue;
+  .list-item-divhome1 div i{
+    font-size: 25px;
     width: 40px;
     height: 40px;
-    border-radius: 50px;
-    margin: 10px;
-}
-.newfeed .thongtin .hinhanh {
-    display: grid;
-    position: relative;
- 
-}
-.newfeed .thongtin .hinhanh .hienonl{
-    width: 12px;
-    height: 12px;
-    border-radius: 20px;
-    background-color: rgb(53, 231, 53);
-    position: absolute;
-    bottom: 10px;
-    right: 30px;
-
-    
-}
-.newfeed .thongtin .hinhanh img:hover{
-   cursor: pointer;
-}
-
-.newfeed .thongtin .chitietthongtin p{
-    margin: 10px 0 0 0;
-    padding: 0;
-    color: white;
-    
-    font-size: 15px;
-    font-weight: bold;
-}
-.newfeed .thongtin .chitietthongtin p:hover{
-  cursor: pointer;
-  text-decoration: underline; 
-}
-
-.newfeed .thongtin .chitietthongtin h6{
-   color: white;
-}
-.newfeed .thongtin .luachon{
-    margin-top: 7px;
-}
-.newfeed .thongtin .luachon i{
-    color: white;
-    font-size: 20px;
-    margin: 5px;
-    padding: 5px;
-    border-radius: 50px;
-}
-.newfeed .thongtin .luachon i:hover{
-   background-color: #555555;
-}
-
-.newfeed .baidang{
-    margin: 5px;
-}
-.newfeed .noidungbaidang{
-    margin: 0 0 10px 10px;
-    color: white;
-
-}
-.hinhanhbaidang{
-    width: auto;            /* Tự động chiều rộng để phù hợp với kích thước của hình ảnh */
-    height: 500px;      
-    display: flex;    /* Chiều cao cố định */
-    overflow: hidden;       /* Ẩn các phần hình ảnh bị tràn ra ngoài khung chứa */
-    background-color: #222222;
-    align-items: center;
-    justify-content: center;/* Căn giữa hình ảnh theo chiều ngang */
-}
-
-.newfeed .hinhanhbaidang img{
-    height: 100%;           /* Đảm bảo hình ảnh chiếm toàn bộ chiều cao của khung chứa */
-    width: auto;            /* Chiều rộng của hình ảnh tự động để giữ tỷ lệ gốc */
-    object-fit: cover; 
-    text-align: center;
-    border-radius: 10px;
-}
-.newfeed .hinhanhbaidang img:hover{
-  cursor: pointer;
-}
-.newfeed .luotlike{
-    display: grid;
-    grid-template-columns: 60% 24% 16%;
-    color: white;
-    margin: 15px 0 0 20px;
-}
-.cacicon{
-    display: flex;
-}
-.newfeed .luotlike{
-    border-bottom:1px solid #2b2b2b; ;
-
-}
-.newfeed .luotlike i {
-    font-size: 20px;
-    margin: 3px;
-}
-.xemlike:hover{
-    text-decoration: underline; 
-    cursor: pointer;
-
-}
-.cacicon i:hover{
-    cursor: pointer;
-}
-.xembl:hover{
-    text-decoration: underline; 
-    cursor: pointer;
-
-}
-.xemshare:hover{
-    text-decoration: underline; 
-    cursor: pointer;
-
-}
-
-.newfeed .like{
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: 33% 34% 33%;
-    text-align: center;
-    color: white;
-    position: relative;
-
-}
-.newfeed .like div{
-    padding: 5px;
-    border-radius: 10px;
-}
-.newfeed .like .handdlike:hover{
-    background-color: #555555;
-    cursor: pointer;
-}
-.newfeed .like .handdcmt:hover{
-    background-color: #555555;
-    cursor: pointer;
-}
-.newfeed .like .handdshare:hover{
-    background-color: #555555;
-    cursor: pointer;
-}
-.like .allicon{
-    padding: 7px;
-    border-radius: 20px;
-    background-color: #555555;
-    font-size: 20px;
-    position: absolute;
-    left: 5%;
-    top: -50px;
-}
-.like .allicon i{
-    padding: 10px;
-    transition: transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi hover */
-
-}
-.like .allicon i:hover{
-    transform: scale(1.1); /* Phóng to hình ảnh 10% khi hover */
-
-}
-
-.noti{
-    margin: 10px 0 0 10px;
-    /* border: 2px solid black;  */
-        z-index: 999; 
-        overflow-y: scroll;
-        color: white;
-        /* background-color:white; */
-    
-
-
-
-    
-}
-
-
-.noti .quangcao ul{
-    list-style-type: none;
-    border-bottom:1px solid #2b2b2b; ;
-
-}
-.noti .quangcao li{
-    display: flex; /* Đặt thành flex container */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    margin: 0  0 10px 0;
-    border-radius: 20px;
-}
-
-.noti .quangcao li:hover{
-   cursor: pointer;
-   background-color: #555555;
-}
-
-.noti .quangcao p{
-    margin: 10px 0 10px 20px;
-}
-.noti .quangcao li img{
-
-    width: 120px;
-    border-radius: 20px;
-    height: 120px;
-}
-.noti .quangcao .thongtinquangcao{
-    display: flex;
-
-}
-.noti .quangcao .thongtinquangcao h6 {
-    margin: 0 0 0 20px; 
-}
-
-.noti .thongbao{
-    margin: 0 0 0 30px;
-    border-bottom:1px solid #2b2b2b; ;
-
-}
-.noti .thongbao .thongtinsinhnhat i{
-    font-size: 20px;
-}
-.noti .thongbao .thongtinsinhnhat i:hover{
-    cursor: pointer;
-}
-.noti .thongbao .thongtinsinhnhat p:hover{
-    text-decoration: underline; 
-cursor: pointer;
-}
-.noti .thongbao .thongtinsinhnhat{
-    
-    display: grid;
-    grid-template-columns: 10% 90%;
-
-    margin: 5px;
-}
-.noti .thongbao .thongtinsinhnhat i{
-    
-    color: palevioletred;
-}
-.noti .banbedangonline .tuychon {
-    display: grid;
-    grid-template-columns: 75% 25%;
-
-
-}
-.noti .banbedangonline .tuychon .theli i:hover{
-    background-color: #555555;
-
-}
-
-.noti .banbedangonline .tuychon  .theli {
-    font-size: 15px;
-    
-}
-.tuychon .theli i{
-    margin: 0 10px;
-    padding: 5px;
-    border-radius: 10px;
-}
-
-
-.noti .banbedangonline {
-    margin: 13px 0 0 30px;
-}
-.noti .banbedangonline .thongtinbanbe{
-    display: flex;
-    margin: 10px 0 0 0 ;
-    border-radius: 10px;
-    /* align-items: center;  */
-
-}
-.noti .banbedangonline .thongtinbanbe:hover{
-   cursor: pointer;
-   background-color: #555555;
-
-
-}
-
-.noti .banbedangonline .thongtinbanbe img {
-    padding: 4px;
-    background-color: blue;
-    width: 40px;
-    border-radius: 50px;
-    height: 40px;
-}
-
-.noti .banbedangonline .thongtinbanbe .hienonl{
-    width: 12px;
-    margin-left: -14px;
-    margin-top: 32px;
-    border-radius: 50px;
-    height: 12px;
-    background-color: rgb(105, 237, 105);
-}
-.noti .banbedangonline .thongtinbanbe p{
-    /* display: flex; */
-    margin: 0 0 0 10px;
-    font-weight: bold;
-    /* align-items: center;  */
-    margin-top: 12px;
-}
-
-::-webkit-scrollbar{
+  }
+  ::-webkit-scrollbar{
     width: 5px;
     height: 5px;
 }
@@ -661,305 +72,106 @@ cursor: pointer;
     background-color: #262628;
     border-radius: 10px;
 }
-.formbinhluan{
-    /* display: ; */
-    width: 45%;
-    position: absolute;
-    height: 90%;
-    background-color: #222222;
-    z-index: 1000;
-    position: fixed;
-    top: 60px;
-    left: 50%;
-    right: 25%;
+.div2-home .div-story .item-story{
+    width: 150px;
+    height: 230px;
+    background-color: aquamarine;
     border-radius: 10px;
-    overflow-y: scroll;
-    transform: translateX(-50%);
-}
-.formbinhluan .baivietcuaai {
-    border-bottom: 1px solid #444444;
-    padding: 15px;
-    display: grid;
-    grid-template-columns:10% 80% 10%;
-    text-align: center;
-    position: sticky;
-    top: 0px;
-    background-color: #222222;
-
+    flex-shrink: 0; 
+    overflow: hidden; 
 
 }
-.formbinhluan .baivietcuaai h4{
-    color: white;
-
-}
-.formbinhluan .baivietcuaai i{
-    color: white;
-    font-size: 30px;
-}
-.formbinhluan .baivietcuaai i:last-child:hover{
-    background-color: #555555;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.formbinhluan .thongtinnguoivietbai {
-    padding:10px;
+.div2-home .div-story{
     display: flex;
-    justify-content: space-between;
-    /* position: sticky; */
-    border-top:2px solid #444444 ;
-    /* top: 65px; */
-    background-color: #222222;
+    gap: 4px;
+    max-width: 738px;
+    overflow-x: scroll;
+    overflow-y: hidden; 
 
 }
+.div-img-video-story {
+    height: 100%; 
+    transition: transform 0.2s ease; /* Thêm hiệu ứng chuyển tiếp */
 
-.thongtinnguoivietbai .hinhvatennguoiviet{
-    display: flex;
-    align-items: center;
+}
+.item-story .div-img-video-story .rounded-lg {
+    width: auto; 
+    height: 100%; 
+    object-fit: cover; 
 }
 
-.formbinhluan .thongtinnguoivietbai .hinhanhnguoiviet img{
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 50px;
-    padding: 5px;
-    background-color: blue;
-    
-}
-.formbinhluan .thongtinnguoivietbai .tennguoiviet p:first-child{
-    color: white;
-    font-size: 15px;
+.div-img-video-story p{
     margin: 0;
     padding: 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 200px;
+    left: 8px;
+}
+.div-img-video-story:hover{
+    cursor: pointer;
+    transform: scale(1.05); 
+
+}
+.lammo{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.form-input-story{
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    background-color: black;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    z-index: 1000;
+    color: white;
+}
+.form-input-story .title-form i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #444444;
+}
+.form-input-story .title-form i:hover{
+    cursor: pointer;
+}
+.form-input-story .title-form h1{
+    font-size: 20px;
     font-weight: bold;
 }
-
-.formbinhluan .thongtinnguoivietbai .tennguoiviet p:last-child{
-    color: white;
-    font-size: 12px;
-    margin: 0;
-    padding: 0;
-}
-
-
-.formbinhluan .thongtinnguoivietbai .tennguoiviet p:hover{
-    cursor: pointer;
-  text-decoration: underline; 
-}
-.formbinhluan .thongtinnguoivietbai .tuychon i{
-    color: white;
-    font-size: 25px;
-    
-    
-}
-.formbinhluan .anhbiaviet img{
-    width: 100%;
-    height:auto ;
-}   
-.formbinhluan .tuongtacbaiviet {
-    display: grid;
-    grid-template-columns:60% 20% 20%;
-    margin: 10px;
-    padding: 10px;
-    border-bottom: 2px solid #444444 ;
-
-}
-
-.formcamxuc{
-    /* display: ; */
-    color: white;
-    width: 45%;
-    position: absolute;
-    height: 90%;
-    background-color: #222222;
-    z-index: 1000;
-    position: fixed;
-    top: 60px;
-    left: 50%;
-    right: 25%;
-    border-radius: 10px;
-    overflow-y: scroll;
-    transform: translateX(-50%);
-}
-.formcamxuc .baivietcuaai {
+.title-form{
+    padding:  10px;
     border-bottom: 1px solid #444444;
-    padding: 15px;
-    display: grid;
-    grid-template-columns:10% 80% 10%;
-    text-align: center;
-    position: sticky;
-    top: 0px;
-    background-color: #222222;
-
-
 }
-
-.formcamxuc .baivietcuaai h4{
-    color: white;
-
+.form-textarea textarea{
+    width: 100%;
+    height: 200px;
+    background-color: black;
 }
-.formcamxuc .baivietcuaai i{
-    color: white;
-    font-size: 30px;
-}
-.formcamxuc .baivietcuaai i:last-child:hover{
-    background-color: #555555;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.formcamxuc .loaicamxuc{
-    display: flex;
-    justify-content: space-evenly;
-}
-.formcamxuc .loaicamxuc .active{
-    background-color: #555555;
-}
-.formcamxuc .loaicamxuc p{
-    background-color: #262628;
-    margin: 0;
-    padding: 5px 15px;
-    border-radius: 10px;
-}
-.formcamxuc .loaicamxuc p:hover{
-    background-color: #333333;
-    cursor: pointer;
-   
-}
-.formcamxuc .nguoithacamxuc{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #333333;
-    margin: 5px;
-    border-radius: 10px;
-}
-.nguoithacamxuc .hinh{
-    position: relative;
-}
-.nguoithacamxuc .hinh i{
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    font-size: 15px;
-}
-.formcamxuc .nguoithacamxuc .hinh img{
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    margin: 5px;
-}
-.nguoithacamxuc .thongtin{
-    display: flex;
-    align-items: center;
-}
-.nguoithacamxuc .ten p{
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-}
-.nguoithacamxuc .banbe button{
-    border-radius: 10px;
-    background-color: blue;
-    padding: 5px;
-    margin-right: 10px;
-}
-
-.tuongtacnguoidung {
-    display: grid;
-    color: white;
-    text-align: center;
-    grid-template-columns:33% 33% 34%;
+.custom-select {
+    font-size: 12px;
     padding: 2px;
-    border-bottom: 2px solid #444444;
-}
-.tuongtacnguoidung div{
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.tuongtacnguoidung .camxuc :hover{
-   background-color: #555555;
-   cursor: pointer;
+    width: 70px; /* Đặt chiều rộng */
+    border: 1px solid #ccc; /* Đặt viền */
+    border-radius: 5px; /* Bo góc */
+    background-color: #444444; /* Màu nền */
+    appearance: none; /* Xóa giao diện mặc định */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Vị trí mũi tên */
 }
 
-.tuongtacnguoidung .binhluan:hover{
-    background-color: #555555;
-    cursor: pointer;
- }
- 
- .tuongtacnguoidung .chiase:hover{
-    background-color: #555555;
-    cursor: pointer;
- }
- .tuongtacnguoidung .handdlike .allicon{
-    position: absolute;
-    font-size: 20px;
-    bottom: -55px;
-    padding: 10px;
-    background-color: #555555;
-    border-radius: 10px;
- }
- .tuongtacnguoidung .handdlike .allicon i{
-    margin: 10px;
-    transition: transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi hover */
-
- }
-
- .tuongtacnguoidung .handdlike .allicon i:hover{
-    margin: 10px;
-    transform: scale(1.5); /* Phóng to hình ảnh 10% khi hover */
-
- }
- 
-
-.tuongtacbaiviet .camxucbaiviet {
-    display: flex;
-    padding-left: 20px;
-
-}
-.tuongtacbaiviet .camxucbaiviet  p{
-    color: white;    
-}
-.tuongtacbaiviet .sobinhluan  p{
-    color: white;    
-}
-.tuongtacbaiviet .sochiase  p{
-    color: white;    
-}
-.formbinhluan .formdienbinhluan{
-    background-color: #222222;
-    padding: 5px;
-    display: flex;
-    bottom: 0px;
-    align-items: center;
-    display: grid;
-    grid-template-columns:8% 84%  ;
-    position: relative;
-    position: sticky;
-
-
-    bottom: 0px;
-}
-.formbinhluan .formdienbinhluan img{
-    width: 40px;
-    height: 40%;
-    border-radius: 50px;
-}
-.formdienbinhluan button{
-    background-color: #222222;
-    border: none;
-}
-.formbinhluan .formdienbinhluan form textarea{
-    width: 90%;
-    color: white;
-    height: 80px;
-    background-color: #555555;
-    border-radius: 15px;
-}
-.formdienbinhluan form label{
-    position: absolute;
-    bottom: 15px;
-    left: 60px;
+.custom-select option {
+    font-size: 12px;
+    padding: 10px; /* Thêm khoảng cách cho tùy chọn */
 }
 input[type="file"] {
     display: none;
@@ -968,54 +180,275 @@ input[type="file"] {
   
   .custom-file-upload {
     display: inline-block;
-    padding: 6px 12px;
     cursor: pointer;
+    z-index: 700;
+    color: green;
   }
-.formbinhluan .formdienbinhluan i{
-   font-size: 20px;
-   color: blue;
+.img-select-uppost{
+    width: 150px;
+    height: 100px;
 }
-
-.docbinhluan {
-   display: flex;
-   align-items: center;
-
-    
-}
-
-
-.docbinhluan .hinhnguoibinhluan img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    margin: 10px;
-}
-.docbinhluan .chitietbinhluan p{
-
+.infor-user-post p{
     color: white;
     margin: 0;
+    padding: 0;
+    font-size: 13px;
 }
-.docbinhluan .chitietbinhluan{
+.infor-user-post p:first-child{
+    font-size: 15px;
+    font-weight: bold;
+}
+.close-post:hover{
+    background-color: #444444;
+}
+.img-post{
+    text-align: center;
+    overflow: hidden;
+}
+.img-post img{
+    /* height: auto; */
+    max-height: 400px;
+    width: 100%;
+}
+.div-up-story{
+    background-color: #222222;
+}
+.detail-newfeed{
+    background-color: #222222;
+}
+.hienthi-like-comment{
+    border-bottom:0.5px solid #444444 ;
+}
+.banmuondanggi{
+    background-color: #444444;
+}
+.infor-user-online .name-user-p p{
+    font-size: 12px;
+}
+.infor-user-online .name-user-p p:first-child{
+    font-weight: bold;
+}
+.infor-user-online:hover{
+    background-color: #444444;
+}
+.infor-user-online .hienonl{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(62, 221, 62);
+    top: 40px;
+    left: 37px;
+}
+.lammo-comment{
+    z-index: 500;
+}
+.view-comment{
+    width: 50%;
+    height: 600px;
+    background-color: #222222;
+    z-index: 600;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 1000px) {
+    .view-comment{
+
+        width: 70%;
+        height: 600px;
+
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    .view-comment{
+
+        width: 100%;
+        height: 600px;
+
+    }
+  }
+  .title-post-incomment{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+  .div-title-post{
+    border-bottom: 0.5px solid #444444;
+  }
+  .div-title-post i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #444444;
+    border-radius: 50px;
+    color: #918f8f;
+  }
+  .infor-user-post-incomment p{
+    color: white;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+  }
+  .infor-user-post-incomment p:first-child{
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .content-post{
+    font-size: 15px;
+    color: white;
+    margin-left: 8px;
+    margin-bottom: 10px;
+  }
+  .div-coment-post{
+    height: 431.4px;
+    overflow-y: scroll;
+  }
+.item-user-commnt .content p{
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+
+}
+.item-user-commnt .content .username-cmt:first-child{
+    font-size: 15px;
+    font-weight: bold;
+}
+.item-user-commnt .content{
+    min-width: 80px;
+    padding: 10px;
+    background-color: #444444;
+    border-radius: 10px;
+}
+
+.textxa-comment textarea{
+    width: 100%;
+    height: 70px;
+    background-color: #444444;
+    border-radius: 10px;
+}
+.textxa-comment{
+    padding: 10px;
+}
+.img-select-comment{
+    width: 100px;
+    height: 70px;
+}
+.div-button-submit-comment button{
+    padding:5px  15px;
+    background-color: blue;
+    border-radius: 10px;
+}
+.div-button-submit-comment{
+    bottom: 20px;
+    right: 20px;
+}
+.nguoilienhe input{
+    background-color: #444444;
+    border-radius: 40px;
+    padding-left: 10px;
+}
+@media only screen and (max-width: 1250px) {
+    .nguoilienhe input{
+        width: 100px;
+    }
+  }
+  @media only screen and (max-width: 1060px) {
+    .nguoilienhe input{
+        width: 25px;
+    }
+    .nguoilienhe input:focus {
+        width: 100px; /* Chiều rộng khi focus */
+    }
+    .nguoilienhe input::placeholder{
+        display: none !important; 
+    }
+  }
+.list-item-icon-hover{
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    background-color: #222222;
+    padding: 5px;
+    border-radius: 50px;
+}
+.list-item-icon-hover i{
+    font-size: 30px;
+    
+}
+.option-icon-camxuc{
+    padding: 10px 0;
+}
+.option-icon-camxuc .items-center{
+    padding: 5px;
+    background-color: #444444;
+    border-radius: 10px;
+}
+.option-icon-camxuc p{
+    font-size: 12px;
+}
+.option-icon-camxuc .items-center:hover{
+    cursor: pointer;
+}
+.div-list-camxuc{
+    height: 469px;
+}
+@media only screen and (max-width: 535px) {
+    .option-icon-camxuc p{
+        display: none;
+    }
+    .option-icon-camxuc p:first-child{
+        display: block;
+    }
+  }
+
+  .infor-nguoithacamxuc{
+    color: white;
+  }
+  .infor-nguoithacamxuc .name-user p:first-child{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .item-icon-camxuc-nguoitha{
+    position: absolute;
+    font-size: 15px;
+    bottom: 0;
+    left: 30px;
+  }
+  .banchung{
+    font-size: 12px;
+  }
+  .item-user-camxuc{
+    padding: 5px 0;
+    border-radius: 10px;
+  }
+  .item-user-camxuc:hover{
+    background-color: #444444;
+    cursor: pointer;
+  }
+  .option-icon-camxuc .active{
+    background-color: blue;
+  }
+  .image-comment {
+    max-height: 200px;
+  }
+  .fa-trash{
+    position: absolute;
+    right: 0;
+  }
+  .date-comment{
+    right: 0;
+    bottom: -15px;
+    left: 0;
+    font-size: 12px;
+}
+.button-friend button{
     padding: 5px;
     border-radius: 10px;
 }
-.docbinhluan .chitietbinhluan .ok{
-    /* position: absolute; */
-    padding: 10px;
-    background-color: #555555;
-    border-radius:10px ;
-}
-main .formaddstory{
-    position: absolute;
-    background-color: aliceblue;
-    width: 300px;
-    height: 300px;
-    top: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    text-align: center;
-}
-.formaddstory .buttonstoty{
-    margin-top: 190px;
+.p-skeleton-circle {
+    background-color: red !important; /* Thêm !important để đảm bảo */
 }

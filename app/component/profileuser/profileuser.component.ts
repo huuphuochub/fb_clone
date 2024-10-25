@@ -81,7 +81,7 @@ export class ProfileuserComponent implements OnInit{
     // console.log(this.id_user);
     const id:any[] =[]
     id.push(this.id_user);
-    console.log(id);
+    // console.log(id);
     this.PostBehaviorSubject.setarridfriend([])
 
     this.PostBehaviorSubject.setarridfolowing(id)
@@ -90,7 +90,7 @@ export class ProfileuserComponent implements OnInit{
   getpostbyfriend(){
     const id:any[] =[]
     id.push(this.id_user);
-    console.log(id);
+    // console.log(id);
     this.PostBehaviorSubject.setarridfolowing([])
 
     this.PostBehaviorSubject.setarridfriend(id);

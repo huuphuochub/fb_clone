@@ -74,9 +74,9 @@ export class PostBehaviorSubject {
   getpostbyfriend(){
     this.arridfriend$.subscribe(data =>{
       this.arrid_friend = data
-    console.log(this.arrid_friend)
+    // console.log(this.arrid_friend)
     if(this.arrid_friend[0] !== null && this.arrid_friend.length>0){
-      this.Postservice.getpostbyfriend(this.arrid_friend).subscribe(data =>{
+      this.Postservice.getallpostbyuser(this.arrid_friend).subscribe(data =>{
         // console.log(data);
            this.arrpost  = data
            this.ispost()
@@ -169,7 +169,7 @@ getlike(){
         index === self.findIndex((t:any) => t._id === item._id)
       );
     
-    console.log(postArray);
+    // console.log(postArray);
     // console.log(userArray);
     let arrpost:any[] =[]
     let ok =postArray.sort((a:any,b:any) =>{

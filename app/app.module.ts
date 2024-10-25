@@ -20,6 +20,12 @@ import { StoriesComponent } from './component/stories/stories.component';
 import { TestvideoComponent } from './component/testvideo/testvideo.component';
 import { FriendComponent } from './component/friend/friend.component'; // Import HttpClientModule
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SkeletonModule } from 'primeng/skeleton';
+
+
+
 
 
 
@@ -43,8 +49,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
   ],
   imports: [
     BrowserModule,
+    SkeletonModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    ToastrModule.forRoot(), // Thêm ToastrModule
     ReactiveFormsModule,
     InfiniteScrollModule,
     HttpClientModule

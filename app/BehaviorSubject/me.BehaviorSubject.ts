@@ -11,13 +11,19 @@ import { SocketIoService } from '../service/socketio.service';
 export class MeBehaviorSubject {
   private id_user!:any
   allloimoi!:any;
+  bancuabanfl!:any
+  allloimoifl!:any
   listuser!:any;
   bancuaban!:any;
   bancuaminh!:any;
   datauser!:any
+  bancuaminhfl!:any;
+  listuserfl!:any;
+  datauserfl!:any;
   idfriendonline!:any;
   isfriendonline:any[] =[];
   profilefriend!:any
+  profilefriendfl!:any;
   // listuserhoanchinh!:any
   constructor(private http:HttpClient,private friendservice:Friendservice, private socketservice:SocketIoService){
       this.idlistfriend$.subscribe(data=>{
@@ -34,7 +40,7 @@ export class MeBehaviorSubject {
   private arridlistfriend = new BehaviorSubject<string>('');
   idlistfriend$ = this.arridlistfriend.asObservable();
 
-  setidlistfriend(arr: any) {
+  setidlistfriend(arr: string) {
     // console.log(arr)
     this.arridlistfriend.next(arr);
   }
@@ -52,11 +58,29 @@ export class MeBehaviorSubject {
   private alluser = new BehaviorSubject<any>('');
   alluser$ = this.alluser.asObservable();
 
+  private alluserfl = new BehaviorSubject<any>('');
+  alluserfl$ = this.alluserfl.asObservable();
+
+  compressionuserfl(data:any){
+    this.datauserfl = data
+    // console.log(data)
+    this.id_user = localStorage.getItem('id_user');
+    this.fetchtatcaloimoifl()
+  }
+
+
   compressionuser(data:any){
     this.datauser = data
     // console.log(data)
     this.id_user = localStorage.getItem('id_user');
     this.fetchtatcaloimoi()
+  }
+  fetchtatcaloimoifl(){
+    this.friendservice.getallfriend(this.id_user).subscribe(data =>{
+      // console.log(data)
+      this.allloimoifl = data
+      this.xulydulieu()
+    })
   }
 
   fetchtatcaloimoi(){
@@ -66,6 +90,45 @@ export class MeBehaviorSubject {
       this.xulydulieu()
     })
   }
+
+  xulydulieufl(){
+    const allusers = this.datauserfl.map((user: any) => {
+        let status = 0;
+        let id_friend = '';
+
+        if (user._id === this.id_user) {
+            status = 4;
+        } else {
+            const add = this.allloimoifl.find((add: any) => 
+                (user._id === add.id_user1 && add.id_user2 === this.id_user && add.status === 1) ||
+                (user._id === add.id_user2 && add.id_user1 === this.id_user && add.status === 1) ||
+                ((user._id === add.id_user2 && add.id_user1 === this.id_user && add.status === 2) ||
+                 (user._id === add.id_user1 && add.id_user2 === this.id_user && add.status === 2))
+            );
+
+            if (add) {
+                if (add.status === 1) {
+                    status = (user._id === add.id_user1) ? 1 : 2;
+                } else if (add.status === 2) {
+                    status = 3;
+                }
+                id_friend = add._id;
+            }
+        }
+
+        return {
+            _id: user._id,
+            username: user.username,
+            avatar: user.avatar,
+            status: status,
+            id_friend: id_friend,
+            email: user.email,
+        };
+    });
+
+    this.listuserfl = allusers;
+    this.timbanchungfl();
+}
 
 
   xulydulieu(){
@@ -108,7 +171,18 @@ export class MeBehaviorSubject {
 }
 
 
-  
+timbanchungfl(){
+  const arrid :any[] =[]
+  this.listuserfl.forEach((item:any)=>{
+    arrid.push(item._id)
+  })
+  // console.log(arrid);
+  this.friendservice.timbancuaban(arrid).subscribe(data=>{
+    this.bancuabanfl = data
+    // console.log(data)
+    this.timbancuaminhfl();
+  })
+}
 
 
   timbanchung(){
@@ -123,6 +197,15 @@ export class MeBehaviorSubject {
       this.timbancuaminh();
     })
   }
+
+  timbancuaminhfl(){
+    // console.log( typeof this.id_user)
+    this.friendservice.timbancuaminh(this.id_user).subscribe(data =>{
+      this.bancuaminhfl = data
+      this.xulydulieubanchungfl()
+    })
+  }
+
   timbancuaminh(){
     // console.log( typeof this.id_user)
     this.friendservice.timbancuaminh(this.id_user).subscribe(data =>{
@@ -130,6 +213,76 @@ export class MeBehaviorSubject {
       this.xulydulieubanchung()
     })
   }
+
+  xulydulieubanchungfl(){
+
+    let allhoanchinhnhat:any[] =[]
+   const mangarr :any[] =[]
+   
+     this.bancuaminhfl.forEach((item:any)=>{
+       mangarr.push(item.id_user1);
+       mangarr.push(item.id_user2)
+   
+     })
+   
+     // console.log(mangarr);
+   
+     const uniqueArray = [...new Set(mangarr)];
+     // console.log(uniqueArray);
+     const ok =uniqueArray.filter(item => item !== this.id_user)
+    //  console.log(ok); //bancuaminh
+   
+     this.listuserfl.forEach((mag:any) =>{
+       let banchung =0
+      if(mag._id !== this.id_user){
+         this.bancuabanfl.forEach((bancuaban:any)=>{
+           let okla = ''
+           if(mag._id === bancuaban.id_user1){
+             okla = bancuaban.id_user2
+             if(okla !== this.id_user){
+               ok.forEach((bancuaminh)=>{
+                 if(okla === bancuaminh){
+                   banchung +=1;
+                 }
+               })
+             }
+           }else if(mag._id === bancuaban.id_user2){
+               okla = bancuaban.id_user1;
+               if(okla !== this.id_user){
+                 ok.forEach((bancuaminh)=>{
+                   if(okla === bancuaminh){
+                     banchung+=1
+                   }
+                 })
+               }
+           }
+         })
+       }
+      allhoanchinhnhat.push({
+       id_friend:mag.id_friend,
+       _id:mag._id,
+       username:mag.username,
+      //  id_user:mag.id_user,
+       avatar:mag.avatar,
+       status:mag.status,
+       banchung:banchung,
+      })
+     
+     })
+   
+   
+   
+  //  console.log(allhoanchinhnhat)
+   this.profilefriend = allhoanchinhnhat
+  //  this.alluser.next(allhoanchinhnhat)
+
+  //  this.alluser.next(allhoanchinhnhat)
+    //  this.listuserhoanchinh = allhoanchinhnhat;
+    // this.loadban()
+    this.friendonlinefl()
+   }
+
+
   xulydulieubanchung(){
 
     let allhoanchinhnhat:any[] =[]
@@ -197,6 +350,44 @@ export class MeBehaviorSubject {
     // this.loadban()
     this.friendonline()
    }
+
+   friendonlinefl() {
+    this.idlistfriend$.subscribe(data => {
+        this.idfriendonline = data;
+        // console.log('idfriendonline:', data);
+
+        let arr: any[] = [];
+        // console.log('profilefriend:', this.profilefriend);
+
+        if (this.idfriendonline && this.profilefriendfl) {
+            this.profilefriendfl.forEach((friend: any) => {
+                let online = 0;
+                this.idfriendonline.forEach((idfriendonlines: any) => {
+                    if (friend._id === idfriendonlines) {
+                        online = 1;
+                    }
+                });
+
+                arr.push({
+                    _id: friend._id,
+                    id_friend: friend.id_friend,
+                    // id_user:friend.id_user,
+                    username: friend.username,
+                    avatar: friend.avatar,
+                    online: online,
+                    banchung: friend.banchung,
+                    status: friend.status,
+                });
+            });
+        }
+
+        this.isfriendonline = arr;
+        // console.log('Danh sách bạn bè với trạng thái online:', arr);
+
+        // Thực hiện các hành động khác sau khi đã cập nhật isfriendonline
+        this.alluserfl.next(arr);
+    });
+}
 
 
 

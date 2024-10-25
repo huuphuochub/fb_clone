@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild ,HostListener} from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ActiveStateService } from '../../service/active-state.service';
 import { SocketIoService } from '../../service/socketio.service';
@@ -15,12 +15,15 @@ import { Notificationservice } from '../../service/notification.service';
 import { MeBehaviorSubject } from '../../BehaviorSubject/me.BehaviorSubject';
 
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit{
+  private lastWidth: number = window.innerWidth;
+  isChecked:boolean[] =[]; 
   showchat:boolean =false;
   showthongbao:boolean =false;
 showcaidat:boolean = false;
@@ -47,7 +50,17 @@ arridingroup:any[] =[];
 showaddgroup:boolean = false;
 formnamegroup!:FormGroup;
 profileme!:any;
+opensearch:boolean = false;
 
+@HostListener('window:resize', ['$event'])
+onResize(event: Event) {
+  const currentWidth = window.innerWidth;
+  
+  // Kiểm tra nếu chiều rộng thay đổi vượt quá ngưỡng
+  if(currentWidth >1100){
+    this.opensearch = false
+  }
+}
 
 @ViewChild('scrollBottom') private scrollBottom!: ElementRef;
 
@@ -95,7 +108,7 @@ profileme!:any;
     const email = this.EncryptionService.getemail()
     this.userservice.getuser(id_user).subscribe(data=>{
       // alert(data)
-      console.log(data);
+      // console.log(data);
       this.profileme = data
       if(data === null){
         this.router.navigate(['/login']);
@@ -115,6 +128,28 @@ profileme!:any;
       this.loadnoti()
     })
 
+  }
+
+  toggleCheckbox(index:number) {
+    this.isChecked[index] = !this.isChecked[index]; 
+
+
+    if(this.arridingroup.indexOf(this.mess[index].id_user) === -1){
+      this.arridingroup.push(this.mess[index].id_user);
+    }else{
+      this.arridingroup = this.arridingroup.filter((item:any) =>item !== this.mess[index].id_user);
+    }
+    
+    console.log(this.arridingroup);
+    
+
+    
+}
+  OpenClickSearch(){
+    this.opensearch = true;
+  }
+  CloseClickSearch(){
+    this.opensearch = false;
   }
   dangxuat(){
     localStorage.clear();
@@ -175,10 +210,24 @@ profileme!:any;
     }
   }
 
-sendchat(id_user:any){
-  const formdata = new FormData();
-  
-  formdata.append('content', this.forminputchat.get('content')?.value)
+  sendchat(id_user:any){
+    const formdata = new FormData();
+
+
+    
+    if(this.forminputchat.get('content')?.value ==='' || this.forminputchat.get('content')?.value ===null){
+      if(!this.selectedFile){
+          return;
+      }
+    }
+    if(this.forminputchat.get('content')?.value === null){
+     const content = ''
+     formdata.append('content', content);
+
+    }else{
+      formdata.append('content', this.forminputchat.get('content')?.value)
+
+    }
   formdata.append('username', this.profileme.username)
   formdata.append('avatar', this.profileme.avatar)
   // console.log(this.userchat);
@@ -188,6 +237,7 @@ sendchat(id_user:any){
   })
   formdata.append('id_room', id_room);
   formdata.append('id_user', this.id_user);
+
   if(!this.selectedFile){
     this.selectedFile =''
   }
@@ -245,6 +295,10 @@ handleaddgroup(){
   formdata.append('file', this.selectedFile ? this.selectedFile : '');
   this.Messengerservice.addgroupchat(formdata).subscribe(data =>{
     // console.log(data);
+    if(data === true){
+      this.selectedFile='';
+      this.image = '';
+    }
     
   })
 
@@ -320,6 +374,7 @@ xemnhomchat(){
     // console.log(this.alluser);
     // console.log(this.allmessenger)
     this.allmessenger.forEach((mess:any) =>{
+      if(Array.isArray(this.alluser)){
         this.alluser.forEach((friend:any) =>{
           if(mess.id_user.includes(friend._id)){
             arr.push({
@@ -335,6 +390,7 @@ xemnhomchat(){
             })
           }
         })
+      }
     })
     // console.log(arr);
     const uniqueRooms = arr.filter((room, index, self) =>
@@ -348,6 +404,8 @@ xemnhomchat(){
 
   oncheckeduser(event:any,ids:any){
     if (event.target.checked) {
+      // console.log(ids);
+      
       // Nếu checkbox được chọn, thêm id_user vào mảng
       this.arridingroup.push(ids);
     } else {
@@ -367,8 +425,13 @@ xemnhomchat(){
   }
 
     openchat(id:any){
-      // console.log(id)
-      let arr:any[] =[]
+      const currentWidth = window.innerWidth;
+
+      console.log(currentWidth);
+      if(currentWidth <620){
+        this.showchat = false;
+      }
+      
       // console
       this.idroom = id;
       const haha = this.mess.filter((item:any) => item.id_room == id)
@@ -412,6 +475,8 @@ xemnhomchat(){
       })
       // console.log(this.contentmess);
       this.showformchat = true;
+      console.log(this.showformchat);
+      
    
       
     }
@@ -420,6 +485,10 @@ xemnhomchat(){
       if(this.scrollBottom){
       this.scrollBottom.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }
+    }
+    deleteimg(){
+      this.image = '';
+
     }
     ngAfterViewChecked() {
       this.scrollToBottom();

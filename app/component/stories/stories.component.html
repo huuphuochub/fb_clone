@@ -1,10 +1,10 @@
 <main>
   <div class="divfirst">
     <div class="avataruser">
-        <img src="{{userstory.avatar}}" alt="">
+        <img src="{{userstory?.avatar}}" alt="">
        <div class="divp">
-        <p>{{userstory.username}}</p>
-        <p>{{userstory.date}} </p>
+        <p>{{userstory?.username}}</p>
+        <p>{{userstory?.date}} </p>
        </div>
 
 
@@ -107,7 +107,7 @@
   </div>
     <div class="divstory">
         <video id="videotest"  controls>
-            <source src="{{userstory.linkvideo}}" type="video/mp4">
+            <source src="{{userstory?.linkvideo}}" type="video/mp4">
         
         </video>
         <div>
@@ -127,10 +127,10 @@
         </div>
 
         <div class="nextavataruser" *ngFor="let story of storys">
-            <img src="{{story.avatar}}" alt="" routerLink="/stories/{{story._id}}">
-           <div class="divp" routerLink="/stories/{{story._id}}">
-            <p>{{story.username}}</p>
-            <p>{{story.date}}</p>
+            <img src="{{story?.avatar}}" alt="" routerLink="/stories/{{story?._id}}">
+           <div class="divp" routerLink="/stories/{{story?._id}}">
+            <p>{{story?.username}}</p>
+            <p>{{story?.date}}</p>
            </div>
     
     

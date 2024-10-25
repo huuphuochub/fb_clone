@@ -56,7 +56,7 @@ ngOnInit(): void {
       this.router.navigate(['/regsiter'])
 
     }
-    console.log(data);
+    // console.log(data);
   })
 }
 
@@ -102,7 +102,7 @@ ngOnInit(): void {
     this.isnputField1.nativeElement.value=''
    }else if(this.isinput1 === true){
     // console.log(this.inputField.nativeElement.value)
-    console.log(this.isnputField1.nativeElement.value.slice(1))
+    // console.log(this.isnputField1.nativeElement.value.slice(1))
     this.valuein2=this.isnputField1.nativeElement.value.slice(1);
 
     this.chuyensanginput2();
@@ -115,7 +115,7 @@ ngOnInit(): void {
       this.insputField2.nativeElement.value=''
      }else if(this.isinput2 === true){
       // console.log(this.inputField.nativeElement.value)
-      console.log(this.insputField2.nativeElement.value.slice(2))
+      // console.log(this.insputField2.nativeElement.value.slice(2))
       this.valuein3=this.insputField2.nativeElement.value.slice(2);
 
       this.chuyensanginput3();
@@ -130,9 +130,9 @@ ngOnInit(): void {
       this.inpsutField3.nativeElement.value='' 
      }else if(this.isinput3 === true){
       // console.log(this.inputField.nativeElement.value)
-      console.log(this.inpsutField3.nativeElement.value.slice(3))
+      // console.log(this.inpsutField3.nativeElement.value.slice(3))
       this.valuein4=this.inpsutField3.nativeElement.value.slice(3);
-      console.log(typeof this.inpsutField3.nativeElement.value)
+      // console.log(typeof this.inpsutField3.nativeElement.value)
 
 
       this.chuyensanginput4();
@@ -146,9 +146,9 @@ ngOnInit(): void {
       this.insputField4.nativeElement.value='' 
      }else if(this.isinput4 === true){
       // console.log(this.inputField.nativeElement.value)
-      console.log(this.insputField4.nativeElement.value.slice(4))
+      // console.log(this.insputField4.nativeElement.value.slice(4))
       this.valuein5=this.insputField4.nativeElement.value.slice(4);
-      console.log(typeof this.insputField4.nativeElement.value)
+      // console.log(typeof this.insputField4.nativeElement.value)
 
 
       this.chuyensanginput5();
@@ -162,9 +162,9 @@ ngOnInit(): void {
       this.inpsutField5.nativeElement.value='' 
      }else if(this.isinput5 === true){
       // console.log(this.inputField.nativeElement.value)
-      console.log(this.inpsutField5.nativeElement.value.slice(5))
+      // console.log(this.inpsutField5.nativeElement.value.slice(5))
       this.valuein6=this.inpsutField5.nativeElement.value.slice(5);
-      console.log(typeof this.inpsutField5.nativeElement.value)
+      // console.log(typeof this.inpsutField5.nativeElement.value)
 
 
       // this.chuyensanginput4();
@@ -185,7 +185,7 @@ ngOnInit(): void {
 
     const numberString = otp.join('');
     const result = parseInt(numberString);
-    console.log(result)
+    // console.log(result)
     this.userservice.checkma(result).subscribe(data =>{
      if(data.ketqua == false){
       // this.router.navigate(['/authenticate'])
@@ -199,9 +199,12 @@ ngOnInit(): void {
   }
 
   dangky(){
+    console.log(this.email);
+    
     // var email =(this.formemail.get('email')?.value);
     var password = this.formpassword.get('password')?.value;
     var cfpassword = this.formpassword.get('cfpassword')?.value;
+
     var email = this.email;
     const status = 1
     if(password.length<8){
@@ -211,12 +214,16 @@ ngOnInit(): void {
     } 
     
     else{
-      console.log(email,password,cfpassword);
+      // console.log(email,password,cfpassword);
+      console.log(email);
+      
       const formdata = new FormData()
       formdata.append('email',email);
       formdata.append('password',password);
       formdata.append('status', status.toString());
 
+      console.log(formdata);
+      
       this.userservice.dangky(formdata).subscribe(data=>{
         console.log(data);
         if(data == true){
@@ -237,7 +244,7 @@ ngOnInit(): void {
 
   }
   chuyensanginput2(){
-    console.log()
+    // console.log()
     this.insputField2.nativeElement.focus()
 
   }

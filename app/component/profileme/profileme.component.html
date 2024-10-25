@@ -6,15 +6,18 @@
     </div>
     <div class="thongtincanhandautrang">
         <div class="anhdaidien">
-            <img src="{{user.avatar}}" alt="">
+            <img src="{{user?.avatar}}" alt="">
             <div class="hienonl" ><i class="fa-solid fa-camera"></i></div>
         </div>
         <div class="tennguoidung">
             <div class="ten">
-                <h1>{{user.username}}</h1>
+                <h1>{{user?.username}}</h1>
             </div>
             <div class="banbe">
-                <p>{{listfriend.length}} người bạn -  </p>
+                <p *ngIf="listfriend; else noFriends">{{ listfriend?.length }} người bạn - </p>
+                <ng-template #noFriends>
+                    <p>Chưa có người bạn nào.</p>
+                </ng-template>
                 <p> </p>
             </div>
             <div class="hinhbanbe" >
@@ -74,32 +77,14 @@
             </div>
             <div class="storynguoidung">
             
-                        <div class="hinstory">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                            <p>colection</p>
-                        </div>
-                  
-                        <div class="hinstory">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                            <p>colection</p>
-        
-                        </div>
+                <div class="divstory" *ngFor="let story of storys">
+                    <video id="videotest"  controls>
+                        <source src="{{story.linkvideo}}" type="video/mp4">
                     
-                        <div class="hinstory">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                            <p>colection</p>
-        
-                        </div>
-                        <div class="hinstory">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                            <p>colection</p>
-        
-                        </div>
-                        <div class="hinstory">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
-                            <p>colection</p>
-        
-                        </div>
+                    </video>
+                </div>
+                  
+               
                     
             </div>
         </div>
@@ -113,7 +98,7 @@
               
 
             </div>
-            <div class="tatcaanhnguoidung">
+            <div class="tatcaanhnguoidung" *ngIf="summanyimg && summanyimg.length > 0">
                 <div *ngFor="let post of summanyimg">
                     <div class="image-container" *ngIf="post.image !== '' ">
                         <img  src="{{post.image}}" alt="">
@@ -154,7 +139,7 @@
                     <a>xem tất cả bạn bè</a>
                 </div>
                 <div class="sobanchung">
-                    <p>{{listfriend.length}} bạn bè </p>
+                    <p>{{listfriend?.length}} bạn bè </p>
                 </div>
             </div>
             <div class="tatcabanbeoday" >
@@ -165,7 +150,7 @@
                 </div> 
             </div>
         </div>
-        <p style="color: white;"><i class="fa-brands fa-github"></i>huuphuochub</p>
+        <p style="color: white;"><i class="fa-brands fa-github"></i></p>
     </div>
    
     <div class="cacbaivietnguoidungdang">

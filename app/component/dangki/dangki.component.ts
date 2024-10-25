@@ -34,7 +34,7 @@ export class DangkiComponent implements OnInit {
     let formdata = new FormData();
     var email =(this.formemail.get('email')?.value);
     formdata.append('email',email);
-    console.log(email)
+    // console.log(email)
     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
     if (!filter.test(email)) { 
      this.loiemail = true;

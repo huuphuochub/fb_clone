@@ -28,7 +28,7 @@ constructor(private userservice:Userservice, private formbuilder:FormBuilder, pr
 }
 ngOnInit(): void {
   const email = this.EncryptionService.getemail();
-  console.log(email);
+  // console.log(email);
   this.email = email
 }
 
@@ -48,7 +48,7 @@ ngOnInit(): void {
   handlesetting():void{
     const username = this.formname.get('username')?.value;
     this.isloading =true
-    console.log(username, this.email)
+    // console.log(username, this.email)
     if(!this.selectedFile){
       this.selectedFile = 'https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp';
     }else if(!username){
@@ -71,7 +71,7 @@ ngOnInit(): void {
       .subscribe(data =>{
         if(data){
           localStorage.setItem('id_user', data._id);
-          console.log(data);
+          // console.log(data);
           // localStorage.setItem('')
           this.router.navigate(['/'])
 

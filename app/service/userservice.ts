@@ -9,6 +9,8 @@ import { Sharedataservice } from './sharedata.service';
 export class Userservice {
   private url = 'http://192.168.2.39:3001/'
 
+  // private url = 'http://172.16.98.157:3001/'
+
 //  private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
 
  constructor(private http: HttpClient) {}
@@ -41,7 +43,7 @@ export class Userservice {
   return this.http.get<any>(`${this.url}user/${id}`)
   }
   login(formdata:any):Observable<any>{
-    console.log('ok');
+    // console.log('ok');
     
     return this.http.post<any>(`${this.url}user/login/`, formdata);
   }

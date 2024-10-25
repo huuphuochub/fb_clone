@@ -1,4 +1,269 @@
-<div class="header">
+<div class="header flex justify-between fixed top-0">
+    <div class="logo flex items-center" >
+        <i class="bi bi-facebook ml-2 hover:cursor-pointer" routerLink="/" *ngIf="!opensearch"></i>
+        <p class="p-2 p-huy ml-2 hover:cursor-pointer" *ngIf="opensearch" (click)="CloseClickSearch()">hủy</p>
+        <div class="divinputsearch relative ml-2 ">
+               <form [formGroup]="formsearchuser" (ngSubmit)="timkiemuser()" class="relative form-search">
+                <i class="bi bi-search absolute ml-1"></i>
+
+                <input type="text" class="inputsearch pl-6" placeholder="tìm kiếm" formControlName="username">
+               </form>
+               <i *ngIf="!opensearch" class="bi bi-search bisearchs hidden hover:cursor-pointer absolute " (click)="OpenClickSearch()"></i>
+               <form [formGroup]="formsearchuser" (ngSubmit)="timkiemuser()" class="relative form-search-two" *ngIf="opensearch">
+
+                <input type="text" class="inputsearch pl-6" placeholder="tìm kiếm" formControlName="username">
+               </form>
+        </div>
+    </div>
+    <div class="flex items-center  list-item-header">
+        <div [ngClass]="{'active': currentPage === 'home'}"><a routerLink="/"><i class="bi bi-house"></i></a></div>
+        <div><a routerLink="/testvideo"><i class="bi bi-film"></i></a></div>
+        <div><a href=""><i class="bi bi-bag"></i></a></div>
+        <div><a href=""><i class="bi bi-bag-check"></i></a></div>
+        <div><a href=""><i class="bi bi-controller"></i></a></div>
+    </div>
+    <div class="flex items-center  list-item-two-header mr-4">
+        <div>
+            <i class="bi bi-grid-3x3-gap"></i>
+        </div>
+        <div class="ochat ">
+            
+            <i class="bi bi-chat thongbaochat" (click)="close()"></i>
+
+           
+        </div>
+        <div class="sothongbao relative">
+            <i class="bi bi-bell" (click)="closetb()"></i>
+            <div class="py-0 px-1 rounded-md absolute bg-red-600 top-1 right-0">
+                <p *ngIf="newnoti.length > 0" class="p-0 m-0 so-thong-bao">{{newnoti?.length}}</p>
+            </div>
+        </div>
+        <div><i class="bi bi-person-circle" (click)="closecaidat()"></i></div>
+    </div>
+
+</div>
+<div class="absolute right-0  messenger h-full" *ngIf="showchat">
+    <div class="flex flex-col h-full ">
+        <div class="border-b border-gray-600">
+            <h1 class="text-white title-chat">Đoạn chat</h1>
+        </div>
+        <div class="m-2">
+            <input type="text" placeholder="tìm kiếm đoạn chat" class="input-search-chat">
+        </div>
+        <div class="button-option-chat flex gap-2 ml-2 mb-2">
+            <button (click)="loadroom()">tất cả</button>
+            <button (click)="xemnhomchat()">nhóm</button>
+            <button (click)="addgroup()">tạo nhóm</button>
+        </div>
+
+
+        <div class="w-full scrolls-chat overflow-y-scroll mt-4 text-white" *ngIf="showaddgroup">
+            <p class="text-xl ml-2">tạo nhóm</p>
+            <div>
+                <form class="m-2" [formGroup]="formnamegroup">
+
+                    <input type="text" placeholder="tên nhóm" class="border rounded-md" formControlName="name">
+                    <label for="file-upload" class="custom-file-upload absolute">
+                        <i class="fa-solid fa-image text-sm"></i> Ảnh nhóm
+                    </label>
+                    <input id="file-upload" type="file" (change)="onFileChange($event)"/>                
+                    <img *ngIf="image !== '' " [src]="image" alt="" width="70px" height="70px" class="mt-2">
+
+                </form>
+                <div><p class="ml-2">chọn thành viên</p></div>
+                <div *ngFor="let chat of mess ;let i = index">
+                    <div class="flex items-center gap-3 m-2 item-user-add-group" (click)="toggleCheckbox(i)" >
+                        <input type="checkbox" [(ngModel)]="isChecked[i]" (change)="oncheckeduser($event,chat.id_user)">
+                        <div class="flex items-center gap-2">
+                            <img src="{{chat.avatar}}" alt="" class="w-8 h-8  rounded-full">
+                            <div>
+                                <p>{{chat.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                
+
+
+            </div>
+        </div>
+                <div class="button-huy-or-ok flex justify-center gap-4 py-2" *ngIf="showaddgroup">
+                    <button (click)="handleaddgroup()">tạo</button>
+                    <button (click)="closeaddgroup()">hủy</button>
+                </div>
+
+
+        <div class=" flex flex-col scrolls-chat overflow-y-scroll   h-full " *ngIf="!showaddgroup">
+            <div class="ml-2  div-list-user-chat">
+                <div *ngFor="let chat of mess" class="flex items-center gap-1 p-2  rounded-lg item-chat-user  ">
+                    <div (click)="openchat(chat.id_room)" class="relative">
+                        <img src="{{chat.avatar}}" alt="" class="w-10 h-10 rounded-full">
+                        <div class="hienonl" *ngIf="chat.online === 1"></div>
+                    </div>
+                    <div (click)="openchat(chat.id_room)" class="div-p-nemuser">
+                        <p>{{chat.name}}</p>
+                        <div class="flex gap-2">
+                            <p *ngIf="chat.lastuser === id_user">bạn:</p>
+                            <p>{{ chat.lastmess}}</p>
+                        </div>
+                    </div>
+                </div>
+               
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="showthongbao" class="absolute right-0   notification h-full">
+    <div class="flex flex-col h-full ">
+        <div class="div-title-notìication border-b border-gray-600">
+            <p>Thông báo</p>
+        </div>
+        <div class="button-option-chat flex gap-2 ml-2 mb-2 mt-2">
+            <button>Tất cả</button>
+            <button>Đã đọc</button>
+            <button>chưa đọc</button>
+        </div>
+        <div class="container-noti overflow-y-scroll">
+            <div *ngFor="let noti of notification">
+                <div  class="content-noti flex items-center gap-2 m-2" (click)="updatenoti(noti._id)">
+                    <p>{{noti.content}}<i>{{noti.date.split("T")[1]}}</i></p>
+                    <div *ngIf="noti.status === 0" class="chuadoc mr-2">
+
+                    </div>
+                    <div class="dadoc mr-2" *ngIf="noti.status === 1">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div  *ngIf="showcaidat" class="setting absolute right-0 h-full">
+    <div class="div-setting flex items-center p-2 gap-2 border-b border-gray-600 justify-between">
+        <div class="flex items-center gap-2">
+            <div class="setting-img hover:cursor-pointer">
+                <img src="{{profileme.avatar}}" alt=""  class="w-10 h-10 rounded-full">
+            </div>
+            <div class="setting-name">
+                <p class="hover:underline hover:cursor-pointer">{{profileme.username}}</p>
+            </div>
+        </div>
+        <div class="mr-2 hover:cursor-pointer">
+            <i class="bi bi-gear text-white" ></i>
+        </div>
+    </div>
+    <div (click)="dangxuat()" class="logout-setting flex items-center p-2 gap-2">
+        <i class="bi bi-box-arrow-right"></i>
+        <p>đăng xuất</p>
+    </div>
+</div>
+
+
+
+<div *ngIf="showformchat && contentmess" class="">
+   <div class="chat absolute   " *ngFor="let mes of contentmess">
+    <div  class="flex items-center justify-between border-b border-gray-600 " >
+        <div class="div-infor-chat flex items-center px-2 py-1 gap-2 ">
+            <div>
+                <img [src]="mes.avatar"  alt="" class="w-10 h-10 rounded-full">
+            </div>
+            <div>
+                <p>{{mes.name}}</p>
+                <p *ngIf="mes.online ===1" class="danghoatdong">đang hoạt động</p>
+            </div>
+        </div>
+        <div class="mr-2 hover:cursor-pointer text-white">
+            <i class="bi bi-x-lg" (click)="closekhungchat()"></i>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="content-chat overflow-y-scroll " *ngIf="mes.type === 1">
+        <div *ngFor="let ok of mes.content">
+            <div class="item-content-chat" *ngIf="ok.id_user !== id_user">
+                <div class="content relative">
+                    <p *ngIf="ok.content !==''">{{ok.content}}</p>
+                    <img *ngIf="ok.image !== '' " src="{{ok.image}}" alt="" class="">
+    
+                </div>
+            </div>
+            <div class="item-content-chat-me" *ngIf="ok.id_user === id_user">
+                <div class="content-me relative">
+                    <p *ngIf="ok.content !==''">{{ok.content}}</p>
+                    <img *ngIf="ok.image !== '' " src="{{ok.image}}" alt="" class="">
+    
+                </div>
+    
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="content-chat overflow-y-scroll " *ngIf="mes.type === 2">
+        <div *ngFor="let ok of mes.content">
+            <div class="item-content-chat" *ngIf="ok.id_user !== id_user">
+                <div class="content relative">
+                    <p *ngIf="ok.content !==''" class="p-group-chat">{{ok.content}}<img src="{{ok.avatar}}" alt="" class="w-3 h-3">
+                        
+                    </p>
+                    <img *ngIf="ok.image !== ''" src="{{ok.image}}" alt="" class="">
+    
+                </div>
+            </div>
+            <div class="item-content-chat-me" *ngIf="ok.id_user === id_user">
+                <div class="content-me relative">
+                    <p *ngIf="ok.content !==''">{{ok.content}}</p>
+                    <img *ngIf="ok.image !== ''" src="{{ok.image}}" alt="" class="">
+    
+                </div>
+    
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+    <div class=" class-form-chat border-t border-gray-600 h-11 relative">
+        <div class=" img-input-chat flex " *ngIf="image !== '' " >
+            <img [src]="image" alt="" >
+            <div>
+                <i class="bi bi-x-lg hover:cursor-pointer" (click)="deleteimg()"></i>
+            </div>
+        </div>
+        <form class="relative form-input-chat flex m-2" [formGroup]="forminputchat" (ngSubmit)="sendchat(mes.id_user)">
+            <label for="file-upload" class="custom-file-upload absolute">
+                <i class="fa-solid fa-image"></i> Ảnh
+            </label>
+            <input id="file-upload" type="file" (change)="onFileChange($event)"/>
+            <input type="text" placeholder="nhập đoạn chat" class="absolute pl-16 w-56 rounded-md" formControlName="content">
+            <button class="absolute right-0 px-2 rounded-md">gửi</button>
+        </form>
+    </div>
+   </div>
+
+
+</div>
+
+
+
+<!-- <div class="header">
     <div class="logo">
         <i class="bi bi-facebook" routerLink="/"></i>
     </div>
@@ -10,7 +275,7 @@
     </div>
     <div class="link">
             <div [ngClass]="{'active': currentPage === 'home'}"><a routerLink="/"><i class="bi bi-house"></i></a></div>
-            <div><a href=""><i class="bi bi-film"></i></a></div>
+            <div><a routerLink="/testvideo"><i class="bi bi-film"></i></a></div>
             <div><a href=""><i class="bi bi-bag"></i></a></div>
             <div><a href=""><i class="bi bi-bag-check"></i></a></div>
             <div><a href=""><i class="bi bi-controller"></i></a></div>
@@ -23,7 +288,7 @@
            
         </div>
         <div class="sothongbao">
-            <i class="bi bi-bell" (click)="closetb()"></i><p>{{newnoti.length}}</p>
+            <i class="bi bi-bell" (click)="closetb()"></i><p>{{newnoti?.length}}</p>
         </div>
         <div><i class="bi bi-person-circle" (click)="closecaidat()"></i></div>
     </div>
@@ -31,7 +296,6 @@
         chat
     </div>
 
-    <!-- khung chat -->
     <div class="khungchat" *ngIf="showchat">
         <div class="iconchat">
             <h4>đoạn chat</h4>
@@ -89,11 +353,12 @@
         <div class="xemtatcachat">
             xem tất cả đoạn chat
         </div>
+
     </div>
-    <!-- end khung chat -->
+    <div class="khungochat" *ngIf="showformchat">
 
+    </div>
 
-    <!-- khung thongbao -->
     <div class="khungthongbao" *ngIf="showthongbao" >
         <div>
             <h3 style="color: white;">thông báo</h3>
@@ -112,9 +377,9 @@
     </div>
 
     </div>
-    <!-- end khung thong bao -->
 
-    <!-- khung cai dat -->
+
+
      <div class="khungcaidat" *ngIf="showcaidat">
         <div >
             <h3 style="color: white;">cài đặt</h3>
@@ -135,12 +400,12 @@
             <i class="fa-solid fa-right-from-bracket"></i>
             <p (click)="dangxuat()">đăng xuất</p>
         </div>
-     </div>
+     </div> -->
      <!-- end khung cai dat -->
 
      <!-- khung nhap chat -->
-     <div class="khungnhapchat" *ngIf="showformchat && contentmess">
-        <div *ngFor="let mes of contentmess">
+     <!-- <div class="khungnhapchat" *ngIf="showformchat && contentmess">
+        <div *ngFor="let mes of contentmess" >
             <div  *ngIf="mes.type === 1">
                 <div class="nguoichat"  *ngIf="mes.type === 1">
                   <div class="hinhvatennguoichat">
@@ -204,7 +469,6 @@
      
 
 
-<!-- óadjklajsssssssssssssssssssss ssssssssssssssssssssssss sssssssssssssss -->
 
 <div *ngFor="let mes of contentmess">
     <div  *ngIf="mes.type === 2">
@@ -266,17 +530,16 @@
     </div>
 </div>
 
-<!-- jjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjj  -->
 
 
     
-    </div>
+    </div> -->
      <!-- end khung nhap chat -->
 
   <!-- add nhóm chat -->
           
   
-  <div class="addgroup" *ngIf="showaddgroup" >
+  <!-- <div class="addgroup" *ngIf="showaddgroup" >
     <div class="inputsearchuser">
         <input type="text" placeholder="tìm kiếm">
         <p style="color: white;" (click)="closeaddgroup()">hủy</p>
@@ -308,9 +571,7 @@
         <button (click)="handleaddgroup()">tạo nhóm</button>
     </div>
 
-    </div>
-
-<!-- end addgroup chat -->
+    </div> -->
 
 
-</div>
+

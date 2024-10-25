@@ -44,7 +44,7 @@ export class Friendservice {
     return this.http.delete<any>(`${this.url}friend/cancelloimoi/${id}`)
   }
   updatelastPostTimeUser(id:any):Observable<any>{
-    return this.http.put<any>(`${this.url}friend/updatelastPostTimeUser`,id)
+    return this.http.put<any>(`${this.url}friend/updatelastPostTimeUser/`,id)
   }
 
   

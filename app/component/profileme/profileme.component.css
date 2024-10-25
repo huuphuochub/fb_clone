@@ -176,36 +176,59 @@ main{
     margin-right: 10px;
 }
 .divgioithieu .storynguoidung {
-   margin: 0;
-   padding: 0;
-
-}
-.divgioithieu .storynguoidung {
-    display: flex;
+    margin: 0;
     padding: 0;
-    list-style-type: none;
-    overflow-x:scroll;
-}
+ 
+ }
+ .divgioithieu .storynguoidung {
+     display: flex;
+     
+ 
+ 
+ }
 
 
 
 
-.storynguoidung .hinstory img{
-    width: 150px;
-    height: 200px;
+.storynguoidung .divstory video{
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
+    transition: transform 0.3s ease; 
+
 }
-.storynguoidung .hinstory {
+
+
+.storynguoidung .divstory {
     display: grid;
     margin: 5px;
     text-align: center;
 }
-.storynguoidung .hinstory p{
+
+.storynguoidung .divstory video:hover{
+    transform: scale(1.05); /* Phóng to hình ảnh 10% khi hover */
+
+
+}
+.storynguoidung .divstory p{
     display: inline-block; /* Hoặc inline nếu phù hợp */
 
    margin: 0;
    padding: 0;
 }
+#videotest::-webkit-media-controls {
+    display: none !important;
+  }
+  #videotest::-moz-media-controls {
+    display: none !important;
+  }
+  #videotest::-ms-media-controls {
+    display: none !important;
+  }
+  #videotest::-o-media-controls {
+    display: none !important;
+  }
+
 
 .phanhai .cacanhnguoidung{
     background-color: #222222;

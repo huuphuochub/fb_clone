@@ -24,6 +24,7 @@ export class PostnewfeedBehaviorSubject {
     arrpost3!:any
     newfeed:any[] =[]
     isgetlike:boolean = false
+    hetpost:boolean = false;
 
     arruser!:any[]
     arruser2!:any
@@ -53,6 +54,9 @@ export class PostnewfeedBehaviorSubject {
 
   private arridfriend = new BehaviorSubject<any>('');
   arridfriend$ = this.arridfriend.asObservable();
+
+  private endpost = new BehaviorSubject<any>('');
+  endpost$ = this.endpost.asObservable();
 
   private arriduser = new BehaviorSubject<any>('');
   arriduser$ = this.arriduser.asObservable();
@@ -157,15 +161,27 @@ export class PostnewfeedBehaviorSubject {
 getlike(){
   // console.log('họi nhiêu fk');
   // const like$ = this.Likeservice.getalllikeme(this.id_me,this.arrlike)
-
-  if(this.isgetlike === false){
+    // console.log(this.arrlike);
+    // if(this.isgetlike === false){
+    // console.log(this.arrlike.length>0);
+    
+    if(this.arrlike.length>0){
+      // console.log('đã chạy getlike');
+      this.endpost.next(false);
+      
     this.Likeservice.getalllikeme(this.id_me,this.arrlike).subscribe(data =>{
     // console.log(data);
     
-    this.arrlikepost.next(data)
-    this.isgetlike = true;
+    // this.arrlikepost.next(data)
+    this.graftlikepost(data)
+    // this.isgetlike = true;
+    
   })
-}
+    }else{
+          this.endpost.next(true);
+
+    }
+// }
 }
 
   ispost(){
@@ -184,6 +200,8 @@ getlike(){
     const postArray = this.arrpost3.filter((item:any, index:any, self:any) =>
         index === self.findIndex((t:any) => t._id === item._id)
       );
+      // console.log(postArray);
+      
       const arrlike = postArray.map((item:any) => item._id);
       // console.log(arrlike);
       this.arrlike = arrlike;
@@ -231,7 +249,7 @@ getlike(){
     this.post = arrpost
     // console.log('gọi graftlikepost');
     
-    this.graftlikepost()
+    // this.graftlikepost()
   }
   calculateMinutesDifference(date: string): string { 
     const now = new Date(); 
@@ -254,17 +272,21 @@ getlike(){
     return `${diffInMinutes} phút trước`;
   }
 
-  graftlikepost() {
-    this.arrlikepost$
-    .pipe(distinctUntilChanged())
-    .subscribe(likes => {
+  graftlikepost(data:any) {
+    // this.arrlikepost$
+    // .pipe(distinctUntilChanged())
+    // .subscribe(likes => {
       // console.log(likes)
+
+      if(data){
       // console.log(this.post)
       // console.log('lấy likepost');
-      
+        // console.log(likes);
+        
+      if(Array.isArray(data)){
 
       const okla = this.post.map((post: any) => {
-        const like = likes.find((like: any) => post.id_post === like.id_post);
+        const like = data.find((like: any) => post.id_post === like.id_post);
         return {
           id_post: post.id_post,
           id_user: post.id_user,
@@ -279,12 +301,16 @@ getlike(){
           ishover: false,
           typelike: like ? like.type : 0, // Set `typelike` if `like` exists, otherwise null
         };
+      
       });
-     this.setposst(okla);
+      this.setposst(okla);
+
+    }
       
 
        // Emit the result to `allpost` BehaviorSubject
-    });
+  }
+      // });
    
   }
   setposst(post:any){

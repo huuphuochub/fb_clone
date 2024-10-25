@@ -25,16 +25,17 @@ export class FriendBehaviorSubject {
         // console.log(data)
       })
   }
-  private url = 'http://192.168.2.39:3001/'
 
   // private url = 'https://huuphuoc.test.huuphuoc.id.vn/'
+
+  private url = 'http://192.168.2.39:3001/'
 
 
   // list id user
   private arridlistfriend = new BehaviorSubject<string>('');
   idlistfriend$ = this.arridlistfriend.asObservable();
 
-  setidlistfriend(arr: any) {
+  setidlistfriend(arr: string) {
     // console.log(arr)
     this.arridlistfriend.next(arr);
   }

@@ -10,6 +10,8 @@ export class SocketIoService {
 
   constructor() {
     this.socket = io('http://192.168.2.39:3001/')
+
+    // this.socket = io('http://172.16.98.157:3001/')
     // this.socket = io('https://huuphuoc.test.huuphuoc.id.vn/');
     
 
@@ -17,10 +19,9 @@ export class SocketIoService {
     // this.socket = io('http://192.168.2.39:3001/');
   }
   public sendOnlineStatus( id_user:any): void {
-    const operatingstatus = localStorage.getItem('operatingstatus')
-    if(operatingstatus=='1'){
+    
       this.socket.emit('online', id_user);
-    }
+    
   }
   public sendmess( id_user:any,id_room:any): void {
     this.socket.emit('sendmess', id_user,id_room);
@@ -32,7 +33,7 @@ export class SocketIoService {
   public receicemess(): Observable<string> {
     return new Observable<string>(observer => {
       this.socket.on('receicemess', (message: string) => {
-        console.log(message)
+        // console.log(message)
         observer.next(message);
       });
     });
@@ -73,7 +74,7 @@ export class SocketIoService {
   public getfriendonline():Observable<string>{
     return new Observable<string>(observer =>{
       this.socket.on('frienonline', (message:string) =>{
-        console.log(message)
+        // console.log(message)
         observer.next(message)
       })
     })

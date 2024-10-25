@@ -33,12 +33,12 @@ export class StoriesComponent implements OnInit{
   }
   loadstory(){
     this.Sharedataservice.story$.subscribe(data =>{
-      console.log(data)
+      // console.log(data)
       this.storys = data
       
     })
     const ok =this.storys.filter((item:any) =>item._id === this.id_story)
-    console.log(ok)
+    // console.log(ok)
     this.userstory = ok[0]
     if(this.userstory.id_user !== this.idme){
       this.isviewer === false
