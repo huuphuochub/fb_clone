@@ -1,0 +1,80 @@
+main {
+    width: 100%;
+    margin-top: 70px;
+    position: absolute;
+}
+.divmain{
+    margin: 0 30%;
+    background-color: #222222;
+}
+main .optionfriend{
+   margin-top: 10px;
+    color: white;
+    display: flex;
+}
+.optionfriend .active{
+    border-bottom:2px solid blue ;
+
+}
+.optionfriend p{
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px;
+    background-color: #333333;
+
+}
+.listitem{
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #222222;
+}
+.listitem .itemimg{
+    position: relative;
+}
+.listitem .itemimg .hienonl{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(65, 237, 65);
+    position: absolute;
+    right: 3px;
+    bottom: 5px;
+}
+.listitem .itemimg img{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin: 5px;
+}
+.listitem .item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    background-color: #333333;
+    border-radius: 10px;
+}
+.listitem .itemnameandimg{
+    display: flex;
+    color: white;
+    align-items: center;
+}
+.listitem .itemname p{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+.listitem .itemname p:first-child{
+   font-size: 15px;
+   font-weight: bold;
+}
+.item .itembutton{
+    margin-right: 10px;
+}
+.item .itembutton button{
+    margin: 5px;
+    border-radius: 10px;
+    background-color: rgb(90, 90, 238);
+    padding: 5px;
+}
+

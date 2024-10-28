@@ -1,0 +1,23 @@
+<div *ngIf="isloading" class="loading">
+  <div class="item">
+    <i class="bi bi-facebook" ></i> <br>
+    <div class="spinner"></div>
+  </div>
+
+</div>
+
+<ng-container *ngIf="!formlogin() && !formsign() && !authenticate() && !setprofile() && isloading === false && isconnected === true  && loiserver === false" >
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-container>
+<ng-container *ngIf="formlogin() || formsign() || authenticate() || setprofile()"  >
+  <router-outlet></router-outlet>
+</ng-container>
+<div class="notconnected" *ngIf="isconnected === false && isloading === false && loiserver === true">
+  <h1>k có kết nối internet</h1>
+  <h3>vui lòng kiếm tra lại kết nối của bạn</h3>
+</div>
+<div class="w-full h-full" *ngIf="loiserver === true && isconnected === true">
+  <h1 class="text-8xl text-white">lỗi server, vui lòng thử lại sau</h1>
+</div>

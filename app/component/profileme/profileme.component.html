@@ -1,0 +1,346 @@
+<main>
+    <div class="phandau" id="loadlai">
+    <div class="divanhbia">
+        <img src="https://i.imgur.com/qV5uuOz.jpg" alt="">
+
+    </div>
+    <div class="thongtincanhandautrang">
+        <div class="anhdaidien">
+            <img src="{{user?.avatar}}" alt="">
+            <div class="hienonl" ><i class="fa-solid fa-camera"></i></div>
+        </div>
+        <div class="tennguoidung">
+            <div class="ten">
+                <h1>{{user?.username}}</h1>
+            </div>
+            <div class="banbe">
+                <p *ngIf="listfriend; else noFriends">{{ listfriend?.length }} người bạn - </p>
+                <ng-template #noFriends>
+                    <p>Chưa có người bạn nào.</p>
+                </ng-template>
+                <p> </p>
+            </div>
+            <div class="hinhbanbe" >
+                <img *ngFor="let listfriend of friends" src="{{listfriend.avatar}}" alt="">
+            </div>
+        </div>
+        <div class="cactuychon">
+           <button>chỉnh sửa</button>
+
+            <button>thêm vào tin</button>
+            <i class="bi bi-chevron-compact-down"></i>
+        </div>
+    </div>
+    <div class="chedoxem">
+        <div class="cacluachonxem">
+            <ul>
+                <li>bài viết</li>
+                <li>giới thiệu</li>
+                <li>bạn bè</li>
+                <li>Ảnh</li>
+                <li>Video</li>
+                <li>Check in</li>
+                <li> xem thêm
+                    <select>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div>
+
+        </div>
+        <div class="baocao">
+           <i>---</i>
+        </div>
+    </div>
+</div>
+<div class="phanhai">
+    <div class="cacthongtinnguoidung">
+        <div class="divgioithieu">
+            <h3>giới thiệu</h3>
+            <div class="hocvan">
+                <i class="fa-solid fa-school"></i> <p>đã học tại ...</p>
+            </div>
+            <div class="songtai">
+                <i class="fa-solid fa-house"></i> <p>sống tại ...</p>
+            </div>
+            <div class="nguoitheodoi">
+                <i class="bi bi-rss"></i> <p>có ... người theo dõi</p>
+            </div>
+            <div class="các liên kết khác">
+                <i class="fa-brands fa-instagram"></i> <p>name intagram</p>
+            </div>
+            <div class="storynguoidung">
+            
+                <div class="divstory" *ngFor="let story of storys">
+                    <video id="videotest"  controls>
+                        <source src="{{story.linkvideo}}" type="video/mp4">
+                    
+                    </video>
+                </div>
+                  
+               
+                    
+            </div>
+        </div>
+        <div class="cacanhnguoidung">
+            <div class="tieudeanh">
+                <div class="chitiettieudeanh">
+                    <h3>Ảnh</h3>
+                    <i></i>
+                    <a>xem tất cả ảnh</a>
+                </div>
+              
+
+            </div>
+            <div class="tatcaanhnguoidung" *ngIf="summanyimg && summanyimg.length > 0">
+                <div *ngFor="let post of summanyimg">
+                    <div class="image-container" *ngIf="post.image !== '' ">
+                        <img  src="{{post.image}}" alt="">
+                    </div>
+                </div>
+               
+                <!-- <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div>
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="">
+                </div> -->
+            </div>
+        </div>
+        <div class="hienbanbenguoidung">
+            <div class="phandaubanbe">
+                <div class="tieudebanbe">
+                    <h3>bạn bè</h3>
+                    <i></i>
+                    <a>xem tất cả bạn bè</a>
+                </div>
+                <div class="sobanchung">
+                    <p>{{listfriend?.length}} bạn bè </p>
+                </div>
+            </div>
+            <div class="tatcabanbeoday" >
+                <div class="chitietbanbecuaban" *ngFor="let listfriend of friend">
+                    <img src="{{listfriend.avatar}}" alt=""  routerLink="/profileuser/{{listfriend._id}}">
+                    <h6>{{listfriend.username}}</h6>
+                    <p *ngIf="listfriend.banchung > 0">{{listfriend.banchung}} bạn chung</p>
+                </div> 
+            </div>
+        </div>
+        <p style="color: white;"><i class="fa-brands fa-github"></i></p>
+    </div>
+   
+    <div class="cacbaivietnguoidungdang">
+        <div class="tuongtacvoinguoidung">
+            <div class="noidenhap">
+                <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                <input type="text" placeholder="bạn đang nghĩ gì...." (click)="openformpost()">
+            </div>
+            <div class="cactuychontuongtacnguoidung">
+                <ul>
+                    <li><i class="fa-solid fa-video" style="color: red;"></i>video trực tiếp</li>
+                    <li><i class="fa-solid fa-image" style="color: green;"></i>ảnh </li>
+                    <li><i class="fa-solid fa-face-smile" style="color: yellow;"></i>cảm xúc/hoạt động</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bolocbaiviet">
+            <h3>bài viết</h3>
+            <i></i>
+            <button><i class="fa-solid fa-sliders"></i>  bộ lọc</button>
+        </div>
+        <div class="cacbaiviet" *ngFor="let post of postofme">
+            <div class="thongtinbaivietotrangcanhan">
+                <div class="hinhvaten">
+                    <div class="hinhdaidien">
+                        <img src="{{user.avatar}}" alt="">
+                    </div>
+                    <div class="thongtinnguoidang">
+                        <p>{{user.username}}</p>
+                        <p>{{post.date.split('T')[0]}}</p>
+                    </div>
+                </div>
+               <div>
+                <div class="luachon">
+                    <p *ngIf="post.status === 1">công khai</p>
+                    <p *ngIf="post.status === 2">bạn bè</p>
+                    <p *ngIf="post.status === 3">chỉ mình tôi</p>
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+          
+               </div>
+               <div class="tieudebaiviet">
+                <p>{{post.content}}</p>
+            </div>
+            <div class="hinhanhbaiviet">
+                <img src="{{post.image}}" alt="" class="image-baiviet">
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet"> -->
+            </div>
+            <div class="luottuongtacbaiviet">
+                <div class="luotlike">
+                    <div class="cacicon">            
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                        <i class="fa-solid fa-heart" style="color: red;"></i>
+                        <p class="xemlike">{{post.totallike}} lượt thích</p>
+                    </div>
+                    <div  class="xembl" >
+                        {{post.totalcomment}} bình luận
+                    </div>
+                    <div class="xemshare">
+                        {{post.totalshare}} luọt chia sẻ
+                    </div>
+                </div>
+            </div>
+            <div class="tuongtacvoibaiviet">
+                <div><i class="fa-regular fa-thumbs-up"></i>thích</div>
+                <div><i class="fa-regular fa-comment"></i> bình luận</div>
+                <div><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+            </div>
+        </div>
+        <!-- <div class="cacbaiviet">
+            <div class="thongtinbaivietotrangcanhan">
+                <div class="hinhdaidien">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                </div>
+                <div class="thongtinnguoidang">
+                    <h5>name</h5>
+                    <p>5 tháng 1</p>
+                </div>
+                <div> </div>
+                <div class="luachon">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+            <div class="tieudebaiviet">
+                <p>bài viết này nocap</p>
+            </div>
+            <div class="hinhanhbaiviet">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet">
+            </div>
+            <div class="luottuongtacbaiviet">
+                <div class="luotlike">
+                    <div class="cacicon">            
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                        <i class="fa-solid fa-heart" style="color: red;"></i>
+                        <p class="xemlike">bạn và 40 người khác</p>
+                    </div>
+                    <div  class="xembl" >
+                        10 bình luận
+                    </div>
+                    <div class="xemshare">
+                        9 luọt chia sẻ
+                    </div>
+                </div>
+            </div>
+            <div class="tuongtacvoibaiviet">
+                <div><i class="fa-regular fa-thumbs-up"></i>thích</div>
+                <div><i class="fa-regular fa-comment"></i> bình luận</div>
+                <div><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+            </div>
+        </div>
+        <div class="cacbaiviet">
+            <div class="thongtinbaivietotrangcanhan">
+                <div class="hinhdaidien">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                </div>
+                <div class="thongtinnguoidang">
+                    <h5>name</h5>
+                    <p>5 tháng 1</p>
+                </div>
+                <div> </div>
+                <div class="luachon">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+            <div class="tieudebaiviet">
+                <p>bài viết này nocap</p>
+            </div>
+            <div class="hinhanhbaiviet">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPl6cN04e_V_Qgy4ik4CHODlay32-cYL5MMw&s" alt="" class="image-baiviet">
+            </div>
+            <div class="luottuongtacbaiviet">
+                <div class="luotlike">
+                    <div class="cacicon">            
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                        <i class="fa-solid fa-heart" style="color: red;"></i>
+                        <p class="xemlike">bạn và 40 người khác</p>
+                    </div>
+                    <div  class="xembl" >
+                        10 bình luận
+                    </div>
+                    <div class="xemshare">
+                        9 luọt chia sẻ
+                    </div>
+                </div>
+            </div>
+            <div class="tuongtacvoibaiviet">
+                <div><i class="fa-regular fa-thumbs-up"></i>thích</div>
+                <div><i class="fa-regular fa-comment"></i> bình luận</div>
+                <div><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+            </div>
+        </div> -->
+    </div>
+    
+</div>
+    <div class="addpost" *ngIf="isformaddpost">
+           <div class="taobaiviet">
+            <h3>tạo bài viết</h3>
+            <i class="fa-solid fa-circle-xmark" (click)="closeformpost()"></i>
+           </div>
+            <div class="thongtinnguoiviet">
+                <img src="{{user.avatar}}" alt="">
+                <div class="username">
+                    <h5>{{user.username}}</h5>
+                    <select (change)="selectedOption($event)" name="" id="">
+                        <option [value]="1">mọi người</option>
+                        <option [value]="2">bạn bè</option>
+                        <option [value]="3">chỉ mình tôi</option>
+                    </select>
+                </div>
+            </div>
+            <form class="ok" [formGroup]="formaddpost" (ngSubmit)="handleaddpost()">
+
+            <div class="inputpost">
+                <textarea name="" id="" placeholder="bạn đang nghĩ gì" style="color: white;" formControlName="content"></textarea>
+                <img *ngIf="image !== '' " [src]="image" alt="">
+                
+            </div>
+
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fa-solid fa-image"></i> ảnh
+                </label>
+            <input id="file-upload" type="file" (change)="onFileChange($event)"/> <br>
+            <button>đăng</button>
+        </form>
+
+          
+    </div>
+    <div class="overlay" id="overlay" *ngIf="lammo"></div>
+
+</main>

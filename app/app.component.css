@@ -1,0 +1,33 @@
+/* styles.css */
+.loading{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    display: grid;
+}
+.loading .item{
+}
+.loading i{
+    font-size: 150px;
+    color: blue;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .spinner {
+    border: 4px solid rgba(0,0,0,0.1);
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+  }
+  
+.notconnected{
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+}

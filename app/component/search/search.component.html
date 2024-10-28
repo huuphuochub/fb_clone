@@ -1,0 +1,129 @@
+<main>
+    <div class="phan1">
+        <div class="tieude">
+            <h2 style="color: white;">Kết quả tìm kiếm</h2>
+        </div>
+        <div class="boloc">
+            <h5>bộ lọc</h5>
+            <div class="tuychonboloc">
+                <ul>
+                    <li (click)="searchpost()"><i class="fa-solid fa-earth-oceania" ></i> bài viết</li>
+                    <li  (click)="searchusers()"><i class="fa-solid fa-earth-oceania"></i> mọi người </li>
+                    <li><i class="fa-solid fa-earth-oceania" ></i> ảnh</li>
+                    <li><i class="fa-solid fa-earth-oceania"></i> nhóm</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="phan2" *ngIf="loading"><h1 style="color: white;">loading...</h1></div>
+    <div class="phan2" *ngIf="searchuser">
+       <div class="thongtin" *ngIf="listuserhoanchinh">
+        <div class="content">
+            <h4>mọi ngươi</h4>
+        </div>
+        <div class="searchuser" *ngFor="let user of listuserhoanchinh" >
+            <div class="okla" routerLink="/profileuser/{{user._id}}">
+                <img src="{{user?.avatar}}" alt="">
+                <div class="hienonl" *ngIf="user.online === 1"></div>
+
+            </div>
+            <div class="thongtinuser" routerLink="/profileuser/{{user._id}}">
+                <h5>{{user.username}}</h5>
+                <p *ngIf="user._id !== id_user && user.banchung>0">có {{user.banchung}} bạn chung</p>
+            </div>
+            <button *ngIf="user.status === 4" style="background-color: #555555;">chỉnh sửa trang cá nhân</button>
+            <button *ngIf="user.status === 0" (click)="addfriend(user._id)">thêm bạn bè</button>
+              <div *ngIf="user.status === 1 ">
+                <button (click)="acpfriend(user.id_friend, user._id)"  >chấp nhận</button> <button style="background-color: #555555;">xóa</button>
+              </div>
+            <button *ngIf="user.status ===2" style="background-color: #555555;" (click)="huyloimoi(user.id_friend)">hủy lời mời</button>
+            <button *ngIf="user.status ===3" style="background-color: #555555;">bạn bè</button>
+
+
+
+        </div>
+       </div>
+    </div>
+
+    <div class="phan2" *ngIf="hienbaiviet">
+        <div class="thongtin">
+           
+            <div class="baiviet">
+            <div class="searchbaiviet">
+                <div class="hinhnguoidang">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                </div>
+                <div class="thongtinnguoidang">
+                    <h5>name</h5>
+                    <p>20/5/2024</p>
+                </div>
+                <div class="tuychon">
+                    ...
+                </div>
+            </div>
+            <div class="noidungbaiviet">
+                <p>bài viết này hay cực</p>
+            </div>
+            <div class="anhbaiviet">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            </div>
+            <div class="luotlike">
+                <div class="cacicon">            
+                    <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                    <p class="xemlike">bạn và 40 người khác</p>
+                </div>
+                <div  class="xembl" >
+                    10 bình luận
+                </div>
+                <div class="xemshare">
+                    9 luọt chia sẻ
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+
+        <div class="thongtin">
+           
+            <div class="baiviet">
+            <div class="searchbaiviet">
+                <div class="hinhnguoidang">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+                </div>
+                <div class="thongtinnguoidang">
+                    <h5>name</h5>
+                    <p>20/5/2024</p>
+                </div>
+                <div class="tuychon">
+                    ...
+                </div>
+            </div>
+            <div class="noidungbaiviet">
+                <p>bài viết này hay cực</p>
+            </div>
+            <div class="anhbaiviet">
+                    <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            </div>
+            <div class="luotlike">
+                <div class="cacicon">            
+                    <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                    <p class="xemlike">bạn và 40 người khác</p>
+                </div>
+                <div  class="xembl" >
+                    10 bình luận
+                </div>
+                <div class="xemshare">
+                    9 luọt chia sẻ
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+
+    </div>
+</main>

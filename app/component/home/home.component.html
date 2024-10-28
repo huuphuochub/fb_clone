@@ -1,0 +1,992 @@
+<main>
+    <div class="div1-home overflow-y-scroll">
+
+        <div class="list-item-divhome1 mt-2 ">
+            <div class="flex items-center gap-2 hover:cursor-pointer" *ngIf="profileuser" routerLink="/profileme">
+                <img [src]="profileuser.avatar || 'default-avatar.png'"  alt="" class="w-10 h-10 rounded-full">
+                <p>{{ profileuser.username || 'Unknown User' }}</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-people-fill"></i>
+                <p>bạn bè</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-clipboard-heart-fill"></i>
+                <p>kỉ niệm</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-bookmark-check-fill"></i>
+                <p>đã lưu</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="fa-solid fa-users"></i>
+                <p>nhóm</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-file-earmark-play"></i>
+                <p>video</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-clipboard-heart-fill"></i>
+                <p>kỉ niệm</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-bookmark-check-fill"></i>
+                <p>đã lưu</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="fa-solid fa-users"></i>
+                <p>nhóm</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-file-earmark-play"></i>
+                <p>video</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-clipboard-heart-fill"></i>
+                <p>kỉ niệm</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-bookmark-check-fill"></i>
+                <p>đã lưu</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="fa-solid fa-users"></i>
+                <p>nhóm</p>
+            </div>
+            <div class="flex items-center gap-2 hover:cursor-pointer mt-1">
+                <i class="bi bi-file-earmark-play"></i>
+                <p>video</p>
+            </div>
+        </div>
+    </div>
+ <!-- xem bình luận -->
+
+    <div class="" *ngIf="openbinhluan">
+        <div class="w-full h-full lammo-comment lammo absolute top-0 left-0 hover:cursor-pointer">
+
+        </div>
+        <div class="absolute view-comment rounded-sm">
+            <div class="p-2">
+                <div>
+                    <div class="flex items-center justify-between p-3 div-title-post">
+                        <p class="title-post-incomment">bài viết của {{post.username}}</p>
+                        <i class="bi bi-x-lg" (click)="dongbinhluan()"></i>
+                    </div>
+
+                </div>
+                <div class="div-coment-post">
+                    <div class="infor-user-post-incomment flex gap-2 items-center p-2">
+                        <div>
+                            <img src="{{post.avatar}}" alt="" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div>
+                            <p>{{post.username}}</p>
+                            <p>{{post.date}}</p>
+                        </div>
+                    </div>
+                    <div class="content-post">
+                        <p>
+                            {{post.content}}
+                        </p>
+                    </div>
+                    <div>
+                        <img src="{{post.image}}" alt="" class="w-full max-h-96">
+                    </div>
+                    <div class="comment-and-like">
+                        <div class="flex p-3 justify-between hienthi-like-comment text-white">
+                            <div class="hover:cursor-pointer">
+                                <i class="fa-solid fa-thumbs-up" style="color: blue;" (click)="handlelike(1,post.id_post,post.id_user)"></i> {{post.totallike}}                      
+                            </div>
+                            <div class="hover:underline hover:cursor-pointer">
+                                <p>
+                                    {{post.totalcomment}} bình luận
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between p-3 text-white">
+                            <div class="flex gap-2 items-center hover:cursor-pointer">
+                                <i class="fa-regular fa-thumbs-up"  ></i>thích
+                            </div>
+                            <div class="hover:cursor-pointer">
+                                <i class="fa-regular fa-comment"></i> viết bình luận
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex text-white item-user-commnt gap-2 mt-4" *ngFor="let cmt of allcmt">
+                            <img src="{{cmt.avatar}}" alt="" class="w-10 h-10 rounded-full" routerLink="/profileuser/{{cmt.id_user}}">
+                            <div class="content relative">
+                                <p routerLink="/profileuser/{{cmt.id_user}}" class="username-cmt">{{cmt.username}}</p>
+                                <p>{{cmt.content}}</p>
+                                <div class="flex items-center absolute date-comment">
+                                    <p class="">{{cmt.date}}</p>
+                                    <i class="fa-solid fa-trash hover:cursor-pointer" (click)="deletecomment(cmt._id)"></i>
+                                </div>
+                                <div>
+                                    <img src="{{cmt.image}}" alt="" class="image-comment">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    </div>
+                    
+                </div>
+                <div class="textxa-comment">
+                    <div class="absolute bottom-24 right-4 flex gap-2" *ngIf="imageselected != '' ">
+                        <img [src]="imageselected" alt="" class="img-select-comment">
+                        <i class="bi bi-x-lg text-white hover:cursor-pointer"></i>
+                    </div>
+                    <div class="absolute div-button-submit-comment">
+                        <button class="" (click)="handlecomment()">gửi</button>
+                    </div>
+                    <form [formGroup]="formcomment" (ngSubmit)="handlecomment()">
+                        <label for="file-upload" class="custom-file-upload absolute bottom-5 left-6">
+                            <i class="fa-solid fa-image"></i> Ảnh
+                        </label>
+                        <input id="file-upload" type="file" (change)="onFileChange($event)"/>
+                        <textarea name="" id="" placeholder="viết bình luận" formControlName="content"></textarea>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- xem cảm xúc -->
+
+    <div *ngIf="openforminteract">
+        <div class="w-full h-full lammo-comment lammo absolute top-0 left-0 hover:cursor-pointer">
+
+        </div>
+        <div class="absolute view-comment rounded-sm">
+            <div class="p-2">
+                <div>
+                    <div class="flex items-center justify-between p-3 div-title-post">
+                        <p class="title-post-incomment">xem cảm xúc bài viết của {{userpost?.username}}</p>
+                        <i class="bi bi-x-lg" (click)="dong()"></i>
+                    </div>
+
+                </div>
+                <div class="text-white flex items-center gap-2 option-icon-camxuc">
+                    <div (click)="tatca()" class="flex items-center gap-1 " [ngClass]="{'active': currentseen === 'tatca'}">
+                        <p>tất cả</p>
+                    </div>
+                    <div class="flex items-center gap-1" (click)="seenlike()"  [ngClass]="{'active': currentseen === 'like'}">
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                        <p>thích</p>
+                    </div>
+                    <div class="flex items-center gap-1"(click)="seenfavorite()" [ngClass]="{'active': currentseen === 'favorite'}">
+                        <i class="fa-solid fa-heart" style="color: red;" ></i>
+                        <p>yêu thích</p>
+                    </div>
+                    <div class="flex items-center gap-1" (click)="seenhaha()" [ngClass]="{'active': currentseen === 'haha'}">
+                        <i class="fa-solid fa-face-smile" style="color: yellow;"  ></i>
+                        <p>haha</p>
+                    </div>
+                    <div class="flex items-center gap-1" (click)="seensaid()" [ngClass]="{'active': currentseen === 'said'}">
+                        <i class="fa-solid fa-face-frown" style="color:orange;"  ></i>
+                        <p>buồn</p>
+                    </div>
+                    <div class="flex items-center gap-1" (click)="seenangry()" [ngClass]="{'active': currentseen === 'angry'}">
+                        <i class="fa-solid fa-face-angry" style="color: #f25c2e;"  ></i>
+                        <p>phẫn nộ</p>
+                    </div>
+                    <div class="flex items-center gap-1" (click)="seenwow()" [ngClass]="{'active': currentseen === 'wow'}">
+                        <i class="fa-solid fa-face-surprise"  style="color: pink;"  ></i>
+                        <p>wow</p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="w-full div-list-camxuc overflow-y-scroll">
+                <div class="item-user-camxuc flex justify-between m-2" *ngFor="let user of userlike">
+                    <div class="relative flex gap-2 items-center infor-nguoithacamxuc">
+                        <img src="{{user.avatar}}" alt="" class="w-10 h-10 rounded-full">
+                        <div class="name-user">
+                            <p>{{user.username}}</p>
+                            <p *ngIf="user.banchung > 0" class="banchung"> {{user.banchung}} ban chung</p>
+                        </div>
+                        <i class="fa-solid fa-thumbs-up absolute item-icon-camxuc-nguoitha" style="color: blue;" *ngIf="user.type ===1"></i>
+                        <i class="fa-solid fa-heart absolute item-icon-camxuc-nguoitha" style="color: red;" *ngIf="user.type ===2"></i>
+                        <i class="fa-solid fa-face-laugh-beam absolute item-icon-camxuc-nguoitha" style="color: yellow;" *ngIf="user.type ===3"></i>
+                        <i class="fa-solid fa-face-frown-open absolute item-icon-camxuc-nguoitha" style="color: orange;" *ngIf="user.type ===4"></i>
+                        <i class="fa-solid fa-face-angry absolute item-icon-camxuc-nguoitha" style="color: #f25c2e;" *ngIf="user.type ===5"></i>
+                        <i class="fa-solid fa-face-surprise absolute item-icon-camxuc-nguoitha" style="color: yellow;" *ngIf="user.type ===6"></i>
+
+
+    
+                    </div>
+                    <div class="button-friend">
+                        <button *ngIf="user.status === 0" class="bg-blue-700 p-1 rounded-sm">thêm bạn bè</button>
+                        <button  *ngIf="user.status === 1" style="background-color: blue;">chấp nhận</button>
+                        <button  *ngIf="user.status === 2" style="background-color: rgb(101, 99, 97);">hủy lời mời</button>
+                        <button  *ngIf="user.status === 3" style="background-color: rgb(101, 99, 97);">bạn bè</button>
+                        <button  *ngIf="user.status === 4" style="background-color: rgb(101, 99, 97)">trang cá nhân</button>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="div2-home overflow-y-scroll overflow-x-hidden"
+    infiniteScroll
+       [infiniteScrollDistance]="3"
+       [infiniteScrollThrottle]="500"
+       [scrollWindow]="false"
+       (scrolled)="onScroll()"
+    >
+        
+        <div class="div-story mt-2   ">
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+            <div class="item-story relative">
+
+                <div class="div-img-video-story">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="rounded-lg ">
+                    <p>tên người đăng</p>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="div-up-story p-1 mt-2">
+            <div class="flex items-center gap-2 m-2">
+                <img [src]="profileuser.avatar || 'default-avatar.png'" alt="" class="w-10 h-10 rounded-full">
+                <input type="text" placeholder="bạn muốn đăng gì" class="h-10 w-full rounded-full pl-2 hover:cursor-pointer banmuondanggi">
+            </div>
+
+<!-- ĐĂNG POST -->
+
+
+            <!-- <div >
+                <div class="form-input-story">
+                    <div class="flex justify-between title-form">
+                        <h1>tạo bài viết</h1>
+                        <i class="bi bi-x-lg"></i>
+                    </div>
+                    <div class="flex items-center gap-2 m-2">
+                        <div>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="w-10 h-10 rounded-full">
+
+                        </div>
+                        <div class="div-option-post">
+                            <p>tên của bạn</p>
+                            <select class="custom-select">
+                                <option value="1">Công khai</option>
+                                <option value="2">Bạn bè</option>
+                                <option value="3">Chỉ mình tôi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-textarea">
+                        <form>
+                            <textarea name="" id="" placeholder="bạn muốn đăng gì"></textarea>
+
+                        </form>
+                        <label for="file-upload" class="custom-file-upload absolute bottom-0 left-1">
+                            <i class="fa-solid fa-image"></i> Ảnh
+                        </label>
+                        <input id="file-upload" type="file" (change)="onFileChange($event)"/>
+                        <div class="absolute bottom-0 left-16 flex gap-1">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69cJJLNvrYMmmpK4pjx71vxqST-cjw-ucaQ&s" alt="" class="img-select-uppost">
+                            <i class="bi bi-x-lg hover:cursor-pointer"></i>
+                        </div>
+                        <div class="absolute bottom-0 right-2">
+                            <button class="bg-blue-700  flex items-center justify-center rounded-md p-2 px-4">Đăng</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute w-full h-full top-0 left-0 hover:cursor-pointer  lammo">
+
+                </div>
+            </div> -->
+
+
+        </div>
+        <div class="div-post mt-2">
+            <div class="newfeed">
+                <div class="mt-2 detail-newfeed p-2" *ngFor="let post of allpostnewfeed, let i = index">
+                    <div class="flex items-center  justify-between">
+                        <div class="flex gap-1 m-1" routerLink="/profileuser/{{post.id_user}}">
+                            <img src="{{post.avatar}}" alt="" class="w-10 h-10 rounded-full p-1 bg-gray-500">
+                            <div class="infor-user-post">
+                                <p>{{post.username}}</p>
+                                <p>{{post.date}}</p>
+                            </div>
+                        </div>
+                        <div class="w-6 h-6 flex justify-center items-center rounded-full hover:cursor-pointer close-post">
+                            <i class="bi bi-x-lg"></i>
+                        </div>
+                    </div>
+                    <div class="content-post">
+                        <p>{{post.content}} </p>
+                    </div>
+                    <div class="img-post hover:cursor-pointer" *ngIf="post.image !== '' ">
+                        <img src="{{post.image}}" alt="" class="w-full h-full">
+                    </div>
+                    <div class="flex p-2 justify-between hienthi-like-comment"> 
+                        <div class="hover:cursor-pointer" (click)="openinteract(post.id_post, post.id_user)">
+                            <i class="fa-solid fa-thumbs-up" style="color: blue;" (click)="handlelike(1,post.id_post,post.id_user)"></i> {{post.totallike}}                     
+                        </div>
+                        <div class="hover:underline hover:cursor-pointer" (click)="mobinhluan(post.id_post,post.id_user)">
+                            <p>
+                                {{post.totalcomment}} bình luận
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between p-2">
+                        <div class="flex gap-2 items-center hover:cursor-pointer relative" 
+                        (mouseenter)="onMouseEnter(i)" 
+                        (mouseleave)="onMouseLeave(i)">
+                            <div *ngIf="post.typelike === 0" (click)="handlelike(1,post.id_post,post.id_user)" class="flex gap-2 items-center"> <i class="fa-regular fa-thumbs-up"  ></i><p>thích</p> </div>
+                            <div *ngIf="post.typelike === 1" (click)="deletelike(post.id_post)" class="flex gap-2 items-center"><i class="fa-solid fa-thumbs-up"  style="color: blue;" ></i>thích</div>
+                            <div *ngIf="post.typelike === 2" (click)="deletelike(post.id_post)" class="flex gap-2 items-center"><i class="fa-solid fa-heart" style="color: red;" ></i>yêu thích</div>
+                            <div *ngIf="post.typelike === 3" (click)="deletelike(post.id_post)" class="flex gap-2 items-center"><i class="fa-solid fa-face-laugh-beam" style="color: yellow;" ></i>haha</div>
+                            <div *ngIf="post.typelike === 4" (click)="deletelike(post.id_post)" class="flex gap-2 items-center"> <i class="fa-solid fa-face-frown-open" style="color: orange;" ></i>buồn</div>
+                            <div *ngIf="post.typelike === 5" (click)="deletelike(post.id_post)" class="flex gap-2 items-center"><i class="fa-solid fa-face-angry" style="color: #f25c2e;" ></i>phẫn nộ</div>
+                            <div *ngIf="post.typelike === 6" (click)="deletelike(post.id_post)" class="flex gap-2 items-center"><i class="fa-solid fa-face-surprise" style="color: yellow;" ></i>wow</div>
+                            <div class="absolute flex gap-2 list-item-icon-hover " *ngIf="post.ishover" (mouseenter)="onMouseEnter(i)"
+                            (mouseleave)="onMouseLeave(i)">
+                                <i class="fa-solid fa-thumbs-up" style="color: blue;" (click)="handlelike(1,post.id_post,post.id_user)"></i>
+                                <i class="fa-solid fa-heart" style="color: red;"  (click)="handlelike(2,post.id_post,post.id_user)"></i>
+                                <i class="fa-solid fa-face-smile" style="color: yellow;"  (click)="handlelike(3,post.id_post,post.id_user)"></i>
+                                <i class="fa-solid fa-face-frown" style="color:orange;"  (click)="handlelike(4,post.id_post,post.id_user)"></i>
+                                <i class="fa-solid fa-face-angry" style="color: #f25c2e;"  (click)="handlelike(5,post.id_post,post.id_user)"></i>
+                                <i class="fa-solid fa-face-surprise"  style="color: pink;"  (click)="handlelike(6,post.id_post,post.id_user)"></i>
+                            </div>
+                        </div>
+                        <div class="hover:cursor-pointer" (click)="mobinhluan(post.id_post,post.id_user)">
+                            <i class="fa-regular fa-comment"></i> viết bình luận
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
+                <div class="mt-2 detail-newfeed p-2 h-96" *ngIf="divloadpost">
+
+                    <div class="border-round  surface-border p-4 surface-card">
+                        <div class="flex mb-3">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2 p-skeleton-circle bg-gray-500"/>
+                            <div>
+                                <p-skeleton width="10rem" styleClass="mb-2 bg-gray-500" />
+                                <p-skeleton width="5rem" styleClass="mb-2 bg-gray-500" />
+                                <p-skeleton height=".5rem" styleClass=" bg-gray-500"/>
+                            </div>
+                        </div>
+                        <p-skeleton width="100%" height="250px" styleClass=" bg-gray-500"/>
+                        
+                    </div>
+                </div>
+
+
+                <div class="mt-2 detail-newfeed h-96  flex items-center justify-items-center" *ngIf="!divloadpost">
+
+                    <p class="text-xl">bạn đã xem hết bào viết, hãy thêm bạn bè hoặc theo giõi người khác để xem thêm bài viết</p>
+                    
+                </div>
+
+                
+
+                
+
+                
+            </div>
+        </div>
+    </div>
+    <div class="div3-home overflow-y-scroll">
+        <div class="p-2 border-b flex justify-between nguoilienhe">
+            <p>người liên hệ</p>
+            <form class="relative">
+                <input type="text" [(ngModel)]="searchText" (focus)="hideIcon()" (blur)="showIcon()" class="daira">
+                <i class="bi bi-search absolute left-1" *ngIf="showSearchIcon" (click)="hideIcon()"></i>
+            </form>
+        </div>
+        <div *ngFor="let friend of isfriendonline" >
+            <div class="flex items-center gap-2 p-2 infor-user-online hover:cursor-pointer relative" routerLink="/profileuser/{{friend._id}}">
+                <img src="{{friend.avatar}}" alt="" class=" w-10 h-10 rounded-full" >
+                <div class="flex flex-col name-user-p">
+                    <p>{{friend.username}}</p>
+                    <p>{{friend.banchung}} bạn chung</p>
+                </div>
+                <div *ngIf="friend.online === 1" class="hienonl"></div>
+            </div>
+        </div>
+        
+
+    </div>
+</main>
+
+
+<!-- <main >
+    <div class="notification"></div>
+    <div class="errnotification"></div>
+
+    <div class="nav">
+        <div class="menu">
+        <ul>
+            <li *ngIf="profileuser" routerLink="/profileme">
+                <img [src]="profileuser.avatar || 'default-avatar.png'" alt="">
+                {{ profileuser.username || 'Unknown User' }}
+            </li>
+        <li routerLink="/friend"><i class="bi bi-people-fill"></i>bạn bè</li>
+        <li><i class="bi bi-clipboard-heart-fill"></i>kỷ niệm</li>
+        <li><i class="bi bi-bookmark-check-fill"></i>đã lưu</li>
+        <li><i class="fa-solid fa-users"></i>nhóm</li>
+        <li><i class="bi bi-file-earmark-play"></i>video</li>
+        <li><i class="fa-solid fa-shop"></i>marketplace</li>
+        <li><i class="bi bi-journal-text"></i>bảng feed</li>
+        <li><i class="bi bi-chevron-compact-down"></i>xem thêm</li>
+    </ul>
+        </div>
+            <div class="group"> 
+                <p>lối tắt của bạn </p>
+                <ul>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 1</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 2</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 3</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 4</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 5</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 1</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 1</li>
+                    <li><img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">nhóm 1</li>
+                    <li><i class="bi bi-chevron-compact-down"></i>xem thêm</li>
+                </ul>
+            </div>
+ 
+    </div>
+
+
+
+    <div class="content"
+    infiniteScroll
+       [infiniteScrollDistance]="3"
+       [infiniteScrollThrottle]="500"
+       [scrollWindow]="false"
+       (scrolled)="onScroll()"
+    >
+
+      <div style="overflow-x:scroll ;">
+        <div class="story"  [ngStyle]="{'left.px': position}">
+            <ul >
+                <li *ngIf="storyme" routerLink="/stories/{{storyme._id}}">
+                        <img src="{{profileuser.avatar}}" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
+                        <video id="videotest"  controls  *ngIf="storyme">
+                            <source  src="{{storyme!.linkvideo || ''}}" type="video/mp4">
+
+                        </video>
+                        <p> elon musk</p> <br>
+                        <p>tạo tin</p>
+
+                   
+                    </li>
+                    <li *ngIf="!storyme" >
+                        <img src="{{profileuser?.avatar}}" alt="" class="anhdaidien" style="background-color: rgb(86, 83, 80);">
+                        <video id="videotest"  controls  *ngIf="storyme">
+                            <source  src="{{storyme!.linkvideo || ''}}" type="video/mp4">
+
+                        </video>
+                        <p> elon musk</p> <br>
+                        <p>tạo tin</p>
+
+                   
+                    </li>
+    
+                    <li *ngFor="let story of story">
+                        <img src="{{story.avatar}}" alt="" class="anhdaidien">
+                        <video id="videotest"  controls routerLink="/stories/{{story._id}}">
+                            <source type="video/mp4" src="{{story.linkvideo}}" >
+                        
+                        </video>
+                    </li>
+                   
+                
+    
+            </ul>
+      
+       
+
+
+       </div>
+      </div>
+       <div  *ngIf="trove" class="xemthems" (click)="quaylai()" ><i class="bi bi-arrow-left"></i></div>
+       <div class="xemthem" (click)="togglePosition()"><i class="bi bi-arrow-right-short"></i></div>
+
+
+       <div class="addblog">
+        <div class="blog">
+            <img src="https://i.pinimg.com/originals/9a/63/e1/9a63e148aaff53532b045f6d1f09d762.webp" alt="">
+            <input type="text" placeholder="bạn nghĩ gì" (click)="openformstory()">
+        </div>
+        <div class="optionblog">
+            <ul>
+                <li><i class="fa-solid fa-video"></i>video trực tiếp</li>
+                <li><i class="fa-solid fa-image"></i>ảnh </li>
+                <li><i class="fa-solid fa-face-smile"></i>cảm xúc/hoạt động</li>
+            </ul>
+        </div>
+       </div>
+      
+       <div class="newfeed" *ngFor="let post of allpostnewfeed, let i = index">
+        <div class="thongtin" routerLink="/profileuser/{{post.id_user}}">
+            <div class="hinhanh">           
+                <img src="{{post.avatar}}" alt="">
+               
+            </div>
+            <div class="chitietthongtin">
+                <div>
+                    <p>{{post.username}}</p>
+                    <h6>{{post.date}}</h6>
+                </div>
+            </div>
+            <div class="luachon">
+                <i class="bi bi-list"></i>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+
+        <div class="baidang">
+            <p class="noidungbaidang">
+                {{post.content}}
+            </p>
+            <div class="hinhanhbaidang" *ngIf="post.image !== '' ">
+                <img src="{{post.image}}" alt="">
+            </div>
+            <div class="luotlike">
+                <div class="cacicon">            
+                    <p class="xemlike" (click)="openinteract(post.id_post, post.id_user)" >{{post.totallike}} tương tác</p>
+                </div>
+                <div  class="xembl" (click)="mobinhluan(post.id_post,post.id_user)">
+                    {{post.totalcomment}} bình luận
+                </div>
+                <div class="xemshare">
+                    {{post.totalshare}} lượt chia sẻ
+                </div>
+            </div>
+            <div class="like">
+                
+                <div class="handdlike" 
+                (mouseenter)="onMouseEnter(i)" 
+                (mouseleave)="onMouseLeave(i)">
+               <div *ngIf="post.typelike === 0" (click)="handlelike(1,post.id_post,post.id_user)"> <i class="fa-regular fa-thumbs-up"  ></i>thích </div>
+               <div *ngIf="post.typelike === 1" (click)="deletelike(post.id_post)"><i class="fa-solid fa-thumbs-up"  style="color: blue;" ></i>thích</div>
+                <div *ngIf="post.typelike === 2" (click)="deletelike(post.id_post)"><i class="fa-solid fa-heart" style="color: red;" ></i>yêu thích</div>
+                <div *ngIf="post.typelike === 3" (click)="deletelike(post.id_post)"><i class="fa-solid fa-face-laugh-beam" style="color: yellow;" ></i>haha</div>
+               <div *ngIf="post.typelike === 4" (click)="deletelike(post.id_post)"> <i class="fa-solid fa-face-frown-open" style="color: orange;" ></i>buồn</div>
+                <div *ngIf="post.typelike === 5" (click)="deletelike(post.id_post)"><i class="fa-solid fa-face-angry" style="color: #f25c2e;" ></i>phẫn nộ</div>
+                <div *ngIf="post.typelike === 6" (click)="deletelike(post.id_post)"><i class="fa-solid fa-face-surprise" style="color: yellow;" ></i>wow</div>
+                    <div class="allicon" *ngIf="post.ishover">
+                        <i class="fa-solid fa-thumbs-up" style="color: blue;" (click)="handlelike(1,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-heart" style="color: red;"  (click)="handlelike(2,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-smile" style="color: yellow;"  (click)="handlelike(3,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-frown" style="color:orange;"  (click)="handlelike(4,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-angry" style="color: #f25c2e;"  (click)="handlelike(5,post.id_post,post.id_user)"></i>
+                        <i class="fa-solid fa-face-surprise"  style="color: pink;"  (click)="handlelike(6,post.id_post,post.id_user)"></i>
+                    </div></div>
+                <div class="handdcmt" (click)="mobinhluan(post.id_post,post.id_user)"><i class="fa-regular fa-comment"></i> bình luận</div>
+                <div class="handdshare"><i class="fa-regular fa-share-from-square"></i> chia sẻ</div>
+
+            </div>
+
+
+        </div>
+        
+      
+
+</div>
+
+
+<div class="endnewfeed">
+    
+        <h3>bạn đã xem hết bài viết, hãy thêm bạn bè hoặc theo giõi người khác để xem thêm bài viết của hộ, cảm ơn bạn đã trải nghiệm ứng dụng của tôi </h3>
+  
+
+</div>
+
+
+
+
+    <div style="height: 100px;"></div>
+   
+
+
+       
+
+       <div class="formbinhluan" *ngIf="openbinhluan">
+        
+        <div class="isloading" *ngIf="loadcomment" style="width: 100%; height: 100%;">
+                <div class="item">
+                  <div class="spinner"></div>
+                </div>
+              
+        </div>
+
+        <div class="" *ngIf="!loadcomment">
+            <div class="baivietcuaai">
+                <i></i>
+                <h4>bài viết của {{post.username}}</h4>
+                <i class="fa-solid fa-xmark" (click)="dongbinhluan()"></i>
+    
+            </div>
+           
+           
+            <div class="thongtinnguoivietbai">
+                 <div class="hinhvatennguoiviet">
+                    <div class="hinhanhnguoiviet">
+                        <img src="{{post.avatar}}" alt="">
+    
+                    </div>
+                    <div class="tennguoiviet">
+                        <p>{{post.username}}</p>
+                        <p>{{post.date}}</p>
+                    </div>
+                 </div>
+                   
+                    <div class="tuychon">
+                        <i class="bi bi-list"></i>
+                    </div>
+                  
+             </div>
+             <div style="color: white;" class="tieude">
+                <p>{{post.content}} </p>
+            </div>
+             <div class="anhbiaviet">
+                <img src="{{post.image}}" alt="">
+             </div>
+             <div class="tuongtacbaiviet">
+                <div class="camxucbaiviet">
+                    <i class="fa-solid fa-thumbs-up" style="color: blue;"></i>
+                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                    <p class="xemlike">{{post.totallike}} </p>
+                </div>
+              
+                <div class="sobinhluan">
+                    <p>{{post.totalcomment}} bình luận</p>
+                </div>
+                <div class="sochiase">
+                    <p>{{post.totalshare}} luọt chia sẻ</p>
+                </div>
+             </div>
+    
+            
+             <div class="docbinhluan" *ngFor="let cmt of allcmt">
+    
+                <div class="hinhnguoibinhluan" routerLink="/profileuser/{{cmt.id_user}}">
+                    
+                    <img src="{{cmt.avatar}}" alt="">
+    
+                </div>
+                <div class="chitietbinhluan">
+                    <div class="ok">
+                        
+                        <div class="div-cmt-detailuser">
+                            <p>{{cmt.username}}</p>
+                        <p>{{cmt.content}}</p>
+                        </div>
+                        <div class="div-icon-trash" *ngIf="cmt.id_user === profileuser._id">
+                            <i class="fa-solid fa-trash" (click)="deletecomment(cmt._id)"></i>
+                           
+                        </div>
+                        
+                    </div>
+                   <div class="image-cmt" *ngIf="cmt.image != '' ">
+                        <p class="imagecoment"><img src="{{cmt.image}}" alt=""></p>
+                   </div>
+                   <div class="div-likecmt">
+                    <i class="fa-solid fa-reply"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <p>{{cmt.date}}</p>
+                   </div>
+    
+                    
+                </div> 
+                <div>
+    
+                </div>
+                
+            </div>
+           
+    
+    
+    
+    
+            
+    
+        
+             <div class="formdienbinhluan">
+                <img class="avataruser" src="{{profileuser.avatar}}" alt="">
+                <form [formGroup]="formcomment" (ngSubmit)="handlecomment()">
+    
+                <div class="text-input">
+                    <textarea placeholder="viết bình luận" formControlName="content">
+    
+                    </textarea>
+                    
+                    <label for="file-upload" class="custom-file-upload">
+                        <i class="fa-solid fa-image" type="submit"></i> 
+                    </label>
+                    <input id="file-upload" type="file" (change)="onFileChange($event)" />
+                    <img class="input-image" *ngIf="imageselected != '' " [src]="imageselected" alt="">
+    
+                    <button>
+                        <i class="fa-solid fa-paper-plane" *ngIf="!isloadhandlecmt"></i>
+        
+                    </button>
+                    <div class="loader" *ngIf="isloadhandlecmt"></div>
+    
+                </div>
+    
+    
+                 </form>
+    
+             </div>
+        </div>
+
+
+         
+        </div>
+       
+       
+       
+       
+        <div class="confirmation-deletecmt" *ngIf="confirmationdeletecmt">
+            <div class="loader" style="width: 40px; height: 40px;top: 40%;left: 45%; position: absolute;transform: translate(-50%);" *ngIf="isloadhandlecmt">
+
+            </div>
+
+            <div *ngIf="!isloadhandlecmt">
+                <p>bạn muốn xóa bình luận</p>
+                <div class="button-confirmation-deletecmt">
+                    <button (click)="confirmdeletecmt()">xóa</button>
+                    <button (click)="destroydelete()">hủy</button>
+                </div>
+            </div>
+        </div> 
+
+
+
+        <div class="formcamxuc" *ngIf="openforminteract">
+            
+            <div class="baivietcuaai">
+                <i></i>
+                <h4>bài viết của {{userpost?.username}}</h4>
+                <i class="fa-solid fa-xmark" (click)="dong()"></i>
+    
+            </div>
+            <div class="loaicamxuc">
+                <p (click)="tatca()" [ngClass]="{'active': currentseen === 'tatca'}">tất cả ({{post.totallike}})</p>
+                <p (click)="seenlike()"  [ngClass]="{'active': currentseen === 'like'}"><i class="fa-solid fa-thumbs-up"  style="color: blue;" ></i></p>
+                <p (click)="seenfavorite()" [ngClass]="{'active': currentseen === 'favorite'}"><i class="fa-solid fa-heart" style="color: red;" ></i></p>
+                <p (click)="seenhaha()" [ngClass]="{'active': currentseen === 'haha'}"><i class="fa-solid fa-face-laugh-beam" style="color: yellow;" ></i></p>
+                <p (click)="seensaid()" [ngClass]="{'active': currentseen === 'said'}"><i class="fa-solid fa-face-frown-open" style="color: orange;" ></i></p>
+                <p (click)="seenangry()" [ngClass]="{'active': currentseen === 'angry'}"><i class="fa-solid fa-face-angry" style="color: #f25c2e;" ></i></p>
+                <p (click)="seenwow()" [ngClass]="{'active': currentseen === 'wow'}"><i class="fa-solid fa-face-surprise" style="color: yellow;" ></i></p>
+            </div>
+            <div class="nguoithacamxuc" *ngFor="let user of userlike">
+               <div class="thongtin">
+                <div class="hinh">
+                    <img src="{{user.avatar}}" alt="">
+                    <i class="fa-solid fa-thumbs-up"  style="color: blue;" *ngIf="user.type ===1" ></i>
+                    <i class="fa-solid fa-heart" style="color: red;" *ngIf="user.type ===2"></i>
+                    <i class="fa-solid fa-face-laugh-beam" style="color: yellow;" *ngIf="user.type ===3"></i>
+                    <i class="fa-solid fa-face-frown-open" style="color: orange;" *ngIf="user.type ===4"></i>
+                    <i class="fa-solid fa-face-angry" style="color: #f25c2e;" *ngIf="user.type ===5"></i>
+                    <i class="fa-solid fa-face-surprise" style="color: yellow;" *ngIf="user.type ===6"></i>
+                </div>
+                <div class="ten">
+                    <p>{{user.username}}</p>
+                    <p *ngIf="user.banchung > 0">{{user.banchung}} bạn chung</p>
+                </div>
+               </div>
+                <div class="banbe">
+                    <button *ngIf="user.status === 0" style="background-color: blue;">thêm bạn bè</button>
+                    <button  *ngIf="user.status === 1" style="background-color: blue;">chấp nhận</button>
+                    <button  *ngIf="user.status === 2" style="background-color: rgb(101, 99, 97);">hủy lời mời</button>
+                    <button  *ngIf="user.status === 3" style="background-color: rgb(101, 99, 97);">bạn bè</button>
+                    <button  *ngIf="user.status === 4" style="background-color: rgb(101, 99, 97)">trang cá nhân</button>
+
+                </div>
+            </div>
+         
+            
+        </div>
+    </div>
+
+
+
+
+    
+    <div class="noti">
+        <div class="quangcao">
+            <p>được tài trợ</p>
+            <ul>
+                <li class="thongtinquangcao"><img src="https://i.imgur.com/qV5uuOz.jpg" alt=""><h6>quảng cáo 1</h6></li>
+                <li class="thongtinquangcao"><img src="https://i.imgur.com/qV5uuOz.jpg" alt=""><h6>quảng cáo 2</h6></li>
+            </ul>
+        </div>
+        <div class="thongbao">
+            <h5>sinh nhật</h5>
+            <div class="thongtinsinhnhat">
+                <i class="fa-solid fa-cake-candles"></i>
+                <p>hôm nay là sinh nhật của .....</p>
+            </div>            
+        </div>
+        <div class="banbedangonline" *ngIf="isfriendonline">
+            <div class="tuychon">
+                <div class="nguoilienhe">
+                    <h6>người liên hệ</h6>
+
+                </div>
+                <div class="theli">
+                    
+                    <i class="bi bi-search"></i>
+                    <i class="bi bi-list"></i>
+
+                </div>
+
+            </div>
+            <div class="thongtinbanbe" *ngFor="let friend of isfriendonline" >
+                <img src="{{friend.avatar}}" alt="" routerLink="/profileuser/{{friend._id}}">
+                <div class="hienonl" *ngIf="friend.online === 1"></div>
+                <p>{{friend.username}}</p>
+            </div>
+           
+        </div> 
+    </div>
+
+
+    <div class="formaddstory" *ngIf="formstory">
+        <div class="load">
+            <div *ngIf="isloading">đang tạo tin, vui lòng đợi <div class="loader" ></div></div>
+
+
+        </div>
+        
+
+       <div *ngIf="!isloading">
+        <h4>tạo tin</h4>
+        <div>
+           
+            <label for="file-upload" class="custom-file-upload">
+                <i class="fa-solid fa-image" type="submit"></i>video 
+            </label>
+            <input id="file-upload" type="file" (change)="onFileChange($event)" />
+        </div>
+        <div class="buttonstoty">
+            <button (click)="handlepoststory()">đăng</button>
+            <button (click)="closeformstory()">hủy</button>
+        </div>
+       </div>
+        </div>
+
+</main> -->

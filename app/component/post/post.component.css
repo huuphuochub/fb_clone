@@ -1,0 +1,159 @@
+.divpost{
+    position: absolute;
+    margin: 100px 25% 0 25%;
+    width: 50%;
+    height: 600px;
+    background-color: #222222;
+    border-radius: 10px;
+    overflow-y: scroll;
+    color: white;
+}
+.baiviet{
+    border-bottom:1px solid #555555 ;
+    padding: 10px;
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+
+    top: 0;
+    background-color: #222222;
+}
+.thongtin .user img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin: 10px 5px 10px 10px;
+}
+.thongtin .user{
+    display: flex;
+    align-items: center;
+}
+.thongtin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* border-bottom:1px solid #222222 ; */
+}
+.thongtin .iclose{
+    margin-right: 20px;
+    font-size: 20px;
+}
+.user .divp p{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    
+}
+.user .divp p:first-child{
+        font-size: 15px;
+        font-weight: bold;
+    
+}
+.content{
+    font-size: 15px;
+    margin-left: 10px;
+}
+.hinhpost{
+    width: auto;            /* Tự động chiều rộng để phù hợp với kích thước của hình ảnh */
+    height: 500px;      
+    display: flex;    /* Chiều cao cố định */
+    overflow: hidden;       /* Ẩn các phần hình ảnh bị tràn ra ngoài khung chứa */
+    background-color: #222222;
+    align-items: center;
+    justify-content: center;/* Căn giữa hình ảnh theo chiều ngang */
+
+}
+.hinhpost img{
+    height: 100%;           /* Đảm bảo hình ảnh chiếm toàn bộ chiều cao của khung chứa */
+    width: auto;            /* Chiều rộng của hình ảnh tự động để giữ tỷ lệ gốc */
+    object-fit: cover; 
+    text-align: center;
+    border-radius: 10px;
+}
+.like{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 15px;
+    border-bottom:1px solid #555555 ;
+}
+.comment .usercomment img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin: 10px 5px 5px 10px;
+}
+.comment {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.comment .usercmt p{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    
+}
+
+.comment .usercmt p:first-child{
+   font-weight: bold;
+    
+}
+
+.comment .usercmt{
+    padding: 5px;
+    background-color: #555555;
+    border-radius: 10px;
+}
+::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #f2f2f8;
+    border-radius: 10px;
+}
+input[type="file"] {
+    display: none;
+
+  }
+  
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .formbinhluan {
+    padding-top: 10px;
+    border-top:1px solid #555555 ;
+    position: relative;
+    position: sticky;
+    bottom: 0;
+    background-color: #222222;
+  }
+  .formbinhluan form{
+    display: flex;
+    align-items: center;
+  }
+  .formbinhluan form textarea{
+    margin-left: 20px;
+    width: 80%;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #555555;
+  }
+  textarea::placeholder{
+    color: white;
+  }
+  .formbinhluan form label{
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+  }
+  .formbinhluan form button{
+        padding: 14px;
+        border-radius: 10px;
+  }

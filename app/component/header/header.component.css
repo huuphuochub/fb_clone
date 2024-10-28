@@ -1,0 +1,360 @@
+:root{
+    --color-backgorund:black;
+    --color-background2: #222222;
+    --color-backgrounds:#444444;
+    --color-border:#444444;
+    --color-text:#918f8f;
+    --color-test:white;
+}
+
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: #222222;
+    border-bottom:1px solid #444444  ;
+}
+.p-huy{
+    background-color: #444444;
+    border-radius: 50px;
+    color: #918f8f;
+}
+.bi-facebook{
+    color: blue;
+    font-size: 40px;
+}
+.bi-search{
+    font-size: 20px;
+    color: #918f8f;
+}
+.inputsearch{
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 50px;
+    background-color: #444444;
+}
+.list-item-header div{
+    padding: 4px 40px;
+    border-radius: 10px;
+}
+.list-item-header div:hover{
+    background-color: #444444 ;
+}
+.list-item-header i{
+    color: #918f8f;
+    font-size: 30px;
+}
+.list-item-two-header i{
+    font-size: 30px;
+    color: #918f8f;
+}
+.list-item-two-header div{
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 10px;
+
+}
+.list-item-two-header div:hover{
+    background-color: #444444;    
+}
+/* .bisearchs{
+    display: none;
+}
+.bisearchs:hover{
+    cursor: pointer;
+} */
+@media only screen and (min-width: 1199px) {
+    .form-search-two{
+        display: none;
+    }
+    .p-huy{
+        display: none;
+    }
+
+  }
+  .form-search-two{
+    
+    position: absolute;
+    top: -13px;
+    
+}
+@media only screen and (max-width: 1199px) {
+    .list-item-header div{
+        padding: 4px 20px;
+    }
+    .list-item-two-header div{
+        padding: 4px 10px;
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+   .form-search{
+    display: none;
+   }
+   .bisearchs{
+    display: block;
+    font-size: 20px;
+    position: absolute; /* Đảm bảo vị trí là absolute */
+    top: 50%; /* Đặt nó ở giữa chiều cao của phần tử cha */
+    left: 10px; /* Điều chỉnh khoảng cách từ bên trái nếu cần */
+    transform: translateY(-50%);
+    padding: 0 5px;
+    background-color: #444444;
+    border-radius: 50px;
+   }
+
+  }
+  @media only screen and (max-width: 750px) {
+    .list-item-header{
+        display: none;
+    }
+ 
+   }
+   .messenger{
+    height:  90vh;
+    width: 300px;
+    background-color: #222222;
+    top: 50px;
+    z-index: 500;
+   }
+   .notification{
+    height:  90vh;
+    width: 300px;
+    background-color: #222222;
+    top: 50px;
+    z-index: 500;
+   }
+   .title-chat{
+    font-size: 20px;
+    padding: 10px;
+   }
+.input-search-chat{
+    width: 100%;
+    height: 30px;
+    border-radius: 50px;
+    padding-left: 10px;
+}
+.button-option-chat button{
+    background-color: #444444;
+    color: #918f8f;
+    padding: 5px;
+    border-radius: 10px;
+}
+.div-p-nemuser p{
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 13px;
+}
+.div-p-nemuser p:first-child{
+    font-weight: bold;
+}
+.item-chat-user:hover{
+    background-color: #444444;
+    cursor: pointer;
+}
+.overflow-y-scroll{
+    height: 100%;
+}
+.scrolls-chat{
+    flex-grow: 1;
+}
+::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #262628;
+    border-radius: 10px;
+}
+.div-title-notìication {
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+}
+.container-noti{
+    height: 100%;
+    width: 100%;
+}
+.chuadoc{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: blue;
+}
+.dadoc{
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+.content-noti {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.content-noti:hover{
+    background-color: #444444;
+    cursor: pointer;
+    
+}
+.setting{
+    height:  auto;
+    width: 300px;
+    background-color: #222222;
+    top: 50px;
+    z-index: 500;
+}
+.setting-name{
+    color: white;
+}
+.bi-gear{
+    font-size: 20px;
+}
+.logout-setting{
+    color: white;
+    font-size: 20px;
+}
+.logout-setting:hover{
+    background-color: #444444;
+    cursor: pointer;
+}
+.chat{
+    right: 320px;
+    bottom: 0;
+    border-radius: 10px;
+    z-index: 600;
+    width: 280px;
+    height: 550px;
+    max-height: 450px;
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+}
+@media only screen and (max-width: 620px) {
+    .chat{
+        right: 20px;
+        bottom: 10px;
+        border-radius: 10px;
+        z-index: 600;
+        width: 280px;
+        height: 550px;
+        max-height: 450px;
+        background-color: #222222;
+        display: flex;
+        flex-direction: column;
+    }
+  }
+.div-infor-chat p{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    color: white;
+}
+input[type="file"] {
+    display: none;
+    color: white;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    z-index: 700;
+    border-right: 1px solid #444444;
+    color: green;
+  }
+.form-input-chat button{
+    background-color: blue;
+}
+.content-chat{
+    flex-grow: 1; /* Chiếm phần còn lại của div cha */
+}
+.img-input-chat{
+    height: 100px;
+    max-height: 200px;    
+    position: absolute;
+    bottom: 50px;
+    overflow: hidden; /* Ẩn bất kỳ phần nào của hình ảnh vượt quá */
+    left: 10px;
+    border: 1px solid #918f8f;
+    padding: 5px;
+
+}
+.img-input-chat img {
+    height: 100%; /* Đặt chiều cao của hình ảnh bằng với chiều cao của div cha */
+    width: auto; /* Giữ tỷ lệ khung hình */
+    object-fit: cover; /* Cắt hình ảnh nếu cần thiết */
+}
+.item-content-chat{
+    display: flex;
+
+    justify-content: start;
+
+}
+.item-content-chat p{
+    font-size: 13px;
+    color: white;
+    padding: 5px;
+    background-color: #918f8f;
+    border-radius: 20px 20px 20px 0px;
+    margin: 5px 15px 5px 5px;
+}
+.item-content-chat-me{
+    display: flex;
+
+    justify-content: end;
+
+}
+.item-content-chat-me p{
+    font-size: 13px;
+    color: white;
+    padding: 5px;
+    background-color: blue;
+    border-radius: 20px 20px 0 20px;
+    margin: 5px 5px 5px 15px;
+}
+.content-me img{
+    max-height: 150px;
+    float: right;
+    margin-right: 5px;
+}
+.content img{
+    max-height: 150px;
+    float: left;
+    margin-left: 5px;
+}
+.p-group-chat img{
+    float: right;
+    border-radius: 10px;
+}
+.hienonl{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: green;
+    bottom: 0;
+    right: 0;
+}
+.item-user-add-group{
+    padding: 5px;
+    border-radius: 10px;
+    /* background-color: #444444; */
+
+}
+.item-user-add-group:hover{
+    background-color: #444444;
+    cursor: pointer;
+}
+.button-huy-or-ok button{
+    padding: 5px 10px;
+    background-color: red;
+    border-radius: 10px;
+
+}
+.button-huy-or-ok button:first-child{
+    background-color: blue;
+}
+.so-thong-bao{
+    font-size: 10px;
+    color: white;
+}

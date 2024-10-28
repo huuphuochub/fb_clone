@@ -1,0 +1,129 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Toàn bộ phần chính */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+
+/* Container cho form đăng nhập */
+.formlogin {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Logo và tiêu đề */
+.formlogin .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.formlogin .logo i {
+    font-size: 50px;
+    margin-right: 10px;
+}
+
+.formlogin .logo h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Form nhập liệu */
+.formnhap form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formnhap form div {
+    margin-bottom: 20px;
+}
+
+/* Label và thông báo lỗi */
+.formnhap form label {
+    font-size: 14px;
+    color: #333;
+    display: block; /* Đảm bảo label nằm trên dòng riêng biệt */
+}
+
+.formnhap form p {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+/* Input cho form */
+.formnhap form input[type="text"],
+.formnhap form input[type="password"] {
+    display: block; /* Đảm bảo input nằm trên dòng riêng biệt */
+    width: 100%; /* Đảm bảo input chiếm toàn bộ chiều ngang */
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  /* Tạo khoảng cách dưới cho input */
+}
+/* Nút đăng nhập và hủy */
+.formnhap form div:last-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.formnhap form button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formnhap form button:first-child {
+    background-color: #1877f2;
+    color: #fff;
+}
+
+.formnhap form button:first-child:hover {
+    background-color: #165ec9;
+}
+
+.formnhap form button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.formnhap form button:last-child:hover {
+    background-color: #bbb;
+}
+
+/* Liên kết đăng ký và quên mật khẩu */
+.formnhap div:last-child {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.formnhap div:last-child a {
+    color: #1877f2;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.formnhap div:last-child a:hover {
+    color: #165ec9;
+}
