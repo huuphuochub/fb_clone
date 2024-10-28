@@ -1,0 +1,610 @@
+main{
+    display: flex;
+    margin-top: 50px;
+    width: 99vw;
+    height: 92.5vh;
+    background-color: black;
+}
+.div1-home{
+    width: 25%;
+    height: 100%;
+    background-color: black;
+}
+.div2-home{
+    flex-grow: 1;
+    height: 100%;
+    background-color: black;
+    color: #918f8f;
+}
+.div3-home{
+    width: 25%;
+    height: 100%;
+    background-color: black;
+    color: #918f8f;
+}
+@media only screen and (max-width: 1000px) {
+    .div1-home{
+        display: none;
+    }
+    .div2-home{
+        width: 70%;
+        
+    }
+    .div3-home{
+        flex-grow: 1;
+        
+    }
+  }
+  @media only screen and (max-width: 750px) {
+
+    .div2-home{
+        width: 100%;
+        
+    }
+    .div3-home{
+        display: none;
+    }
+  }
+
+  .list-item-divhome1 div{
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 10px;
+    
+  }
+  .list-item-divhome1 div:hover{
+    background-color: #222222;
+
+    
+  }
+
+  .list-item-divhome1 div i{
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+  }
+  ::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #262628;
+    border-radius: 10px;
+}
+.div2-home .div-story .item-story{
+    width: 150px;
+    height: 230px;
+    /* background-color: aquamarine; */
+    border-radius: 10px;
+    flex-shrink: 0; 
+    overflow: hidden; 
+    background-color: #444444;
+
+}
+.div2-home .div-story{
+    display: flex;
+    gap: 4px;
+    max-width: 738px;
+    overflow-x: scroll;
+    overflow-y: hidden; 
+
+}
+.div-img-video-story {
+    height: 100%; 
+    transition: transform 0.2s ease; /* Thêm hiệu ứng chuyển tiếp */
+
+}
+.item-story .div-img-video-story .rounded-lg {
+    width: auto; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.div-img-video-story p{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 200px;
+    left: 8px;
+}
+.div-img-video-story:hover{
+    cursor: pointer;
+    transform: scale(1.05); 
+
+}
+.lammo{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.form-input-story{
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: #222222;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    z-index: 1000;
+    color: white;
+}
+@media only screen and (max-width: 600px) {
+
+    .form-input-story{
+        width: 100%;
+    }
+  }
+.form-input-story .title-form i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #444444;
+}
+.form-input-story .title-form i:hover{
+    cursor: pointer;
+}
+.form-input-story .title-form h1{
+    font-size: 20px;
+    font-weight: bold;
+}
+.title-form{
+    padding:  10px;
+    border-bottom: 1px solid #444444;
+}
+.form-textarea textarea{
+    width: 100%;
+    height: 300px;
+    background-color: #222222;
+}
+.custom-select {
+    font-size: 12px;
+    padding: 2px;
+    width: 70px; /* Đặt chiều rộng */
+    border: 1px solid #ccc; /* Đặt viền */
+    border-radius: 5px; /* Bo góc */
+    background-color: #444444; /* Màu nền */
+    appearance: none; /* Xóa giao diện mặc định */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Vị trí mũi tên */
+}
+
+.custom-select option {
+    font-size: 12px;
+    padding: 10px; /* Thêm khoảng cách cho tùy chọn */
+}
+input[type="file"] {
+    display: none;
+    color: white;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    z-index: 700;
+    color: green;
+  }
+.img-select-uppost{
+    width: 150px;
+    height: 100px;
+}
+.infor-user-post p{
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+.infor-user-post p:first-child{
+    font-size: 15px;
+    font-weight: bold;
+}
+.close-post:hover{
+    background-color: #444444;
+}
+.img-post{
+    text-align: center;
+    overflow: hidden;
+}
+.img-post img{
+    /* height: auto; */
+    max-height: 400px;
+    width: 100%;
+}
+.div-up-story{
+    background-color: #222222;
+}
+.detail-newfeed{
+    background-color: #222222;
+}
+.hienthi-like-comment{
+    border-bottom:0.5px solid #444444 ;
+}
+.banmuondanggi{
+    background-color: #444444;
+}
+.infor-user-online .name-user-p p{
+    font-size: 12px;
+}
+.infor-user-online .name-user-p p:first-child{
+    font-weight: bold;
+}
+.infor-user-online:hover{
+    background-color: #444444;
+}
+.infor-user-online .hienonl{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgb(62, 221, 62);
+    top: 40px;
+    left: 37px;
+}
+.lammo-comment{
+    z-index: 500;
+}
+.view-comment{
+    width: 50%;
+    height: 600px;
+    background-color: #222222;
+    z-index: 600;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 1000px) {
+    .view-comment{
+
+        width: 70%;
+        height: 600px;
+
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    .view-comment{
+
+        width: 100%;
+        height: 600px;
+
+    }
+  }
+  .title-post-incomment{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+  .div-title-post{
+    border-bottom: 0.5px solid #444444;
+  }
+  .div-title-post i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #444444;
+    border-radius: 50px;
+    color: #918f8f;
+  }
+  .infor-user-post-incomment p{
+    color: white;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+  }
+  .infor-user-post-incomment p:first-child{
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .content-post{
+    font-size: 15px;
+    color: white;
+    margin-left: 8px;
+    margin-bottom: 10px;
+  }
+  .div-coment-post{
+    height: 431.4px;
+    overflow-y: scroll;
+  }
+.item-user-commnt .content p{
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+
+}
+.item-user-commnt .content .username-cmt:first-child{
+    font-size: 15px;
+    font-weight: bold;
+}
+.item-user-commnt .content{
+    min-width: 80px;
+    padding: 10px;
+    background-color: #444444;
+    border-radius: 10px;
+}
+
+.textxa-comment textarea{
+    width: 100%;
+    height: 70px;
+    background-color: #444444;
+    border-radius: 10px;
+}
+.textxa-comment{
+    padding: 10px;
+}
+.img-select-comment{
+    width: 100px;
+    height: 70px;
+}
+.div-button-submit-comment button{
+    padding:5px  15px;
+    background-color: blue;
+    border-radius: 10px;
+}
+.div-button-submit-comment{
+    bottom: 20px;
+    right: 20px;
+}
+.nguoilienhe input{
+    background-color: #444444;
+    border-radius: 40px;
+    padding-left: 10px;
+}
+@media only screen and (max-width: 1250px) {
+    .nguoilienhe input{
+        width: 100px;
+    }
+  }
+  @media only screen and (max-width: 1060px) {
+    .nguoilienhe input{
+        width: 25px;
+    }
+    .nguoilienhe input:focus {
+        width: 100px; /* Chiều rộng khi focus */
+    }
+    .nguoilienhe input::placeholder{
+        display: none !important; 
+    }
+  }
+.list-item-icon-hover{
+    /* position: absolute; */
+    bottom: 30px;
+    left: 0;
+    background-color: #222222;
+    /* padding: 5px; */
+    border-radius: 50px;
+}
+.list-item-icon-hover i{
+    font-size: 20px;
+    
+}
+.option-icon-camxuc{
+    padding: 10px 0;
+}
+.option-icon-camxuc .items-center{
+    padding: 5px;
+    background-color: #444444;
+    border-radius: 10px;
+}
+.option-icon-camxuc p{
+    font-size: 12px;
+}
+.option-icon-camxuc .items-center:hover{
+    cursor: pointer;
+}
+.div-list-camxuc{
+    height: 469px;
+}
+@media only screen and (max-width: 535px) {
+    .option-icon-camxuc p{
+        display: none;
+    }
+    .option-icon-camxuc p:first-child{
+        display: block;
+    }
+  }
+
+  .infor-nguoithacamxuc{
+    color: white;
+  }
+  .infor-nguoithacamxuc .name-user p:first-child{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .item-icon-camxuc-nguoitha{
+    position: absolute;
+    font-size: 15px;
+    bottom: 0;
+    left: 30px;
+  }
+  .banchung{
+    font-size: 12px;
+  }
+  .item-user-camxuc{
+    padding: 5px 0;
+    border-radius: 10px;
+  }
+  .item-user-camxuc:hover{
+    background-color: #444444;
+    cursor: pointer;
+  }
+  .option-icon-camxuc .active{
+    background-color: blue;
+  }
+  .image-comment {
+    max-height: 200px;
+  }
+  .fa-trash{
+    position: absolute;
+    right: 0;
+  }
+  .date-comment{
+    right: 0;
+    bottom: -15px;
+    left: 0;
+    font-size: 12px;
+}
+.button-friend button{
+    padding: 5px;
+    border-radius: 10px;
+}
+.p-skeleton-circle {
+    background-color: red !important; /* Thêm !important để đảm bảo */
+}
+.div-option-post-or-story{
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    background-color: #222222;
+    z-index: 500;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.bi-facebook{
+    font-size: 70px;
+    color: blue;
+}
+.div-option-post-or-story button{
+    padding: 3px 7px;
+    background-color: blue;
+    border-radius: 10px;
+
+}
+.icon-close{
+    width: 30px;
+    height: 30px;
+    background-color: #444444;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-video-story{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: auto;
+
+}
+.div-video-story video{
+    max-width: 200px;
+    max-height: 200px;
+
+}
+.button-story{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.button-story button{
+    padding:3px 10px;
+    border-radius: 10px;
+    background-color: blue;
+}
+.button-story button:hover{
+    background-color: rgb(117, 117, 246);
+}
+.notification,
+.errnotification {
+    display: none;
+  position: fixed; /* Đặt vị trí cố định */
+  right: 20px; /* Cách từ bên phải */
+  top: 100px; /* Cách từ trên */
+  background-color: #4CAF50; /* Màu nền cho thông báo thành công */
+  color: white; /* Màu chữ */
+  padding: 15px; /* Khoảng cách bên trong */
+  border-radius: 5px; /* Bo góc */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng chuyển động */
+  opacity: 1; /* Độ mờ ban đầu */
+}
+
+.errnotification {
+  background-color: #f44336; /* Màu nền cho thông báo lỗi */
+}
+
+.notification.hidden,
+.errnotification.hidden {
+  opacity: 0; /* Độ mờ khi ẩn */
+  transform: translateY(-100%); /* Di chuyển lên trên */
+}
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Canh giữa nội dung */
+    height: 100%; /* Chiếm toàn bộ chiều cao màn hình */
+    position: fixed; /* Đặt vị trí cố định */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999; /* Đặt trên cùng để luôn hiển thị */
+}
+
+.loading-message {
+    font-size: 1.5rem; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+    animation: fadeIn 0.5s ease-in-out; /* Hiệu ứng hiện lên */
+    display: flex;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Di chuyển lên một chút khi hiện */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Đặt lại vị trí ban đầu */
+    }
+}
+
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #3498db; /* Màu sắc cho phần trên */
+    border-radius: 50%;
+    width: 24px; /* Đường kính của spinner */
+    height: 24px;
+    animation: spin 1s linear infinite; /* Hiệu ứng quay */
+    margin-right: 10px; /* Khoảng cách giữa spinner và chữ */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-message:hover {
+    animation: bounce 0.5s infinite; /* Hiệu ứng nhảy lên khi hover */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0); /* Về vị trí ban đầu */
+    }
+    40% {
+        transform: translateY(-10px); /* Nhảy lên */
+    }
+    60% {
+        transform: translateY(-5px); /* Nhảy lên một chút nữa */
+    }
+}
+
+.alkjdkas i{
+    font-size: 20px;
+}

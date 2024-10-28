@@ -1,0 +1,214 @@
+<main>
+   <div class="divmain">
+    <div class="div-div-main">
+        <div class="optionfriend">
+            <p [ngClass]="{'active': current === 'banbe'}" (click)="loadfriend()">tất cả bạn</p>
+            <p [ngClass]="{'active': current === 'loimoikb'}" (click)="loimoiketban()">lời mời kết bạn</p>
+            <p [ngClass]="{'active': current === 'daguiloimoi'}" (click)="daguiloimoi()">đã gửi lời mời</p>
+            <p [ngClass]="{'active': current === 'dangtheogioi'}" (click)="dangtheogioi()">người theo giõi</p>
+            <p [ngClass]="{'active': current === 'datheogioi'}" (click)="datheogioi()">đã theo giõi</p>
+        </div>
+        <div class="listitem" *ngIf="isTatcaban && !isloading">
+            <p style="color: white; margin-left: 20px;">        {{Tatcaban.length}}
+            </p>
+            <div class="item" *ngFor="let user of Tatcaban">
+                <div class="itemnameandimg" routerLink="/profileuser/{{user._id}}">
+                    <div class="itemimg">
+                        <img src="{{user.avatar}}" alt="">
+                        <div class="hienonl" *ngIf="user.online === 1"></div>
+    
+                    </div>
+                    <div class="itemname">
+                        <p>{{user.username}}</p>
+                        <p *ngIf="user.banchung>0">{{user.banchung}} bạn chung</p>
+                    </div>
+                </div>
+                <div class="itembutton">
+                    <div class="listitembutton">
+                        <button *ngIf="user.status === 0">thêm bạn bè</button>
+                        <button *ngIf="user.status === 2">hủy</button>
+                        <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
+                        <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                        <button *ngIf="user.folower === 1" (click)="handlefolow(user._id)">theo giõi lại</button>
+                        <button *ngIf="user.folower === 2" style="background-color: rgb(58, 59, 61);">hủy theo giõi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="listitem" *ngIf="isLoimoiketban">
+            <p style="color: white; margin-left: 20px;">        {{Loimoiketban.length}}
+            </p>
+            <div class="item" *ngFor="let user of Loimoiketban">
+                <div class="itemnameandimg" routerLink="/profileuser/{{user._id}}">
+                    <div class="itemimg">
+                        <img src="{{user.avatar}}" alt="">
+                        <div class="hienonl" *ngIf="user.online === 1"></div>
+    
+                    </div>
+                    <div class="itemname">
+                        <p>{{user.username}}</p>
+                        <p *ngIf="user.banchung>0">{{user.banchung}} bạn chung</p>
+                    </div>
+                </div>
+                <div class="itembutton">
+                    <div class="listitembutton">
+                        <button *ngIf="user.status === 0">thêm bạn bè</button>
+                        <button *ngIf="user.status === 2">hủy</button>
+                        <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
+                        <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                        <button *ngIf="user.folower === 1" (click)="handlefolow(user._id)">theo giõi lại</button>
+                        <button *ngIf="user.folower === 2" style="background-color: rgb(58, 59, 61);">hủy theo giõi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="listitem" *ngIf="isDaguiloimoi">
+            <p style="color: white; margin-left: 20px;">        {{Daguiloimoi.length}}
+            </p>
+            <div class="item" *ngFor="let user of Daguiloimoi">
+                <div class="itemnameandimg" routerLink="/profileuser/{{user._id}}">
+                    <div class="itemimg">
+                        <img src="{{user.avatar}}" alt="">
+                        <div class="hienonl" *ngIf="user.online === 1"></div>
+    
+                    </div>
+                    <div class="itemname">
+                        <p>{{user.username}}</p>
+                        <p *ngIf="user.banchung>0">{{user.banchung}} bạn chung</p>
+                    </div>
+                </div>
+                <div class="itembutton">
+                    <div class="listitembutton">
+                        <button *ngIf="user.status === 0">thêm bạn bè</button>
+                        <button *ngIf="user.status === 2">hủy</button>
+                        <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
+                        <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                        <button *ngIf="user.folower === 1" (click)="handlefolow(user._id)">theo giõi lại</button>
+                        <button *ngIf="user.folower === 2" style="background-color: rgb(58, 59, 61);">hủy theo giõi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="listitem" *ngIf="isNguoitheogioi && !isloading">
+            <p style="color: white; margin-left: 20px;">        {{Nguoitheogioi.length}}
+            </p>
+            <div class="item" *ngFor="let user of Nguoitheogioi">
+                <div class="itemnameandimg" routerLink="/profileuser/{{user._id}}">
+                    <div class="itemimg">
+                        <img src="{{user.avatar}}" alt="">
+                        <div class="hienonl" *ngIf="user.online === 1"></div>
+    
+                    </div>
+                    <div class="itemname">
+                        <p>{{user.username}}</p>
+                        <p *ngIf="user.banchung>0">{{user.banchung}} bạn chung</p>
+                    </div>
+                </div>
+                <div class="itembutton">
+                    <div class="listitembutton">
+                        <button *ngIf="user.status === 0">thêm bạn bè</button>
+                        <button *ngIf="user.status === 2">hủy</button>
+                        <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
+                        <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                        <button *ngIf="user.folower === 1" (click)="handlefolow(user._id)">theo giõi lại</button>
+                        <button *ngIf="user.folower === 2" style="background-color: rgb(58, 59, 61);">hủy theo giõi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="listitem" *ngIf="isloading">
+            <div class="border-round surface-border p-4 surface-card">
+                <ul class="m-0 p-0 list-none">
+                    <li class="mb-3">
+                        <div class="flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2 bg-gray-500" />
+                            <div style="flex: 1">
+                                <p-skeleton width="100%" styleClass="mb-2 bg-gray-500" />
+                                <p-skeleton width="75%" styleClass="bg-gray-500" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="mb-3">
+                        <div class="flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2 bg-gray-500" />
+                            <div style="flex: 1">
+                                <p-skeleton width="100%" styleClass="mb-2 bg-gray-500" />
+                                <p-skeleton width="75%" styleClass="bg-gray-500" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="mb-3">
+                        <div class="flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2 bg-gray-500" />
+                            <div style="flex: 1">
+                                <p-skeleton width="100%" styleClass="mb-2 bg-gray-500" />
+                                <p-skeleton width="75%" styleClass="bg-gray-500" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="mb-3">
+                        <div class="flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2 bg-gray-500" />
+                            <div style="flex: 1">
+                                <p-skeleton width="100%" styleClass="mb-2 bg-gray-500" />
+                                <p-skeleton width="75%" styleClass="bg-gray-500" />
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="listitem" *ngIf="isDatheogiioi && !isloading">
+            <p style="color: white; margin-left: 20px;">        {{Datheogiioi.length}}
+            </p>
+            <div class="item" *ngFor="let user of Datheogiioi">
+                <div class="itemnameandimg" routerLink="/profileuser/{{user._id}}">
+                    <div class="itemimg">
+                        <img src="{{user.avatar}}" alt="">
+                        <div class="hienonl" *ngIf="user.online === 1"></div>
+    
+                    </div>
+                    <div class="itemname">
+                        <p>{{user.username}}</p>
+                        <p *ngIf="user.banchung>0">{{user.banchung}} bạn chung</p>
+                    </div>
+                </div>
+                <div class="itembutton">
+                    <div class="listitembutton">
+                        <button *ngIf="user.status === 0">thêm bạn bè</button>
+                        <button *ngIf="user.status === 2">hủy</button>
+                        <button *ngIf="user.status === 1" (click)="acpfriend(user.id_friend,user._id)">chấp nhận</button><button *ngIf="user.status === 1" style="background-color: rgb(76, 78, 79);">xóa</button>
+                        <button *ngIf="user.status === 3" style="background-color: rgb(58, 59, 61);">bạn bè</button>
+                        <button *ngIf="user.folower === 1" (click)="handlefolow(user._id)">theo giõi lại</button>
+                        <button *ngIf="user.folower === 2" style="background-color: rgb(58, 59, 61);">hủy theo giõi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+</main>

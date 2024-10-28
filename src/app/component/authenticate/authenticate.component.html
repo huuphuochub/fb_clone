@@ -1,0 +1,58 @@
+<main>
+    <form [formGroup]="formlogin"  (ngSubmit)="nopotp()">
+        <div class="otp-container">
+            <h2>Nhập mã OTP</h2>
+            <p >thời gian: {{thoigianconlai}} giây</p>
+            <p>Nhập mã OTP gồm 6 số bạn nhận được</p>
+            <!-- <p>do form bị lỗi thuật toán nên mọi người nhập lại số cuối nha</p> -->
+            <p style="color: red;" *ngIf="saimaotp">sai mã otp, vui lòng nhập lại</p>
+            <div class="otp-inputs">
+                <input #inputField type="text"  (input)="onInput()" value="{{valuein1}}">
+                <!-- <input #inputFields type="text" maxlength="1" (input)="onInput1()"> -->
+                <!-- <input #inputField1 type="text" maxlength="1" (input)="onInputs()" style="display: none;"> -->
+    
+                <input #isnputField1 type="text" (input)="onInputs()" value="{{valuein2}}">
+                <input #insputField2 type="text" (input)="onInputss()" value="{{valuein3}}">
+                <input #inpsutField3 type="text"   (input)="onInputsss()" value="{{valuein4}}">
+                <input #insputField4 type="text"   (input)="onInputssss()" value="{{valuein5}}">
+                <input #inpsutField5 type="text" maxlength="1"  (input)="onInputsssss()" value="{{valuein6}}">
+
+                
+                <input #inpsutField3 type="text"  (input)="onInputsss()" value="{{valuein4}}" style="display: none;">
+    
+    
+            </div>
+            <button >Xác nhận</button>
+        </div>
+    </form>
+    <div class="formlogin" *ngIf="hienformpassword">
+        <div class="logo">
+            <i class="bi bi-facebook" style="color: blue;"></i> 
+            <h3>đăng nhập phở bò</h3>
+        </div>
+        <div class="formnhap" >
+            <form [formGroup]="formpassword" (ngSubmit)="dangky()">
+                <div>
+                        <label for="">mật khẩu</label> <br>
+                        <p *ngIf="loipassword">mật khẩu phải từ 8 kí tự trở lên</p>
+
+                        <input type="text" placeholder="nhập mật khẩu"  formControlName="password"><br>
+                        <label for="">mật lại khẩu</label> <br>
+                        <p *ngIf="loicfpassword">mật khẩu nhập lại k đúng</p>
+
+                      
+                        <input type="text" placeholder="nhập lại mật khẩu" formControlName="cfpassword"><br>
+                                        
+                        
+                </div>
+                <div>
+                    <button>xác nhận</button>
+                    <button>hủy</button>
+                </div>
+            </form>
+            <div>
+                <a routerLink="/login">đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</main>

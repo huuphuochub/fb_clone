@@ -1,0 +1,31 @@
+
+
+
+<main>
+    <div class="formlogin">
+        <div class="logo">
+            <i class="bi bi-facebook" style="color: blue;"></i> 
+            <h3>đăng nhập phở bò</h3>
+        </div>
+        <div class="formnhap">
+            <form [formGroup]="formemail" (ngSubmit)="checkemail()">
+                <div>
+                        <!-- <p>email đăng nhập không đúng</p> -->
+                        <label for="">nhập email</label> <br>
+                        <p *ngIf="loiemail" style="color: red;">vui lòng nhập đúng email</p>
+                        <p *ngIf="emailtontai" style="color: red;">email này đã đc đăng kí tài khoản khác</p>
+                        <input type="text" placeholder="nhập email" formControlName="email"><br>
+                                        
+                        
+                </div>
+                <div>
+                    <button>xác nhận email</button>
+                    <button>hủy</button>
+                </div>
+            </form>
+            <div>
+                <a routerLink="/login">đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</main>

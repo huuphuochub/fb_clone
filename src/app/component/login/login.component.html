@@ -1,0 +1,31 @@
+<main>
+    <div class="formlogin">
+        <div class="logo">
+            <i class="bi bi-facebook" style="color: blue;"></i> 
+            <h3>đăng nhập phở bò</h3>
+        </div>
+        <div class="formnhap">
+            <form [formGroup]="formlogin" (ngSubmit)="handlelogin()">
+                <div>   
+                        <p style="color: red;" *ngIf="loi">{{loi}}</p>
+                        <p *ngIf="erremail">email đăng nhập không đúng</p>
+                        <label for="">đăng nhập bằng email</label> <br>
+                        <input #inputField type="text" placeholder="nhập email" formControlName="email" ><br>
+                    
+                        <p *ngIf="errmatkhau">mật khẩu phải từ 8 kí tự trở lên</p> <br>
+                        <label for="" >mật khẩu</label> <br>
+                        <input #inputField2 type="password" placeholder="nhập mật khẩu" (input)="onInputs()" formControlName="password">
+                        
+                </div>
+                <div>
+                    <button>đăng nhập</button>
+                    <button>hủy</button>
+                </div>
+            </form>
+            <div>
+                <a routerLink="/regsiter">đăng ký</a>
+                <a href="">quên mật khẩu</a>
+            </div>
+        </div>
+    </div>
+</main>

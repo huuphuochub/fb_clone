@@ -1,0 +1,139 @@
+main{
+  position: relative;
+    top: 70px;
+    width: 100%;
+    height: 90vh;
+    /* align-items: center; */
+    background-color: #444444;
+    display: flex;
+    color: white;
+    
+}
+
+.divstory{
+    position: absolute;
+    top: 10px;
+    width: 23%;
+    height:auto;
+    margin: 0 37.5% 0 37.5% ;
+    border-radius: 10px;
+}
+.divstory #videotest{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.avataruser img{
+  
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  margin: 10px;
+}
+.avataruser {
+  position: absolute;
+  top: 10px;
+  display: flex;
+  align-items: center;
+}
+.avatarviewer .divp{
+  display: flex;
+}
+.avataruser .divp p{
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+.avatarviewer .divp p{
+  margin: 0 5px;
+}
+.avataruser .divp p:first-child{
+  font-size: 15px;
+  font-weight: bold;
+}
+.allicon{
+  text-align: center;
+}
+.allicon i{
+  margin: 0 15px;
+  font-size: 20px;
+  
+
+}
+.viewer{
+  margin: 0  20px;
+  padding-right: 70px;
+  position: absolute;
+  top: 100px;
+  height: 550px;
+  overflow-y: scroll;
+}
+.avatarviewer{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.avatarviewer p{
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+.avatarviewer img{
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  margin: 5px
+}
+.closestory{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.nextstory{
+  position: absolute;
+  right: 0px;
+}
+.nextstory i{
+  font-size: 20px;
+  margin-right: 20px;
+
+}
+.nextavataruser{
+  display: flex;
+  margin: 5px;
+
+}
+.nextavataruser p{
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  margin-right: 10px;
+}
+.nextavataruser img{
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  margin: 5px;
+}
+/* 
+#videotest::-webkit-media-controls {
+    display: none !important;
+  }
+  #videotest::-moz-media-controls {
+    display: none !important;
+  }
+  #videotest::-ms-media-controls {
+    display: none !important;
+  }
+  #videotest::-o-media-controls {
+    display: none !important;
+  } */
+
+  ::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #262628;
+    border-radius: 10px;
+}

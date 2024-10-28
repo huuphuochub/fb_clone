@@ -1,0 +1,79 @@
+.divsetprofile {
+    width: 50%;
+    max-width: 800px;
+    height: auto;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.divsetprofile h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.divsetprofile h5 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.divsetprofile p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.divsetprofile img {
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.divsetprofile input[type="file"] {
+    display: block;
+    margin: 10px auto;
+}
+
+.divsetprofile input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.divsetprofile button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.divsetprofile button:hover {
+    background-color: #0056b3;
+}
+
+.divsetprofiles {
+    width: 50%;
+    max-width: 800px;
+    height: 50%;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

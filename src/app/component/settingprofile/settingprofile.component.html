@@ -1,0 +1,16 @@
+<div class="divsetprofile">
+    <h2>chào mừng bạn đến với phở bò</h2>
+    <h5>hãy cập nhật thông tin của bạn</h5>
+    <p>ảnh đại diện</p>
+    <form [formGroup]="formname" (ngSubmit)="handlesetting()">
+
+    <img [src]="avatarUrl" alt="" width="100px" height="100px">
+    <input type="file" (change)="onFileChange($event)">
+        <p *ngIf="loiname" style="color: red;">vui lòng nhập tên của bạn để tiếp tục</p>
+    <input type="text" placeholder="hãy nhập tên của bạn" formControlName="username"><br>
+    <button >tiếp tục</button>
+</form>
+</div>
+<div class="divsetprofiles" *ngIf="isloading">
+   <h1>loading...</h1>
+</div>
