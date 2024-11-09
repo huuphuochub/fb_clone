@@ -141,6 +141,8 @@ export class PostBehaviorSubject {
 
 getlike(){
   this.Likeservice.getalllikeme(this.id_me,this.arrlike).subscribe(data =>{
+    // console.log('chay tiep ne');
+    
     this.arrlikepost.next(data)
   })
 }
@@ -250,6 +252,8 @@ getlike(){
       });
       
       // console.log(okla);
+      // console.log('chay nef');
+      
       this.allpost.next(okla); // Emit the result to `allpost` BehaviorSubject
     });
   }

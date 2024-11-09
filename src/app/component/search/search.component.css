@@ -1,143 +1,112 @@
-main{
-    width: 100%;
-    position: absolute;
-    margin-top: 70px;
-    display: grid;
-    grid-template-columns: 20% 80%;
-
-}
-.phan1{
-    background-color: #222222;
+.div1-search{
+    width: 25%;
+    color: white;
+    border-right:1px solid #444444 ;
     height: 92vh;
-    overflow: hidden;
-    top: 70px;
-    color: white;
 
-    position: sticky;
 }
-.phan1 .tieude{
-   margin: 10px;
-   border-bottom: 1px solid #555555 ;
+
+.div2-search{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+
 }
-.phan1 .tuychonboloc ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+
+.option-filter-div2 p{
+    padding: 10px;
+}
+.option-filter-div2 p:hover{
+   background-color: #444444;
+   cursor: pointer;
+}
+@media only screen and (max-width: 1040px) {
+    .div1-search{
+        display: none;
+    }
+    .div2-search{
+        width: 100%;
+    }
+
+  }
+  .option-filter-div2{
+    display: none;
+    color: white;
+    border-bottom:1px solid #444444 ;
+    font-size: 15px;
+    gap: 10px;
+}
+@media only screen and (max-width: 1040px) {
+   
+    .option-filter-div2{
+        display: block;
+    }
+  }
+.div1-search h1{
+    font-size: 30px;
+    font-weight: bold;
+}
+.div1-title{
+    padding: 10px;
+    border-bottom: 1px solid #444444;
+}
+.option-filter{
     font-size: 20px;
 }
-.phan1 .tuychonboloc li{
-    margin: 10px;
+.option-filter p{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
 }
-.phan1 .tuychonboloc li:hover{
+.option-filter p:hover{
+   background-color: #444444;
+   cursor: pointer;
+}
+.option-filter h2{
+    padding: 10px;
+}
+.option-filter i{
+    font-size: 25px;
+}
+.container-content{
+    width: 600px;
+}
+.list-item-search{
+    color: white;
+    padding: 10px;
+
+}
+.list-item-search:hover{
+    background-color: #444444;
     cursor: pointer;
-    background-color: #555555;
-}
-.truonghopdacbiet{
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-
-.phan2{
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 20px;
-    border-radius: 10px;
-}
-.phan2 .thongtin{
-    color: white;
-    background-color: #222222;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-.phan2 .searchuser{
-    display: grid;
-    grid-template-columns: 17% 63% 20%;
-    margin: 10px;
-    align-items: center;
-    border: 1px solid #555555;
-    border-radius: 10px;
-}
-
-.phan2 .searchuser img{
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
-    margin-left: 30px;
-}
-.phan2 .searchuser button{
-    color: white;
-    width: 130px;
-    background-color: blue;
-    height: 50px;
-    border-radius: 10px;
-
-}
-.searchuser .okla{
-    position: relative;
-    display: flex;
-}
-.searchuser .okla .hienonl{
-    top: 100px;
-    width: 12px;
-    height: 12px;
-    margin-left: -13px;
-    margin-top: 40px;
-    border-radius: 50px;
-    height: 12px;
-    background-color: rgb(105, 237, 105);
     
+}
+.name-friend p{
+    font-size: 12px;
 
 }
-.phan2 .thongtinuser h5{
- margin: 0;
- padding: 0;
+.name-friend p:first-child{
+    font-size: 15px;
+    font-weight: bold;
 }
-.baiviet{
-    background-color: #222222;
-    border: 2px solid #555555;
-    border-radius: 10px;
-}
-.baiviet .anhbaiviet img{
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-.phan2 .searchbaiviet{
-    align-items: center;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-}
-.phan2 .searchbaiviet img{
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    margin-left: 10px;
-}
-.phan2 .searchbaiviet h5{
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-.phan2 .luotlike{
-    display: grid;
-    grid-template-columns: 60% 24% 16%;
-    color: white;
-    margin: 15px 0 0 20px;
-}
-.cacicon{
+.btn-friend{
     display: flex;
+    gap: 5px;
 }
-.phan2 .luotlike{
-    border-bottom:1px solid #2b2b2b; ;
-
+.btn-friend button{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: aqua;
 }
-.phan2 .luotlike i {
-    font-size: 20px;
-    margin: 3px;
+.online{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(34, 221, 34);
+    border-radius: 10px;
+    bottom: 0;
+    left: 38px;
+}
+.aldjnasd{
+    background-color: #222222;
 }

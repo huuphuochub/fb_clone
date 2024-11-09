@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit{
     private activeStateService:ActiveStateService, private sharedataservice:Sharedataservice,private friendservice:Friendservice, private messengerservice:Messengerservice){}
 ngOnInit(): void {
   // this.socketservice.sendOnlineStatus(this.id_user);
-
+  this.loading = true;
   this.id_user = localStorage.getItem('id_user')
   this.activeStateService.setCurrentPage('');
   this.fetchalldataa();
@@ -59,12 +59,14 @@ fetchalldataa(){
 
 fetachdata(){
   this.UserBehaviorSubject.alluser$.subscribe(data =>{
+    console.log(data);
+    
     if(!data || data.length ===0){
       this.loading=true
       // this.fetchtatcaloimoi()
     }else{
       this.listuserhoanchinh = data;
-      // console.log(data);
+      console.log(data);
       this.loading = false
     }
    

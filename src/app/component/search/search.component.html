@@ -1,4 +1,69 @@
-<main>
+<main class="flex mt-12">
+    <div class="div1-search">
+        <div class="div1-title">
+            <h1>ket qua tim kiem</h1>
+        </div>
+        <div class="option-filter">
+            <h2>bo loc</h2>
+            <p><i class="bi bi-person-badge-fill" (click)="searchusers()"></i>nguoi dung</p>
+            <p><i class="bi bi-file-earmark-post-fill" (click)="searchpost()"></i>bai viet</p>
+        </div>
+    </div>
+    <div class="div2-search">
+        
+        <div class="container-content">
+            <div class="phan2" *ngIf="loading"><h1 style="color: white;">loading...</h1></div>
+
+            <div class="aldjnasd">
+                <div class="option-filter-div2 ">
+                    <div class="flex">
+                        <p><i class="bi bi-person-badge-fill mr-1"></i>nguoi dung</p>
+                        <p><i class="bi bi-file-earmark-post-fill mr-1"></i>bai viet</p>
+                    </div>
+                </div>
+                <div class="aldjlsjdas" *ngIf="searchuser" >
+                    <div class="list-item-search flex items-center justify-between" *ngFor="let user of listuserhoanchinh">
+                        <div class="flex items-center gap-1 relative" routerLink="/profileuser/{{user._id}}">
+                            <img src="{{user?.avatar}}" alt="" class="w-12 h-12 rounded-full">
+                            <div class="name-friend">
+                                <p>{{user.username}}</p>
+                                <p *ngIf="user._id !== id_user && user.banchung>0">{{user.banchung}} ban chung</p>
+                            </div>
+                            <div class="online" *ngIf="user.online === 1">
+        
+                            </div>
+                        </div>
+                        <div class="btn-friend">
+                            <button *ngIf="user.status === 4" style="background-color: #555555;">chỉnh sửa trang cá nhân</button>
+                            <button *ngIf="user.status === 0" (click)="addfriend(user._id)">thêm bạn bè</button>
+                            <div *ngIf="user.status === 1 ">
+                                <button (click)="acpfriend(user.id_friend, user._id)"  >chấp nhận</button> <button style="background-color: #555555;">xóa</button>
+                              </div>                            <button *ngIf="user.status ===2" style="background-color: #555555;" (click)="huyloimoi(user.id_friend)">hủy lời mời</button>
+                            <button *ngIf="user.status ===3" style="background-color: #555555;">bạn bè</button>
+
+                        </div>
+                    </div>
+        
+                    <!-- <div class="list-item-search flex items-center justify-between">
+                        <div class="flex items-center gap-1">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf2fqzzfDGavklvKqL6nZG7FJHwQEUyVzsMg&s" alt="" class="w-12 h-12 rounded-full">
+                            <div class="name-friend">
+                                <p>nguyen van a</p>
+                                <p>2 ban chung</p>
+                            </div>
+                        </div>
+                        <div class="btn-friend">
+                            <button>ban be</button>
+                            <button>them ban be</button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- <main>
     <div class="phan1">
         <div class="tieude">
             <h2 style="color: white;">Kết quả tìm kiếm</h2>
@@ -126,4 +191,4 @@
 
 
     </div>
-</main>
+</main> -->

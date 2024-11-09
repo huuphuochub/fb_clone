@@ -427,7 +427,8 @@ xemnhomchat(){
 
     openchat(id:any){
       const currentWidth = window.innerWidth;
-
+      // console.log('load mess');
+      
       console.log(currentWidth);
       if(currentWidth <620){
         this.showchat = false;
@@ -468,6 +469,8 @@ xemnhomchat(){
       
 
         // console.log(ok);
+        // console.log('xong load mess');
+        
         this.contentmess = ok
         // console.log(this.contentmess);
 

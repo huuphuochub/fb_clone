@@ -8,9 +8,8 @@ import { io } from 'socket.io-client';
   styleUrl: './testvideo.component.css'
 })
 export class TestvideoComponent implements OnInit{
-  // private socket = io('http://192.168.2.39:3001/')
 
-  private socket = io('https://huuphuoc.test.huuphuoc.id.vn/');
+  private socket = io('http://localhost:3001/');
   private localStream!: MediaStream;
   private peerConnection!: RTCPeerConnection; 
   public localVideo!: HTMLVideoElement; 
@@ -92,13 +91,14 @@ export class TestvideoComponent implements OnInit{
     
 
     this.peerConnection.onicecandidateerror = (event) =>{
-      // console.log(event);
+      console.log(event);
       
     }
     this.peerConnection.onicecandidate=(event) => {
 
       // console.log(event.cancelable)
-      // console.log('đã vô onice');
+      
+      console.log('đã vô onice');
       
         console.log('Đã gửi ice candidate:', event.candidate);
         this.socket.emit('icecandidate', event.candidate); // Gửi candidate tới server

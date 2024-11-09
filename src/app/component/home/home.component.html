@@ -121,7 +121,7 @@
                                 <p>{{cmt.content}}</p>
                                 <div class="flex items-center absolute date-comment">
                                     <p class="">{{cmt.date}}</p>
-                                    <i class="fa-solid fa-trash hover:cursor-pointer" (click)="deletecomment(cmt._id)"></i>
+                                    <i *ngIf="cmt.id_user === profileuser._id" class="fa-solid fa-trash hover:cursor-pointer" (click)="deletecomment(cmt._id)"></i>
                                 </div>
                                 <div>
                                     <img src="{{cmt.image}}" alt="" class="image-comment">
@@ -260,7 +260,7 @@
 
             <div class="item-story relative " *ngIf="!storyme">
 
-                <div class="div-img-video-story" (click)="openformstory()">
+                <div class="div-img-video-story" (click)="openformstory()" >
                     <img src="{{profileuser.avatar}}" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
 
                     <p> <i class="bi bi-plus-square"></i> Thêm vào tin</p>
@@ -272,7 +272,7 @@
 
             <div class="item-story relative" *ngFor="let story of story">
 
-                <div class="div-img-video-story" >
+                <div class="div-img-video-story" routerLink="/stories/{{story._id}}" >
                     <img src="{{story.avatar}}" alt="" class="absolute top-1 left-1 w-10 h-10 rounded-full p-1 bg-gray-500">
                     <!-- {{story.linkvideo}} -->
                     <video src="{{story.linkvideo}}"></video>
@@ -527,7 +527,21 @@
         </div>
      </div>
 
+     <div class="confirmation-deletecmt" *ngIf="confirmationdeletecmt">
+        <!-- <div class="confirmation-deletecmt" > -->
 
+        <div class="loader" style="width: 40px; height: 40px;top: 40%;left: 45%; position: absolute;transform: translate(-50%);" *ngIf="isloadhandlecmt">
+
+        </div>
+
+        <div *ngIf="!isloadhandlecmt">
+            <p>bạn muốn xóa bình luận</p>
+            <div class="button-confirmation-deletecmt flex gap-2 items-center justify-center my-4">
+                <button (click)="confirmdeletecmt()">xóa</button>
+                <button (click)="destroydelete()">hủy</button>
+            </div>
+        </div>
+    </div> 
      <div class="notification"></div>
      <div class="errnotification"></div>
 </main>

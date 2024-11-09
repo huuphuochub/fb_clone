@@ -159,9 +159,9 @@ export class ProfileuserComponent implements OnInit{
     }
   }
 
-  // ngOnDestroy(): void {
-  //   this.subscriptions.unsubscribe();
-  // }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
 
   
