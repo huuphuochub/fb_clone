@@ -131,7 +131,7 @@ export class HomeComponent implements OnInit {
     // console.log(typeof this.id_user);
     this.userservice.getuser(this.id_user).subscribe(data =>{
       this.profileuser = data;
-      // console.log(data)
+      console.log(data)
       
       // console.log(data);
                 this.loadban()

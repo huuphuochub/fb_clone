@@ -65,5 +65,20 @@ handlelogin(){
     }
     
   }
+  onTestLoginChange(event: any) {
+    if (event.target.checked) {
+      // Khi checkbox được chọn, điền sẵn giá trị email và password
+      this.formlogin.patchValue({
+        email: 'user1@gmail.com',
+        password: '11111111'
+      });
+    } else {
+      // Nếu bỏ chọn, làm trống các trường
+      this.formlogin.patchValue({
+        email: '',
+        password: ''
+      });
+    }
+  }
 
 } 
